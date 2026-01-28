@@ -89,8 +89,34 @@ h4, .SectionLabel, h5 {
 #masterContentArea {
     background-color: var(--pbs-white);
     margin: 0 auto;
-    max-width: 1200px;
+    max-width: 960px;
     padding: 0 15px;
+    width: 100%;
+}
+
+/* Responsive content width - wider on larger screens */
+@media (min-width: 1200px) {
+    #masterContentArea {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 1400px) {
+    #masterContentArea {
+        max-width: 1320px;
+    }
+}
+
+@media (min-width: 1600px) {
+    #masterContentArea {
+        max-width: 1500px;
+    }
+}
+
+@media (min-width: 1920px) {
+    #masterContentArea {
+        max-width: 1700px;
+    }
 }
 
 /* YUI Grid - 2 column layout */
@@ -121,9 +147,11 @@ h4, .SectionLabel, h5 {
 
 /* ========================================
    BOOTSTRAP GRID (Inner Content)
-   Force flexbox layout for .row and columns
+   Only apply within content area to avoid conflicts
    ======================================== */
-.row {
+#masterContentArea .row,
+#masterSideBarPanel .row,
+#yui-main .row {
     display: -webkit-box !important;
     display: -ms-flexbox !important;
     display: flex !important;
@@ -134,12 +162,18 @@ h4, .SectionLabel, h5 {
 }
 
 /* Remove any pseudo-elements that might interfere */
-.row::before,
-.row::after {
+#masterContentArea .row::before,
+#masterContentArea .row::after,
+#masterSideBarPanel .row::before,
+#masterSideBarPanel .row::after,
+#yui-main .row::before,
+#yui-main .row::after {
     display: none !important;
 }
 
-[class*="col-"] {
+#masterContentArea [class*="col-"],
+#masterSideBarPanel [class*="col-"],
+#yui-main [class*="col-"] {
     position: relative;
     width: 100%;
     padding-right: 15px;
@@ -148,11 +182,15 @@ h4, .SectionLabel, h5 {
     box-sizing: border-box;
 }
 
-/* Mobile first - stacked (below 576px) */
-.col-sm-3,
-.col-sm-6,
-.col-sm-9,
-.col-sm-12 {
+/* Mobile first - stacked (below 576px) - scoped to content areas */
+#masterContentArea .col-sm-3,
+#masterContentArea .col-sm-6,
+#masterContentArea .col-sm-9,
+#masterContentArea .col-sm-12,
+#masterSideBarPanel .col-sm-3,
+#masterSideBarPanel .col-sm-12,
+#yui-main .col-sm-3,
+#yui-main .col-sm-9 {
     -webkit-box-flex: 0 !important;
     -ms-flex: 0 0 100% !important;
     flex: 0 0 100% !important;
@@ -161,25 +199,29 @@ h4, .SectionLabel, h5 {
 
 /* Small screens and up (576px+) - columns side by side */
 @media (min-width: 576px) {
-    .col-sm-3 {
+    #masterContentArea .col-sm-3,
+    #masterSideBarPanel .col-sm-3,
+    #yui-main .col-sm-3 {
         -webkit-box-flex: 0 !important;
         -ms-flex: 0 0 25% !important;
         flex: 0 0 25% !important;
         max-width: 25% !important;
     }
-    .col-sm-6 {
+    #masterContentArea .col-sm-6 {
         -webkit-box-flex: 0 !important;
         -ms-flex: 0 0 50% !important;
         flex: 0 0 50% !important;
         max-width: 50% !important;
     }
-    .col-sm-9 {
+    #masterContentArea .col-sm-9,
+    #yui-main .col-sm-9 {
         -webkit-box-flex: 0 !important;
         -ms-flex: 0 0 75% !important;
         flex: 0 0 75% !important;
         max-width: 75% !important;
     }
-    .col-sm-12 {
+    #masterContentArea .col-sm-12,
+    #masterSideBarPanel .col-sm-12 {
         -webkit-box-flex: 0 !important;
         -ms-flex: 0 0 100% !important;
         flex: 0 0 100% !important;
@@ -187,16 +229,6 @@ h4, .SectionLabel, h5 {
     }
 }
 
-/* Fix for yui-main container - needs full width */
-#yui-main {
-    float: none !important;
-    width: 100% !important;
-}
-
-#yui-main .yui-b {
-    margin-left: 0;
-    width: 100%;
-}
 
 /* ========================================
    HEADER
@@ -210,6 +242,7 @@ h4, .SectionLabel, h5 {
     min-height: 90px;
 }
 
+/* Logo area */
 #masterLogoArea {
     padding: 10px 15px;
 }
@@ -225,6 +258,24 @@ h4, .SectionLabel, h5 {
 #masterTopBarAuxiliary {
     background-color: var(--pbs-gray-100);
     padding: 8px 15px;
+}
+
+#masterTopBarAuxiliary .NavigationUnorderedList {
+    display: flex;
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+}
+
+#masterTopBarAuxiliary .NavigationListItem {
+    list-style: none !important;
+}
+
+/* Social icons in aux bar */
+#masterSocialNetworking {
+    display: flex;
+    align-items: center;
 }
 
 #masterTopBarAuxiliary a {
@@ -243,13 +294,23 @@ h4, .SectionLabel, h5 {
 /* ========================================
    PRIMARY NAVIGATION (RadMenu)
    ======================================== */
+
+/* Nav panel wrapper - full width blue background */
+.PrimaryNavPanel,
+#ctl01_NavPanel {
+    background-color: var(--pbs-blue);
+}
+
+/* RadMenu - full width background, centered content via padding */
 .RadMenu {
     margin-top: 0;
 }
 
+/* RadMenu - full width blue background */
 .RadMenu.RadMenu_Austin {
     background-color: var(--pbs-blue) !important;
     width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 .RadMenu_Austin.RadMenu a.rmLink {
@@ -422,25 +483,39 @@ h4, .SectionLabel, h5 {
     background-color: var(--pbs-gray-100);
 }
 
-/* Profile image container - center content, don't stretch */
-[id*="contactPicture"] [style*="text-align"],
-[id*="ContactPicture"] [style*="text-align"],
-.col-sm-3 [id*="panContent"] {
+/* Profile image container - center content, constrain width */
+[id*="contactPicture"],
+[id*="ContactPicture"],
+.col-sm-3 [id*="panContent"],
+.col-sm-3 .PanelField img[src*="image"],
+.col-sm-3 img.ContactPictureImage {
     text-align: center !important;
 }
 
+/* Profile image wrapper - prevent expansion */
+[id*="contactPicture"] > div,
+[id*="ContactPicture"] > div,
+.col-sm-3 .PanelFieldValue:has(img) {
+    text-align: center !important;
+    width: 100% !important;
+}
+
 /* Profile image - fixed width, natural height for portrait photos */
+/* Using multiple selectors and max-width to prevent mobile expansion */
 .ContactPictureImage,
 img[id*="profileImage"],
-img[id*="ContactPicture"] {
+img[id*="ContactPicture"],
+.col-sm-3 img[src*="image"],
+.col-sm-3 .PanelField img,
+.col-sm-3 .PanelFieldValue img {
     width: 130px !important;
+    max-width: 130px !important;
     height: auto !important;
-    max-width: none !important;
-    max-height: none !important;
+    max-height: 200px !important;
     border: 3px solid var(--pbs-blue) !important;
     display: inline-block !important;
     margin: 15px auto !important;
-    object-fit: unset !important;
+    object-fit: cover !important;
 }
 
 /* Profile fields */
@@ -496,6 +571,34 @@ img[id*="ContactPicture"] {
 /* ========================================
    TABS (RadTabStrip)
    ======================================== */
+
+/* Tab container - horizontal scroll on overflow */
+.RadTabStrip,
+.RadTabStripTop_Metro,
+.RadTabStrip_Metro,
+.RadTabStrip_Austin {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap !important;
+}
+
+/* Tab list - prevent wrapping */
+.RadTabStrip .rtsUL,
+.RadTabStripTop_Metro .rtsUL,
+.RadTabStrip_Metro .rtsUL {
+    display: inline-flex !important;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+}
+
+/* Individual tabs - don't shrink */
+.RadTabStrip .rtsLI,
+.RadTabStripTop_Metro .rtsLI,
+.RadTabStrip_Metro .rtsLI {
+    flex-shrink: 0 !important;
+}
+
 .RadTabStripTop_Metro .rtsLevel1,
 .RadTabStripTop_Metro .rtsLevel1 .rtsUL,
 .RadTabStrip_Metro .rtsLevel1,
@@ -729,6 +832,174 @@ input[type="date"]:focus {
 select {
     border: 1px solid var(--pbs-gray-300);
     background-color: var(--pbs-white);
+}
+
+/* Multi-select boxes (native HTML) */
+select[multiple] {
+    min-height: 120px;
+    padding: 0;
+}
+
+select[multiple] option {
+    padding: 6px 10px;
+}
+
+/* ========================================
+   TELERIK MULTI-SELECT (RadListBox, RadComboBox)
+   ======================================== */
+
+/* RadListBox container - proper sizing */
+.RadListBox,
+.RadListBox_Metro,
+.RadListBox_Austin,
+.rlbGroup {
+    min-height: 120px !important;
+    max-height: 200px !important;
+    overflow-y: auto !important;
+    border: 1px solid var(--pbs-gray-300) !important;
+    background-color: var(--pbs-white) !important;
+    display: block !important;
+}
+
+/* RadListBox list items - remove bullets, show as list */
+.RadListBox ul,
+.RadListBox_Metro ul,
+.RadListBox_Austin ul,
+.rlbGroup ul,
+.rlbList {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.RadListBox li,
+.RadListBox_Metro li,
+.RadListBox_Austin li,
+.rlbGroup li,
+.rlbItem {
+    list-style: none !important;
+    padding: 6px 10px !important;
+    margin: 0 !important;
+    border-bottom: 1px solid var(--pbs-gray-200) !important;
+    cursor: pointer;
+    display: block !important;
+}
+
+.RadListBox li:hover,
+.rlbItem:hover {
+    background-color: var(--pbs-gray-100) !important;
+}
+
+.RadListBox li.rlbSelected,
+.rlbItem.rlbSelected {
+    background-color: var(--pbs-blue) !important;
+    color: var(--pbs-white) !important;
+}
+
+/* RadComboBox with checkboxes */
+.RadComboBox .rcbCheckAllItems,
+.RadComboBox_Metro .rcbCheckAllItems,
+.rcbList {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.RadComboBox .rcbItem,
+.rcbItem {
+    list-style: none !important;
+    padding: 6px 10px !important;
+    display: block !important;
+}
+
+/* Checkbox styling within multi-selects */
+.RadListBox input[type="checkbox"],
+.RadComboBox input[type="checkbox"],
+.rcbCheckBox {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* QueryBuilderControl / Search criteria multi-selects */
+/* QueryBuilderControl specific styling */
+.QueryBuilderControl > ul {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid var(--pbs-gray-300);
+    background: var(--pbs-white);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.QueryBuilderControl > ul > li {
+    list-style: none !important;
+    padding: 6px 10px !important;
+    border-bottom: 1px solid var(--pbs-gray-200);
+    cursor: pointer;
+}
+
+.QueryBuilderControl > ul > li:hover {
+    background-color: var(--pbs-gray-100);
+}
+
+/* Selected items display area - only in query builder contexts */
+.QueryBuilderControl .SelectedItemsList,
+[id*="QueryBuilder"] .SelectedItemsList {
+    list-style: none !important;
+    margin: 0 0 10px 0 !important;
+    padding: 5px !important;
+    background: var(--pbs-gray-100);
+    border-radius: 3px;
+}
+
+.QueryBuilderControl .SelectedItemsList li,
+[id*="QueryBuilder"] .SelectedItemsList li {
+    list-style: none !important;
+    display: inline-block !important;
+    padding: 3px 8px !important;
+    margin: 2px !important;
+    background: var(--pbs-blue) !important;
+    color: var(--pbs-white) !important;
+    border-radius: 3px !important;
+    font-size: 12px;
+}
+
+/* iMIS Search/Directory criteria - multi-select fields */
+/* Only target specific search/directory contexts to avoid breaking other layouts */
+[id*="QueryBuilder"] ul,
+[id*="SearchCriteria"] ul,
+.DirectorySearchCriteria ul,
+.QueryBuilderControl ul {
+    list-style: none !important;
+    margin: 5px 0 !important;
+    padding: 0 !important;
+    border: 1px solid var(--pbs-gray-300) !important;
+    background: var(--pbs-white) !important;
+    max-height: 180px !important;
+    overflow-y: auto !important;
+}
+
+[id*="QueryBuilder"] ul li,
+[id*="SearchCriteria"] ul li,
+.DirectorySearchCriteria ul li,
+.QueryBuilderControl ul li {
+    list-style: none !important;
+    padding: 6px 10px !important;
+    margin: 0 !important;
+    border-bottom: 1px solid var(--pbs-gray-200) !important;
+    cursor: pointer !important;
+    background: var(--pbs-white) !important;
+}
+
+[id*="QueryBuilder"] ul li:last-child,
+[id*="SearchCriteria"] ul li:last-child {
+    border-bottom: none !important;
+}
+
+[id*="QueryBuilder"] ul li:hover,
+[id*="SearchCriteria"] ul li:hover {
+    background-color: var(--pbs-gray-100) !important;
 }
 
 /* ========================================
@@ -1043,12 +1314,36 @@ a[title*="Edit"] .IconSprite {
         padding: 10px 8px;
     }
 
-    /* Profile image smaller on mobile - fixed width, auto height */
+    /* Profile image smaller on mobile - constrained width */
     .ContactPictureImage,
     img[id*="profileImage"],
-    img[id*="ContactPicture"] {
+    img[id*="ContactPicture"],
+    .col-sm-3 img[src*="image"],
+    .col-sm-3 .PanelField img,
+    .col-sm-3 .PanelFieldValue img {
         width: 100px !important;
+        max-width: 100px !important;
         height: auto !important;
+        max-height: 150px !important;
+    }
+
+    /* Tabs - ensure horizontal scroll on mobile */
+    .RadTabStrip,
+    .RadTabStripTop_Metro,
+    .RadTabStrip_Metro {
+        max-width: 100vw;
+        margin-left: -15px;
+        margin-right: -15px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    /* Smaller tab text on mobile */
+    .RadTabStrip .rtsLink,
+    .RadTabStripTop_Metro .rtsLink,
+    .RadTabStrip_Metro .rtsLink {
+        padding: 8px 12px !important;
+        font-size: 12px !important;
     }
 
     /* Prevent iOS zoom on inputs */
@@ -1066,10 +1361,23 @@ a[title*="Edit"] .IconSprite {
         padding: 0 10px;
     }
 
+    /* Compact navigation on small screens */
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink {
         font-size: 10px;
-        padding: 8px 6px;
+        padding: 8px 5px;
         letter-spacing: 0;
+    }
+
+    /* Allow nav to scroll horizontally if too many items */
+    .RadMenu,
+    .RadMenu_Austin {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .RadMenu .rmRootGroup {
+        display: flex;
+        flex-wrap: wrap;
     }
 
     h1, .PageTitle {
@@ -1078,6 +1386,17 @@ a[title*="Edit"] .IconSprite {
 
     h2, .PanelTitle {
         font-size: 130%;
+    }
+
+    /* Smaller profile image on very small screens */
+    .ContactPictureImage,
+    img[id*="profileImage"],
+    img[id*="ContactPicture"],
+    .col-sm-3 img[src*="image"],
+    .col-sm-3 .PanelField img,
+    .col-sm-3 .PanelFieldValue img {
+        width: 80px !important;
+        max-width: 80px !important;
     }
 }
 

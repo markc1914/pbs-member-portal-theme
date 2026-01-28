@@ -107,13 +107,33 @@ Custom responsive CSS theme for the Phi Beta Sigma Fraternity iMIS 20.2.66 membe
    - Mobile breakpoint uses 100px width
 4. Created dedicated git repository for project
 
+## Session History (2026-01-28 continued)
+5. Added responsive content widths
+   - Content area scales: 960px → 1140px → 1320px → 1500px → 1700px
+   - Breakpoints at 1200px, 1400px, 1600px, 1920px
+6. Added horizontal scroll for tabs on mobile
+   - RadTabStrip now scrollable with `overflow-x: auto`
+   - Smaller tab text on mobile (12px)
+7. Fixed multi-select list styling
+   - Made selectors more specific to avoid breaking other layouts
+   - Targets only `[id*="QueryBuilder"]` and `.QueryBuilderControl` contexts
+8. Fixed cross-browser compatibility (Chrome/Edge vs Safari)
+   - Scoped Bootstrap grid selectors (`.row`, `.col-sm-*`) to content areas only
+   - Previously global selectors were breaking RadMenu and page layout
+   - Now only applies within `#masterContentArea`, `#masterSideBarPanel`, `#yui-main`
+9. Fixed wide screen layout issue
+   - Removed problematic `#yui-main { float: none; width: 100% }` override
+   - Restored proper 2-column YUI grid layout
+
 ## Current Status
 - Theme is functional and responsive
+- Cross-browser compatible (Safari, Chrome, Edge)
+- Responsive content widths working
+- YUI 2-column layout preserved on wide screens
 - Profile image displays correctly at all screen sizes
-- Renewal box has transparent background (matches other sidebar boxes)
-- Left sidebar content fills full width
 
 ## Next Steps / Known Issues
-- Fine-tune profile image sizing if needed
-- Test on actual iMIS dev site with CSS deployed
-- May need additional tweaks for specific iMIS pages/components
+- Accessibility improvements (focus indicators, reduced motion, touch targets)
+- Fine-tune nav menu alignment (currently full-width, menu items natural position)
+- Test multi-select styling on Directory search page
+- Footer content alignment to match header/content width
