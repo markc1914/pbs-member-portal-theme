@@ -1,0 +1,1562 @@
+@charset "UTF-8";
+@import url("../UltraWave/00-Reset.css");
+@import url("../UltraWave/10-UltraWave.css");
+@import url("../UltraWave/11-ObjectBrowser.css");
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+/*$color1: #3aabcf; // base color - used for links
+$color2: #23749d; // base variant - used for h3s
+$color3: #0856a4; // accent - used for callouts
+$color4: #f77b01; // accent variant  - used for callouts
+$color5: #424242; // dark gray  - used for footer bg, headings*/
+body {
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.4em;
+  color: #333333; 
+  background-color:white;
+  background-image:url(images/pbs_bg.gif);
+  }
+
+a {
+  color: #07498b;
+  text-decoration: none; }
+  a:hover, a:focus, a:active {
+    color: #000000; }
+
+.RadGrid a {
+  color: #23749d !important;
+  text-decoration: underline; }
+  .RadGrid a:hover, .RadGrid a:focus, .RadGrid a:active {
+    text-decoration: underline;
+    color: #1a5573 !important; }
+  .RadGrid a:visited {
+    color: #2883b2 !important; }
+
+p {
+  margin-bottom: .5em; }
+
+h1, .PageTitle, h2, .PanelTitle {
+  font-family: 'Droid Sans', Verdana, sans-serif;
+  font-weight: 200;
+  color: #424242; }
+
+h1, .PageTitle {
+  color: #0856a4;
+  font-size: 350%; }
+
+h1.BigHeader {
+  color: white;
+  background-color: #0856a4;
+  padding: 20px;
+  margin: 0; }
+
+h2, .PanelTitle {
+  line-height: 1.45em;
+  font-size: 170%; }
+
+h2, .PanelHead.Distinguish, .TitleBarCaption {
+  min-height: 0;
+  border-bottom-style: dotted; }
+
+h4, .SectionLabel, h5 {
+  color: #0856a4;
+  margin: .2em 0; }
+
+hr {
+  margin-before: .5em;
+  margin-after: .5em;
+  border-width: 1px 0 0 0;
+  border-style: dotted;
+  border-color: #cccccc; }
+
+/* Used for messages guiding users to the next step */
+.HelperText {
+  color: #0064cd; }
+
+/* This gives certain selected items (e.g., in the PeoplePanel in the Event Showcase) a colored background */
+.SelectedItem {
+  background-color: #93cadc; }
+
+/*******************************************/
+/*           Master Page Styles            */
+/*******************************************/
+/* This applies to the loading bar at the top of the page */
+#FillProgressDiv {
+  background-color: #ffdd6f; }
+
+#masterHeaderBackground {
+  height:135px;
+ }
+
+#masterTopBarAuxiliary {
+  /* Universal search control */ }
+  #masterTopBarAuxiliary a {
+    color: black; }
+  #masterTopBarAuxiliary #SimpleSearchBlock input[type="text"] {
+    background: white url("images/CommonSprite.png") 0 -20px no-repeat;
+    color: #777;
+    padding: 3px 12px;
+    padding-left: 23px !important;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-color: #CCC;
+    -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2) inset; }
+  #masterTopBarAuxiliary #SimpleSearchBlock .TextButton {
+    display: none; }
+
+#masterHeaderImage, #masterDonorHeaderImage {
+  background-image: url("images/pbs-header2.png");
+  background-repeat: no-repeat;
+  width: 1000px;
+  height: 89px;
+  /* The following are needed to hide the text, but allow it to be read by screen readers */
+  text-indent: -9999px;
+  overflow: hidden;
+  position: absolute;
+  margin-top: 29px; 
+  margin-left:-40px;}
+
+#masterHeaderActionArea a {
+  display: block;
+  text-align: center; }
+
+#ft {
+  background-color: #0856A4;
+  color: white; }
+  #ft h4 {
+    color: white;
+    font-family: 'Droid Sans', Verdana, sans-serif;
+    font-weight: 200; }
+  #ft a {
+    color: #ffffff;
+		text-decoration:underline;}
+  #ft .yui-g:after {
+    content: none;
+    /* remove yui styling, which is causing weird spacing after the footer */ }
+
+#masterFooterConnectWithUs {
+  border-left: 1px dotted #064483;
+  border-right: 1px dotted #064483; }
+
+#masterFooterCopyright {
+  border-top: 1px solid #064483; }
+
+/* On Behalf Of with target set */
+.ProxyPanelContact {
+  background-color: #0856a4;
+  color: white; }
+  .ProxyPanelContact a {
+    color: #a2d2ea; }
+
+/********** Cart Indicator **************/
+#masterTopBarAuxiliary .cartSprite {
+  background-repeat: no-repeat;
+  height: 14px;
+  display: inline-block;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  vertical-align: top;
+  position: relative;
+  top: 6px;
+  background-image: url(images/CommonSprite.png); }
+
+#masterTopBarAuxiliary .cartEmpty .cartSprite {
+  width: 23px;
+  background-position: 0 0; }
+
+#masterTopBarAuxiliary .cartLeft.cartSprite {
+  width: 11px;
+  background-position: -55px 0; }
+
+#masterTopBarAuxiliary .cartCenter.cartSprite {
+  background-position: -66px 0; }
+
+#masterTopBarAuxiliary .cartCenter span {
+  color: #0856a4;
+  font-weight: bold;
+  position: relative;
+  top: -8px; }
+
+#masterTopBarAuxiliary .cartRight.cartSprite {
+  width: 9px;
+  background-position: -170px 0; }
+
+#masterFooterNavigation .cartEmpty, #masterFooterNavigation .cartFull {
+  display: none; }
+
+/*</Cart Indicator >*/
+/**** End Master Page Styles ****/
+/***********************************************/
+/*                Page loading                 */
+/***********************************************/
+/* Displays a loading message and spinner when a control is taking a while to load */
+BODY.loadingBody {
+  background-color: #999999;
+  margin: 0;
+  padding: 0; }
+
+#loadingSpinner {
+  background-image: url("images/spinner.gif"); }
+
+/**** End Page Loading ****/
+/***********************************************/
+/*          Left Nav Styling                   */
+/***********************************************/
+#pagesubnav {
+  border-right: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc; }
+
+.SubNavPanelHead {
+  background-color: #f5f5f5;
+  color: #333333;
+  font-family: 'Droid Sans', Verdana, sans-serif;
+  font-weight: 200; }
+
+.SubNavigationSeparator {
+  border-style: dotted;
+  border-width: 1px 0 0 0;
+  border-color: #cccccc;
+  height: 1px;
+  padding: 0px;
+  margin: 0px;
+  width: 90%; }
+
+/**** End Left Nav Styling ****/
+/******************************************/
+/*             Action Icons               */
+/******************************************/
+/* This is used to display the add, edit, delete, move up, and move down icons */
+.IconSprite,
+.DeleteImage, .EditImage, .ArrowUp, .ArrowUpOff, .ArrowDown, .ArrowDownOff {
+  background-image: url(images/IconSprite.png);
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  margin-left: .2em; }
+
+.IconSprite.AddIcon, .IconSprite.AddIcon[disabled]:hover, .IconSprite.SaveIcon, .IconSprite.SaveIcon[disabled]:hover {
+  background-position: 0 0; }
+.IconSprite.AddIcon:hover, .IconSprite.AddIcon:focus, a:hover .IconSprite.AddIcon, a:focus .IconSprite.AddIcon, .IconSprite.SaveIcon:hover, .IconSprite.SaveIcon:focus, a:hover .IconSprite.SaveIcon, a:focus .IconSprite.SaveIcon {
+  background-position: 0 -35px; }
+
+.IconSprite.EditIcon, .IconSprite.EditIcon[disabled]:hover,
+.EditImage,
+.EditImage[disabled]:hover {
+  background-position: -35px 0; }
+.IconSprite.EditIcon:hover, .IconSprite.EditIcon:focus, a:hover .IconSprite.EditIcon, a:focus .IconSprite.EditIcon,
+.EditImage:hover,
+.EditImage:focus, a:hover
+.EditImage, a:focus
+.EditImage {
+  background-position: -35px -35px; }
+
+.IconSprite.DeleteIcon, .IconSprite.DeleteIcon[disabled]:hover,
+.DeleteImage,
+.DeleteImage[disabled]:hover {
+  background-position: -70px 0; }
+.IconSprite.DeleteIcon:hover, .IconSprite.DeleteIcon:focus, a:hover .IconSprite.DeleteIcon, a:focus .IconSprite.DeleteIcon,
+.DeleteImage:hover,
+.DeleteImage:focus, a:hover
+.DeleteImage, a:focus
+.DeleteImage {
+  background-position: -70px -35px; }
+
+.IconSprite.UpIcon, .IconSprite.UpIcon[disabled]:hover,
+.ArrowUp,
+.ArrowUp[disabled]:hover, .ArrowUpOff, .ArrowUpOff[disabled]:hover {
+  background-position: -105px 0; }
+.IconSprite.UpIcon:hover, .IconSprite.UpIcon:focus, a:hover .IconSprite.UpIcon, a:focus .IconSprite.UpIcon,
+.ArrowUp:hover,
+.ArrowUp:focus, a:hover
+.ArrowUp, a:focus
+.ArrowUp, .ArrowUpOff:hover, .ArrowUpOff:focus, a:hover .ArrowUpOff, a:focus .ArrowUpOff {
+  background-position: -105px -35px; }
+
+.IconSprite.DownIcon, .IconSprite.DownIcon[disabled]:hover,
+.ArrowDown,
+.ArrowDown[disabled]:hover, .ArrowDownOff, .ArrowDownOff[disabled]:hover {
+  background-position: -140px 0; }
+.IconSprite.DownIcon:hover, .IconSprite.DownIcon:focus, a:hover .IconSprite.DownIcon, a:focus .IconSprite.DownIcon,
+.ArrowDown:hover,
+.ArrowDown:focus, a:hover
+.ArrowDown, a:focus
+.ArrowDown, .ArrowDownOff:hover, .ArrowDownOff:focus, a:hover .ArrowDownOff, a:focus .ArrowDownOff {
+  background-position: -140px -35px; }
+
+.IconSprite.SelectIcon, .IconSprite.SelectIcon[disabled]:hover {
+  background-position: -175px 0; }
+.IconSprite.SelectIcon:hover, .IconSprite.SelectIcon:focus, a:hover .IconSprite.SelectIcon, a:focus .IconSprite.SelectIcon {
+  background-position: -175px -35px; }
+
+.IconSprite.CheckIcon, .IconSprite.CheckIcon[disabled]:hover {
+  background-position: -245px 0; }
+.IconSprite.CheckIcon:hover, .IconSprite.CheckIcon:focus, a:hover .IconSprite.CheckIcon, a:focus .IconSprite.CheckIcon {
+  background-position: -245px -35px; }
+
+.IconSprite.UndoIcon, .IconSprite.UndoIcon[disabled]:hover, .IconSprite.ResetIcon, .IconSprite.ResetIcon[disabled]:hover {
+  background-position: -280px 0; }
+.IconSprite.UndoIcon:hover, .IconSprite.UndoIcon:focus, a:hover .IconSprite.UndoIcon, a:focus .IconSprite.UndoIcon, .IconSprite.ResetIcon:hover, .IconSprite.ResetIcon:focus, a:hover .IconSprite.ResetIcon, a:focus .IconSprite.ResetIcon {
+  background-position: -280px -35px; }
+
+.IconSprite.FindIcon, .IconSprite.FindIcon[disabled]:hover {
+  background-position: -315px 0; }
+.IconSprite.FindIcon:hover, .IconSprite.FindIcon:focus, a:hover .IconSprite.FindIcon, a:focus .IconSprite.FindIcon {
+  background-position: -315px -35px; }
+
+.IconSprite.CancelIcon, .IconSprite.CancelIcon[disabled]:hover {
+  background-position: -350px 0; }
+.IconSprite.CancelIcon:hover, .IconSprite.CancelIcon:focus, a:hover .IconSprite.CancelIcon, a:focus .IconSprite.CancelIcon {
+  background-position: -350px -35px; }
+
+.IconSprite.ContactIcon, .IconSprite.ContactIcon[disabled]:hover {
+  background-position: -385px 0; }
+.IconSprite.ContactIcon:hover, .IconSprite.ContactIcon:focus, a:hover .IconSprite.ContactIcon, a:focus .IconSprite.ContactIcon {
+  background-position: -385px -35px; }
+
+.IconSprite.ConfigureIcon, .IconSprite.ConfigureIcon[disabled]:hover {
+  background-position: -420px 0; }
+.IconSprite.ConfigureIcon:hover, .IconSprite.ConfigureIcon:focus, a:hover .IconSprite.ConfigureIcon, a:focus .IconSprite.ConfigureIcon {
+  background-position: -420px -35px; }
+
+.ArrowUpOff, .ArrowDownOff {
+  opacity: .4;
+  filter: alpha(opacity=40);
+  /* filter needed for IE compatibility */ }
+
+/**** End Action Icons Styling ****/
+/******************************************/
+/*       Social Networking Icons          */
+/******************************************/
+.SocialSprite {
+  background-image: url(images/SocialSprite.png);
+  background-repeat: no-repeat;
+  width: 24px;
+  height: 24px;
+  vertical-align: top;
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  -webkit-transition: opacity 0.2s ease-out;
+  -moz-transition: opacity 0.2s ease-out;
+  -o-transition: opacity 0.2s ease-out;
+  transition: opacity 0.2s ease-out; }
+  .SocialSprite.LargeButtons {
+    width: 32px;
+    height: 32px; }
+  .SocialSprite:hover, .SocialSprite:focus, .SocialSprite:active {
+    opacity: 1;
+    filter: alpha(opacity=100); }
+  .SocialSprite.FacebookIcon {
+    background-position: 0 0;
+    background-color: #3b5998; }
+    .SocialSprite.FacebookIcon.LargeButtons {
+      background-position: 0 -80px; }
+  .SocialSprite.TwitterIcon {
+    background-position: -40px 0;
+    background-color: #00a0d1; }
+    .SocialSprite.TwitterIcon.LargeButtons {
+      background-position: -40px -80px; }
+  .SocialSprite.LinkedInIcon {
+    background-position: -80px 0;
+    background-color: #0e76a8; }
+    .SocialSprite.LinkedInIcon.LargeButtons {
+      background-position: -80px -80px; }
+  .SocialSprite.YouTubeIcon {
+    background-position: -120px 0;
+    background-color: #c4302b; }
+    .SocialSprite.YouTubeIcon.LargeButtons {
+      background-position: -120px -80px; }
+  .SocialSprite.EmailIcon {
+    background-position: -160px 0;
+    background-color: #0a629a; }
+    .SocialSprite.EmailIcon.LargeButtons {
+      background-position: -160px -80px; }
+  .SocialSprite.PinterestIcon {
+    background-position: -200px 0;
+    background-color: #0a629a; }
+    .SocialSprite.PinterestIcon.LargeButtons {
+      background-position: -200px -80px; }
+  .SocialSprite.GPlusIcon {
+    background-position: -240px 0;
+    background-color: #db4a39; }
+    .SocialSprite.GPlusIcon.LargeButtons {
+      background-position: -240px -80px; }
+
+/**** End Social Netowrking Icon Styling ****/
+/*form {
+  margin: 0 0 $baseLineHeight;
+}*/
+/* fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+} */
+/* legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: $baseLineHeight;
+  font-size: $baseFontSize * 1.5;
+  line-height: $baseLineHeight * 2;
+  color: $grayDark;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+
+  // Small
+  small {
+    font-size: $baseLineHeight * .75;
+    color: $grayLight;
+  }
+}*/
+/* label,
+input,
+button,
+select,
+textarea {
+  @include font-shorthand($baseFontSize, normal, $baseLineHeight); // Set size, weight, line-height here
+} */
+input,
+button,
+select,
+textarea {
+  font-family: Segoe UI, Helvetica, Arial, sans-serif; }
+
+/* label {
+  display: block;
+  margin-bottom: 5px;
+}*/
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  display: inline-block;
+  min-height: 1.4em;
+  padding: 2px;
+  font-size: 14px;
+  line-height: 1.4em;
+  color: #555555;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+
+input.rdfd_ {
+  min-height: 0;
+  /* Have to specifically reset the min-height for an input that is meant to be hidden in the rad date picker */ }
+
+/*input,
+textarea,
+.uneditable-input {
+  width: 206px; // plus 12px padding and 2px border
+}*/
+/*textarea {
+  height: auto;
+}*/
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  background-color: white;
+  border: 1px solid #cccccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s; }
+  textarea:focus,
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="datetime"]:focus,
+  input[type="datetime-local"]:focus,
+  input[type="date"]:focus,
+  input[type="month"]:focus,
+  input[type="time"]:focus,
+  input[type="week"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus,
+  input[type="url"]:focus,
+  input[type="search"]:focus,
+  input[type="tel"]:focus,
+  input[type="color"]:focus,
+  .uneditable-input:focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0;
+    outline: thin dotted \9;
+    /* IE6-9 */
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6); }
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 4px 0 0;
+  *margin-top: 0;
+  /* IE7 */
+  margin-top: 1px \9;
+  /* IE8-9 */
+  line-height: normal;
+  cursor: pointer; }
+
+input[type="file"],
+input[type="image"],
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="radio"],
+input[type="checkbox"] {
+  width: auto; }
+
+select {
+  border: 1px solid #cccccc;
+  background-color: white; }
+
+select[multiple],
+select[size] {
+  height: auto; }
+
+select:focus,
+input[type="file"]:focus,
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px; }
+
+/*input,
+textarea {
+  @include placeholder();
+}*/
+input[disabled],
+select[disabled],
+textarea[disabled],
+input[readonly],
+select[readonly],
+textarea[readonly] {
+  cursor: default;
+  background-color: #eeeeee; }
+
+input[type="radio"][disabled],
+input[type="checkbox"][disabled],
+input[type="radio"][readonly],
+input[type="checkbox"][readonly],
+input[type="image"][disabled] {
+  background-color: transparent; }
+
+input[type="image"][disabled] {
+  opacity: 0.5;
+  filter: alpha(opacity=50); }
+
+.help-block,
+.help-inline {
+  color: #595959; }
+
+.help-block {
+  display: block;
+  margin-bottom: 0.7em; }
+
+.help-inline {
+  display: inline-block;
+  *display: inline;
+  /* IE7 inline-block hack */
+  *zoom: 1;
+  vertical-align: middle;
+  padding-left: 5px; }
+
+input.search-query {
+  padding-right: 14px;
+  padding-right: 4px \9;
+  padding-left: 14px;
+  padding-left: 4px \9;
+  /* IE7-8 doesn't have border-radius, so don't indent the padding */
+  margin-bottom: 0;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px; }
+
+/* Allow for input prepend/append in search forms */
+.form-search .input-append .search-query,
+.form-search .input-prepend .search-query {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0; }
+
+.form-search .input-append .search-query {
+  -webkit-border-radius: 14px 0 0 14px;
+  -moz-border-radius: 14px 0 0 14px;
+  border-radius: 14px 0 0 14px; }
+
+.form-search .input-append .btn {
+  -webkit-border-radius: 0 14px 14px 0;
+  -moz-border-radius: 0 14px 14px 0;
+  border-radius: 0 14px 14px 0; }
+
+.form-search .input-prepend .search-query {
+  -webkit-border-radius: 0 14px 14px 0;
+  -moz-border-radius: 0 14px 14px 0;
+  border-radius: 0 14px 14px 0; }
+
+.form-search .input-prepend .btn {
+  -webkit-border-radius: 14px 0 0 14px;
+  -moz-border-radius: 14px 0 0 14px;
+  border-radius: 14px 0 0 14px; }
+
+/*************************************/
+/*            Buttons                */
+/*************************************/
+.btn, .TextButton, .TextButtonWithImage, a#ctl00_LoginStatus1,
+.RadUpload .ruButton, .RadUploadProgressArea .ruButton, #masterHeaderActionArea a {
+  display: inline-block;
+  padding: 5px 15px !important;
+  text-transform:uppercase;
+  background-color: #07498B;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  -webkit-transition: background 0.2s ease-out;
+  -moz-transition: background 0.2s ease-out;
+  -o-transition: background 0.2s ease-out;
+  transition: background 0.2s ease-out; }
+  .btn:visited, .TextButton:visited, .TextButtonWithImage:visited, a#ctl00_LoginStatus1:visited,
+  .RadUpload .ruButton:visited, .RadUploadProgressArea .ruButton:visited, #masterHeaderActionArea a:visited {
+    color: white; }
+  .btn:hover, .btn:active, .btn:focus, .TextButton:hover, .TextButton:active, .TextButton:focus, .TextButtonWithImage:hover, .TextButtonWithImage:active, .TextButtonWithImage:focus, a#ctl00_LoginStatus1:hover, a#ctl00_LoginStatus1:active, a#ctl00_LoginStatus1:focus,
+  .RadUpload .ruButton:hover,
+  .RadUpload .ruButton:active,
+  .RadUpload .ruButton:focus, .RadUploadProgressArea .ruButton:hover, .RadUploadProgressArea .ruButton:active, .RadUploadProgressArea .ruButton:focus, #masterHeaderActionArea a:hover, #masterHeaderActionArea a:active, #masterHeaderActionArea a:focus {
+    color: white;
+    text-decoration: none;
+    background-color: #000000; }
+
+.RadUpload .ruButton, .RadUploadProgressArea .ruButton {
+  background-color: #2f8aa7 !important;
+  color: white !important; }
+
+.PrimaryButton, .SaveAndClose, .SaveAs,
+.UsePrimaryButton .TextButton,
+.UsePrimaryButton .TextButtonWithImage,
+#masterHeaderActionArea a {
+  background-color: #0856a4; }
+  .PrimaryButton:hover, .PrimaryButton:active, .PrimaryButton:focus, .SaveAndClose:hover, .SaveAndClose:active, .SaveAndClose:focus, .SaveAs:hover, .SaveAs:active, .SaveAs:focus,
+  .UsePrimaryButton .TextButton:hover,
+  .UsePrimaryButton .TextButton:active,
+  .UsePrimaryButton .TextButton:focus,
+  .UsePrimaryButton .TextButtonWithImage:hover,
+  .UsePrimaryButton .TextButtonWithImage:active,
+  .UsePrimaryButton .TextButtonWithImage:focus,
+  #masterHeaderActionArea a:hover,
+  #masterHeaderActionArea a:active,
+  #masterHeaderActionArea a:focus {
+    background-color: #000000; }
+
+.MediumButton, .UseMediumButton .TextButton, .UseMediumButton .TextButtonWithImage {
+  font-size: 120% !important;
+  padding: 9px 14px !important; }
+
+.LargeButton, .UseLargeButton .TextButton, .UseLargeButton .TextButtonWithImage {
+  font-size: 150% !important;
+  padding: 12px 17px !important; }
+
+.CalloutArea1 .btn.PrimaryButton, .CalloutArea1 .TextButton.PrimaryButton, .CalloutArea1 .TextButtonWithImage.PrimaryButton, .CalloutArea2 .btn.PrimaryButton, .CalloutArea2 .TextButton.PrimaryButton, .CalloutArea2 .TextButtonWithImage.PrimaryButton {
+  color: white;
+  background-color: #424242; }
+  .CalloutArea1 .btn.PrimaryButton:hover, .CalloutArea1 .btn.PrimaryButton:active, .CalloutArea1 .btn.PrimaryButton:focus, .CalloutArea1 .TextButton.PrimaryButton:hover, .CalloutArea1 .TextButton.PrimaryButton:active, .CalloutArea1 .TextButton.PrimaryButton:focus, .CalloutArea1 .TextButtonWithImage.PrimaryButton:hover, .CalloutArea1 .TextButtonWithImage.PrimaryButton:active, .CalloutArea1 .TextButtonWithImage.PrimaryButton:focus, .CalloutArea2 .btn.PrimaryButton:hover, .CalloutArea2 .btn.PrimaryButton:active, .CalloutArea2 .btn.PrimaryButton:focus, .CalloutArea2 .TextButton.PrimaryButton:hover, .CalloutArea2 .TextButton.PrimaryButton:active, .CalloutArea2 .TextButton.PrimaryButton:focus, .CalloutArea2 .TextButtonWithImage.PrimaryButton:hover, .CalloutArea2 .TextButtonWithImage.PrimaryButton:active, .CalloutArea2 .TextButtonWithImage.PrimaryButton:focus {
+    color: white;
+    background-color: #232323; }
+
+.btn[disabled], .btn[disabled]:hover, .btn[disabled]:active, .btn[disabled]:focus, .TextButton[disabled], .TextButton[disabled]:hover, .TextButton[disabled]:active, .TextButton[disabled]:focus, .TextButtonWithImage[disabled], .TextButtonWithImage[disabled]:hover, .TextButtonWithImage[disabled]:active, .TextButtonWithImage[disabled]:focus {
+  background-color: #cccccc;
+  color: #eeeeee;
+  cursor: auto; }
+
+.RadUpload .ruButton, .RadUploadProgressArea .ruButton {
+  background-position: 0 0 !important;
+  cursor: pointer; }
+
+/**** End button styles ****/
+/***************************************/
+/*             iPart Styles            */
+/***************************************/
+.StandardPanel, .ContentBorder, h2, .PanelHead.Distinguish, .TitleBarCaption, div.ShowFieldset fieldset {
+  border-color: #cccccc; }
+
+.ContentWizardDisplay {
+  border-style: solid;
+  border-width: 0 1px 1px 1px;
+  border-color: #cccccc;
+  padding: 1px 5px 5px 5px;
+  border-top: none; }
+
+.PanelHead.Distinguish .PanelHeadOptions {
+  margin-top: .6em; }
+
+/*** Search Results ***/
+.SearchField, .SearchResultSummary .ListItemTitle a {
+  display: block;
+  background-color: #badde8;
+  padding: 8px 12px; }
+
+.SearchField label {
+  font-size: 120%;
+  color: #23749d; }
+
+.SearchResultSummary .ListItemTitle a {
+  text-decoration: none;
+  color: #333333 !important;
+  margin: -4px -7px 0; }
+
+.SearchResultSummary .ListItemTitle a:hover {
+  background-color: #93cadc;
+  text-decoration: underline; }
+
+/*** End Search Results ***/
+/*** Event Display ***/
+.EventSummary {
+  background-color: #f5f5f5; }
+  .EventSummary .PhotoArea {
+    padding: 2em; }
+    .EventSummary .PhotoArea img {
+      border: 1px solid #CCC !important; }
+  .EventSummary .Description {
+    padding: 2em; }
+
+.ProgramGroup .PanelHead {
+  background-color: #93cadc; }
+.ProgramGroup .PanelTitle {
+  font-family: Segoe UI, Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 120%;
+  line-height: 2em;
+  padding-left: .5em; }
+
+/*** End Event Display ***/
+/*** Progress Tracker ***/
+/* These are overrides for the colors and styles defined in 10-UltraWave.css */
+/* <Progress Tracker (Default)> */
+.ProgressTracker .count {
+  font-weight: bold; }
+
+.ProgressTracker .SuccessfulMessage, .ProgressTracker .ProgressBar > span {
+  background-color: #3aabcf; }
+
+/* </Progress Tracker > */
+/* <Progress Tracker 2> */
+.ProgressTracker2 .ProgressTrackerPanel {
+  background-color: #93cadc;
+  *zoom: 1; }
+  .ProgressTracker2 .ProgressTrackerPanel:before, .ProgressTracker2 .ProgressTrackerPanel:after {
+    display: table;
+    content: "";
+    line-height: 0; }
+  .ProgressTracker2 .ProgressTrackerPanel:after {
+    clear: both; }
+
+.ProgressTracker2 .ProgressTrackerPanel .count {
+  color: white;
+  font-family: 'Droid Sans', Verdana, sans-serif;
+  font-weight: 200; }
+
+.ProgressTracker2 div p {
+  background-color: white;
+  color: #23749d;
+  margin-bottom: 0; }
+
+.ProgressTracker2 .ProgressBar {
+  margin: 10px; }
+
+.ProgressTracker2 .ProgressBar > span {
+  background-color: #dba570; }
+
+.ProgressTracker2 .SuccessfulMessage {
+  background-color: #6db0d3;
+  color: #333333; }
+
+/* </Progress Tracker 2> */
+/*** End Progress Tracker ***/
+/*** Filter Panel (Query Menu) ***/
+/* This is an alternate style for the Query Menu filter panel */
+.StandardPanel.FilterPanel {
+  background-color: #eeeeee;
+  border: none !important;
+  margin-top: -3px; }
+
+.StandardPanel.FilterPanel .PanelTitle {
+  background-image: none;
+  padding-left: 0.1em;
+  line-height: normal;
+  margin-left: 0;
+  font-size: 140%; }
+
+.StandardPanel.FilterPanel .PanelHead.Distinguish {
+  border: none;
+  min-height: 1em; }
+
+/*** End Filter Panel ***/
+/*** Cart Charges ***/
+.CartCharges {
+  background-color: #f5f5f5; }
+  .CartCharges .PanelField {
+    width: 99%;
+    border-bottom: none;
+    border-top: 1px dotted #cccccc; }
+    .CartCharges .PanelField:first-child, .CartCharges .PanelField .GrandTotal {
+      border-top: none; }
+  .CartCharges .GrandTotal .PanelField {
+    background-color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #0856a4; }
+    .CartCharges .GrandTotal .PanelField label {
+      color: #0856a4; }
+
+/*** End Cart Charges ***/
+/*** Group List Editor ***/
+.RadTreeView.GLE a:hover, .RadTreeView.GLE a:focus, .RadTreeView.GLE span[onclick]:hover, .RadTreeView.GLE span[onclick]:focus {
+  background-color: #2f8aa7;
+  color: #fff; }
+
+/*** End Group List Editor ***/
+/**** End iPart Styles ****/
+/*****************************************/
+/*         Primary Navigation            */
+/*****************************************/
+.RadMenu_Austin.RadMenu a.rmLink {
+  color: white;
+  padding: 12px 12px;
+  font-weight:normal;
+  text-decoration: none;
+	background-color:#0856a4;
+	border-top:3px solid #6a9ac9;
+	border-bottom:3px solid #6a9ac9;}
+  .RadMenu_Austin.RadMenu a.rmLink .rmText {
+    padding: 0; }
+  .RadMenu_Austin.RadMenu a.rmLink.rmRootLink {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px; }
+  .RadMenu_Austin.RadMenu a.rmLink.rmFocused, .RadMenu_Austin.RadMenu a.rmLink.rmSelected, .RadMenu_Austin.RadMenu a.rmLink.rmExpanded, .RadMenu_Austin.RadMenu a.rmLink:focus, .RadMenu_Austin.RadMenu a.rmLink:active {
+    color: white;
+    background-color: #0856a4;
+	border-top:3px solid #0856a4;
+	}
+	.RadMenu_Austin.RadMenu a.rmLink:hover{
+	background-color: #2066ac;
+	border-top:3px solid #6a9ac9;
+	}
+.RadMenu_Austin.RadMenu .rmVertical .rmItem {
+  border-bottom: 1px solid #cccccc; }
+  .RadMenu_Austin.RadMenu .rmVertical .rmItem:first-child {
+    border-top: 1px solid #cccccc; }
+.RadMenu_Austin.RadMenu .rmGroup {
+  border: none;
+  margin-top: -1px;
+  background: transparent;}
+  .RadMenu_Austin.RadMenu .rmGroup .rmItem {
+    border-bottom: 1px solid #2066ac;
+	}
+    .RadMenu_Austin.RadMenu .rmGroup .rmItem:last-child {
+      border-bottom: none; }
+    .RadMenu_Austin.RadMenu .rmGroup .rmItem a.rmLink {
+      padding: 6px 30px 6px 10px;
+		background-color:#0856a4;
+		border-bottom:1px solid #2066ac;
+		border-left:none;
+		border-top:none;
+		border-right:none;
+		text-transform:uppercase;
+		font-size:.9em;
+		}
+		.RadMenu_Austin.RadMenu .rmGroup .rmItem a.rmLink:hover {
+		background-color:#2066ac;
+		border-bottom:1px solid #3574b3;
+		}
+    .RadMenu_Austin.RadMenu .rmGroup .rmItem.rmSeparator {
+      background-color: #eeeeee; }
+  .RadMenu_Austin.RadMenu .rmGroup .rmExpandRight:after {
+    content: '»';
+    position: absolute;
+    right: 8px; }
+
+/* <MegaDropDownMenu Styling> */
+.RadMenu .rmGroup .MegaDropDownMenuOuter .rmText {
+  padding: 0;
+  margin: 0;
+  min-width: 600px; }
+
+div.MegaDropDownMenu {
+  padding-left: 5px;
+  padding-right: 5px; }
+
+.MegaDropDownMenuToolTip {
+  padding: 5px; }
+
+.MegaDropDownMenuSeperator {
+  border-style: 1px dotted #cccccc;
+  height: 1px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  width: 150px; }
+
+/* </MegaDropDownMenu Styling> */
+/**** End Primary Navigation Styling ****/
+.RadTabStripTop_Metro .rtsLevel1, .RadTabStripTop_Metro .rtsLevel1 .rtsUL, .RadTabStrip_Metro .rtsLevel1, .RadTabStrip_Metro .rtsLevel1 .rtsUL {
+  background-color: #0856a4 !important; }
+  .RadTabStripTop_Metro .rtsLevel1 .rtsLink, .RadTabStripTop_Metro .rtsLevel1 .rtsUL .rtsLink, .RadTabStrip_Metro .rtsLevel1 .rtsLink, .RadTabStrip_Metro .rtsLevel1 .rtsUL .rtsLink {
+    border-color: #0856a4; }
+  .RadTabStripTop_Metro .rtsLevel1 .rtsSelected, .RadTabStripTop_Metro .rtsLevel1 .rtsLink:hover, .RadTabStripTop_Metro .rtsLevel1 .rtsUL .rtsSelected, .RadTabStripTop_Metro .rtsLevel1 .rtsUL .rtsLink:hover, .RadTabStrip_Metro .rtsLevel1 .rtsSelected, .RadTabStrip_Metro .rtsLevel1 .rtsLink:hover, .RadTabStrip_Metro .rtsLevel1 .rtsUL .rtsSelected, .RadTabStrip_Metro .rtsLevel1 .rtsUL .rtsLink:hover {
+    border-color: white; }
+
+/*<RadToolTip>*/
+/* Currently used by the QueryMenu iPart */
+.RadToolTip_Telerik a:hover {
+  background-color: #93cadc; }
+
+/*</RadToolTip>*/
+/*<RadGrid>*/
+.RadGrid.RadGrid_Sitefinity .rgAltRow {
+  background-color: #f5f5f5; }
+
+/*</RadGrid>*/
+/**************************************/
+/*        Homepage Hero Area          */
+/**************************************/
+.HeroArea {
+  height: 350px;
+  width: 100%;
+  position: relative; }
+
+.HeroBackground {
+  height: 100%;
+  background: #009fd9 url(images/MobileCairnsBanner.jpg) bottom center no-repeat;
+  background-size: cover; }
+
+.HeroContent {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 8px 0;
+  background-color: black;
+  /* Fallback for IE8, which doesn't support rgba */
+  background-color: rgba(0, 0, 0, 0.75); }
+  .HeroContent h1, .HeroContent h2, .HeroContent h3, .HeroContent h4, .HeroContent h5, .HeroContent .HeroText {
+    color: white;
+    margin: 0 8px 8px 8px; }
+  .HeroContent .TextButton {
+    float: right; }
+
+#customLink {
+    display: block;
+	width: 960px;
+	height:466px;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+.Slider.FullWidth {
+  height: 211px; }
+  .Slider.FullWidth .SliderContent h1 {
+    text-align: right;
+    padding: 12px;
+    font-size: 350%;
+	color: #ffffff;}
+  .Slider.FullWidth .SliderPage1 {
+    height: 100%;
+	width: 100%;
+    background:/* #0c161f  */ url(images/bluPrint-h-Logo-rgb-900px.png) center center no-repeat;
+    background-size: 960px 211px;
+	background-color: rgba(0,0,0,0); }
+    .Slider.FullWidth .SliderPage1 h1 {
+      color: rgba(255,255,255,1.0);
+      margin: 0;
+      padding-top: 50px;
+      padding-bottom: 20px; }
+    .Slider.FullWidth .SliderPage1 .SliderText {
+      float: right;
+      width: 400px;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-right: 12px;
+      line-height: 1.7em;
+      background-color: rgba(0,0,0,0);
+      /* Fallback for IE8, which doesn't support rgba */
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 0 8px 8px;
+      color: white; }
+      .Slider.FullWidth .SliderPage1 .SliderText h2, .Slider.FullWidth .SliderPage1 .SliderText h3, .Slider.FullWidth .SliderPage1 .SliderText h4, .Slider.FullWidth .SliderPage1 .SliderText h5 {
+        color: inherit; }
+    .Slider.FullWidth .SliderPage1 .ActionButton {
+      float: right;
+      clear: right;
+      text-align: right;
+      position: relative;
+      top: -6px;
+      right: 25px; }
+
+/**** End Hero Area ***/
+/************************************/
+/*            Communities           */
+/************************************/
+/* Community name, picture and description */
+.CommunitySummaryBlock {
+  border: 1px solid #cccccc;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 10px; }
+
+.CommunitySummaryImage img {
+  max-width: 170px; }
+
+/* Community left nav */
+.CommunityLinksBlock a {
+  display: block;
+  text-decoration: none;
+  padding: 0 5px;
+  line-height: 2em;
+  margin-right: -5px;
+  margin-left: -5px;
+  border-top: 1px solid #CCC;
+  color: #333333; }
+  .CommunityLinksBlock a:hover {
+    background-color: #93cadc; }
+  .CommunityLinksBlock a.CommunityLinksSelected, .CommunityLinksBlock a.CommunityLinksSelected:hover {
+    background-color: #2f8aa7;
+    color: White;
+    font-weight: bold; }
+
+/* CommunityBreadCrumb */
+.BreadCrumbCurrent {
+  font-size: 120%;
+  font-weight: bold; }
+
+/*** Communities common elements ***/
+.CommunityItemActionLinks {
+  clear: both;
+  text-align: right;
+  padding: .25em 0; }
+  .CommunityItemActionLinks a {
+    display: inline-block;
+    padding: 0 4px 2px 4px;
+    margin-left: -4px;
+    border-right: 1px solid #cccccc; }
+    .CommunityItemActionLinks a:hover {
+      background-color: #2f8aa7;
+      color: white;
+      text-decoration: none; }
+    .CommunityItemActionLinks a:last-child {
+      border-right: none; }
+
+.CommunityItemTitle {
+  font-size: 110%;
+  padding: .25em 0; }
+
+.CommunityDateLine {
+  font-size: 85%;
+  font-style: italic; }
+  .CommunityDateLine div {
+    float: none !important;
+    display: inline !important;
+    padding: 0 !important; }
+
+.CommunityNewItem {
+  color: red;
+  text-align: right;
+  float: right; }
+
+.CommunitySideBarSearch {
+  width: 70% !important;
+  margin-right: .25em; }
+
+/*.CommunityRepeaterTable 
+{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}*/
+div.CommunityProfileTitle {
+  display: table-cell;
+  padding-bottom: 5px; }
+
+.CommunityProfilePicture {
+  float: left; }
+
+.CommunityProfilePicture img {
+  width: 38px; }
+
+.CommunityTitleDate {
+  margin-left: 38px;
+  /* to leave space for the poster picture */
+  padding-left: 5px; }
+
+.CommunityLastComment {
+  padding-top: 10px;
+  padding-bottom: 5px;
+  float: right;
+  color: #999999;
+  font-size: 85%; }
+
+.CommunityCommentItem {
+  background: #f2f2f2;
+  border-left: 10px solid #cccccc;
+  padding: .5em .5em .2em .5em;
+  margin-left: 3em;
+  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); }
+
+.CommunityWikiItem .CommunityRepeaterTable .CommunityCommentItem {
+  background: #f2f2f2;
+  border-left: 0;
+  margin-left: 0; }
+
+/* For adding comments */
+.CommunityWikiReplyForm, .CommunityReplyForm {
+  padding: 5px 5px;
+  background: #f2f2f2;
+  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); }
+
+.CommunityReplyForm {
+  border-left: 10px solid #cccccc;
+  margin-left: 3.3em; }
+
+/*** Contents List ***/
+.ContentsListHeader {
+  font-weight: bold;
+  font-size: 105%; }
+
+.ContentsListItem {
+  padding: .2em 0; }
+
+/*****************************************************/
+/*            Donor Sample Site Styles               */
+/*****************************************************/
+/* These styles are used in the Donor sample site  */
+.DonorBannerHome {
+  background: url(../../images/SampleSites/Donor/birdbanner.jpg) no-repeat;
+  overflow: hidden;
+  height: 330px;
+  position: relative; }
+
+.DonorBannerInterior {
+  overflow: hidden;
+  height: 275px;
+  position: relative; }
+
+.DonorBannerInteriorBackground1 {
+  background: #67895e url(../../images/SampleSites/Donor/bearbanner.jpg) no-repeat; }
+
+.DonorBannerInteriorBackground2 {
+  background: #95bb19 url(../../images/SampleSites/Donor/butterflybanner.jpg) no-repeat; }
+
+.DonorBannerInteriorBackground3 {
+  background: #764c31 url(../../images/SampleSites/Donor/catbanner.jpg) no-repeat; }
+
+.DonorBannerInteriorBackground4 {
+  background: #416a26 url(../../images/SampleSites/Donor/frogbanner.jpg) no-repeat; }
+
+.DonorBannerInteriorBackground5 {
+  background: #696f44 url(../../images/SampleSites/Donor/numbatbanner.jpg) no-repeat; }
+
+.DonorBannerInteriorBackground6 {
+  background: #3c683d url(../../images/SampleSites/Donor/squirrelbanner.jpg) no-repeat; }
+
+.DonorBannerTextBackgroundHome {
+  background: none repeat scroll 0 0 #191919;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.4);
+  float: right;
+  height: 292px;
+  width: 450px;
+  margin: 20px; }
+
+.DonorBannerTextBackgroundInterior {
+  background: none repeat scroll 0 0 #191919;
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0.4);
+  float: right;
+  height: 236px;
+  width: 450px;
+  margin: 20px; }
+
+.DonorBannerTextBackgroundHome h1, .DonorBannerTextBackgroundInterior h1 {
+  color: white;
+  font-size: 2.8em;
+  background: none;
+  margin: 0.4em; }
+
+.DonorBannerTextBackgroundHome p, .DonorBannerTextBackgroundInterior p {
+  color: white;
+  font-size: 1.2em;
+  line-height: 1.6em;
+  margin: 1em;
+  padding: 0.4em; }
+
+/**** End Donor Sample Site Styles ****/
+/***********************************/
+/*          Misc. Styles           */
+/***********************************/
+/* Classes that can be used for iParts and HTML content */
+/* Use class CalloutArea1 or CalloutArea2 to call out an iPart or content block */
+.CalloutArea1, .CalloutBlockType1 {
+  background-color: #0856a4;
+  padding: 5px;
+  color: white; }
+  .CalloutArea1 label, .CalloutArea1 h1, .CalloutArea1 h2, .CalloutArea1 h3, .CalloutArea1 h4, .CalloutArea1 h5, .CalloutArea1 .PanelTitle, .CalloutArea1 .TitleBarCaption, .CalloutBlockType1 label, .CalloutBlockType1 h1, .CalloutBlockType1 h2, .CalloutBlockType1 h3, .CalloutBlockType1 h4, .CalloutBlockType1 h5, .CalloutBlockType1 .PanelTitle, .CalloutBlockType1 .TitleBarCaption {
+    color: white; }
+  .CalloutArea1 a, .CalloutBlockType1 a {
+    color: white;
+    text-decoration: underline; }
+  .CalloutArea1 .Error, .CalloutBlockType1 .Error {
+    color: #ffc40d !important; }
+  .CalloutArea1 h2, .CalloutArea1 .PanelHead.Distinguish, .CalloutArea1 .TitleBarCaption, .CalloutBlockType1 h2, .CalloutBlockType1 .PanelHead.Distinguish, .CalloutBlockType1 .TitleBarCaption {
+    border-bottom: none; }
+
+.CalloutArea2 {
+  background-color: #2066ac;
+  padding: 5px;
+  color: white; }
+  .CalloutArea2 label, .CalloutArea2 h1, .CalloutArea2 h2, .CalloutArea2 h3, .CalloutArea2 h4, .CalloutArea2 h5, .CalloutArea2 .PanelTitle, .CalloutArea2 .TitleBarCaption {
+    color: white; }
+  .CalloutArea2 a {
+    color: white;
+    text-decoration: underline; }
+  .CalloutArea2 .Error {
+    color: #ffc40d !important; }
+  .CalloutArea2 h2, .CalloutArea2 .PanelHead.Distinguish, .CalloutArea2 .TitleBarCaption {
+    border-bottom: none; }
+
+/* Use class AltBgColor1 to put a light-colored background on an iPart or content block */
+.AltBgColor1 {
+  background-color: #f5f5f5;
+  padding: 5px; }
+
+.CalloutPart2 .PanelHead, .CalloutPart2 .PanelBody {
+  background-color: #f5f5f5; }
+
+.CalloutPart1 .PanelHead, .CalloutPart1 .PanelBody {
+  background-color: #93cadc; }
+
+.CalloutPart2 .PanelHead.Distinguish, .CalloutPart1 .PanelHead.Distinguish {
+  background-color: transparent; }
+
+/* Use class ContentBlockPrimary to give a block of content extra emphasis */
+.ContentBlockPrimary {
+  padding: 20px;
+  background-color: #F5F5F5; }
+
+/* Make the titles on secondary columns smaller - used on the Member home page */
+.SecondaryColumn h2, .SecondaryColumn .PanelTitle {
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 90%;
+  color: #999999;
+  text-transform: uppercase; }
+.SecondaryColumn h2, .SecondaryColumn .PanelHead, .SecondaryColumn .TitleBarCaption {
+  border-bottom: none; }
+.SecondaryColumn .PanelHead {
+  padding: 0 4px; }
+.SecondaryColumn .CommunityBlogItem {
+  padding: 0 0 0 10px; }
+  .SecondaryColumn .CommunityBlogItem .PanelFieldValue {
+    padding: 0; }
+.SecondaryColumn .CommunityItemTitle {
+  font-weight: normal;
+  font-size: inherit; }
+.SecondaryColumn .RadGrid .rgRow td, .SecondaryColumn .RadGrid .rgNoRecords td {
+  padding: 4px; }
+
+/* Use class ContentBlockPictureArea to surround an image within a ContentBlockPrimary area */
+.ContentBlockPictureArea, .ContentBlockLeft {
+  width: 250px;
+  float: left;
+  margin-right: .5em;
+  margin-bottom: .5em; }
+  .ContentBlockPictureArea.FloatRight, .ContentBlockLeft.FloatRight {
+    float: right;
+    margin-left: .5em; }
+  .ContentBlockPictureArea img, .ContentBlockLeft img {
+    max-width: 100%;
+    height: auto !important; }
+
+.BlockList ul {
+  margin: 0; }
+.BlockList li {
+  list-style: none; }
+.BlockList a {
+  display: block;
+  text-decoration: none;
+  padding: 10px 20px; }
+  .BlockList a:hover {
+    background-color: #f5f5f5; }
+.BlockList p {
+  color: #333333; }
+.BlockList a div span:hover {
+  text-decoration: underline; }
+
+/* Tagged list format, styled similar to BlockList */
+.BlockTLItem {
+  display: block;
+  text-decoration: none;
+  padding: 10px 0; }
+
+.BlockTLItem, .BlockList li {
+  border-bottom: 1px dotted #cccccc; }
+
+.BlockTLItem h4, .BlockList h4 {
+  font-size: 110%;
+  font-weight: normal; }
+
+/* PublishDate and ReadMoreLink are used in the Block tagged list format */
+.PublishDate {
+  font-size: 85%;
+  font-style: italic; }
+
+blockquote.Quote {
+  background: white;
+  border-left: 10px solid #0856a4;
+  margin: 1.5em .7em 1.5em 0;
+  padding: 1.5em .7em;
+  quotes: "\201C" "\201D" "\2018" "\2019"; }
+  blockquote.Quote p {
+    font-size: 1.2em;
+    line-height: 1.6em;
+    font-weight: normal; }
+  ​
+  blockquote.Quote:before {
+    color: #e0e3cc;
+    content: open-quote;
+    font-size: 5em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em; }
+  blockquote.Quote:after {
+    color: #ccc;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em; }
+
+/* CalloutPanelField1 can be used as a wrapper for PanelFields, or on the PanelField directly, to callout the first label. */
+.CalloutPanelField1 .PanelField label:first-child,
+.CalloutPanelField1.PanelField label:first-child {
+  position: relative;
+  padding: 15px;
+  margin: 0 0 1em;
+  color: white;
+  background: #f77b01;
+  /* default background for browsers without gradient support */
+  /* css3 */
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+  .CalloutPanelField1 .PanelField label:first-child:after,
+  .CalloutPanelField1.PanelField label:first-child:after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    /* value = - border-top-width - border-bottom-width */
+    left: 30px;
+    /* controls horizontal position */
+    border-width: 8px 8px 0;
+    /* vary these values to change the angle of the vertex */
+    border-style: solid;
+    border-color: #f77b01 transparent;
+    /* reduce the damage in FF3.0 */
+    display: block;
+    width: 0; }
+
+/* TotalBox can be used as a wrapper for PanelFields, or on the PanelField directly, to visually distinguish a calculated total. */
+.TotalBox .PanelField, .PanelField.TotalBox {
+  border-color: #cccccc; }
+
+.TotalBox .PanelFieldLabel {
+  background-color: #0856a4;
+  color: white;
+  padding: .25em .75em; }
+
+.StandardPanel .TotalBox .PanelField .PanelFieldLabel label, .StandardPanel .PanelField.TotalBox .PanelFieldLabel label,
+.TotalBox .PanelField .PanelFieldLabel label, .PanelField.TotalBox .PanelFieldLabel label {
+  color: white; }
+
+/* Add zone style "CCOGrayBg" to give CCO content a gray background */
+.CCOGrayBg .ContentWizardDisplay {
+  background-color: #f5f5f5; }
+
+.CCOGrayBg .yui-g {
+  float: none; }
+
+/* Add zone style "TitleBarNoBorder" to remove the bottom border from the title bar caption */
+.TitleBarNoBorder .TitleBarCaption, .TitleBarNoBorder .PanelHead.Distinguish {
+  border-bottom: none; }
+
+/* Use the iPartChain class along with the appropriate placement class (FirstPart, MiddlePart or LastPart) 
+to give several stacked iParts a conjoined look. */
+.iPartChain.FirstPart .StandardPanel {
+  border-bottom-width: 0 !important; }
+
+.iPartChain.MiddlePart .StandardPanel {
+  border-top-width: 0 !important;
+  border-bottom-width: 0 !important; }
+
+.iPartChain.LastPart .StandardPanel {
+  border-top-width: 0 !important; }
+
+.iPartChain.MiddlePart, .iPartChain.LastPart {
+  margin-top: -0.9em; }
+
+/*Use PanelNoPadding class to turn off the padding on a PanelBody */
+.NoPanelPadding .PanelBody {
+  padding: 0; }
+
+/* Use the FeatureText class to make a block of text larger for emphasis */
+.FeatureText {
+  color: #595959;
+  font-size: 150%;
+  line-height: 170%; }
+
+/* Use the CenterText class to center the text within the iPart */
+.CenterText {
+  text-align: center; }
+
+.FullWidthButtons .btn, .FullWidthButtons .TextButton {
+  display: block; }
+
+/* Use class FeatureActionLink on a link to call attention to it */
+a.FeatureActionLink {
+  -webkit-transition: all 0.2s ease 0;
+  -moz-transition: all 0.2s ease 0;
+  -o-transition: all 0.2s ease 0;
+  transition: all 0.2s ease 0;
+  color: #333333;
+  font-family: 'Droid Sans', Verdana, sans-serif;
+  font-size: 250%;
+  font-weight: 200;
+  line-height: 1.5em;
+  padding: 8px 0;
+  text-decoration: none; }
+  a.FeatureActionLink:hover {
+    text-decoration: underline; }
+
+/**** End misc. styles ****/
+/**************************************/
+/*          Spotlight Area            */
+/**************************************/
+.Spotlight {
+  text-align: center; }
+  .Spotlight img, .Spotlight h4 {
+    text-align: center; }
+  .Spotlight .TextButton {
+    float: right; }
+  .Spotlight p {
+    text-align: left; }
+  .Spotlight a img {
+    -webkit-transition: opacity 0.2s;
+    -moz-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    transition: opacity 0.2s; }
+    .Spotlight a img:hover {
+      opacity: 0.8;
+      filter: alpha(opacity=80); }
+
+.SpotlightRow {
+  margin-bottom: 20px; }
+  .SpotlightRow.ThreeAcross .Spotlight {
+    float: left;
+    width: 23%;
+    margin-left: 15.45%; }
+    .SpotlightRow.ThreeAcross .Spotlight:first-child {
+      margin-left: 0; }
+
+/**** End Spotlight ****/
+
+/*CSI custom classes*/
+.RadMenu
+{
+	margin-top:70px;
+}
+
+#MainPanel
+{
+	background-color:white;
+}
+
+#masterContentArea
+{
+	background-color:white;
+	margin:0px auto;
+}
+
+.RadMenu.RadMenu_Austin.rmSized
+{
+	width:960px!important;
+	background-image:url(images/pbs_menurpt.png);
+	background-repeat:repeat-x;
+}
+
+.PanelHead
+{
+	background-image:url(images/pbs_bg.gif);
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+}
+
+#bd
+{
+	background-image:url(images/pbs_bg.gif);
+}
+
+#ft a img.SocialSprite
+{
+	border:1px solid #064483!important;
+}
+
+.PanelTitle
+{
+	text-transform:uppercase;
+	font-weight:bold;
+}
+
+.RadTabStripTop_Metro .rtsLevel1 {
+    background-color: #0856a4;
+}
+
+#ctl00_TemplateBody_OptionalGroup
+{
+	display:none;
+}
+div[id$='_RegistrantTypePanel'] label[for$='_AddContact'], div[id$='_RegistrantTypePanel'] input[id$='_AddContact']{
+    display:none;
+}

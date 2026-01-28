@@ -1,0 +1,14 @@
+# HTML files with personal data
+AccountPage.html
+AccountPageInDev.html
+
+# macOS
+.DS_Store
+
+# Claude Code local files
+.claude/
+
+# Editor files
+*.swp
+*.swo
+*~
