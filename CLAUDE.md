@@ -17,11 +17,11 @@ Custom responsive CSS theme for the Phi Beta Sigma Fraternity iMIS 20.2.66 membe
 ## Files
 - `pbs-theme.css` - Main responsive theme file
 - `PBSTheme_Current_Production.css` - Reference copy of production CSS
-- `PBSTheme.xml` - iMIS theme import manifest
 - `package/` - Theme package folder for ZIP export
   - `pbs-theme.css`
-  - `PBSTheme.xml`
-  - `images/pbs-header2.png` (add manually)
+  - `ThemeSettings.xml` - iMIS 20.2 theme settings file
+  - `images/` - All theme images including `pbs-header2.png`
+- `PBSTheme-Modern-Responsive.zip` - Ready-to-deploy theme package
 
 ## Key CSS Features Implemented
 
@@ -153,6 +153,25 @@ Custom responsive CSS theme for the Phi Beta Sigma Fraternity iMIS 20.2.66 membe
     - `package/` folder structure for ZIP export
     - Ready for iMIS theme import
 
+## Session History (2026-01-28 evening)
+15. Created iMIS theme package
+    - `ThemeSettings.xml` with correct iMIS 20.2 format
+    - `PBSTheme-Modern-Responsive.zip` ready for deployment
+16. Improved top bar button styling
+    - SIGN IN/SIGN OUT buttons: white background, blue border, blue text
+    - Hover effect inverts to blue background with white text
+17. Fixed main navigation menu
+    - Larger text (13px), bold (700), proper padding
+    - White text on blue background with good contrast
+    - Added multiple selector variations with `!important` for override
+18. Improved tabs styling
+    - 14px font, semi-bold (600)
+    - Blue text on white, blue underline on hover/selected
+19. Fixed panel edit buttons
+    - Edit, Edit Panel, Edit Address now have blue text
+    - Matches "Hide" button styling for consistency
+    - Targeted `[id*="_Head"]` elements for panel headers
+
 ## Current Status
 - Theme is fully functional and responsive
 - Cross-browser compatible (Safari, Chrome, Edge)
@@ -161,12 +180,14 @@ Custom responsive CSS theme for the Phi Beta Sigma Fraternity iMIS 20.2.66 membe
 - Header branding image displays (except login page - different master page)
 - Profile image displays correctly at all screen sizes
 - Multi-select lists working on Directory page
+- All buttons and links readable with proper contrast
 
-## Theme Import Instructions
-1. Copy `pbs-header2.png` to `package/images/`
-2. Create ZIP: `cd package && zip -r ../PBSTheme.zip *`
-3. In iMIS: RiSE → Page Builder → Manage themes → Import theme
-4. Upload `PBSTheme.zip`
+## Theme Deployment (iMIS 20.2)
+1. Extract `PBSTheme-Modern-Responsive.zip`
+2. On iMIS server, navigate to: `C:\Program Files (x86)\ASI\iMIS\Net\App_Themes\`
+3. Create folder: `PBSTheme-Modern-Responsive`
+4. Copy contents: `ThemeSettings.xml`, `pbs-theme.css`, `images/`
+5. In iMIS Staff: RiSE → select theme for website
 
 ## Next Steps / Known Issues
 - Accessibility improvements (focus indicators, reduced motion, touch targets)

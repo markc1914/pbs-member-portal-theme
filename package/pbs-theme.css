@@ -1267,11 +1267,11 @@ tr:hover {
    ICON SPRITES & ACTION ICONS
    ======================================== */
 .IconSprite {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     margin-left: 0.3em;
     opacity: 1;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: opacity 0.2s ease;
     position: relative;
     display: inline-block;
     vertical-align: middle;
@@ -1281,38 +1281,56 @@ tr:hover {
 }
 
 .IconSprite:hover {
-    opacity: 0.8;
-    transform: scale(1.1);
+    opacity: 0.7;
 }
 
-/* Edit/Panel action buttons - more visible */
+/* Panel action buttons - match Hide button styling (blue text links) */
 .panel-heading-options,
-.PanelHeadOptions {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.panel-heading-options a,
-.PanelHeadOptions a {
+.PanelHeadOptions,
+.PanelHead .panel-heading-options {
     display: inline-flex;
+    gap: 12px;
     align-items: center;
-    padding: 4px 8px;
-    border-radius: 3px;
-    background-color: var(--pbs-gray-100);
-    border: 1px solid var(--pbs-gray-300);
-    transition: all 0.2s ease;
+    float: right;
 }
 
-.panel-heading-options a:hover,
-.PanelHeadOptions a:hover {
-    background-color: var(--pbs-blue);
-    border-color: var(--pbs-blue);
+/* Edit, Edit Panel, Edit Address links and buttons - blue text */
+a[id*="Edit"],
+a[id*="edit"],
+a[title*="Edit"],
+a[title*="edit"],
+a[href*="Edit"],
+a[onclick*="Edit"],
+.EditLink,
+.editLink,
+/* Target buttons in panel headers */
+.panel-heading a,
+.panel-heading input,
+.panel-heading button,
+.panel-heading .TextButton,
+.PanelHead a,
+.PanelHead input,
+.PanelHead button,
+.PanelHead .TextButton,
+[class*="panel"] [class*="head"] a,
+[class*="panel"] [class*="head"] input[type="button"],
+[class*="panel"] [class*="head"] input[type="submit"],
+[class*="Panel"] [class*="Head"] a,
+[id*="Head"] a,
+[id*="Head"] input[type="button"],
+[id*="Head"] .TextButton {
+    color: var(--pbs-blue) !important;
+    background-color: transparent !important;
+    border: none !important;
 }
 
-.panel-heading-options a:hover .IconSprite,
-.PanelHeadOptions a:hover .IconSprite {
-    filter: brightness(0) invert(1);
+/* Ensure any white text in panel headers becomes blue */
+.panel-heading *,
+.PanelHead *,
+[id*="_Head"] a,
+[id*="_Head"] input,
+[id*="_Head"] .TextButton {
+    color: var(--pbs-blue) !important;
 }
 
 /* Panel Settings/Configure - Gear Icon */
