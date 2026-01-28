@@ -56,8 +56,10 @@ Custom responsive CSS theme for the Phi Beta Sigma Fraternity iMIS 20.2.66 membe
 - Rounded corners (3px)
 - Box shadows on inputs
 
-### 7. Profile Section
-- Circular profile image with blue border
+### 7. Profile Section (Left Sidebar)
+- Profile image with blue border, fixed width (130px desktop, 100px mobile)
+- Natural aspect ratio preserved (no distortion)
+- Sidebar content fills full column width
 - 2-column layout (25% sidebar, 75% content)
 
 ### 8. Tabs (RadTabStrip)
@@ -91,3 +93,27 @@ Custom responsive CSS theme for the Phi Beta Sigma Fraternity iMIS 20.2.66 membe
 7. Added conditional button styling (grey/blue based on disabled state)
 8. Added SVG icons with CSS tooltips
 9. Added horizontal scroll for wide tables
+
+## Session History (2026-01-28)
+1. Fixed left sidebar content to fill full column width
+   - Added width rules for `.col-sm-3` child elements
+   - Targeted iMIS-specific containers (`[id*="ste_container"]`, etc.)
+2. Fixed Renewal button box blue background
+   - Made `.UsePrimaryButton` and `.UseLargeButton` containers transparent
+   - Used aggressive `*` selector to override UltraWave base styles
+3. Fixed profile image distortion
+   - Removed forced square dimensions that caused oval/stretched images
+   - Set fixed width (130px) with `height: auto` to preserve aspect ratio
+   - Mobile breakpoint uses 100px width
+4. Created dedicated git repository for project
+
+## Current Status
+- Theme is functional and responsive
+- Profile image displays correctly at all screen sizes
+- Renewal box has transparent background (matches other sidebar boxes)
+- Left sidebar content fills full width
+
+## Next Steps / Known Issues
+- Fine-tune profile image sizing if needed
+- Test on actual iMIS dev site with CSS deployed
+- May need additional tweaks for specific iMIS pages/components
