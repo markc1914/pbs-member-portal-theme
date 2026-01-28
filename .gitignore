@@ -12,3 +12,5 @@ AccountPageInDev.html
 *.swp
 *.swo
 *~
+*.zip
+/package/images

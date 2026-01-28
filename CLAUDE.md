@@ -1,4 +1,6 @@
-# Phi Beta Sigma Member Portal - CSS Theme Project
+# PBSTheme-Modern-Responsive
+
+## Phi Beta Sigma Member Portal - CSS Theme Project
 
 ## Project Overview
 Custom responsive CSS theme for the Phi Beta Sigma Fraternity iMIS 20.2.66 member portal.
@@ -15,8 +17,11 @@ Custom responsive CSS theme for the Phi Beta Sigma Fraternity iMIS 20.2.66 membe
 ## Files
 - `pbs-theme.css` - Main responsive theme file
 - `PBSTheme_Current_Production.css` - Reference copy of production CSS
-- `AccountPage.html` - Sample account page HTML
-- `AccountPageInDev.html` - Dev site HTML for testing
+- `PBSTheme.xml` - iMIS theme import manifest
+- `package/` - Theme package folder for ZIP export
+  - `pbs-theme.css`
+  - `PBSTheme.xml`
+  - `images/pbs-header2.png` (add manually)
 
 ## Key CSS Features Implemented
 
@@ -125,15 +130,45 @@ Custom responsive CSS theme for the Phi Beta Sigma Fraternity iMIS 20.2.66 membe
    - Removed problematic `#yui-main { float: none; width: 100% }` override
    - Restored proper 2-column YUI grid layout
 
+## Session History (2026-01-28 afternoon)
+10. Fixed menu and content width alignment
+    - Made all major page sections (`#doc`, `#hd`, `#bd`, etc.) full width
+    - Added aggressive `!important` overrides for YUI template classes (`.yui-t1` through `.yui-t5`)
+    - Nav bar and content area now match perfectly at all screen sizes
+11. Fixed multi-select lists on Directory search page
+    - Added scrollable list styling for `.PanelField ul`, `.PanelBody ul`, `td ul`
+    - Excluded navigation lists (`.NavigationUnorderedList`, `.rtsUL`, `.rmRootGroup`) to avoid breaking menus
+    - Lists now display with border, max-height 150px, and overflow-y scroll
+12. Fixed Community page layout
+    - Added CSS for community pages with floating images/logos
+    - Fixed float issues that were causing large empty spaces
+    - Community logo/sidebar content now flows correctly
+13. Added header image/branding
+    - CSS for `#masterHeaderImage` with background-image
+    - Uses `images/pbs-header2.png` from theme folder
+    - Positioned absolutely within `#masterHeaderBackground`
+    - **Note:** Login page uses different master page - requires iMIS admin configuration to show header
+14. Created theme import package
+    - `PBSTheme.xml` - iMIS theme manifest file
+    - `package/` folder structure for ZIP export
+    - Ready for iMIS theme import
+
 ## Current Status
-- Theme is functional and responsive
+- Theme is fully functional and responsive
 - Cross-browser compatible (Safari, Chrome, Edge)
-- Responsive content widths working
-- YUI 2-column layout preserved on wide screens
+- Menu and content widths aligned perfectly
+- Community pages display correctly
+- Header branding image displays (except login page - different master page)
 - Profile image displays correctly at all screen sizes
+- Multi-select lists working on Directory page
+
+## Theme Import Instructions
+1. Copy `pbs-header2.png` to `package/images/`
+2. Create ZIP: `cd package && zip -r ../PBSTheme.zip *`
+3. In iMIS: RiSE → Page Builder → Manage themes → Import theme
+4. Upload `PBSTheme.zip`
 
 ## Next Steps / Known Issues
 - Accessibility improvements (focus indicators, reduced motion, touch targets)
-- Fine-tune nav menu alignment (currently full-width, menu items natural position)
-- Test multi-select styling on Directory search page
-- Footer content alignment to match header/content width
+- Login page header: Requires iMIS admin to configure master page
+- Footer content alignment (optional enhancement)
