@@ -1459,17 +1459,47 @@ tr:hover {
     box-shadow: none !important;
 }
 
-/* Make RadButton "Edit" actions look like inline links */
+/* Make RadButton "Edit" actions look like inline links - remove ALL box backgrounds */
 .panel-heading-options .RadButton,
-.PanelHeadOptions .RadButton {
+.PanelHeadOptions .RadButton,
+.PanelHead .RadButton,
+[id*="_Head"] .RadButton {
     display: inline-flex !important;
     align-items: center;
     vertical-align: middle;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
+/* Remove backgrounds from ALL inner RadButton elements */
+.panel-heading-options .RadButton *,
+.PanelHeadOptions .RadButton *,
+.PanelHead .RadButton *,
+[id*="_Head"] .RadButton *,
 .panel-heading-options .RadButton .rbDecorated,
-.PanelHeadOptions .RadButton .rbDecorated {
+.panel-heading-options .RadButton .rbPrimaryIcon,
+.panel-heading-options .RadButton .rbSecondaryIcon,
+.panel-heading-options .RadButton .rbText,
+.panel-heading-options .RadButton .rbIcon,
+.PanelHeadOptions .RadButton .rbDecorated,
+.PanelHeadOptions .RadButton .rbPrimaryIcon,
+.PanelHeadOptions .RadButton .rbSecondaryIcon,
+.PanelHeadOptions .RadButton .rbText,
+.PanelHeadOptions .RadButton .rbIcon,
+.PanelHead .RadButton .rbDecorated,
+.PanelHead .RadButton .rbPrimaryIcon,
+.PanelHead .RadButton .rbSecondaryIcon,
+.PanelHead .RadButton .rbText,
+.PanelHead .RadButton .rbIcon,
+[id*="_Head"] .RadButton .rbDecorated,
+[id*="_Head"] .RadButton .rbPrimaryIcon,
+[id*="_Head"] .RadButton .rbSecondaryIcon,
+[id*="_Head"] .RadButton .rbText,
+[id*="_Head"] .RadButton .rbIcon {
     background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
@@ -1483,16 +1513,27 @@ tr:hover {
 }
 
 .panel-heading-options .RadButton:focus,
-.panel-heading-options .RadButton .rbDecorated:focus,
+.panel-heading-options .RadButton *:focus,
 .PanelHeadOptions .RadButton:focus,
-.PanelHeadOptions .RadButton .rbDecorated:focus {
+.PanelHeadOptions .RadButton *:focus,
+.PanelHead .RadButton:focus,
+.PanelHead .RadButton *:focus,
+[id*="_Head"] .RadButton:focus,
+[id*="_Head"] .RadButton *:focus {
     outline: none !important;
     box-shadow: none !important;
 }
 
 /* Make RadButton actions behave like text links outside panel headers */
-.RadButton.rbSkinnedButton .rbDecorated {
+.RadButton.rbSkinnedButton,
+.RadButton.rbSkinnedButton .rbDecorated,
+.RadButton.rbSkinnedButton .rbPrimaryIcon,
+.RadButton.rbSkinnedButton .rbSecondaryIcon,
+.RadButton.rbSkinnedButton .rbText,
+.RadButton.rbSkinnedButton .rbIcon {
     background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 !important;
@@ -1502,7 +1543,7 @@ tr:hover {
     cursor: pointer !important;
 }
 
-/* Edit, Edit Panel, Edit Address links and buttons - blue text */
+/* Edit, Edit Panel, Edit Address links and buttons - blue text, NO backgrounds */
 a[id*="Edit"],
 a[id*="edit"],
 a[title*="Edit"],
@@ -1512,6 +1553,7 @@ a[onclick*="Edit"],
 .EditLink,
 .editLink,
 /* Target buttons in panel headers */
+/* NOTE: Avoid [id*="Head"] as it matches #masterHeaderImage - use class selectors instead */
 .panel-heading a,
 .panel-heading input,
 .panel-heading button,
@@ -1524,21 +1566,65 @@ a[onclick*="Edit"],
 [class*="panel"] [class*="head"] input[type="button"],
 [class*="panel"] [class*="head"] input[type="submit"],
 [class*="Panel"] [class*="Head"] a,
-[id*="Head"] a,
-[id*="Head"] input[type="button"],
-[id*="Head"] .TextButton {
+.PanelHeadOptions a,
+.PanelHeadOptions input[type="button"],
+.PanelHeadOptions .TextButton {
     color: var(--pbs-blue) !important;
+    background: transparent !important;
     background-color: transparent !important;
+    background-image: none !important;
     border: none !important;
+    box-shadow: none !important;
 }
 
-/* Ensure any white text in panel headers becomes blue */
+/* Ensure any element in panel headers has no background */
+/* NOTE: Do NOT use [id*="_Head"] as it matches #masterHeaderImage */
 .panel-heading *,
 .PanelHead *,
-[id*="_Head"] a,
-[id*="_Head"] input,
-[id*="_Head"] .TextButton {
+.PanelHead a,
+.PanelHead input,
+.PanelHead span,
+.PanelHead .TextButton {
     color: var(--pbs-blue) !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* AGGRESSIVE: Remove ALL backgrounds from Edit/Address controls and their wrappers */
+a[id*="Edit"],
+a[id*="edit"],
+a[id*="Address"],
+a[id*="address"],
+[id*="Edit"] a,
+[id*="edit"] a,
+[id*="Address"] a,
+[id*="address"] a,
+[id*="Edit"] span,
+[id*="edit"] span,
+[id*="Address"] span,
+[id*="address"] span,
+[id*="Edit"] > *,
+[id*="edit"] > *,
+[id*="Address"] > *,
+[id*="address"] > *,
+a[id*="Edit"] *,
+a[id*="edit"] *,
+a[id*="Address"] *,
+a[id*="address"] *,
+.PanelHeadOptions a,
+.PanelHeadOptions a *,
+.PanelHeadOptions span,
+.panel-heading-options a,
+.panel-heading-options a *,
+.panel-heading-options span {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 /* Panel Settings/Configure - Gear Icon */
@@ -1831,4 +1917,21 @@ a[title*="Edit"] .IconSprite {
         background: white;
         font-size: 12pt;
     }
+}
+
+/* ========================================
+   HEADER IMAGE PROTECTION - MUST BE LAST
+   Prevents other rules from removing the banner
+   ======================================== */
+#hd #masterHeaderImage,
+#hd #masterDonorHeaderImage,
+#masterHeaderBackground #masterHeaderImage,
+#masterHeaderBackground #masterDonorHeaderImage,
+#masterHeaderImage,
+#masterDonorHeaderImage,
+a#masterHeaderImage,
+a#masterDonorHeaderImage {
+    background: url("images/pbs-header2.png") no-repeat left center !important;
+    background-image: url("images/pbs-header2.png") !important;
+    background-color: transparent !important;
 }
