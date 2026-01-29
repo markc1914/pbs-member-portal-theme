@@ -60,6 +60,71 @@ a:hover, a:focus, a:active {
     color: #000000;
 }
 
+/* ========================================
+   ACCESSIBILITY ENHANCEMENTS (NO BRAND COLOR CHANGES)
+   ======================================== */
+/* Focus visibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.RadMenu a.rmLink:focus-visible,
+.RadTabStrip .rtsLink:focus-visible,
+.RadTabStripTop_Metro .rtsLink:focus-visible,
+.RadTabStrip_Metro .rtsLink:focus-visible {
+    outline: 2px solid var(--pbs-blue-accent);
+    outline-offset: 2px;
+}
+
+/* Remove focus outline on panel edit buttons/links to match design */
+.panel-heading a:focus-visible,
+.panel-heading input:focus-visible,
+.panel-heading button:focus-visible,
+.PanelHead a:focus-visible,
+.PanelHead input:focus-visible,
+.PanelHead button:focus-visible,
+[id*="_Head"] a:focus-visible,
+[id*="_Head"] input:focus-visible,
+[id*="_Head"] button:focus-visible {
+    outline: none;
+}
+
+/* Keep submenu open for keyboard users */
+.RadMenu_Austin.RadMenu .rmItem:focus-within > .rmGroup {
+    display: block;
+}
+
+/* Larger, consistent touch targets */
+.RadMenu a.rmLink.rmRootLink,
+.RadMenu_Austin a.rmLink.rmRootLink,
+.RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
+.RadMenu.RadMenu_Austin a.rmLink.rmRootLink,
+button,
+input[type="submit"],
+input[type="button"],
+a.TextButton {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Content links are more recognizable */
+#masterContentArea a:not(.TextButton):not(.rmLink) {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 h1, .PageTitle {
     color: var(--pbs-blue);
     font-size: 250%;
@@ -367,6 +432,8 @@ a.TextButton[id*="Login"]:hover {
     margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
+    position: relative;
+    z-index: 2000;
 }
 
 /* RadMenu - full width, matches content area */
@@ -389,6 +456,11 @@ a.TextButton[id*="Login"]:hover {
 /* Ensure root menu group spans full width */
 .RadMenu .rmRootGroup {
     width: 100% !important;
+}
+
+/* Keep dropdowns anchored to their parent items */
+.RadMenu .rmItem {
+    position: relative;
 }
 
 .RadMenu a.rmLink,
@@ -444,6 +516,11 @@ a.TextButton[id*="Login"]:hover {
     border: none;
     margin-top: -1px;
     background: transparent;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 2100;
+    min-width: 180px;
 }
 
 .RadMenu_Austin.RadMenu .rmGroup .rmItem {
@@ -762,6 +839,8 @@ a[onclick*="Edit"],
 a.EditLink {
     color: var(--pbs-blue) !important;
     font-weight: 600 !important;
+    font-size: inherit !important;
+    text-transform: none !important;
 }
 
 /* ========================================
@@ -1166,6 +1245,37 @@ tr:hover {
 }
 
 /* ========================================
+   RESOURCE/DOCUMENT LIBRARY
+   ======================================== */
+[id*="ResourceLibrary"],
+[id*="DocumentLibrary"],
+[id*="DocumentBrowser"],
+.ResourceLibrary,
+.DocumentLibrary {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.RadFileExplorer,
+.RadFileExplorer_Default,
+.RadFileExplorer .rfeContent,
+.RadFileExplorer .rfeFileList,
+.RadFileExplorer .rfeListView,
+.RadFileExplorer .rfeView,
+.RadFileExplorer .rfeTreeView,
+.RadFileExplorer .rfeMain,
+.RadFileExplorer .rfePane {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+.RadFileExplorer .rfeContent,
+.RadFileExplorer .rfeFileList,
+.RadFileExplorer .rfeTreeView {
+    min-height: 420px;
+}
+
+/* ========================================
    ON BEHALF OF (Proxy)
    ======================================== */
 .ProxyPanelContact {
@@ -1292,6 +1402,104 @@ tr:hover {
     gap: 12px;
     align-items: center;
     float: right;
+    flex-wrap: wrap;
+    row-gap: 4px;
+    font-size: 12px;
+}
+
+/* Panel header action buttons: align to row, remove chrome */
+.panel-heading-options a,
+.panel-heading-options input,
+.panel-heading-options button,
+.PanelHeadOptions a,
+.PanelHeadOptions input,
+.PanelHeadOptions button,
+.PanelHead a,
+.PanelHead input,
+.PanelHead button {
+    display: inline-flex !important;
+    align-items: center;
+    line-height: 1.2;
+    padding: 0 4px !important;
+    margin: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* Override global button sizing for panel header actions */
+.panel-heading-options input[type="submit"],
+.panel-heading-options input[type="button"],
+.panel-heading-options button,
+.PanelHeadOptions input[type="submit"],
+.PanelHeadOptions input[type="button"],
+.PanelHeadOptions button {
+    min-height: 0 !important;
+    padding: 0 4px !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    text-transform: none !important;
+}
+
+.panel-heading-options a:focus,
+.panel-heading-options input:focus,
+.panel-heading-options button:focus,
+.PanelHeadOptions a:focus,
+.PanelHeadOptions input:focus,
+.PanelHeadOptions button:focus,
+.PanelHead a:focus,
+.PanelHead input:focus,
+.PanelHead button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Make RadButton "Edit" actions look like inline links */
+.panel-heading-options .RadButton,
+.PanelHeadOptions .RadButton {
+    display: inline-flex !important;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.panel-heading-options .RadButton .rbDecorated,
+.PanelHeadOptions .RadButton .rbDecorated {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    color: var(--pbs-blue) !important;
+    font-weight: 600 !important;
+    font-size: inherit !important;
+    line-height: 1.2 !important;
+    text-transform: none !important;
+    cursor: pointer !important;
+}
+
+.panel-heading-options .RadButton:focus,
+.panel-heading-options .RadButton .rbDecorated:focus,
+.PanelHeadOptions .RadButton:focus,
+.PanelHeadOptions .RadButton .rbDecorated:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Make RadButton actions behave like text links outside panel headers */
+.RadButton.rbSkinnedButton .rbDecorated {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    text-transform: none !important;
+    font-weight: 600 !important;
+    color: var(--pbs-blue) !important;
+    cursor: pointer !important;
 }
 
 /* Edit, Edit Panel, Edit Address links and buttons - blue text */
@@ -1549,6 +1757,12 @@ a[title*="Edit"] .IconSprite {
     select,
     textarea {
         font-size: 16px;
+    }
+
+    .panel-heading-options,
+    .PanelHeadOptions,
+    .PanelHead .panel-heading-options {
+        font-size: 11px;
     }
 }
 
