@@ -366,8 +366,10 @@ h4, .SectionLabel, h5 {
    This applies at all screen sizes
    ======================================== */
 #hd ul,
+#hd ol,
 #hd li,
 header ul,
+header ol,
 header li,
 #masterTopBarAuxiliary ul,
 #masterTopBarAuxiliary li,
@@ -378,10 +380,36 @@ header li,
 .NavigationUnorderedList,
 .NavigationListItem,
 nav ul,
-nav li {
+nav li,
+ul.NavigationUnorderedList,
+ul.NavigationUnorderedList li,
+/* Target ALL lists before main content */
+#hd *,
+header * {
     list-style: none !important;
     list-style-type: none !important;
     list-style-image: none !important;
+    -webkit-padding-start: 0 !important;
+    padding-inline-start: 0 !important;
+}
+
+/* Extra specific: any ul or li in header area */
+#hd ul, #hd ol, #hd li,
+#hd ul li, #hd ol li,
+header ul, header ol, header li,
+header ul li, header ol li {
+    list-style: none !important;
+    list-style-type: none !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+/* Override any ::marker pseudo-element */
+#hd li::marker,
+header li::marker,
+.NavigationListItem::marker {
+    content: none !important;
+    display: none !important;
 }
 
 /* Social icons in aux bar */
@@ -1959,7 +1987,7 @@ a[title*="Edit"] .IconSprite {
        MOBILE NAVIGATION BAR & HAMBURGER MENU
        ============================================ */
 
-    /* Hamburger menu toggle - make it prominent */
+    /* Hamburger menu toggle - clear and prominent */
     .navbar-toggle,
     .hamburger,
     .menu-toggle,
@@ -1971,32 +1999,44 @@ a[title*="Edit"] .IconSprite {
     button[aria-label*="menu"],
     button[aria-label*="Menu"],
     a[aria-label*="menu"],
-    a[aria-label*="Menu"] {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
+    a[aria-label*="Menu"],
+    .collapsed-toggle,
+    [data-toggle="collapse"] {
+        display: block !important;
+        width: 100% !important;
         background-color: var(--pbs-blue) !important;
         color: var(--pbs-white) !important;
         border: none !important;
-        padding: 10px 15px !important;
-        border-radius: 4px !important;
+        padding: 12px 15px !important;
+        border-radius: 0 !important;
         font-size: 14px !important;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
         cursor: pointer !important;
-        min-height: 44px !important;
+        text-align: center !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
     }
 
-    /* Add "MENU" label after hamburger icon via CSS */
-    .navbar-toggle::after,
-    .hamburger::after,
-    .menu-toggle::after,
-    [class*="hamburger"]::after,
-    [class*="menu-toggle"]::after {
-        content: " MENU" !important;
-        margin-left: 8px !important;
-        font-size: 12px !important;
+    /* Clear text for menu toggle */
+    .navbar-toggle::before,
+    .hamburger::before,
+    .menu-toggle::before,
+    [class*="hamburger"]::before,
+    [class*="menu-toggle"]::before,
+    [data-toggle="collapse"]::before {
+        content: "☰ TAP HERE TO SHOW/HIDE MENU" !important;
+        font-size: 13px !important;
         font-weight: 700 !important;
-        letter-spacing: 1px !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    /* Hide original toggle content, show our text instead */
+    .navbar-toggle *,
+    .hamburger *,
+    .menu-toggle *,
+    [class*="hamburger"] > *,
+    [class*="menu-toggle"] > * {
+        display: none !important;
     }
 
     /* FORCE NAVIGATION TO BE VISIBLE BY DEFAULT */
@@ -2017,37 +2057,48 @@ a[title*="Edit"] .IconSprite {
         max-height: none !important;
         height: auto !important;
         overflow: visible !important;
-        background-color: var(--pbs-blue) !important;
-        padding: 10px !important;
+        background-color: var(--pbs-white) !important;
+        padding: 8px 5px !important;
+        border-top: 2px solid var(--pbs-blue) !important;
+        border-bottom: 2px solid var(--pbs-blue) !important;
     }
 
-    /* Mobile nav links - styled for touch */
+    /* Mobile nav links - compact text links, not clunky buttons */
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
     .RadMenu a.rmLink,
     nav a {
-        font-size: 12px !important;
-        padding: 10px 12px !important;
-        display: block !important;
-        color: var(--pbs-white) !important;
-        background-color: var(--pbs-blue) !important;
-        border-bottom: 1px solid var(--pbs-blue-light) !important;
+        font-size: 11px !important;
+        padding: 6px 8px !important;
+        margin: 2px !important;
+        display: inline-block !important;
+        color: var(--pbs-blue) !important;
+        background-color: transparent !important;
+        border: 1px solid var(--pbs-blue) !important;
+        border-radius: 3px !important;
+        text-transform: uppercase !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.3px !important;
     }
 
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:hover,
     .RadMenu a.rmLink:hover {
-        background-color: var(--pbs-blue-light) !important;
+        background-color: var(--pbs-blue) !important;
+        color: var(--pbs-white) !important;
     }
 
-    /* Menu items stack vertically on mobile */
+    /* Menu items flow horizontally, wrap as needed */
     .RadMenu .rmRootGroup,
     .rmRootGroup {
         display: flex !important;
-        flex-direction: column !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: flex-start !important;
+        gap: 3px !important;
     }
 
     .RadMenu .rmItem,
     .rmItem {
-        width: 100% !important;
+        width: auto !important;
     }
 
     /* ============================================
