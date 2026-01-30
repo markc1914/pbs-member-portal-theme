@@ -314,6 +314,26 @@ h4, .SectionLabel, h5 {
     height: 135px;
     min-height: 90px;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Force all header link lists to the right */
+#masterHeaderBackground > ul,
+#masterHeaderBackground > div > ul,
+#masterHeaderBackground .NavigationUnorderedList {
+    position: absolute !important;
+    right: 15px !important;
+    top: 10px !important;
+    left: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+    align-items: center !important;
+    z-index: 100 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* Logo area */
@@ -347,6 +367,9 @@ h4, .SectionLabel, h5 {
 #masterTopBarAuxiliary {
     background-color: var(--pbs-gray-100);
     padding: 8px 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 #masterTopBarAuxiliary .NavigationUnorderedList {
@@ -354,11 +377,75 @@ h4, .SectionLabel, h5 {
     list-style: none !important;
     margin: 0;
     padding: 0;
-    gap: 5px;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
 }
 
 #masterTopBarAuxiliary .NavigationListItem {
     list-style: none !important;
+}
+
+/* ========================================
+   HIDE: Keyword Search, GO Button, Social Icons in Header
+   ======================================== */
+#masterTopBarAuxiliary [id*="Search"],
+#masterTopBarAuxiliary [id*="search"],
+#masterTopBarAuxiliary [class*="Search"],
+#masterTopBarAuxiliary [class*="search"],
+#masterTopBarAuxiliary input[type="text"],
+#masterTopBarAuxiliary input[value="GO"],
+#masterTopBarAuxiliary input[type="submit"],
+[id*="KeywordSearch"],
+[id*="keywordSearch"],
+[class*="KeywordSearch"],
+[class*="keyword-search"],
+.SearchBox,
+.KeywordSearch,
+/* HIDE GO BUTTON AND KEYWORD SEARCH ONLY - not Sign In! */
+#hd input[type="text"],
+#hd input[value="GO"],
+header input[type="text"],
+header input[value="GO"],
+input[value="GO"],
+input.TextButton[value="GO"],
+.TextButton[value="GO"],
+[value="GO"],
+#masterLogoArea input[type="text"],
+#masterHeaderBackground input[type="text"],
+/* Hide social media icons in header (they're in footer) */
+#masterSocialNetworking,
+#hd [id*="Social"],
+#hd [class*="social"],
+#hd [class*="Social"],
+header [id*="Social"],
+header [class*="social"],
+#masterTopBarAuxiliary [id*="Social"],
+#masterTopBarAuxiliary [class*="social"],
+#masterLogoArea [id*="Social"],
+#masterLogoArea [class*="social"],
+.SocialSprite,
+#hd .SocialSprite,
+header .SocialSprite,
+/* Social icon links */
+#hd a[href*="facebook"],
+#hd a[href*="twitter"],
+#hd a[href*="instagram"],
+#hd a[href*="linkedin"],
+#hd a[href*="youtube"],
+header a[href*="facebook"],
+header a[href*="twitter"],
+header a[href*="instagram"],
+header a[href*="linkedin"],
+header a[href*="youtube"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
 }
 
 /* ========================================
@@ -392,10 +479,165 @@ header li::marker,
 #masterSocialNetworking {
     display: flex;
     align-items: center;
+    gap: 8px;
 }
 
 #masterTopBarAuxiliary a {
     color: var(--pbs-gray-800);
+}
+
+/* ========================================
+   HEADER LAYOUT - Logo left, links right
+   ======================================== */
+#masterLogoArea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+/* Header links container - align right */
+#masterLogoArea > ul,
+#masterLogoArea .NavigationUnorderedList,
+#hd > ul:not(.rmRootGroup),
+header > ul:not(.rmRootGroup) {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-left: auto !important;
+    position: absolute !important;
+    right: 15px !important;
+    top: 10px !important;
+}
+
+/* ========================================
+   HEADER USER LINKS - Mark, Cart, Sign Out
+   All styled the same, positioned on right of banner
+   ======================================== */
+
+/* Remove any borders from header containers and banner */
+#hd,
+#masterHeaderBackground,
+#masterLogoArea,
+#masterHeaderImage,
+header {
+    border: none !important;
+    outline: none !important;
+}
+
+/* Ensure header is always visible */
+#hd,
+#masterHeaderBackground,
+header,
+.header {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* ========================================
+   HEADER USER LINKS - Sign Up, Sign In, Mark, Cart, Sign Out
+   Style as buttons, position top right
+   ======================================== */
+
+/* ALL direct links in header area - style as buttons */
+#hd > a,
+#hd > span > a,
+#masterLogoArea > a,
+#masterLogoArea > span > a,
+#masterHeaderBackground > a,
+#masterHeaderBackground > span > a,
+a.TextButton[id*="LoginStatus"],
+a.TextButton[id*="Login"],
+a[id*="lnkUserName"],
+a[id*="lnkCart"],
+a[id*="SignOut"],
+a[id*="signout"],
+a[id*="SignUp"],
+a[id*="signup"],
+a[id*="SignIn"],
+a[id*="signin"] {
+    display: inline-block !important;
+    padding: 8px 16px !important;
+    color: var(--pbs-blue) !important;
+    background-color: var(--pbs-white) !important;
+    border: 2px solid var(--pbs-blue) !important;
+    border-radius: 10px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-family: var(--font-base) !important;
+    margin: 3px !important;
+    position: fixed !important;
+    top: 15px !important;
+    z-index: 9999 !important;
+}
+
+/* Position links on right side - use right positioning */
+/* First link (Sign Up or Mark) */
+#hd > a:first-of-type,
+#hd > span:first-of-type > a,
+a[id*="lnkUserName"],
+a[id*="SignUp"],
+a[id*="signup"] {
+    right: 210px !important;
+}
+
+/* Second link (Sign In or Cart) */
+#hd > a:nth-of-type(2),
+#hd > span:nth-of-type(2) > a,
+a[id*="lnkCart"],
+a[id*="SignIn"],
+a[id*="signin"] {
+    right: 110px !important;
+}
+
+/* Third link (Sign Out) */
+#hd > a:nth-of-type(3),
+#hd > a:last-of-type,
+#hd > span:last-of-type > a,
+a.TextButton[id*="LoginStatus"],
+a[id*="SignOut"],
+a[id*="signout"] {
+    right: 15px !important;
+}
+
+/* Hover state */
+#hd > a:hover,
+#hd > span > a:hover,
+#masterLogoArea > a:hover,
+a.TextButton[id*="LoginStatus"]:hover,
+a[id*="lnkUserName"]:hover,
+a[id*="lnkCart"]:hover,
+a[id*="SignOut"]:hover,
+a[id*="SignUp"]:hover,
+a[id*="SignIn"]:hover {
+    background-color: var(--pbs-blue) !important;
+    color: var(--pbs-white) !important;
+}
+
+/* Position the header links container */
+#masterLogoArea {
+    position: relative !important;
+}
+
+#hd {
+    position: relative !important;
+}
+
+/* Container for user/cart/signout links - hide container, links are fixed positioned */
+#masterHeaderBackground > ul,
+#masterHeaderBackground .NavigationUnorderedList,
+[id*="TopLinks"],
+[id*="toplinks"],
+[id*="UserLinks"],
+[id*="userlinks"],
+[class*="user-links"],
+[class*="UserLinks"] {
+    position: static !important;
 }
 
 /* Top bar buttons - SIGN IN, SIGN OUT, GO */
@@ -538,39 +780,185 @@ a.TextButton[id*="Login"]:hover {
     border-top: 3px solid var(--pbs-blue-accent);
 }
 
-/* Dropdown menus */
-.RadMenu_Austin.RadMenu .rmGroup {
-    border: none;
-    margin-top: -1px;
-    background: transparent;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 2100;
-    min-width: 180px;
+/* ========================================
+   DESKTOP DROPDOWN MENUS - CLEAN WHITE STYLE
+   Override ALL Telerik gradient backgrounds
+   ======================================== */
+
+/* Dropdown container - white, no gradients */
+.RadMenu .rmGroup,
+.RadMenu_Austin .rmGroup,
+.RadMenu_Austin.RadMenu .rmGroup,
+.RadMenu.RadMenu_Austin .rmGroup,
+div.RadMenu .rmGroup,
+div.RadMenu_Austin .rmGroup {
+    background: var(--pbs-white) !important;
+    background-color: var(--pbs-white) !important;
+    background-image: none !important;
+    border: 1px solid var(--pbs-gray-300) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
+    padding: 8px 0 !important;
+    margin-top: 0 !important;
+    min-width: 220px !important;
 }
 
-.RadMenu_Austin.RadMenu .rmGroup .rmItem {
-    border-bottom: 1px solid var(--pbs-blue-light);
+/* Dropdown items - no backgrounds or gradients */
+.RadMenu .rmGroup .rmItem,
+.RadMenu_Austin .rmGroup .rmItem,
+.RadMenu_Austin.RadMenu .rmGroup .rmItem,
+.RadMenu .rmGroup li,
+.RadMenu_Austin .rmGroup li {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-.RadMenu_Austin.RadMenu .rmGroup .rmItem:last-child {
-    border-bottom: none;
+/* Dropdown links - clean text style with VISIBLE dark text */
+.RadMenu .rmGroup a.rmLink,
+.RadMenu_Austin .rmGroup a.rmLink,
+.RadMenu_Austin.RadMenu .rmGroup a.rmLink,
+.RadMenu_Austin.RadMenu .rmGroup .rmItem a.rmLink,
+.RadMenu .rmGroup .rmItem a,
+.RadMenu_Austin .rmGroup .rmItem a {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    color: #333333 !important;
+    padding: 10px 20px !important;
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    display: block !important;
+    text-decoration: none !important;
 }
 
-.RadMenu_Austin.RadMenu .rmGroup .rmItem a.rmLink {
-    padding: 6px 30px 6px 10px;
-    background-color: var(--pbs-blue);
-    border-bottom: 1px solid var(--pbs-blue-light);
-    border-left: none;
-    border-top: none;
-    border-right: none;
-    text-transform: uppercase;
-    font-size: 0.9em;
+/* ENSURE dropdown text is always visible - dark color */
+.RadMenu .rmGroup .rmText,
+.RadMenu_Austin .rmGroup .rmText,
+.RadMenu .rmGroup a .rmText,
+.RadMenu_Austin .rmGroup a .rmText,
+.RadMenu .rmGroup span,
+.RadMenu_Austin .rmGroup span {
+    color: #333333 !important;
 }
 
-.RadMenu_Austin.RadMenu .rmGroup .rmItem a.rmLink:hover {
-    background-color: var(--pbs-blue-light);
+/* Dropdown link hover - light gray background, blue text */
+.RadMenu .rmGroup a.rmLink:hover,
+.RadMenu_Austin .rmGroup a.rmLink:hover,
+.RadMenu_Austin.RadMenu .rmGroup a.rmLink:hover,
+.RadMenu_Austin.RadMenu .rmGroup .rmItem a.rmLink:hover,
+.RadMenu .rmGroup .rmItem:hover > a.rmLink,
+.RadMenu_Austin .rmGroup .rmItem:hover > a.rmLink,
+.RadMenu .rmGroup a.rmLink:focus,
+.RadMenu_Austin .rmGroup a.rmLink:focus {
+    background: var(--pbs-blue) !important;
+    background-color: var(--pbs-blue) !important;
+    background-image: none !important;
+    color: var(--pbs-white) !important;
+}
+
+/* Dropdown text color - DARK for visibility */
+.RadMenu .rmGroup .rmText,
+.RadMenu_Austin .rmGroup .rmText,
+.RadMenu_Austin.RadMenu .rmGroup .rmText {
+    color: #333333 !important;
+}
+
+.RadMenu .rmGroup a.rmLink:hover .rmText,
+.RadMenu_Austin .rmGroup a.rmLink:hover .rmText,
+.RadMenu .rmGroup .rmItem:hover .rmText,
+.RadMenu .rmGroup a:hover .rmText,
+.RadMenu_Austin .rmGroup a:hover .rmText,
+.RadMenu .rmGroup a:hover span,
+.RadMenu_Austin .rmGroup a:hover span {
+    color: #FFFFFF !important;
+}
+
+/* Nested dropdowns (third level) - clean styling, no boxes */
+.RadMenu .rmGroup .rmGroup,
+.RadMenu_Austin .rmGroup .rmGroup,
+.RadMenu_Austin.RadMenu .rmGroup .rmGroup {
+    background: var(--pbs-white) !important;
+    background-color: var(--pbs-white) !important;
+    background-image: none !important;
+    border: 1px solid var(--pbs-gray-300) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
+    padding: 8px 0 !important;
+    margin-top: 0 !important;
+    margin-left: 2px !important;
+    left: 100% !important;
+    top: 0 !important;
+    min-width: 180px !important;
+    position: absolute !important;
+}
+
+/* Third level items - NO borders on items */
+.RadMenu .rmGroup .rmGroup .rmItem,
+.RadMenu_Austin .rmGroup .rmGroup .rmItem {
+    background: transparent !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Third level links - clean text, no borders */
+.RadMenu .rmGroup .rmGroup .rmItem a.rmLink,
+.RadMenu_Austin .rmGroup .rmGroup .rmItem a.rmLink,
+.RadMenu .rmGroup .rmGroup a.rmLink,
+.RadMenu_Austin .rmGroup .rmGroup a.rmLink {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    color: #333333 !important;
+    padding: 10px 20px !important;
+    font-size: 12px !important;
+    display: block !important;
+}
+
+.RadMenu .rmGroup .rmGroup a.rmLink:hover,
+.RadMenu_Austin .rmGroup .rmGroup a.rmLink:hover {
+    background-color: var(--pbs-blue) !important;
+    color: #FFFFFF !important;
+}
+
+.RadMenu .rmGroup .rmGroup .rmText,
+.RadMenu_Austin .rmGroup .rmGroup .rmText {
+    color: #333333 !important;
+}
+
+.RadMenu .rmGroup .rmGroup a.rmLink:hover .rmText,
+.RadMenu_Austin .rmGroup .rmGroup a.rmLink:hover .rmText {
+    color: #FFFFFF !important;
+}
+
+/* Remove ALL gradient/image backgrounds from menu elements */
+.RadMenu .rmSlide,
+.RadMenu_Austin .rmSlide,
+.RadMenu .rmGroup *,
+.RadMenu_Austin .rmGroup *,
+.rmScrollWrap,
+.rmScrollWrapInner {
+    background-image: none !important;
+}
+
+/* Remove loading bar effects on desktop too */
+.RadMenu .rmLoading,
+.RadMenu .rmSlide {
+    background-image: none !important;
+    background: transparent !important;
+}
+
+.RadMenu .rmGroup .rmWrapper,
+.RadMenu .rmGroup > div:not(.rmSlide) {
+    background-color: transparent !important;
 }
 
 /* ========================================
@@ -741,7 +1129,11 @@ img[id*="ContactPicture"],
     background-color: var(--pbs-gray-100);
     border-top: 1px solid var(--pbs-gray-300);
     border-bottom: 1px solid var(--pbs-gray-300);
-    padding: 10px 12px;
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 36px;
 }
 
 .panel-title,
@@ -759,6 +1151,21 @@ img[id*="ContactPicture"],
 
 .panel-heading-options {
     float: right;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+/* Ensure Edit links in panel headers are inline with the bar */
+.PanelHead a,
+.PanelHead .TextButton,
+.panel-heading a,
+.panel-heading .TextButton {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 2px 8px !important;
+    line-height: 1.2 !important;
 }
 
 /* ========================================
@@ -1281,10 +1688,17 @@ tr:hover {
 .DocumentLibrary {
     width: 100% !important;
     max-width: 100% !important;
+    min-height: 500px !important;
 }
 
 .RadFileExplorer,
-.RadFileExplorer_Default,
+.RadFileExplorer_Default {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 600px !important;
+    height: auto !important;
+}
+
 .RadFileExplorer .rfeContent,
 .RadFileExplorer .rfeFileList,
 .RadFileExplorer .rfeListView,
@@ -1294,12 +1708,78 @@ tr:hover {
 .RadFileExplorer .rfePane {
     width: 100% !important;
     max-width: 100% !important;
+    min-height: 500px !important;
+    height: auto !important;
 }
 
 .RadFileExplorer .rfeContent,
 .RadFileExplorer .rfeFileList,
 .RadFileExplorer .rfeTreeView {
-    min-height: 420px;
+    min-height: 500px !important;
+}
+
+/* Resource Library - reduce top whitespace */
+.RadFileExplorer .rfeToolbar,
+.RadFileExplorer .rfeAddressBar,
+.RadFileExplorer .rfeBreadcrumb {
+    padding: 5px !important;
+    margin: 0 !important;
+}
+
+/* Make the tree view fill available space */
+.RadFileExplorer .rfeLeftPane,
+.RadFileExplorer .rfeRightPane {
+    min-height: 500px !important;
+    height: auto !important;
+}
+
+/* Tree View expansion - ensure icons and toggles work */
+.RadTreeView,
+.RadTreeView_Default,
+.RadTreeView_Metro,
+[class*="TreeView"] {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Tree node expansion toggles */
+.RadTreeView .rtPlus,
+.RadTreeView .rtMinus,
+.RadTreeView .rtIn,
+.RadTreeView .rtOut,
+.RadTreeView .rtExpand,
+.RadTreeView .rtCollapse,
+.rtPlus,
+.rtMinus,
+[class*="TreeView"] .rtPlus,
+[class*="TreeView"] .rtMinus {
+    display: inline-block !important;
+    visibility: visible !important;
+    cursor: pointer !important;
+}
+
+/* Tree nodes */
+.RadTreeView .rtLI,
+.RadTreeView .rtUL,
+.RadTreeView li,
+.RadTreeView ul {
+    display: block !important;
+    visibility: visible !important;
+    list-style: none !important;
+}
+
+/* Expanded child nodes */
+.RadTreeView .rtUL.rtExpanded,
+.RadTreeView ul.rtExpanded,
+.rtExpanded {
+    display: block !important;
+}
+
+/* Collapsed child nodes */
+.RadTreeView .rtUL.rtCollapsed,
+.RadTreeView ul.rtCollapsed,
+.rtCollapsed {
+    display: none !important;
 }
 
 /* ========================================
@@ -1339,8 +1819,22 @@ tr:hover {
 }
 
 #ft a {
-    color: var(--pbs-white);
-    text-decoration: underline;
+    color: var(--pbs-white) !important;
+    text-decoration: underline !important;
+    text-decoration-line: underline !important;
+}
+
+/* Remove any strikethrough from footer links */
+#ft a,
+#ft a:link,
+#ft a:visited,
+#ft a:hover,
+#ft a:active,
+footer a,
+.footer a {
+    text-decoration: underline !important;
+    text-decoration-line: underline !important;
+    text-decoration-style: solid !important;
 }
 
 #masterFooterConnectWithUs {
@@ -1858,7 +2352,7 @@ a[title*="Edit"] .IconSprite {
         padding-left: 0 !important;
     }
 
-    /* Make header lists horizontal */
+    /* Make header lists horizontal and right-aligned */
     #hd ul:not(.rmRootGroup):not(.rtsUL),
     header ul:not(.rmRootGroup):not(.rtsUL),
     #masterTopBarAuxiliary ul,
@@ -1866,10 +2360,12 @@ a[title*="Edit"] .IconSprite {
     .NavigationUnorderedList {
         display: flex !important;
         flex-wrap: wrap !important;
-        gap: 10px !important;
+        gap: 8px !important;
         align-items: center !important;
+        justify-content: flex-end !important;
         margin: 0 !important;
         padding: 0 !important;
+        width: 100% !important;
     }
 
     #hd li:not(.rmItem):not(.rtsLI),
@@ -1882,7 +2378,7 @@ a[title*="Edit"] .IconSprite {
         padding: 0 !important;
     }
 
-    /* Style the header links - small, clean text links */
+    /* Style the header links - MODERN sleek buttons */
     #hd li:not(.rmItem):not(.rtsLI) > a,
     header li:not(.rmItem):not(.rtsLI) > a,
     #masterTopBarAuxiliary li > a,
@@ -1893,12 +2389,12 @@ a[title*="Edit"] .IconSprite {
         background-color: transparent !important;
         color: var(--pbs-blue) !important;
         text-decoration: none !important;
-        border: 1px solid var(--pbs-blue) !important;
-        border-radius: 3px !important;
-        font-size: 11px !important;
+        border: 1.5px solid var(--pbs-blue) !important;
+        border-radius: 10px !important;
+        font-size: 10px !important;
         font-weight: 600 !important;
         text-transform: uppercase !important;
-        letter-spacing: 0.5px !important;
+        letter-spacing: 0.3px !important;
     }
 
     #hd li:not(.rmItem):not(.rtsLI) > a:hover,
@@ -1959,34 +2455,7 @@ a[title*="Edit"] .IconSprite {
         display: block !important;
     }
 
-    /* ============================================
-       HIDE KEYWORD SEARCH ON MOBILE
-       ============================================ */
-
-    /* Hide keyword search input, GO button, and its toggle */
-    #masterTopBarAuxiliary [id*="Search"],
-    #masterTopBarAuxiliary [id*="search"],
-    #masterTopBarAuxiliary [class*="Search"],
-    #masterTopBarAuxiliary [class*="search"],
-    #masterTopBarAuxiliary input[type="text"],
-    #masterTopBarAuxiliary input[value="GO"],
-    #masterTopBarAuxiliary .SearchBox,
-    #masterTopBarAuxiliary .KeywordSearch,
-    [id*="KeywordSearch"],
-    [id*="keywordSearch"],
-    [class*="KeywordSearch"],
-    [class*="keyword-search"],
-    /* Hide any toggle that controls search */
-    [data-target*="search"],
-    [data-target*="Search"],
-    [href*="search"],
-    [aria-controls*="search"],
-    [aria-controls*="Search"] {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        overflow: hidden !important;
-    }
+    /* Keyword search is already hidden globally - no mobile-specific rules needed */
 
     /* ============================================
        MOBILE MENU TOGGLE BUTTON
@@ -2012,11 +2481,24 @@ a[title*="Edit"] .IconSprite {
         margin-bottom: 5px !important;
     }
 
-    /* Add clear label to menu toggle */
-    .navbar-toggle::before,
-    .navbar-toggler::before,
-    [data-toggle="collapse"]::before {
+    /* Add clear label to menu toggle - ONLY ONE main nav toggle */
+    /* Very specific selector to avoid duplicates */
+    .PrimaryNavPanel > [data-toggle="collapse"]:first-of-type::before {
         content: "☰ TAP TO SHOW/HIDE MENU" !important;
+    }
+
+    /* Hide ALL other collapse toggle ::before content */
+    [data-toggle="collapse"]::before,
+    .navbar-toggle::before,
+    .navbar-toggler::before {
+        content: "" !important;
+        display: none !important;
+    }
+
+    /* Show only the primary nav toggle content */
+    .PrimaryNavPanel > [data-toggle="collapse"]:first-of-type::before {
+        content: "☰ TAP TO SHOW/HIDE MENU" !important;
+        display: block !important;
     }
 
     /* ============================================
@@ -2040,20 +2522,21 @@ a[title*="Edit"] .IconSprite {
     }
 
     /* Mobile nav links - WHITE background, BLUE text for readability */
+    /* MODERN: 10px radius, smaller/sleeker buttons */
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
     .RadMenu a.rmLink.rmRootLink {
-        font-size: 9px !important;
-        padding: 6px 10px !important;
+        font-size: 8px !important;
+        padding: 5px 8px !important;
         margin: 2px !important;
         display: inline-block !important;
         color: var(--pbs-blue) !important;
         background-color: var(--pbs-white) !important;
-        border: 2px solid var(--pbs-blue) !important;
-        border-radius: 3px !important;
+        border: 1.5px solid var(--pbs-blue) !important;
+        border-radius: 10px !important;
         text-transform: uppercase !important;
-        font-weight: 700 !important;
+        font-weight: 600 !important;
         letter-spacing: 0.3px !important;
-        line-height: 1.3 !important;
+        line-height: 1.2 !important;
         text-decoration: none !important;
     }
 
@@ -2125,32 +2608,32 @@ a[title*="Edit"] .IconSprite {
        Styled like main nav - WHITE bg, BLUE text, BLUE border
        ============================================ */
 
-    /* Submenu container */
+    /* Submenu container - MODERN rounded */
     .RadMenu .rmGroup,
     .RadMenu_Austin .rmGroup,
     .rmGroup {
         background-color: var(--pbs-white) !important;
-        border: 2px solid var(--pbs-blue) !important;
-        border-radius: 4px !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
-        min-width: 180px !important;
+        border: 1.5px solid var(--pbs-blue) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        min-width: 160px !important;
         z-index: 9999 !important;
-        padding: 5px !important;
+        padding: 6px !important;
     }
 
-    /* Submenu links - styled like main nav buttons */
+    /* Submenu links - MODERN sleek buttons */
     .RadMenu .rmGroup a.rmLink,
     .RadMenu_Austin .rmGroup a.rmLink,
     .rmGroup a.rmLink {
         display: inline-block !important;
-        padding: 6px 10px !important;
+        padding: 5px 8px !important;
         margin: 2px !important;
         color: var(--pbs-blue) !important;
         background-color: var(--pbs-white) !important;
-        border: 2px solid var(--pbs-blue) !important;
-        border-radius: 3px !important;
-        font-size: 10px !important;
-        font-weight: 700 !important;
+        border: 1.5px solid var(--pbs-blue) !important;
+        border-radius: 10px !important;
+        font-size: 8px !important;
+        font-weight: 600 !important;
         text-transform: uppercase !important;
         text-decoration: none !important;
         width: auto !important;
@@ -2178,16 +2661,45 @@ a[title*="Edit"] .IconSprite {
         color: var(--pbs-white) !important;
     }
 
-    /* Submenu items - remove any gray background */
+    /* Submenu items - remove any borders/backgrounds from container */
     .RadMenu .rmGroup .rmItem,
     .RadMenu_Austin .rmGroup .rmItem,
     .rmGroup .rmItem {
         width: auto !important;
         display: inline-block !important;
-        margin: 0 !important;
+        margin: 2px !important;
         padding: 0 !important;
         background-color: transparent !important;
         background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* FORCE all submenu links to be styled buttons - MODERN */
+    .RadMenu .rmGroup .rmItem > a,
+    .RadMenu .rmGroup .rmItem > a.rmLink,
+    .RadMenu .rmGroup li > a,
+    .RadMenu .rmGroup li > a.rmLink,
+    .RadMenu_Austin .rmGroup .rmItem > a,
+    .RadMenu_Austin .rmGroup .rmItem > a.rmLink,
+    .rmGroup .rmItem > a,
+    .rmGroup .rmItem > a.rmLink,
+    .rmGroup li > a {
+        display: block !important;
+        padding: 5px 10px !important;
+        margin: 0 !important;
+        color: var(--pbs-blue) !important;
+        background-color: var(--pbs-white) !important;
+        border: 1.5px solid var(--pbs-blue) !important;
+        border-radius: 10px !important;
+        font-size: 8px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        text-decoration: none !important;
+        box-sizing: border-box !important;
+        line-height: 1.2 !important;
+        min-width: 80px !important;
+        text-align: center !important;
     }
 
     /* Subnav hover/active states - BLUE bg, WHITE text (no gray!) */
@@ -2205,10 +2717,15 @@ a[title*="Edit"] .IconSprite {
     .rmGroup a.rmLink:active,
     .rmGroup .rmItem:hover > a.rmLink,
     .rmGroup .rmItem.rmSelected > a.rmLink,
-    .rmGroup .rmItem.rmFocused > a.rmLink {
+    .rmGroup .rmItem.rmFocused > a.rmLink,
+    .rmGroup .rmItem:hover > a,
+    .rmGroup .rmItem > a:hover,
+    .rmGroup li:hover > a,
+    .rmGroup li > a:hover {
         background-color: var(--pbs-blue) !important;
         background: var(--pbs-blue) !important;
         color: var(--pbs-white) !important;
+        border-color: var(--pbs-blue) !important;
     }
 
     /* Subnav hover text - WHITE */
@@ -2240,15 +2757,161 @@ a[title*="Edit"] .IconSprite {
         background: var(--pbs-white) !important;
     }
 
-    /* Remove any gray from expanded/open states */
+    /* Remove any gray/loading effects from expanded/open states */
     .RadMenu .rmGroup *,
     .rmGroup * {
         background-color: transparent !important;
+        background-image: none !important;
     }
 
+    /* But links need white background */
     .RadMenu .rmGroup a.rmLink,
-    .rmGroup a.rmLink {
+    .RadMenu .rmGroup a,
+    .rmGroup a.rmLink,
+    .rmGroup a {
         background-color: var(--pbs-white) !important;
+    }
+
+    /* Remove ALL loading bar / skeleton effects */
+    .RadMenu .rmGroup .rmItem,
+    .RadMenu .rmGroup li,
+    .rmGroup .rmItem,
+    .rmGroup li {
+        border: none !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        background-image: none !important;
+        /* Remove any pseudo-element loading bars */
+    }
+
+    .RadMenu .rmGroup .rmItem::before,
+    .RadMenu .rmGroup .rmItem::after,
+    .RadMenu .rmGroup li::before,
+    .RadMenu .rmGroup li::after,
+    .rmGroup .rmItem::before,
+    .rmGroup .rmItem::after {
+        display: none !important;
+        content: none !important;
+    }
+
+    /* Remove borders from rmTemplate, rmWrapper and other internal elements */
+    .RadMenu .rmGroup .rmTemplate,
+    .RadMenu .rmGroup .rmWrapper,
+    .RadMenu .rmGroup > ul,
+    .rmGroup .rmTemplate,
+    .rmGroup .rmWrapper,
+    .rmGroup > ul {
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* ============================================
+       NESTED SUBMENUS (2nd level and beyond)
+       Fix loading bars and ensure proper styling
+       ============================================ */
+
+    /* Nested submenu containers - MODERN rounded */
+    .RadMenu .rmGroup .rmGroup,
+    .RadMenu_Austin .rmGroup .rmGroup,
+    .rmGroup .rmGroup {
+        background-color: var(--pbs-white) !important;
+        border: 1.5px solid var(--pbs-blue) !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+        min-width: 160px !important;
+        z-index: 10000 !important;
+        padding: 6px !important;
+        position: relative !important;
+    }
+
+    /* Nested submenu items - remove loading bars */
+    .RadMenu .rmGroup .rmGroup .rmItem,
+    .RadMenu_Austin .rmGroup .rmGroup .rmItem,
+    .rmGroup .rmGroup .rmItem {
+        width: auto !important;
+        display: inline-block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background-color: transparent !important;
+        background: none !important;
+        /* Remove any loading bar styles */
+        border: none !important;
+        min-height: 0 !important;
+    }
+
+    /* Nested submenu links - MODERN sleek */
+    .RadMenu .rmGroup .rmGroup a.rmLink,
+    .RadMenu_Austin .rmGroup .rmGroup a.rmLink,
+    .rmGroup .rmGroup a.rmLink {
+        display: inline-block !important;
+        padding: 5px 8px !important;
+        margin: 2px !important;
+        color: var(--pbs-blue) !important;
+        background-color: var(--pbs-white) !important;
+        border: 1.5px solid var(--pbs-blue) !important;
+        border-radius: 10px !important;
+        font-size: 8px !important;
+        font-weight: 600 !important;
+        text-transform: uppercase !important;
+        text-decoration: none !important;
+        width: auto !important;
+        box-sizing: border-box !important;
+        line-height: 1.2 !important;
+    }
+
+    /* Nested submenu link hover */
+    .RadMenu .rmGroup .rmGroup a.rmLink:hover,
+    .RadMenu_Austin .rmGroup .rmGroup a.rmLink:hover,
+    .rmGroup .rmGroup a.rmLink:hover {
+        background-color: var(--pbs-blue) !important;
+        color: var(--pbs-white) !important;
+    }
+
+    /* Nested submenu text */
+    .RadMenu .rmGroup .rmGroup .rmText,
+    .rmGroup .rmGroup .rmText {
+        display: inline !important;
+        visibility: visible !important;
+        color: var(--pbs-blue) !important;
+    }
+
+    .RadMenu .rmGroup .rmGroup a.rmLink:hover .rmText,
+    .rmGroup .rmGroup a.rmLink:hover .rmText {
+        color: var(--pbs-white) !important;
+    }
+
+    /* Fix slide container for nested menus */
+    .RadMenu .rmGroup .rmSlide,
+    .rmGroup .rmSlide {
+        overflow: visible !important;
+        background-color: var(--pbs-white) !important;
+        background: var(--pbs-white) !important;
+    }
+
+    /* Remove all loading bar effects from submenus */
+    .RadMenu .rmGroup .rmLoading,
+    .RadMenu .rmGroup .rmSlideDown,
+    .rmGroup .rmLoading,
+    .rmGroup .rmSlideDown {
+        background-image: none !important;
+        background: transparent !important;
+    }
+
+    /* Ensure no empty boxes appear */
+    .RadMenu .rmGroup .rmItem:empty,
+    .rmGroup .rmItem:empty {
+        display: none !important;
+    }
+
+    /* Fix any wrapper elements in submenus */
+    .RadMenu .rmGroup .rmWrapper,
+    .RadMenu .rmGroup > div,
+    .rmGroup .rmWrapper,
+    .rmGroup > div {
+        background-color: transparent !important;
+        background: none !important;
     }
 
     /* ============================================
@@ -2337,7 +3000,19 @@ a[title*="Edit"] .IconSprite {
 
     .panel-heading,
     .PanelHead {
-        padding: 8px 10px !important;
+        padding: 6px 10px !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        flex-wrap: wrap !important;
+        min-height: 32px !important;
+    }
+
+    /* Edit link aligned within grey bar on mobile */
+    .PanelHead a,
+    .panel-heading a {
+        font-size: 12px !important;
+        padding: 2px 6px !important;
     }
 
     /* Reduce spacing on form fields */
