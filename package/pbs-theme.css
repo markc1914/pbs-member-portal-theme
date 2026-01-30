@@ -1798,26 +1798,125 @@ a[title*="Edit"] .IconSprite {
         width: 100%;
     }
 
+    /* ============================================
+       MOBILE TOP BAR / HEADER LINKS FIX
+       Remove bullet points, display as inline buttons
+       ============================================ */
+
+    /* Top bar navigation list - remove bullets and make horizontal */
+    #masterTopBarAuxiliary ul,
+    #masterTopBarAuxiliary .NavigationUnorderedList,
+    #hd ul,
+    #hd .NavigationUnorderedList,
+    .MobileNavigation ul,
+    [id*="TopBar"] ul,
+    header ul:not(.rtsUL):not(.rmRootGroup) {
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+    }
+
+    #masterTopBarAuxiliary li,
+    #masterTopBarAuxiliary .NavigationListItem,
+    #hd li:not(.rmItem):not(.rtsLI),
+    .MobileNavigation li,
+    [id*="TopBar"] li,
+    header li:not(.rmItem):not(.rtsLI) {
+        list-style: none !important;
+        list-style-type: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: inline-block !important;
+    }
+
+    /* Style the links as buttons */
+    #masterTopBarAuxiliary li a,
+    #hd li:not(.rmItem) a,
+    .MobileNavigation li a,
+    [id*="TopBar"] li a,
+    header li:not(.rmItem):not(.rtsLI) a {
+        display: inline-block !important;
+        padding: 8px 16px !important;
+        background-color: var(--pbs-blue) !important;
+        color: var(--pbs-white) !important;
+        text-decoration: none !important;
+        border-radius: 4px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+    }
+
+    #masterTopBarAuxiliary li a:hover,
+    #hd li:not(.rmItem) a:hover,
+    header li:not(.rmItem):not(.rtsLI) a:hover {
+        background-color: var(--pbs-blue-dark) !important;
+    }
+
+    /* ============================================
+       MOBILE HEADER STYLING
+       ============================================ */
+
+    /* Header container */
+    #hd,
+    header,
+    #masterHeaderBackground {
+        padding: 10px 15px !important;
+    }
+
     /* Header image scales on mobile */
     #masterHeaderImage,
     #masterDonorHeaderImage {
         width: 100% !important;
-        max-width: 100% !important;
+        max-width: 280px !important;
+        height: 60px !important;
         background-size: contain !important;
         position: relative !important;
         left: 0 !important;
+        top: 0 !important;
+        margin: 0 auto !important;
+        display: block !important;
     }
 
     #masterHeaderBackground {
         height: auto !important;
-        min-height: 60px !important;
+        min-height: 80px !important;
     }
 
-    /* Stack nav items */
-    .RadMenu_Austin.RadMenu a.rmLink.rmRootLink {
-        font-size: 11px;
-        padding: 10px 8px;
+    /* ============================================
+       MOBILE NAVIGATION BAR
+       ============================================ */
+
+    /* If navigation is visible, style it for mobile */
+    .RadMenu,
+    .RadMenu_Austin,
+    .PrimaryNavPanel,
+    [id*="NavPanel"] {
+        background-color: var(--pbs-blue) !important;
+        padding: 5px 10px !important;
     }
+
+    /* Mobile nav links */
+    .RadMenu_Austin.RadMenu a.rmLink.rmRootLink {
+        font-size: 11px !important;
+        padding: 8px 10px !important;
+        display: inline-block !important;
+    }
+
+    /* If responsive theme uses a hamburger/mobile menu */
+    .mobile-menu,
+    .hamburger-menu,
+    [class*="mobile-nav"],
+    [class*="MobileNav"],
+    [id*="mobileNav"],
+    [id*="MobileNav"] {
+        background-color: var(--pbs-blue) !important;
+    }
+
+    /* ============================================
+       MOBILE CONTENT STYLES
+       ============================================ */
 
     /* Profile image smaller on mobile - constrained width */
     .ContactPictureImage,
@@ -1864,6 +1963,14 @@ a[title*="Edit"] .IconSprite {
     .PanelHeadOptions,
     .PanelHead .panel-heading-options {
         font-size: 11px;
+    }
+
+    /* Content panels full width */
+    .panel,
+    .PanelBody,
+    .ContentWizardDisplay {
+        width: 100% !important;
+        max-width: 100% !important;
     }
 }
 
