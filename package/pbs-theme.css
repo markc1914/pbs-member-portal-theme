@@ -2082,7 +2082,9 @@ footer a:hover {
 .col-secondary nav a,
 [id*="SideBarPlaceHolder"] li a,
 [id*="CommunitySideBar"] li a,
-.col-secondary .NavigationListItem a {
+.col-secondary .NavigationListItem a,
+.CommunityLinksBlock a,
+[id*="CommunityLinksBlock"] a {
     display: block !important;
     background-color: var(--pbs-white) !important;
     color: var(--pbs-blue) !important;
@@ -2099,7 +2101,9 @@ footer a:hover {
 .col-secondary nav a:hover,
 [id*="SideBarPlaceHolder"] li a:hover,
 [id*="CommunitySideBar"] li a:hover,
-.col-secondary .NavigationListItem a:hover {
+.col-secondary .NavigationListItem a:hover,
+.CommunityLinksBlock a:hover,
+[id*="CommunityLinksBlock"] a:hover {
     background-color: var(--pbs-blue) !important;
     color: var(--pbs-white) !important;
 }
@@ -2110,7 +2114,9 @@ footer a:hover {
 .col-secondary li a.selected,
 .col-secondary li a.active,
 [id*="SideBarPlaceHolder"] li.selected a,
-[id*="CommunitySideBar"] li.selected a {
+[id*="CommunitySideBar"] li.selected a,
+.CommunityLinksBlock a.CommunityLinksSelected,
+[id*="CommunityLinksBlock"] a.CommunityLinksSelected {
     background-color: var(--pbs-blue) !important;
     color: var(--pbs-white) !important;
 }
