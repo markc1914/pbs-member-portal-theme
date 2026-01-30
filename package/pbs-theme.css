@@ -2108,6 +2108,103 @@ a[title*="Edit"] .IconSprite {
         width: 100% !important;
         max-width: 100% !important;
     }
+
+    /* ============================================
+       MAXIMIZE SPACE ON MOBILE
+       Reduce padding/margins for more content
+       ============================================ */
+
+    /* Reduce body/container padding */
+    #bd,
+    #masterContentArea,
+    #yui-main,
+    #masterSideBarPanel {
+        padding: 5px !important;
+        margin: 0 !important;
+    }
+
+    /* Compact panels */
+    .panel {
+        margin-bottom: 10px !important;
+        border-radius: 0 !important;
+    }
+
+    .panel-body,
+    .PanelBody {
+        padding: 8px !important;
+    }
+
+    .panel-heading,
+    .PanelHead {
+        padding: 8px 10px !important;
+    }
+
+    /* Reduce spacing on form fields */
+    .PanelField {
+        padding: 3px 5px !important;
+    }
+
+    /* Compact tables */
+    td, th {
+        padding: 6px 8px !important;
+    }
+
+    /* Smaller headings on mobile */
+    h1, .PageTitle {
+        font-size: 160% !important;
+        margin: 10px 0 !important;
+    }
+
+    h2, .PanelTitle {
+        font-size: 120% !important;
+        margin: 8px 0 !important;
+    }
+
+    /* Reduce section spacing */
+    .SectionLabel, h4, h5 {
+        font-size: 14px !important;
+        margin: 5px 0 !important;
+    }
+
+    /* Full width inputs */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    select,
+    textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Buttons - full width and touch-friendly */
+    .TextButton,
+    .PrimaryButton,
+    input[type="submit"],
+    input[type="button"],
+    button {
+        width: 100% !important;
+        padding: 12px 15px !important;
+        margin: 5px 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Remove extra margins from containers */
+    .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    [class*="col-"] {
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+
+    /* Compact footer */
+    #ft {
+        padding: 15px 10px !important;
+    }
 }
 
 @media (max-width: 480px) {
