@@ -361,6 +361,29 @@ h4, .SectionLabel, h5 {
     list-style: none !important;
 }
 
+/* ========================================
+   GLOBAL: Remove bullets from ALL navigation lists
+   This applies at all screen sizes
+   ======================================== */
+#hd ul,
+#hd li,
+header ul,
+header li,
+#masterTopBarAuxiliary ul,
+#masterTopBarAuxiliary li,
+#masterLogoArea ul,
+#masterLogoArea li,
+#masterHeaderBackground ul,
+#masterHeaderBackground li,
+.NavigationUnorderedList,
+.NavigationListItem,
+nav ul,
+nav li {
+    list-style: none !important;
+    list-style-type: none !important;
+    list-style-image: none !important;
+}
+
 /* Social icons in aux bar */
 #masterSocialNetworking {
     display: flex;
@@ -1800,44 +1823,67 @@ a[title*="Edit"] .IconSprite {
 
     /* ============================================
        MOBILE TOP BAR / HEADER LINKS FIX
-       Remove bullet points, display as inline buttons
+       Remove bullet points from ALL header lists
        ============================================ */
 
-    /* Top bar navigation list - remove bullets and make horizontal */
-    #masterTopBarAuxiliary ul,
-    #masterTopBarAuxiliary .NavigationUnorderedList,
+    /* AGGRESSIVE: Remove ALL bullets from header area */
     #hd ul,
-    #hd .NavigationUnorderedList,
-    .MobileNavigation ul,
-    [id*="TopBar"] ul,
-    header ul:not(.rtsUL):not(.rmRootGroup) {
-        list-style: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 8px !important;
-    }
-
+    #hd ol,
+    #hd li,
+    header ul,
+    header ol,
+    header li,
+    #masterTopBarAuxiliary ul,
     #masterTopBarAuxiliary li,
-    #masterTopBarAuxiliary .NavigationListItem,
-    #hd li:not(.rmItem):not(.rtsLI),
-    .MobileNavigation li,
+    #masterLogoArea ul,
+    #masterLogoArea li,
+    #masterHeaderBackground ul,
+    #masterHeaderBackground li,
+    .NavigationUnorderedList,
+    .NavigationListItem,
+    [id*="TopBar"] ul,
     [id*="TopBar"] li,
-    header li:not(.rmItem):not(.rtsLI) {
+    [id*="topBar"] ul,
+    [id*="topBar"] li,
+    [class*="TopBar"] ul,
+    [class*="TopBar"] li {
         list-style: none !important;
         list-style-type: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        display: inline-block !important;
+        list-style-image: none !important;
+        margin-left: 0 !important;
+        padding-left: 0 !important;
     }
 
-    /* Style the links as buttons */
-    #masterTopBarAuxiliary li a,
-    #hd li:not(.rmItem) a,
-    .MobileNavigation li a,
-    [id*="TopBar"] li a,
-    header li:not(.rmItem):not(.rtsLI) a {
+    /* Make header lists horizontal */
+    #hd ul:not(.rmRootGroup):not(.rtsUL),
+    header ul:not(.rmRootGroup):not(.rtsUL),
+    #masterTopBarAuxiliary ul,
+    #masterLogoArea ul,
+    .NavigationUnorderedList {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+        align-items: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    #hd li:not(.rmItem):not(.rtsLI),
+    header li:not(.rmItem):not(.rtsLI),
+    #masterTopBarAuxiliary li,
+    #masterLogoArea li,
+    .NavigationListItem {
+        display: inline-block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Style the header links as buttons */
+    #hd li:not(.rmItem):not(.rtsLI) > a,
+    header li:not(.rmItem):not(.rtsLI) > a,
+    #masterTopBarAuxiliary li > a,
+    #masterLogoArea li > a,
+    .NavigationListItem > a {
         display: inline-block !important;
         padding: 8px 16px !important;
         background-color: var(--pbs-blue) !important;
@@ -1848,9 +1894,10 @@ a[title*="Edit"] .IconSprite {
         font-weight: 600 !important;
     }
 
-    #masterTopBarAuxiliary li a:hover,
-    #hd li:not(.rmItem) a:hover,
-    header li:not(.rmItem):not(.rtsLI) a:hover {
+    #hd li:not(.rmItem):not(.rtsLI) > a:hover,
+    header li:not(.rmItem):not(.rtsLI) > a:hover,
+    #masterTopBarAuxiliary li > a:hover,
+    .NavigationListItem > a:hover {
         background-color: var(--pbs-blue-dark) !important;
     }
 
