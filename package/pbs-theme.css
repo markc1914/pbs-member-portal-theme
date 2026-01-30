@@ -1878,27 +1878,31 @@ a[title*="Edit"] .IconSprite {
         padding: 0 !important;
     }
 
-    /* Style the header links as buttons */
+    /* Style the header links - small, clean text links */
     #hd li:not(.rmItem):not(.rtsLI) > a,
     header li:not(.rmItem):not(.rtsLI) > a,
     #masterTopBarAuxiliary li > a,
     #masterLogoArea li > a,
     .NavigationListItem > a {
         display: inline-block !important;
-        padding: 8px 16px !important;
-        background-color: var(--pbs-blue) !important;
-        color: var(--pbs-white) !important;
+        padding: 4px 10px !important;
+        background-color: transparent !important;
+        color: var(--pbs-blue) !important;
         text-decoration: none !important;
-        border-radius: 4px !important;
-        font-size: 14px !important;
+        border: 1px solid var(--pbs-blue) !important;
+        border-radius: 3px !important;
+        font-size: 11px !important;
         font-weight: 600 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
     }
 
     #hd li:not(.rmItem):not(.rtsLI) > a:hover,
     header li:not(.rmItem):not(.rtsLI) > a:hover,
     #masterTopBarAuxiliary li > a:hover,
     .NavigationListItem > a:hover {
-        background-color: var(--pbs-blue-dark) !important;
+        background-color: var(--pbs-blue) !important;
+        color: var(--pbs-white) !important;
     }
 
     /* ============================================
@@ -1912,53 +1916,138 @@ a[title*="Edit"] .IconSprite {
         padding: 10px 15px !important;
     }
 
-    /* Header image scales on mobile */
+    /* ============================================
+       MOBILE BANNER IMAGE - Responsive
+       ============================================ */
+
+    /* Header image scales responsively on mobile */
     #masterHeaderImage,
     #masterDonorHeaderImage {
         width: 100% !important;
-        max-width: 280px !important;
-        height: 60px !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 50px !important;
         background-size: contain !important;
+        background-position: left center !important;
+        background-repeat: no-repeat !important;
         position: relative !important;
         left: 0 !important;
         top: 0 !important;
-        margin: 0 auto !important;
+        margin: 10px 0 !important;
         display: block !important;
     }
 
     #masterHeaderBackground {
         height: auto !important;
-        min-height: 80px !important;
+        min-height: auto !important;
+        padding: 10px 15px !important;
+    }
+
+    /* Logo/brand image in header */
+    #hd img,
+    header img,
+    #masterLogoArea img,
+    [id*="Logo"] img,
+    [class*="logo"] img,
+    [class*="Logo"] img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block !important;
     }
 
     /* ============================================
-       MOBILE NAVIGATION BAR
+       MOBILE NAVIGATION BAR & HAMBURGER MENU
        ============================================ */
 
-    /* If navigation is visible, style it for mobile */
+    /* Hamburger menu toggle - make it prominent */
+    .navbar-toggle,
+    .hamburger,
+    .menu-toggle,
+    [class*="hamburger"],
+    [class*="menu-toggle"],
+    [class*="navbar-toggle"],
+    [id*="hamburger"],
+    [id*="menuToggle"],
+    button[aria-label*="menu"],
+    button[aria-label*="Menu"],
+    a[aria-label*="menu"],
+    a[aria-label*="Menu"] {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background-color: var(--pbs-blue) !important;
+        color: var(--pbs-white) !important;
+        border: none !important;
+        padding: 10px 15px !important;
+        border-radius: 4px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        cursor: pointer !important;
+        min-height: 44px !important;
+    }
+
+    /* Add "MENU" label after hamburger icon via CSS */
+    .navbar-toggle::after,
+    .hamburger::after,
+    .menu-toggle::after,
+    [class*="hamburger"]::after,
+    [class*="menu-toggle"]::after {
+        content: " MENU" !important;
+        margin-left: 8px !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        letter-spacing: 1px !important;
+    }
+
+    /* FORCE NAVIGATION TO BE VISIBLE BY DEFAULT */
     .RadMenu,
     .RadMenu_Austin,
     .PrimaryNavPanel,
-    [id*="NavPanel"] {
+    [id*="NavPanel"],
+    .navbar-collapse,
+    .nav-collapse,
+    .collapse.navbar-collapse,
+    [class*="nav-collapse"],
+    [class*="NavCollapse"],
+    .rmRootGroup,
+    nav[role="navigation"] {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
         background-color: var(--pbs-blue) !important;
-        padding: 5px 10px !important;
+        padding: 10px !important;
     }
 
-    /* Mobile nav links */
-    .RadMenu_Austin.RadMenu a.rmLink.rmRootLink {
-        font-size: 11px !important;
-        padding: 8px 10px !important;
-        display: inline-block !important;
+    /* Mobile nav links - styled for touch */
+    .RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
+    .RadMenu a.rmLink,
+    nav a {
+        font-size: 12px !important;
+        padding: 10px 12px !important;
+        display: block !important;
+        color: var(--pbs-white) !important;
+        background-color: var(--pbs-blue) !important;
+        border-bottom: 1px solid var(--pbs-blue-light) !important;
     }
 
-    /* If responsive theme uses a hamburger/mobile menu */
-    .mobile-menu,
-    .hamburger-menu,
-    [class*="mobile-nav"],
-    [class*="MobileNav"],
-    [id*="mobileNav"],
-    [id*="MobileNav"] {
-        background-color: var(--pbs-blue) !important;
+    .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:hover,
+    .RadMenu a.rmLink:hover {
+        background-color: var(--pbs-blue-light) !important;
+    }
+
+    /* Menu items stack vertically on mobile */
+    .RadMenu .rmRootGroup,
+    .rmRootGroup {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .RadMenu .rmItem,
+    .rmItem {
+        width: 100% !important;
     }
 
     /* ============================================
