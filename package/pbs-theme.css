@@ -2016,41 +2016,12 @@ footer a:hover {
 }
 
 /* ========================================
-   COMMUNITY PAGES
-   Restore default float-based layout - DO NOT use flexbox
-   Sidebar on LEFT, content on RIGHT (like production)
+   COMMUNITY PAGES STYLING
+   Only style community-specific elements
+   Do NOT override wrapper/col-secondary layout (affects all pages)
    ======================================== */
 
-/* Wrapper must contain floated children */
-.wrapper.has-secondary-col {
-    overflow: hidden !important;
-}
-
-.wrapper.has-secondary-col::after {
-    content: "" !important;
-    display: table !important;
-    clear: both !important;
-}
-
-/* Secondary column (sidebar) - float LEFT */
-.wrapper .col-secondary,
-.wrapper.has-secondary-col .col-secondary,
-.wrapper.col-on-right .col-secondary {
-    float: left !important;
-    width: 220px !important;
-    margin-right: 20px !important;
-}
-
-/* Primary column (main content) - float LEFT, take remaining space */
-.wrapper .col-primary,
-.wrapper.has-secondary-col .col-primary,
-.wrapper.col-on-right .col-primary {
-    float: left !important;
-    width: calc(100% - 250px) !important;
-}
-
-/* Community logo - constrain size */
-.col-secondary img,
+/* Community logo - constrain size (only on community pages) */
 [id*="CommunitySummary"] img {
     max-width: 100% !important;
     height: auto !important;
