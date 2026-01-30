@@ -2060,44 +2060,37 @@ a[title*="Edit"] .IconSprite {
        MOBILE SUBMENUS / DROPDOWNS
        ============================================ */
 
-    /* Submenu container */
+    /* Submenu container - let it display naturally but style it */
     .RadMenu .rmGroup,
     .RadMenu_Austin .rmGroup,
     .rmGroup {
-        position: relative !important;
-        display: none;
         background-color: var(--pbs-white) !important;
         border: 1px solid var(--pbs-blue) !important;
         border-radius: 4px !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-        min-width: 180px !important;
+        min-width: 160px !important;
         z-index: 9999 !important;
-        margin-top: 2px !important;
-        padding: 5px 0 !important;
+        padding: 0 !important;
     }
 
-    /* Show submenu on hover/focus */
-    .RadMenu .rmItem:hover > .rmGroup,
-    .RadMenu .rmItem:focus-within > .rmGroup,
-    .rmItem:hover > .rmGroup,
-    .rmItem:focus-within > .rmGroup {
-        display: block !important;
-    }
-
-    /* Submenu links */
+    /* Submenu links - ensure text is visible */
     .RadMenu .rmGroup a.rmLink,
+    .RadMenu_Austin .rmGroup a.rmLink,
     .rmGroup a.rmLink {
         display: block !important;
-        padding: 8px 15px !important;
+        padding: 10px 15px !important;
         color: var(--pbs-blue) !important;
         background-color: var(--pbs-white) !important;
         border: none !important;
+        border-bottom: 1px solid var(--pbs-gray-200) !important;
         border-radius: 0 !important;
         font-size: 12px !important;
         font-weight: 500 !important;
         text-transform: none !important;
         text-decoration: none !important;
         margin: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
     .RadMenu .rmGroup a.rmLink:hover,
@@ -2106,17 +2099,39 @@ a[title*="Edit"] .IconSprite {
         color: var(--pbs-blue-dark) !important;
     }
 
+    /* Submenu text must be visible */
+    .RadMenu .rmGroup .rmText,
+    .rmGroup .rmText {
+        display: inline !important;
+        visibility: visible !important;
+        color: var(--pbs-blue) !important;
+    }
+
     /* Submenu items */
     .RadMenu .rmGroup .rmItem,
     .rmGroup .rmItem {
         width: 100% !important;
         display: block !important;
-        border-bottom: 1px solid var(--pbs-gray-200) !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
-    .RadMenu .rmGroup .rmItem:last-child,
-    .rmGroup .rmItem:last-child {
+    .RadMenu .rmGroup .rmItem:last-child a.rmLink,
+    .rmGroup .rmItem:last-child a.rmLink {
         border-bottom: none !important;
+    }
+
+    /* Remove any loading animations from submenus */
+    .RadMenu .rmGroup *,
+    .rmGroup * {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    /* Ensure submenu slides/expands work */
+    .RadMenu .rmSlide,
+    .rmSlide {
+        overflow: visible !important;
     }
 
     /* ============================================
