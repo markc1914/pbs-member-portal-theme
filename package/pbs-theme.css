@@ -2057,9 +2057,33 @@ a[title*="Edit"] .IconSprite {
         text-decoration: none !important;
     }
 
+    /* Hover, focus, active, selected states - BLUE bg, WHITE text */
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:hover,
-    .RadMenu a.rmLink.rmRootLink:hover {
+    .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:focus,
+    .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:active,
+    .RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmSelected,
+    .RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmFocused,
+    .RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmExpanded,
+    .RadMenu a.rmLink.rmRootLink:hover,
+    .RadMenu a.rmLink.rmRootLink:focus,
+    .RadMenu a.rmLink.rmRootLink:active,
+    .RadMenu a.rmLink.rmRootLink.rmSelected,
+    .RadMenu a.rmLink.rmRootLink.rmFocused,
+    .RadMenu a.rmLink.rmRootLink.rmExpanded,
+    .rmItem:hover > a.rmLink,
+    .rmItem.rmSelected > a.rmLink,
+    .rmItem.rmFocused > a.rmLink,
+    .rmItem.rmExpanded > a.rmLink {
         background-color: var(--pbs-blue) !important;
+        color: var(--pbs-white) !important;
+        background: var(--pbs-blue) !important;
+    }
+
+    /* Hover text must be white */
+    .rmItem:hover > a.rmLink .rmText,
+    .rmItem.rmSelected > a.rmLink .rmText,
+    .rmItem.rmFocused > a.rmLink .rmText,
+    .rmItem.rmExpanded > a.rmLink .rmText {
         color: var(--pbs-white) !important;
     }
 
@@ -2166,18 +2190,45 @@ a[title*="Edit"] .IconSprite {
         background: none !important;
     }
 
-    /* Override any selected/active states that add gray */
-    .RadMenu .rmGroup .rmItem.rmSelected,
-    .RadMenu .rmGroup .rmItem.rmFocused,
-    .RadMenu .rmGroup .rmItem.rmExpanded,
+    /* Subnav hover/active states - BLUE bg, WHITE text (no gray!) */
+    .RadMenu .rmGroup a.rmLink:hover,
+    .RadMenu .rmGroup a.rmLink:focus,
+    .RadMenu .rmGroup a.rmLink:active,
     .RadMenu .rmGroup a.rmLink.rmSelected,
     .RadMenu .rmGroup a.rmLink.rmFocused,
     .RadMenu .rmGroup a.rmLink.rmExpanded,
+    .RadMenu_Austin .rmGroup a.rmLink:hover,
+    .RadMenu_Austin .rmGroup a.rmLink:focus,
+    .RadMenu_Austin .rmGroup a.rmLink:active,
+    .rmGroup a.rmLink:hover,
+    .rmGroup a.rmLink:focus,
+    .rmGroup a.rmLink:active,
+    .rmGroup .rmItem:hover > a.rmLink,
+    .rmGroup .rmItem.rmSelected > a.rmLink,
+    .rmGroup .rmItem.rmFocused > a.rmLink {
+        background-color: var(--pbs-blue) !important;
+        background: var(--pbs-blue) !important;
+        color: var(--pbs-white) !important;
+    }
+
+    /* Subnav hover text - WHITE */
+    .RadMenu .rmGroup a.rmLink:hover .rmText,
+    .RadMenu .rmGroup a.rmLink:focus .rmText,
+    .RadMenu .rmGroup .rmItem:hover .rmText,
+    .rmGroup a.rmLink:hover .rmText,
+    .rmGroup .rmItem:hover .rmText {
+        color: var(--pbs-white) !important;
+    }
+
+    /* Override any selected/active states that add gray - force white bg when not hovered */
+    .RadMenu .rmGroup .rmItem.rmSelected,
+    .RadMenu .rmGroup .rmItem.rmFocused,
+    .RadMenu .rmGroup .rmItem.rmExpanded,
     .rmGroup .rmSelected,
     .rmGroup .rmFocused,
     .rmGroup .rmExpanded {
-        background-color: var(--pbs-white) !important;
-        background: var(--pbs-white) !important;
+        background-color: transparent !important;
+        background: transparent !important;
     }
 
     /* Ensure submenu slide container has white bg */
