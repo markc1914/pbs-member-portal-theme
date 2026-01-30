@@ -362,54 +362,30 @@ h4, .SectionLabel, h5 {
 }
 
 /* ========================================
-   GLOBAL: Remove bullets from ALL navigation lists
+   GLOBAL: Remove bullets from navigation lists
    This applies at all screen sizes
    ======================================== */
 #hd ul,
-#hd ol,
 #hd li,
 header ul,
-header ol,
 header li,
 #masterTopBarAuxiliary ul,
 #masterTopBarAuxiliary li,
 #masterLogoArea ul,
 #masterLogoArea li,
-#masterHeaderBackground ul,
-#masterHeaderBackground li,
 .NavigationUnorderedList,
-.NavigationListItem,
-nav ul,
-nav li,
-ul.NavigationUnorderedList,
-ul.NavigationUnorderedList li,
-/* Target ALL lists before main content */
-#hd *,
-header * {
-    list-style: none !important;
-    list-style-type: none !important;
-    list-style-image: none !important;
-    -webkit-padding-start: 0 !important;
-    padding-inline-start: 0 !important;
-}
-
-/* Extra specific: any ul or li in header area */
-#hd ul, #hd ol, #hd li,
-#hd ul li, #hd ol li,
-header ul, header ol, header li,
-header ul li, header ol li {
+.NavigationListItem {
     list-style: none !important;
     list-style-type: none !important;
     margin-left: 0 !important;
     padding-left: 0 !important;
 }
 
-/* Override any ::marker pseudo-element */
+/* Override ::marker for header lists */
 #hd li::marker,
 header li::marker,
 .NavigationListItem::marker {
-    content: none !important;
-    display: none !important;
+    content: "" !important;
 }
 
 /* Social icons in aux bar */
@@ -1987,103 +1963,58 @@ a[title*="Edit"] .IconSprite {
        MOBILE NAVIGATION BAR & HAMBURGER MENU
        ============================================ */
 
-    /* Hamburger menu toggle - clear and prominent */
+    /* Hamburger menu toggle - style only the actual toggle button */
     .navbar-toggle,
-    .hamburger,
-    .menu-toggle,
-    [class*="hamburger"],
-    [class*="menu-toggle"],
-    [class*="navbar-toggle"],
-    [id*="hamburger"],
-    [id*="menuToggle"],
-    button[aria-label*="menu"],
-    button[aria-label*="Menu"],
-    a[aria-label*="menu"],
-    a[aria-label*="Menu"],
-    .collapsed-toggle,
-    [data-toggle="collapse"] {
+    .navbar-toggler,
+    button.hamburger,
+    button.menu-toggle {
         display: block !important;
         width: 100% !important;
         background-color: var(--pbs-blue) !important;
         color: var(--pbs-white) !important;
         border: none !important;
-        padding: 12px 15px !important;
-        border-radius: 0 !important;
-        font-size: 14px !important;
-        font-weight: 700 !important;
+        padding: 10px 15px !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
         cursor: pointer !important;
         text-align: center !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
     }
 
-    /* Clear text for menu toggle */
-    .navbar-toggle::before,
-    .hamburger::before,
-    .menu-toggle::before,
-    [class*="hamburger"]::before,
-    [class*="menu-toggle"]::before,
-    [data-toggle="collapse"]::before {
-        content: "☰ TAP HERE TO SHOW/HIDE MENU" !important;
-        font-size: 13px !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.5px !important;
-    }
-
-    /* Hide original toggle content, show our text instead */
-    .navbar-toggle *,
-    .hamburger *,
-    .menu-toggle *,
-    [class*="hamburger"] > *,
-    [class*="menu-toggle"] > * {
-        display: none !important;
-    }
-
-    /* FORCE NAVIGATION TO BE VISIBLE BY DEFAULT */
+    /* Navigation container */
     .RadMenu,
     .RadMenu_Austin,
     .PrimaryNavPanel,
-    [id*="NavPanel"],
-    .navbar-collapse,
-    .nav-collapse,
-    .collapse.navbar-collapse,
-    [class*="nav-collapse"],
-    [class*="NavCollapse"],
-    .rmRootGroup,
-    nav[role="navigation"] {
+    [id*="NavPanel"] {
         display: block !important;
         visibility: visible !important;
-        opacity: 1 !important;
-        max-height: none !important;
-        height: auto !important;
-        overflow: visible !important;
-        background-color: var(--pbs-white) !important;
-        padding: 8px 5px !important;
-        border-top: 2px solid var(--pbs-blue) !important;
-        border-bottom: 2px solid var(--pbs-blue) !important;
+        background-color: var(--pbs-blue) !important;
+        padding: 3px !important;
     }
 
-    /* Mobile nav links - compact text links, not clunky buttons */
+    .rmRootGroup {
+        background-color: var(--pbs-blue) !important;
+    }
+
+    /* Mobile nav links - simple text links */
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
-    .RadMenu a.rmLink,
-    nav a {
-        font-size: 11px !important;
-        padding: 6px 8px !important;
-        margin: 2px !important;
+    .RadMenu a.rmLink {
+        font-size: 10px !important;
+        padding: 4px 6px !important;
+        margin: 1px !important;
         display: inline-block !important;
-        color: var(--pbs-blue) !important;
-        background-color: transparent !important;
-        border: 1px solid var(--pbs-blue) !important;
-        border-radius: 3px !important;
+        color: var(--pbs-white) !important;
+        background-color: var(--pbs-blue) !important;
+        border: none !important;
+        border-radius: 2px !important;
         text-transform: uppercase !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         letter-spacing: 0.3px !important;
+        line-height: 1.2 !important;
     }
 
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:hover,
     .RadMenu a.rmLink:hover {
-        background-color: var(--pbs-blue) !important;
-        color: var(--pbs-white) !important;
+        background-color: var(--pbs-blue-dark) !important;
     }
 
     /* Menu items flow horizontally, wrap as needed */
@@ -2093,12 +2024,22 @@ a[title*="Edit"] .IconSprite {
         flex-direction: row !important;
         flex-wrap: wrap !important;
         justify-content: flex-start !important;
-        gap: 3px !important;
+        gap: 2px !important;
+        padding: 5px !important;
     }
 
     .RadMenu .rmItem,
     .rmItem {
         width: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Ensure nav link text is visible */
+    .RadMenu a.rmLink .rmText,
+    .rmText {
+        display: inline !important;
+        visibility: visible !important;
     }
 
     /* ============================================
