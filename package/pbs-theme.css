@@ -95,15 +95,11 @@ textarea:focus-visible,
     display: block;
 }
 
-/* Larger, consistent touch targets */
+/* Larger touch targets for main navigation only */
 .RadMenu a.rmLink.rmRootLink,
 .RadMenu_Austin a.rmLink.rmRootLink,
 .RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
-.RadMenu.RadMenu_Austin a.rmLink.rmRootLink,
-button,
-input[type="submit"],
-input[type="button"],
-a.TextButton {
+.RadMenu.RadMenu_Austin a.rmLink.rmRootLink {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
@@ -388,47 +384,112 @@ h4, .SectionLabel, h5 {
 }
 
 /* ========================================
-   HIDE: Keyword Search, GO Button, Social Icons in Header
+   HIDE: Keyword Search, GO Button, Social Icons
+   SCOPED TO HEADER AREA ONLY - do not hide content area search forms!
    ======================================== */
-#masterTopBarAuxiliary [id*="Search"],
-#masterTopBarAuxiliary [id*="search"],
-#masterTopBarAuxiliary [class*="Search"],
-#masterTopBarAuxiliary [class*="search"],
-#masterTopBarAuxiliary input[type="text"],
-#masterTopBarAuxiliary input[value="GO"],
-#masterTopBarAuxiliary input[type="submit"],
-[id*="KeywordSearch"],
-[id*="keywordSearch"],
-[class*="KeywordSearch"],
-[class*="keyword-search"],
-.SearchBox,
-.KeywordSearch,
-/* HIDE GO BUTTON AND KEYWORD SEARCH ONLY - not Sign In! */
+
+/* KEYWORD SEARCH in HEADER ONLY - hide the header search bar */
+#hd [id*="KeywordSearch"],
+#hd [id*="keywordSearch"],
+#hd [id*="SearchField"],
+#hd [id*="search-collapse"],
+#hd [id*="search-container"],
+header [id*="KeywordSearch"],
+header [id*="keywordSearch"],
+header [id*="SearchField"],
+header [id*="search-collapse"],
+header [id*="search-container"],
+#hd [class*="KeywordSearch"],
+#hd [class*="keyword-search"],
+#hd [class*="SearchBox"],
+#hd [class*="search-container"],
+#hd [class*="header-search"],
+#hd [class*="searchbar"],
+header [class*="KeywordSearch"],
+header [class*="header-search"],
+header [class*="searchbar"],
+#hd .SearchBox,
+#hd .KeywordSearch,
+#hd .header-search,
+#hd .search-container,
+#hd .search-container-sm,
+#hd .search-collapse,
+#hd .searchbar,
+#hd .SimpleSearchBlock,
+header .SearchBox,
+header .KeywordSearch,
+header .header-search,
+header .SimpleSearchBlock,
+/* Search input fields in HEADER area only */
 #hd input[type="text"],
-#hd input[value="GO"],
-header input[type="text"],
-header input[value="GO"],
-input[value="GO"],
-input.TextButton[value="GO"],
-.TextButton[value="GO"],
-[value="GO"],
+#masterTopBarAuxiliary input[type="text"],
 #masterLogoArea input[type="text"],
 #masterHeaderBackground input[type="text"],
-/* Hide social media icons in header (they're in footer) */
+header input[type="text"],
+/* Keyword search specific inputs in header */
+#hd input[id*="SearchTerms"],
+#hd input[id*="SearchField"],
+header input[id*="SearchTerms"],
+header input[id*="SearchField"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* GO BUTTON - hide in HEADER area only */
+#hd input[value="GO"],
+#hd input[value="Go"],
+#hd input[value="go"],
+#hd button[value="GO"],
+#hd button[value="Go"],
+header input[value="GO"],
+header input[value="Go"],
+header input[value="go"],
+header button[value="GO"],
+header button[value="Go"],
+#hd .TextButton[value="GO"],
+#hd .TextButton[value="Go"],
+header .TextButton[value="GO"],
+header .TextButton[value="Go"],
+#masterTopBarAuxiliary input[type="submit"],
+#masterLogoArea input[type="submit"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* SOCIAL MEDIA ICONS - hide in header (keep in footer) */
 #masterSocialNetworking,
+[id*="SocialNetworking"],
+[id*="socialnetworking"],
+[id*="ste_container_Social"],
+[class*="SocialSprite"],
+[class*="header-social"],
+.SocialSprite,
+.header-social,
+.FacebookIcon,
+.TwitterIcon,
+.YouTubeIcon,
+.InstagramIcon,
+.LinkedInIcon,
+/* Social containers */
 #hd [id*="Social"],
 #hd [class*="social"],
 #hd [class*="Social"],
 header [id*="Social"],
 header [class*="social"],
+header [class*="Social"],
 #masterTopBarAuxiliary [id*="Social"],
 #masterTopBarAuxiliary [class*="social"],
 #masterLogoArea [id*="Social"],
 #masterLogoArea [class*="social"],
-.SocialSprite,
-#hd .SocialSprite,
-header .SocialSprite,
-/* Social icon links */
+/* Social links by URL */
 #hd a[href*="facebook"],
 #hd a[href*="twitter"],
 #hd a[href*="instagram"],
@@ -438,12 +499,25 @@ header a[href*="facebook"],
 header a[href*="twitter"],
 header a[href*="instagram"],
 header a[href*="linkedin"],
-header a[href*="youtube"] {
+header a[href*="youtube"],
+/* Social sprite images */
+img[src*="social"],
+img[src*="Social"],
+img[src*="facebook"],
+img[src*="twitter"],
+img[src*="youtube"],
+img[src*="instagram"],
+img[src*="linkedin"],
+#hd img[alt*="Facebook"],
+#hd img[alt*="Twitter"],
+#hd img[alt*="YouTube"],
+header img[alt*="Facebook"],
+header img[alt*="Twitter"],
+header img[alt*="YouTube"] {
     display: none !important;
     visibility: hidden !important;
     width: 0 !important;
     height: 0 !important;
-    overflow: hidden !important;
     position: absolute !important;
     left: -9999px !important;
 }
@@ -1680,106 +1754,154 @@ tr:hover {
 
 /* ========================================
    RESOURCE/DOCUMENT LIBRARY
+   Minimal styling - let Telerik controls render naturally
    ======================================== */
-[id*="ResourceLibrary"],
-[id*="DocumentLibrary"],
-[id*="DocumentBrowser"],
-.ResourceLibrary,
-.DocumentLibrary {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 500px !important;
+
+/* DO NOT override Telerik RadFileExplorer layout with width/height - it breaks the control */
+/* Only add cosmetic improvements and ensure tree expansion works */
+
+/* Tree view text styling */
+.RadTreeView a,
+.RadTreeView .rtText {
+    color: #333 !important;
+    text-decoration: none !important;
 }
 
-.RadFileExplorer,
-.RadFileExplorer_Default {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 600px !important;
-    height: auto !important;
+.RadTreeView a:hover,
+.RadTreeView .rtText:hover {
+    color: var(--pbs-blue) !important;
 }
 
-.RadFileExplorer .rfeContent,
-.RadFileExplorer .rfeFileList,
-.RadFileExplorer .rfeListView,
-.RadFileExplorer .rfeView,
-.RadFileExplorer .rfeTreeView,
-.RadFileExplorer .rfeMain,
-.RadFileExplorer .rfePane {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-height: 500px !important;
-    height: auto !important;
-}
-
-.RadFileExplorer .rfeContent,
-.RadFileExplorer .rfeFileList,
-.RadFileExplorer .rfeTreeView {
-    min-height: 500px !important;
-}
-
-/* Resource Library - reduce top whitespace */
-.RadFileExplorer .rfeToolbar,
-.RadFileExplorer .rfeAddressBar,
-.RadFileExplorer .rfeBreadcrumb {
-    padding: 5px !important;
-    margin: 0 !important;
-}
-
-/* Make the tree view fill available space */
-.RadFileExplorer .rfeLeftPane,
-.RadFileExplorer .rfeRightPane {
-    min-height: 500px !important;
-    height: auto !important;
-}
-
-/* Tree View expansion - ensure icons and toggles work */
+/* CRITICAL: Ensure tree nodes display properly */
 .RadTreeView,
 .RadTreeView_Default,
-.RadTreeView_Metro,
-[class*="TreeView"] {
+.RadTreeView_Metro {
     display: block !important;
     visibility: visible !important;
 }
 
-/* Tree node expansion toggles */
-.RadTreeView .rtPlus,
-.RadTreeView .rtMinus,
-.RadTreeView .rtIn,
-.RadTreeView .rtOut,
-.RadTreeView .rtExpand,
-.RadTreeView .rtCollapse,
-.rtPlus,
-.rtMinus,
-[class*="TreeView"] .rtPlus,
-[class*="TreeView"] .rtMinus {
-    display: inline-block !important;
+/* Tree node lists - ensure they display and expand to fill parent */
+.RadTreeView ul,
+.RadTreeView .rtUL,
+.rtUL {
+    display: block !important;
     visibility: visible !important;
-    cursor: pointer !important;
+    list-style: none !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
 }
 
-/* Tree nodes */
-.RadTreeView .rtLI,
-.RadTreeView .rtUL,
+/* RAD_SPLITTER_PANE - ensure tree expands to fill container */
+[class*="RAD_SPLITTER_PANE_Content"],
+.RAD_SPLITTER_PANE_Content,
+[id*="RAD_SPLITTER_PANE_Content"] {
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+}
+
+[class*="RAD_SPLITTER_PANE_Content"] .rtUL,
+.RAD_SPLITTER_PANE_Content .rtUL,
+[class*="RAD_SPLITTER_PANE_Content"] .RadTreeView,
+.RAD_SPLITTER_PANE_Content .RadTreeView {
+    height: 100% !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+/* Tree node items */
 .RadTreeView li,
-.RadTreeView ul {
+.RadTreeView .rtLI {
     display: block !important;
     visibility: visible !important;
     list-style: none !important;
 }
 
-/* Expanded child nodes */
+/* Expanded child nodes - MUST show */
 .RadTreeView .rtUL.rtExpanded,
 .RadTreeView ul.rtExpanded,
 .rtExpanded {
     display: block !important;
+    visibility: visible !important;
 }
 
-/* Collapsed child nodes */
+/* Collapsed child nodes - MUST hide */
 .RadTreeView .rtUL.rtCollapsed,
 .RadTreeView ul.rtCollapsed,
-.rtCollapsed {
+.rtCollapsed:not(.RadTreeView) {
     display: none !important;
+}
+
+/* Tree expand/collapse toggle icons - ensure visible */
+.RadTreeView .rtPlus,
+.RadTreeView .rtMinus,
+.rtPlus,
+.rtMinus {
+    display: inline-block !important;
+    visibility: visible !important;
+    cursor: pointer !important;
+}
+
+/* Tree node content wrapper */
+.RadTreeView .rtIn,
+.RadTreeView .rtSp {
+    display: inline !important;
+    visibility: visible !important;
+}
+
+/* Folder/file icons */
+.RadTreeView .rtImg,
+.RadTreeView .rtIcon {
+    display: inline-block !important;
+    visibility: visible !important;
+}
+
+/* ========================================
+   OBJECT BROWSER (BluPrint Document Library)
+   ======================================== */
+
+/* Object Browser wrapper - let it flow naturally */
+.ObjectBrowserWrapper {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Tree pane container */
+.TreePane,
+.Left.TreePane,
+[class*="TreePane"] {
+    display: block !important;
+    visibility: visible !important;
+    overflow: auto !important;
+}
+
+/* Ensure the tree container has proper height */
+.ObjectBrowserWrapper .RadTreeView,
+.TreePane .RadTreeView {
+    display: block !important;
+    visibility: visible !important;
+    overflow: visible !important;
+}
+
+/* Tree nodes in ObjectBrowser - ensure all levels show */
+.ObjectBrowserWrapper .RadTreeView ul,
+.ObjectBrowserWrapper .RadTreeView li,
+.TreePane .RadTreeView ul,
+.TreePane .RadTreeView li {
+    display: block !important;
+    visibility: visible !important;
+    list-style: none !important;
+}
+
+/* Expanded nodes in ObjectBrowser */
+.ObjectBrowserWrapper .rtExpanded,
+.TreePane .rtExpanded,
+.ObjectBrowserWrapper .RadTreeView .rtExpanded,
+.TreePane .RadTreeView .rtExpanded {
+    display: block !important;
+    visibility: visible !important;
 }
 
 /* ========================================
@@ -1846,52 +1968,151 @@ footer a,
     border-top: 1px solid #064483;
 }
 
+/* Footer links - ensure ALL links are white with good visibility */
+#ft a,
+#ft a:link,
+#ft a:visited,
+#ft a:hover,
+#ft a:active,
+#ft li a,
+#ft ul a,
+#ft nav a,
+#ft .NavigationListItem a,
+#ft [class*="Footer"] a,
+#ft [id*="Footer"] a,
+[id*="masterFooter"] a,
+[id*="masterFooter"] a:link,
+[id*="masterFooter"] a:visited,
+#masterFooterConnectWithUs a,
+#masterFooterCopyright a,
+footer a,
+.footer a,
+#ft span a {
+    color: #FFFFFF !important;
+    text-decoration: underline !important;
+    opacity: 1 !important;
+}
+
+#ft a:hover,
+#ft li a:hover,
+#ft ul a:hover,
+[id*="masterFooter"] a:hover,
+footer a:hover {
+    color: #FFFFFF !important;
+    text-decoration: none !important;
+    opacity: 0.9 !important;
+}
+
+/* Footer list items - ensure text is white */
+#ft li,
+#ft ul,
+#ft p,
+#ft span,
+#ft div,
+[id*="masterFooter"] li,
+[id*="masterFooter"] span,
+[id*="masterFooter"] p {
+    color: #FFFFFF !important;
+}
+
 /* ========================================
    COMMUNITY PAGES
-   Fix layout issues with floating images/logos
+   Restore default float-based layout - DO NOT use flexbox
+   Sidebar on LEFT, content on RIGHT (like production)
    ======================================== */
 
-/* Community page container - ensure proper flow */
-[id*="Community"] .row,
-[id*="community"] .row,
-.CommunityPage .row {
-    display: flex !important;
-    flex-wrap: wrap !important;
+/* Wrapper must contain floated children */
+.wrapper.has-secondary-col {
+    overflow: hidden !important;
 }
 
-/* Community logo/image - don't let it break layout */
-[id*="Community"] img,
-[id*="community"] img,
-.CommunityPage img,
-.CommunityLogo,
-[id*="CommunityLogo"] img {
-    max-width: 100%;
-    height: auto;
-    float: none !important;
+.wrapper.has-secondary-col::after {
+    content: "" !important;
+    display: table !important;
+    clear: both !important;
 }
 
-/* Community content sections - proper width */
-[id*="Community"] .col-sm-8,
-[id*="Community"] .col-sm-4,
-[id*="community"] .col-sm-8,
-[id*="community"] .col-sm-4 {
-    float: none !important;
+/* Secondary column (sidebar) - float LEFT */
+.wrapper .col-secondary,
+.wrapper.has-secondary-col .col-secondary,
+.wrapper.col-on-right .col-secondary {
+    float: left !important;
+    width: 220px !important;
+    margin-right: 20px !important;
 }
 
-/* Clear floats in community pages */
-[id*="Community"]::after,
-[id*="community"]::after,
-.CommunityPage::after {
-    content: "";
-    display: table;
-    clear: both;
+/* Primary column (main content) - float LEFT, take remaining space */
+.wrapper .col-primary,
+.wrapper.has-secondary-col .col-primary,
+.wrapper.col-on-right .col-primary {
+    float: left !important;
+    width: calc(100% - 250px) !important;
 }
 
-/* Community sidebar (right side with logo) */
-[id*="Community"] aside,
-[id*="Community"] .Sidebar,
-[id*="Community"] [class*="sidebar"] {
-    float: none !important;
+/* Community logo - constrain size */
+.col-secondary img,
+[id*="CommunitySummary"] img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+}
+
+/* Community sidebar navigation menu - blue background, white text */
+.col-secondary ul,
+.col-secondary nav,
+.col-secondary [class*="Navigation"],
+[id*="SideBarPlaceHolder"] ul,
+[id*="CommunitySideBar"] ul {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.col-secondary li,
+.col-secondary nav li,
+[id*="SideBarPlaceHolder"] li,
+[id*="CommunitySideBar"] li {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Community menu links - WHITE background, BLUE text (match mobile) */
+.col-secondary li a,
+.col-secondary nav a,
+[id*="SideBarPlaceHolder"] li a,
+[id*="CommunitySideBar"] li a,
+.col-secondary .NavigationListItem a {
+    display: block !important;
+    background-color: var(--pbs-white) !important;
+    color: var(--pbs-blue) !important;
+    padding: 10px 15px !important;
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    border: 1px solid var(--pbs-blue) !important;
+    border-radius: 4px !important;
+    margin-bottom: 4px !important;
+}
+
+.col-secondary li a:hover,
+.col-secondary nav a:hover,
+[id*="SideBarPlaceHolder"] li a:hover,
+[id*="CommunitySideBar"] li a:hover,
+.col-secondary .NavigationListItem a:hover {
+    background-color: var(--pbs-blue) !important;
+    color: var(--pbs-white) !important;
+}
+
+/* Active/selected community menu item */
+.col-secondary li.selected a,
+.col-secondary li.active a,
+.col-secondary li a.selected,
+.col-secondary li a.active,
+[id*="SideBarPlaceHolder"] li.selected a,
+[id*="CommunitySideBar"] li.selected a {
+    background-color: var(--pbs-blue) !important;
+    color: var(--pbs-white) !important;
 }
 
 /* ========================================
