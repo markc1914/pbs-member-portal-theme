@@ -2021,9 +2021,13 @@ footer a:hover {
    Do NOT override wrapper/col-secondary layout (affects all pages)
    ======================================== */
 
-/* Hide sub-navigation header (e.g., "Documents & Training") */
+/* Hide sub-navigation tree menu on non-community pages */
+/* This hides the massive tree menu (Staff, Documents, etc.) */
 .sub-nav-head,
-[id*="SubNavHead"] {
+[id*="SubNavHead"],
+.sub-nav-body,
+[id*="SubNavBody"],
+[id*="SubNavigationTree"] {
     display: none !important;
 }
 
