@@ -1,195 +1,243 @@
 # PBSTheme-Modern-Responsive
 
-## Phi Beta Sigma Member Portal - CSS Theme Project
+## AI Assistant Instructions
 
-## Project Overview
-Custom responsive CSS theme for the Phi Beta Sigma Fraternity iMIS 20.2.66 member portal.
+This document provides context for AI assistants (Claude, Codex, Gemini, etc.) working on this project.
 
-**Live Site:** https://members.phibetasigma1914.org
-**Dev Site:** https://members.phibetasigma1914.org/iMISdev/
+### What This Project Is
+A custom responsive CSS theme for the **Phi Beta Sigma Fraternity iMIS 20.2.66 member portal**. This is a CSS-only project - we cannot modify HTML or JavaScript, only CSS.
+
+### Key Constraints
+1. **CSS-only** - No access to HTML templates or JavaScript
+2. **iMIS Platform** - Uses Telerik controls (RadMenu, RadTabStrip, RadGrid, RadComboBox)
+3. **Must use `!important`** - To override iMIS base styles and UltraWave theme
+4. **Master Page: Cities Responsive** - Provides viewport meta tag for mobile
+
+### Live Sites
+- **Production:** https://members.phibetasigma1914.org
+- **Dev/Test:** https://members.phibetasigma1914.org/iMISdev/
+
+---
 
 ## Brand Standards
-- **Primary Color (Royal Blue):** #164F90
-- **Secondary Color (White):** #FFFFFF
-- **Accent Blue:** #6a9ac9
-- **Font:** Inter (Google Fonts)
 
-## Files
-- `pbs-theme.css` - Main responsive theme file
-- `PBSTheme_Current_Production.css` - Reference copy of production CSS
-- `package/` - Theme package folder for ZIP export
-  - `pbs-theme.css`
-  - `ThemeSettings.xml` - iMIS 20.2 theme settings file
-  - `images/` - All theme images including `pbs-header2.png`
-- `PBSTheme-Modern-Responsive.zip` - Ready-to-deploy theme package
+| Element | Value |
+|---------|-------|
+| Primary Color (Royal Blue) | `#164F90` |
+| Secondary Color | `#FFFFFF` |
+| Accent Blue | `#6a9ac9` |
+| Dark Blue | `#0d3a6a` |
+| Font | Inter (Google Fonts) |
 
-## Key CSS Features Implemented
+CSS Variables defined in `:root`:
+```css
+--pbs-blue: #164F90;
+--pbs-blue-dark: #0d3a6a;
+--pbs-blue-light: #2066ac;
+--pbs-blue-accent: #6a9ac9;
+--pbs-white: #FFFFFF;
+```
 
-### 1. Layout System
-- **YUI Grid** - For outer page structure (`#masterSideBarPanel`, `#yui-main`)
-- **Bootstrap Grid** - For inner content (`.row`, `.col-sm-3`, `.col-sm-9`)
-- Both grids work together with `!important` flags to override iMIS defaults
-- Responsive breakpoints: 576px, 767px, 991px, 480px
+---
 
-### 2. Navigation (RadMenu)
-- Blue navigation bar with white text
-- Uppercase menu items with letter-spacing
-- Dropdown menus with proper styling
-- Border accents (#6a9ac9)
+## Project Structure
 
-### 3. Buttons
-- **Enabled buttons:** Blue (#164F90)
-- **Disabled buttons (.aspNetDisabled):** Grey (#6c757d)
-- Applies to Renew Now, Pay Other Items, etc.
-- Checkout button always blue
+```
+pbs-member-portal-theme/
+├── package/                    # DEPLOY THIS FOLDER
+│   ├── pbs-theme.css          # Main CSS file (edit this)
+│   ├── ThemeSettings.xml      # iMIS theme manifest
+│   └── images/
+│       └── pbs-header2.png    # Header banner image
+├── PBSTheme_Current_Production.css  # Reference/backup
+├── testingScreenshots/        # Mobile/desktop screenshots for debugging
+├── CLAUDE.md                  # This file (AI instructions)
+└── README.md                  # User-facing documentation
+```
 
-### 4. Icons (SVG inline)
-- **Gear icon:** Panel settings/configure
-- **Pencil icon:** Edit controls
-- **Trash icon (red):** Delete controls
-- **Plus icon:** Add controls
-- CSS tooltips on hover
+### Key File: `package/pbs-theme.css`
+This is the main CSS file. All edits should be made here. Structure:
+1. Google Fonts import
+2. CSS Variables
+3. Base typography
+4. Accessibility enhancements
+5. YUI Grid layout (master page structure)
+6. Bootstrap Grid (inner content)
+7. Header & navigation
+8. Sidebar & profile
+9. Panels & content
+10. Tabs
+11. Buttons
+12. Forms
+13. Tables
+14. **Responsive breakpoints** (991px, 767px, 480px)
+15. Print styles
 
-### 5. Tables
-- Horizontal scroll for wide tables (Education Background, etc.)
-- `overflow-x: auto` on `.PanelBody`, `.ContentWizardDisplay`
-- Blue header rows
-- Min-width prevents over-compression
+---
 
-### 6. Forms
-- Focus states with blue outline
-- Rounded corners (3px)
-- Box shadows on inputs
+## CSS Architecture
 
-### 7. Profile Section (Left Sidebar)
-- Profile image with blue border, fixed width (130px desktop, 100px mobile)
-- Natural aspect ratio preserved (no distortion)
-- Sidebar content fills full column width
-- 2-column layout (25% sidebar, 75% content)
+### Layout Systems (Both Used Together)
+1. **YUI Grid** - Outer page structure
+   - `#doc`, `#hd`, `#bd`, `#ft` - Page sections
+   - `#masterSideBarPanel` - Left sidebar
+   - `#yui-main` - Main content area
 
-### 8. Tabs (RadTabStrip)
-- Metro style with blue background
-- White text, white border on selected
+2. **Bootstrap Grid** - Inner content
+   - `.row`, `.col-sm-3`, `.col-sm-9`
+   - Scoped to content areas to avoid breaking RadMenu
 
-## iMIS-Specific Notes
-- Uses Telerik controls (RadMenu, RadTabStrip, RadGrid, RadComboBox)
-- ASP.NET disabled buttons use `.aspNetDisabled` class
-- Session timeout dialog may appear incorrectly (JavaScript issue, not CSS)
-- Theme imports UltraWave base styles
+### Responsive Breakpoints
+| Breakpoint | Behavior |
+|------------|----------|
+| Desktop (992px+) | 2-column layout, full nav |
+| Tablet (768-991px) | Narrower sidebar |
+| Mobile (< 767px) | Stacked columns, compact nav |
+| Small mobile (< 480px) | Extra compact |
 
-## CSS Load Order (in iMIS)
-1. `01-MasterPage.css`
-2. `pbs-responsive-theme.css` (this theme)
-3. `PBSTheme.css`
+### iMIS/Telerik Selectors
+```css
+/* Navigation */
+.RadMenu, .RadMenu_Austin, .rmLink, .rmRootLink, .rmItem
 
-## Responsive Behavior
-- **Desktop (992px+):** 2-column layout, full navigation
-- **Tablet (768-991px):** Narrower sidebar
-- **Mobile (< 767px):** Stacked columns, smaller nav text
-- **Small mobile (< 480px):** Compact navigation
+/* Tabs */
+.RadTabStrip, .RadTabStripTop_Metro, .rtsLink, .rtsSelected
 
-## Session History (2026-01-27)
-1. Started with brand color extraction from screenshots
-2. Created initial comprehensive theme
-3. Simplified to avoid layout conflicts
-4. Added Bootstrap grid support (missing from dev site)
-5. Added YUI grid support for master page structure
-6. Fixed `#yui-main` to allow Bootstrap grid inside
-7. Added conditional button styling (grey/blue based on disabled state)
-8. Added SVG icons with CSS tooltips
-9. Added horizontal scroll for wide tables
+/* Grids */
+.RadGrid, .rgMasterTable, .rgRow, .rgAltRow
 
-## Session History (2026-01-28)
-1. Fixed left sidebar content to fill full column width
-   - Added width rules for `.col-sm-3` child elements
-   - Targeted iMIS-specific containers (`[id*="ste_container"]`, etc.)
-2. Fixed Renewal button box blue background
-   - Made `.UsePrimaryButton` and `.UseLargeButton` containers transparent
-   - Used aggressive `*` selector to override UltraWave base styles
-3. Fixed profile image distortion
-   - Removed forced square dimensions that caused oval/stretched images
-   - Set fixed width (130px) with `height: auto` to preserve aspect ratio
-   - Mobile breakpoint uses 100px width
-4. Created dedicated git repository for project
+/* Buttons */
+.TextButton, .PrimaryButton, .aspNetDisabled
 
-## Session History (2026-01-28 continued)
-5. Added responsive content widths
-   - Content area scales: 960px → 1140px → 1320px → 1500px → 1700px
-   - Breakpoints at 1200px, 1400px, 1600px, 1920px
-6. Added horizontal scroll for tabs on mobile
-   - RadTabStrip now scrollable with `overflow-x: auto`
-   - Smaller tab text on mobile (12px)
-7. Fixed multi-select list styling
-   - Made selectors more specific to avoid breaking other layouts
-   - Targets only `[id*="QueryBuilder"]` and `.QueryBuilderControl` contexts
-8. Fixed cross-browser compatibility (Chrome/Edge vs Safari)
-   - Scoped Bootstrap grid selectors (`.row`, `.col-sm-*`) to content areas only
-   - Previously global selectors were breaking RadMenu and page layout
-   - Now only applies within `#masterContentArea`, `#masterSideBarPanel`, `#yui-main`
-9. Fixed wide screen layout issue
-   - Removed problematic `#yui-main { float: none; width: 100% }` override
-   - Restored proper 2-column YUI grid layout
+/* Panels */
+.PanelHead, .PanelBody, .PanelField, .PanelFieldValue
+```
 
-## Session History (2026-01-28 afternoon)
-10. Fixed menu and content width alignment
-    - Made all major page sections (`#doc`, `#hd`, `#bd`, etc.) full width
-    - Added aggressive `!important` overrides for YUI template classes (`.yui-t1` through `.yui-t5`)
-    - Nav bar and content area now match perfectly at all screen sizes
-11. Fixed multi-select lists on Directory search page
-    - Added scrollable list styling for `.PanelField ul`, `.PanelBody ul`, `td ul`
-    - Excluded navigation lists (`.NavigationUnorderedList`, `.rtsUL`, `.rmRootGroup`) to avoid breaking menus
-    - Lists now display with border, max-height 150px, and overflow-y scroll
-12. Fixed Community page layout
-    - Added CSS for community pages with floating images/logos
-    - Fixed float issues that were causing large empty spaces
-    - Community logo/sidebar content now flows correctly
-13. Added header image/branding
-    - CSS for `#masterHeaderImage` with background-image
-    - Uses `images/pbs-header2.png` from theme folder
-    - Positioned absolutely within `#masterHeaderBackground`
-    - **Note:** Login page uses different master page - requires iMIS admin configuration to show header
-14. Created theme import package
-    - `PBSTheme.xml` - iMIS theme manifest file
-    - `package/` folder structure for ZIP export
-    - Ready for iMIS theme import
+---
 
-## Session History (2026-01-28 evening)
-15. Created iMIS theme package
-    - `ThemeSettings.xml` with correct iMIS 20.2 format
-    - `PBSTheme-Modern-Responsive.zip` ready for deployment
-16. Improved top bar button styling
-    - SIGN IN/SIGN OUT buttons: white background, blue border, blue text
-    - Hover effect inverts to blue background with white text
-17. Fixed main navigation menu
-    - Larger text (13px), bold (700), proper padding
-    - White text on blue background with good contrast
-    - Added multiple selector variations with `!important` for override
-18. Improved tabs styling
-    - 14px font, semi-bold (600)
-    - Blue text on white, blue underline on hover/selected
-19. Fixed panel edit buttons
-    - Edit, Edit Panel, Edit Address now have blue text
-    - Matches "Hide" button styling for consistency
-    - Targeted `[id*="_Head"]` elements for panel headers
+## Common Tasks
 
-## Current Status
-- Theme is fully functional and responsive
-- Cross-browser compatible (Safari, Chrome, Edge)
-- Menu and content widths aligned perfectly
-- Community pages display correctly
-- Header branding image displays (except login page - different master page)
-- Profile image displays correctly at all screen sizes
-- Multi-select lists working on Directory page
-- All buttons and links readable with proper contrast
+### Adding Mobile Styles
+Add rules inside the `@media (max-width: 767px)` block in `package/pbs-theme.css`.
 
-## Theme Deployment (iMIS 20.2)
-1. Extract `PBSTheme-Modern-Responsive.zip`
-2. On iMIS server, navigate to: `C:\Program Files (x86)\ASI\iMIS\Net\App_Themes\`
-3. Create folder: `PBSTheme-Modern-Responsive`
-4. Copy contents: `ThemeSettings.xml`, `pbs-theme.css`, `images/`
-5. In iMIS Staff: RiSE → select theme for website
+### Removing Bullet Points from Lists
+Target specific containers:
+```css
+#hd ul, #hd li,
+.NavigationUnorderedList,
+.NavigationListItem {
+    list-style: none !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+```
 
-## Next Steps / Known Issues
-- Accessibility improvements (focus indicators, reduced motion, touch targets)
-- Login page header: Requires iMIS admin to configure master page
-- Footer content alignment (optional enhancement)
+### Styling Navigation Menu Items
+```css
+.RadMenu_Austin.RadMenu a.rmLink.rmRootLink {
+    font-size: 10px !important;
+    padding: 4px 6px !important;
+    color: var(--pbs-white) !important;
+    background-color: var(--pbs-blue) !important;
+}
+```
+
+### Making Elements Full Width on Mobile
+```css
+@media (max-width: 767px) {
+    #masterSideBarPanel,
+    #yui-main {
+        float: none;
+        width: 100%;
+    }
+}
+```
+
+---
+
+## Testing Workflow
+
+1. Edit `package/pbs-theme.css`
+2. Deploy to iMIS server (see deployment section)
+3. Test on dev site: https://members.phibetasigma1914.org/iMISdev/
+4. Take screenshots and save to `testingScreenshots/` for debugging
+5. Commit changes to git
+
+### Mobile Testing
+- Use browser dev tools device emulation
+- Test on actual iOS/Android devices
+- Screenshots should be added to `testingScreenshots/` folder
+
+---
+
+## Deployment to iMIS
+
+### Manual Deployment
+1. Copy `package/` folder contents to iMIS server
+2. Path: `C:\Program Files (x86)\ASI\iMIS\Net\App_Themes\PBSTheme-Modern-Responsive\`
+3. In iMIS Staff: RiSE → Website → Theme Settings → Select theme
+
+### Files to Deploy
+- `pbs-theme.css`
+- `ThemeSettings.xml`
+- `images/pbs-header2.png`
+
+---
+
+## Session History (2026-01-30)
+
+### Mobile Responsive Fixes
+1. Switched from "Cities" to "Cities Responsive" master page (provides viewport meta)
+2. Removed aggressive viewport overrides that were needed for non-responsive master
+3. Fixed header links (Mark, Cart) showing bullet points
+4. Made navigation buttons smaller and less clunky
+5. Added space-maximizing CSS for mobile (reduced padding/margins)
+6. Styled hamburger menu toggle
+7. Fixed over-aggressive CSS that was hiding nav button text
+
+### Current Mobile Styling
+- Header links: Small outline buttons (11px, uppercase)
+- Nav menu: Compact buttons (10px), blue background, horizontal flow
+- Content: Reduced padding for more screen space
+- Buttons: Full-width on mobile for easy tapping
+
+---
+
+## Known Issues / Limitations
+
+1. **Login page header** - Different master page, requires iMIS admin config
+2. **Bullet points** - May require inline style overrides in some cases
+3. **JavaScript interactions** - Cannot be modified via CSS (hamburger toggle behavior)
+4. **iMIS base styles** - Heavy use of `!important` required to override
+
+---
+
+## Git Workflow
+
+```bash
+# Check status
+git status
+
+# Stage and commit
+git add package/pbs-theme.css
+git commit -m "Description of changes"
+
+# Push to GitHub
+git push
+
+# Pull latest
+git pull
+```
+
+Repository: https://github.com/markc1914/pbs-member-portal-theme
+
+---
+
+## Tips for AI Assistants
+
+1. **Always use `!important`** when overriding iMIS/Telerik styles
+2. **Test mobile changes** in the 767px media query block
+3. **Be careful with broad selectors** like `#hd *` - they can break things
+4. **Check screenshots** in `testingScreenshots/` to understand current state
+5. **The main CSS file is `package/pbs-theme.css`** - not the root level
+6. **Commit frequently** - user deploys from git
