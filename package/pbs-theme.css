@@ -2057,32 +2057,15 @@ footer a:hover {
     display: block !important;
 }
 
-/* Community sidebar navigation menu - blue background, white text */
-.col-secondary ul,
-.col-secondary nav,
-.col-secondary [class*="Navigation"],
-[id*="SideBarPlaceHolder"] ul,
-[id*="CommunitySideBar"] ul {
-    list-style: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-.col-secondary li,
-.col-secondary nav li,
-[id*="SideBarPlaceHolder"] li,
-[id*="CommunitySideBar"] li {
+/* Community sidebar navigation menu - ONLY on community pages */
+.CommunityLinksBlock {
     list-style: none !important;
     margin: 0 !important;
     padding: 0 !important;
 }
 
 /* Community menu links - WHITE background, BLUE text (match mobile) */
-.col-secondary li a,
-.col-secondary nav a,
-[id*="SideBarPlaceHolder"] li a,
-[id*="CommunitySideBar"] li a,
-.col-secondary .NavigationListItem a,
+/* ONLY target CommunityLinksBlock to avoid affecting other pages */
 .CommunityLinksBlock a,
 [id*="CommunityLinksBlock"] a {
     display: block !important;
@@ -2097,11 +2080,6 @@ footer a:hover {
     margin-bottom: 4px !important;
 }
 
-.col-secondary li a:hover,
-.col-secondary nav a:hover,
-[id*="SideBarPlaceHolder"] li a:hover,
-[id*="CommunitySideBar"] li a:hover,
-.col-secondary .NavigationListItem a:hover,
 .CommunityLinksBlock a:hover,
 [id*="CommunityLinksBlock"] a:hover {
     background-color: var(--pbs-blue) !important;
@@ -2109,12 +2087,6 @@ footer a:hover {
 }
 
 /* Active/selected community menu item */
-.col-secondary li.selected a,
-.col-secondary li.active a,
-.col-secondary li a.selected,
-.col-secondary li a.active,
-[id*="SideBarPlaceHolder"] li.selected a,
-[id*="CommunitySideBar"] li.selected a,
 .CommunityLinksBlock a.CommunityLinksSelected,
 [id*="CommunityLinksBlock"] a.CommunityLinksSelected {
     background-color: var(--pbs-blue) !important;
