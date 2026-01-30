@@ -2021,6 +2021,12 @@ footer a:hover {
    Do NOT override wrapper/col-secondary layout (affects all pages)
    ======================================== */
 
+/* Hide sub-navigation header (e.g., "Documents & Training") */
+.sub-nav-head,
+[id*="SubNavHead"] {
+    display: none !important;
+}
+
 /* Community logo - constrain size (only on community pages) */
 [id*="CommunitySummary"] img {
     max-width: 100% !important;
