@@ -16,3 +16,10 @@ AccountPageInDev.html
 /package/images
 ./Workfiles/
 testingScreenshots/
+
+# Node.js
+node_modules/
+package-lock.json
+
+# Test scripts (keep test-site.js but ignore temp files)
+test-safari.scpt
