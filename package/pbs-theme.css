@@ -2403,61 +2403,43 @@ footer a:hover {
 
 /* COMMUNITY PAGE LAYOUT
    Community pages use a two-column layout with sidebar on left/right
+   IMPORTANT: Only apply to content wrappers INSIDE #bd (body), not page-level wrappers
    ================================================================= */
 
-/* Community wrapper - ensure proper layout */
-.wrapper,
-.wrapper.has-secondary-col,
-.has-secondary-col {
+/* Only apply flex layout to wrappers inside the body content area */
+#bd .wrapper.has-secondary-col,
+#bd .has-secondary-col,
+#yui-main .wrapper,
+.col-primary + .col-secondary {
     display: flex !important;
     flex-wrap: nowrap !important;
     gap: 20px !important;
-    width: 100% !important;
-    max-width: 100% !important;
 }
 
-/* Sidebar on right (col-on-right) */
-.wrapper.col-on-right,
-.col-on-right {
+/* Sidebar on right (col-on-right) - only in content area */
+#bd .wrapper.col-on-right,
+#bd .col-on-right {
     flex-direction: row !important;
 }
 
-/* Sidebar on left */
-.wrapper.col-on-left,
-.col-on-left {
-    flex-direction: row-reverse !important;
-}
-
 /* Main content - takes remaining space */
-.col-primary,
-[class*="col-primary"],
-.primary-col {
+#bd .col-primary,
+#yui-main .col-primary {
     flex: 1 1 auto !important;
     min-width: 0 !important;
-    order: 1 !important;
-    background: var(--pbs-white) !important;
-    padding: 20px !important;
 }
 
-/* Sidebar - fixed width */
-.col-secondary,
-[class*="col-secondary"],
-.secondary-col,
-#ctl01_SideBarPlaceHolder_ctl00,
-[id*="SideBarPlaceHolder"] {
+/* Content sidebar - fixed width (NOT page-level sidebar) */
+#bd .col-secondary,
+#yui-main .col-secondary {
     flex: 0 0 250px !important;
     width: 250px !important;
     max-width: 250px !important;
-    min-width: 200px !important;
-    order: 2 !important;
-    background: var(--pbs-white) !important;
-    padding: 15px !important;
 }
 
-/* Community Description page specific - fix layout */
+/* Community Description page specific */
 [id*="CommunityDescription"] .wrapper,
-[id*="CommunityLayout"] .wrapper,
-.CommunityDescription .wrapper {
+[id*="CommunityLayout"] .wrapper {
     display: flex !important;
     flex-direction: row !important;
 }
