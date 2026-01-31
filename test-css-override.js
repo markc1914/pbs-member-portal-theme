@@ -102,46 +102,28 @@ ul.rmRootGroup {
     background: #164F90 !important;
 }
 
-/* header-bottom-container - FORCE BLUE */
-.header-bottom-container,
-.header-bottom-container * {
+/* header-bottom-container - FORCE BLUE (container only, not children) */
+.header-bottom-container {
     background-color: #164F90 !important;
 }
 
-/* Override any grey backgrounds in nav area */
-.RadMenu *,
-.RadMenu_Austin *,
-.rmRootGroup *,
-.rmItem,
-li.rmItem,
-.rmFirst,
-.rmLast {
+/* Root nav items - transparent background on blue bar */
+.RadMenu > .rmRootGroup > .rmItem,
+.RadMenu_Austin > .rmRootGroup > .rmItem {
     background-color: transparent !important;
     background: transparent !important;
 }
 
 /* DESKTOP NAV - WHITE TEXT on BLUE background for READABILITY */
-/* Override ALL possible text color properties */
-.RadMenu,
-.RadMenu_Austin,
-.rmRootGroup,
-.RadMenu *,
-.RadMenu_Austin *,
-.rmRootGroup *,
-.header-bottom-container,
-.header-bottom-container * {
-    color: #FFFFFF !important;
-    -webkit-text-fill-color: #FFFFFF !important;
-}
-
-/* Nav links specifically */
-.RadMenu a,
-.RadMenu_Austin a,
-a.rmLink,
-a.rmRootLink,
+/* ONLY target root nav items, NOT dropdowns or buttons */
+.RadMenu > .rmRootGroup > .rmItem > a.rmLink,
+.RadMenu > .rmRootGroup > .rmItem > a.rmLink .rmText,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink .rmText,
 a.rmLink.rmRootLink,
-.rmLink .rmText,
-.rmRootLink .rmText {
+a.rmLink.rmRootLink .rmText,
+.rmRootGroup > .rmItem > a.rmRootLink,
+.rmRootGroup > .rmItem > a.rmRootLink .rmText {
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
     background-color: transparent !important;
@@ -160,38 +142,23 @@ a.rmRootLink:hover {
     -webkit-text-fill-color: #FFFFFF !important;
 }
 
-/* Login page nav - FORCE ALL TEXT WHITE in nav bar area */
-/* Target anything that looks like it's in the nav bar */
-.header-bottom-container a,
-.header-bottom-container span,
-.header-bottom-container li,
-.header-bottom-container *,
-#hd .RadMenu a,
-#hd .RadMenu_Austin a,
-#hd a.rmLink,
-#hd .rmLink,
-#hd .rmText,
-#hd .rmRootLink,
-.PrimaryNavPanel a,
-.PrimaryNavPanel span,
-.PrimaryNavPanel *,
-[class*="Nav"] a,
-[class*="Nav"] span,
-[id*="Nav"] a,
-[id*="Nav"] span,
-.rmItem a,
-.rmItem span,
-li.rmItem *,
-ul.rmRootGroup a,
-ul.rmRootGroup span,
-ul.rmRootGroup * {
+/* ROOT NAV ONLY - White text (NOT dropdowns, NOT buttons) */
+/* Use very specific selectors for root level items only */
+.RadMenu > .rmRootGroup > .rmItem > a.rmLink,
+.RadMenu > .rmRootGroup > .rmItem > a.rmLink > .rmText,
+.RadMenu > .rmRootGroup > .rmItem > a.rmLink > span,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink > .rmText,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink > span,
+.header-bottom-container > .RadMenu > .rmRootGroup > .rmItem > a,
+.header-bottom-container > .RadMenu > .rmRootGroup > .rmItem > a > span {
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
     background-color: transparent !important;
     text-decoration: none !important;
 }
 
-/* Login page - nav container must be blue */
+/* Nav bar containers - blue background */
 .PrimaryNavPanel,
 [class*="NavPanel"],
 [id*="NavPanel"],
@@ -317,7 +284,7 @@ ul.rmRootGroup * {
 
 /* Dropdown z-index fix */
 .rmSlide, .rmGroup {
-    z-index: 99999 !important;
+    z-index: 9999999 !important;
 }
 
 /* FIX: Sign In/Sign Up NavigationLink buttons - proper styling */
@@ -421,36 +388,54 @@ a.TextButton:hover {
     color: #FFFFFF !important;
 }
 
-/* FIX: Subnav dropdown children - proper spacing and styling */
-.rmSlide .rmLink,
-.rmGroup .rmLink,
-.rmSlide a.rmLink,
-.rmGroup a.rmLink,
-ul.rmGroup li a.rmLink {
+/* DROPDOWN MENUS - DARK TEXT ON WHITE BACKGROUND */
+/* High specificity selectors to override any other rules */
+.RadMenu .rmSlide .rmLink,
+.RadMenu .rmGroup .rmLink,
+.RadMenu .rmSlide a.rmLink,
+.RadMenu .rmGroup a.rmLink,
+.RadMenu_Austin .rmSlide .rmLink,
+.RadMenu_Austin .rmGroup .rmLink,
+.RadMenu_Austin .rmSlide a.rmLink,
+.RadMenu_Austin .rmGroup a.rmLink,
+.rmSlide .rmItem a.rmLink,
+.rmGroup .rmItem a.rmLink,
+ul.rmGroup li a.rmLink,
+div.rmSlide a,
+div.rmSlide span,
+ul.rmGroup a,
+ul.rmGroup span,
+.rmSlide .rmText,
+.rmGroup .rmText {
     display: block !important;
     padding: 10px 15px !important;
     margin: 0 !important;
-    color: #164F90 !important;
+    color: #333333 !important;
+    -webkit-text-fill-color: #333333 !important;
     background-color: #FFFFFF !important;
-    font-size: 12px !important;
+    font-size: 13px !important;
     font-weight: 500 !important;
     text-decoration: none !important;
     border-bottom: 1px solid #e0e0e0 !important;
     white-space: nowrap !important;
 }
 
-.rmSlide .rmLink:hover,
-.rmGroup .rmLink:hover,
-.rmSlide a.rmLink:hover,
-.rmGroup a.rmLink:hover {
+.RadMenu .rmSlide .rmLink:hover,
+.RadMenu .rmGroup .rmLink:hover,
+.RadMenu_Austin .rmSlide .rmLink:hover,
+.RadMenu_Austin .rmGroup .rmLink:hover,
+.rmSlide .rmItem a.rmLink:hover,
+.rmGroup .rmItem a.rmLink:hover {
     background-color: #164F90 !important;
     color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
 }
 
-/* Subnav dropdown container styling */
+/* DROPDOWN CONTAINERS - White background with border */
 .rmSlide,
 .rmGroup,
-ul.rmGroup {
+ul.rmGroup,
+div.rmSlide {
     background-color: #FFFFFF !important;
     border: 2px solid #164F90 !important;
     border-radius: 4px !important;
@@ -458,13 +443,26 @@ ul.rmGroup {
     min-width: 200px !important;
     padding: 0 !important;
     margin-top: 2px !important;
+    z-index: 999999 !important;
 }
 
 /* Third level submenu items */
 .rmSlide .rmSlide .rmLink,
-.rmGroup .rmGroup .rmLink {
+.rmGroup .rmGroup .rmLink,
+.rmSlide .rmSlide .rmText,
+.rmGroup .rmGroup .rmText {
     padding-left: 25px !important;
-    font-size: 11px !important;
+    font-size: 12px !important;
+    color: #333333 !important;
+    -webkit-text-fill-color: #333333 !important;
+}
+
+/* NESTED DROPDOWNS - z-index only, let Telerik handle positioning */
+.rmSlide,
+.rmGroup,
+.rmGroup .rmGroup,
+.rmSlide .rmSlide {
+    z-index: 9999999 !important;
 }
 `;
 
@@ -655,29 +653,45 @@ async function testPages() {
             await wait(1000);
             await takeScreenshot(page, '05-account', 'wide');
 
-            // Test dropdown menus - hover over nav items to show all levels
-            console.log('\n=== Testing Nav Dropdown Level 1 (Wide) ===');
+            // Test dropdown menus - hover over STAFF nav item to show submenu
+            console.log('\n=== Testing Nav Dropdown - Hover over STAFF ===');
             await injectCSS(page);
             await wait(500);
 
-            // Find and hover over My Account to show dropdown
-            const myAccountLink = await page.$('a.rmLink.rmRootLink');
-            if (myAccountLink) {
-                await myAccountLink.hover();
-                await wait(1500);
-                await takeScreenshot(page, '06-nav-dropdown-L1', 'wide');
+            // Find and hover over STAFF to show dropdown
+            const staffLink = await page.evaluateHandle(() => {
+                const links = document.querySelectorAll('a.rmLink.rmRootLink');
+                for (const link of links) {
+                    if (link.textContent.toLowerCase().includes('staff')) {
+                        return link;
+                    }
+                }
+                return links[0]; // fallback to first link
+            });
+            if (staffLink) {
+                await staffLink.hover();
+                await wait(2000);
+                await takeScreenshot(page, '06-nav-dropdown-STAFF', 'wide');
 
-                // Try to hover over a submenu item to show level 2
-                console.log('\n=== Testing Nav Dropdown Level 2 (Wide) ===');
+                // Hover over "Reports" submenu item to show level 2
+                console.log('\n=== Testing Nav Dropdown Level 2 - Hover over Reports ===');
                 try {
-                    const submenuItem = await page.$('.rmSlide .rmLink, .rmGroup .rmLink');
-                    if (submenuItem) {
-                        await submenuItem.hover();
-                        await wait(1500);
-                        await takeScreenshot(page, '07-nav-dropdown-L2', 'wide');
+                    const reportsLink = await page.evaluateHandle(() => {
+                        const links = document.querySelectorAll('.rmSlide .rmLink, .rmGroup .rmLink');
+                        for (const link of links) {
+                            if (link.textContent.toLowerCase().includes('report')) {
+                                return link;
+                            }
+                        }
+                        return links[0]; // fallback
+                    });
+                    if (reportsLink) {
+                        await reportsLink.hover();
+                        await wait(2000);
+                        await takeScreenshot(page, '07-nav-dropdown-REPORTS', 'wide');
                     }
                 } catch (e) {
-                    console.log('  Dropdown L2 hover failed, continuing...');
+                    console.log('  Dropdown L2 hover failed:', e.message);
                 }
             }
 
