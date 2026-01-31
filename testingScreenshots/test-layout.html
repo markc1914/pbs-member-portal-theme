@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Test - Member Education Material</title>
+    <link rel="stylesheet" href="../package/pbs-theme.css">
+    <style>
+        /* Minimal base styles to simulate iMIS */
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; }
+        .test-label {
+            position: absolute;
+            background: red;
+            color: white;
+            padding: 2px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body id="MainBody">
+    <!-- Simulating iMIS Cities Responsive Master Page Structure -->
+    <div id="doc" class="yui-t5">
+
+        <!-- HEADER - Should be at TOP -->
+        <div id="hd">
+            <div id="masterHeaderBackground" style="background: #164F90; min-height: 100px; position: relative;">
+                <span class="test-label" style="top:5px;left:5px;">HEADER (#hd)</span>
+                <div style="color: white; padding: 20px;">
+                    <h1 style="margin:0; color:white;">PHI BETA SIGMA FRATERNITY, INC.</h1>
+                </div>
+            </div>
+            <!-- Navigation -->
+            <div class="RadMenu RadMenu_Default" style="background: #164F90; padding: 10px;">
+                <ul class="rmRootGroup rmHorizontal" style="display:flex; flex-wrap:wrap; list-style:none; margin:0; padding:0;">
+                    <li class="rmItem"><a class="rmLink rmRootLink" href="#"><span class="rmText">MY ACCOUNT</span></a></li>
+                    <li class="rmItem"><a class="rmLink rmRootLink" href="#"><span class="rmText">CART</span></a></li>
+                    <li class="rmItem"><a class="rmLink rmRootLink" href="#"><span class="rmText">MEMBERSHIP</span></a></li>
+                    <li class="rmItem" style="position:relative;"><a class="rmLink rmRootLink" href="#"><span class="rmText">DOCUMENTS</span></a>
+                        <!-- Dropdown submenu - forced visible for testing -->
+                        <div class="rmGroup rmSlide" style="display:block !important; visibility:visible !important;">
+                            <ul>
+                                <li class="rmItem"><a class="rmLink" href="#"><span class="rmText">Document Library</span></a></li>
+                                <li class="rmItem"><a class="rmLink" href="#"><span class="rmText">Member Resources</span></a>
+                                    <!-- Nested submenu -->
+                                    <div class="rmGroup" style="display:block !important; visibility:visible !important;">
+                                        <ul>
+                                            <li class="rmItem"><a class="rmLink" href="#"><span class="rmText">Eastern Region</span></a></li>
+                                            <li class="rmItem"><a class="rmLink" href="#"><span class="rmText">Western Region</span></a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- BODY - Main content wrapper - THIS IS THE PROBLEM AREA -->
+        <div id="bd">
+            <div class="wrapper has-secondary-col col-on-right">
+                <span class="test-label" style="top:5px;left:5px;">WRAPPER .has-secondary-col .col-on-right</span>
+
+                <!-- Primary Content Column -->
+                <div class="col-primary" style="background: #f5f5f5; min-height: 400px; padding: 20px; position: relative;">
+                    <span class="test-label" style="top:5px;left:5px;">.col-primary (MAIN CONTENT)</span>
+                    <h2>Member Education Material</h2>
+                    <p>This is the main content area. It should take up most of the width.</p>
+                    <div style="background: white; padding: 20px; margin-top: 20px;">
+                        <h3>Resource Library</h3>
+                        <ul>
+                            <li>Chapter Awards Information</li>
+                            <li>Chapter Charters</li>
+                            <li>Conclave Resources</li>
+                            <li>Constitution & Bylaws</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Secondary Column (Sidebar) -->
+                <div class="col-secondary" style="background: #e0e0e0; min-height: 200px; padding: 20px; position: relative;">
+                    <span class="test-label" style="top:5px;left:5px;">.col-secondary (SIDEBAR)</span>
+                    <h4>Connect With Us</h4>
+                    <p>Contact information and links</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER - Should be at BOTTOM -->
+        <div id="ft" style="position: relative;">
+            <span class="test-label" style="top:5px;left:5px;">FOOTER (#ft)</span>
+            <h4>Connect With Us</h4>
+            <p>Copyright &copy; Phi Beta Sigma Fraternity, Inc. All Rights Reserved.</p>
+        </div>
+
+    </div>
+</body>
+</html>

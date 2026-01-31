@@ -15,7 +15,10 @@ AccountPageInDev.html
 *.zip
 /package/images
 ./Workfiles/
-testingScreenshots/
+# Testing screenshots (keep HTML, ignore images)
+testingScreenshots/*.png
+testingScreenshots/*.jpg
+testingScreenshots/*.jpeg
 
 # Node.js
 node_modules/
