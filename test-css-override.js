@@ -1,0 +1,522 @@
+const puppeteer = require('puppeteer');
+const path = require('path');
+
+const SCREENSHOTS_DIR = './automatedTestScreenshots';
+const BASE_URL = 'https://members.phibetasigma1914.org/iMISDEV';
+
+const PAGES = {
+    login: 'https://members.phibetasigma1914.org/imisdev/pbsmember',
+    home: `${BASE_URL}/PBSMember/Home.aspx`,
+    education: `${BASE_URL}/PBSMember/Documents/Member_Education_Material/PBSMember/Member_Education_Material.aspx?hkey=d0ba999b-db57-47c4-84c0-c9c1505cfacc`,
+    community: `${BASE_URL}/iCore/Communities/CommunityLayouts/CommunityDescription.aspx?iUniformKey=d2a740ce-8b73-4a54-97a5-990ac2cce029&WebsiteKey=f17366dc-26c7-4e94-9bc6-8535489d9140`
+};
+
+const VIEWPORTS = {
+    fullscreen: { width: 2560, height: 1440, name: 'fullscreen' },
+    wide: { width: 1920, height: 1080, name: 'wide' },
+    desktop: { width: 1400, height: 900, name: 'desktop' },
+    mobile: { width: 375, height: 812, name: 'mobile' }
+};
+
+const username = process.argv[2];
+const password = process.argv[3];
+
+const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+// CSS overrides to test fixes - matches changes in pbs-theme.css
+const CSS_OVERRIDES = `
+/* FIX: Header container - expand to full width */
+#hd, .header {
+    background-color: #FFFFFF !important;
+    width: 100% !important;
+}
+
+/* Header parent containers - must be wide enough for 1040px banner */
+.header-container,
+.header-logo-container,
+#masterLogoArea {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+}
+
+#masterHeaderBackground {
+    height: 120px !important;
+    min-height: 120px !important;
+    position: relative !important;
+    display: block !important;
+    margin-bottom: 10px !important;
+    padding: 15px !important;
+    background-color: #FFFFFF !important;
+    width: 100% !important;
+}
+
+/* FIX: Header image - MUST show full 1040px width for founders on right */
+#masterHeaderImage,
+#masterDonorHeaderImage,
+a#masterHeaderImage,
+a#masterDonorHeaderImage {
+    background-image: url("https://members.phibetasigma1914.org/iMISDEV/App_Themes/PBS_Responsive_Theme/images/pbs-header2.png") !important;
+    background-repeat: no-repeat !important;
+    background-position: left center !important;
+    background-size: contain !important;
+    width: 1040px !important;
+    max-width: 95% !important;
+    height: 89px !important;
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    margin: 15px !important;
+    z-index: 10 !important;
+    text-indent: -9999px !important;
+    overflow: hidden !important;
+    font-size: 0 !important;
+    color: transparent !important;
+}
+
+/* Nav panel z-index */
+.PrimaryNavPanel,
+#ctl01_NavPanel,
+[id*="NavPanel"] {
+    z-index: 1000 !important;
+}
+
+/* Nav menu bar - ONLY the nav row should be blue, not entire header */
+.RadMenu,
+.RadMenu_Austin,
+.rmRootGroup {
+    background-color: #164F90 !important;
+}
+
+/* Grey area behind nav on right - make it blue to match */
+.PrimaryNavPanel,
+#ctl01_NavPanel,
+[id*="NavPanel"] {
+    background-color: #164F90 !important;
+}
+
+/* Ensure nav items have proper contrast on blue background */
+.RadMenu a.rmLink.rmRootLink,
+.RadMenu_Austin a.rmLink.rmRootLink {
+    color: #FFFFFF !important;
+    background-color: transparent !important;
+}
+
+.RadMenu a.rmLink.rmRootLink:hover,
+.RadMenu_Austin a.rmLink.rmRootLink:hover {
+    background-color: rgba(255,255,255,0.2) !important;
+    color: #FFFFFF !important;
+}
+
+/* KEEP header/banner area WHITE - not blue */
+#hd, .header, header {
+    background-color: #FFFFFF !important;
+}
+
+.header-top-container,
+.header-container,
+.header-logo-container,
+#masterLogoArea {
+    background-color: #FFFFFF !important;
+}
+
+/* FIX: Mobile nav - BLUE background, WHITE text for visibility */
+@media (max-width: 767px) {
+    /* Mobile banner - scale full image to show founders */
+    /* 1040px image scaled to fit 100% width, maintain aspect ratio */
+    .header-logo-container,
+    #masterLogoArea {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 5px !important;
+    }
+
+    #masterHeaderImage,
+    #masterDonorHeaderImage {
+        display: block !important;
+        visibility: visible !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 35px !important;
+        margin: 5px auto !important;
+        background-size: 100% auto !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+    }
+
+    #masterHeaderBackground {
+        height: auto !important;
+        min-height: 50px !important;
+        padding: 5px !important;
+    }
+
+    /* Nav container */
+    .RadMenu,
+    .RadMenu_Austin,
+    .rmRootGroup {
+        background-color: #FFFFFF !important;
+        border: 2px solid #164F90 !important;
+        padding: 10px !important;
+    }
+
+    /* Nav items - blue background, white text */
+    .RadMenu a.rmLink.rmRootLink,
+    .RadMenu_Austin a.rmLink.rmRootLink {
+        display: inline-block !important;
+        background-color: #164F90 !important;
+        color: #FFFFFF !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        padding: 10px 14px !important;
+        margin: 4px !important;
+        border-radius: 6px !important;
+        border: none !important;
+        text-transform: uppercase !important;
+    }
+
+    /* Selected/active - darker blue with white border */
+    .RadMenu a.rmLink.rmRootLink.rmSelected,
+    .RadMenu a.rmLink.rmRootLink.rmExpanded,
+    .RadMenu a.rmLink.rmRootLink.rmFocused,
+    .RadMenu_Austin a.rmLink.rmRootLink.rmSelected,
+    .RadMenu_Austin a.rmLink.rmRootLink.rmExpanded {
+        background-color: #0d3a6a !important;
+        color: #FFFFFF !important;
+        border: 2px solid #FFFFFF !important;
+    }
+
+    /* Hover state */
+    .RadMenu a.rmLink.rmRootLink:hover,
+    .RadMenu_Austin a.rmLink.rmRootLink:hover {
+        background-color: #0d3a6a !important;
+        color: #FFFFFF !important;
+    }
+}
+
+/* Dropdown z-index fix */
+.rmSlide, .rmGroup {
+    z-index: 99999 !important;
+}
+
+/* FIX: Sign Out button - position in TOP RIGHT with MARK and CART */
+.auth-link-container {
+    position: fixed !important;
+    top: 10px !important;
+    right: 180px !important;
+    z-index: 9999 !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+#navbar-collapse .auth-link-container .auth-link,
+#navbar-collapse .auth-link-container a.auth-link,
+#navbar-collapse .auth-link-container a#ctl01_LoginStatus1,
+.auth-link-container > a.auth-link,
+.auth-link-container > a#ctl01_LoginStatus1,
+#hd .auth-link-container a,
+a#ctl01_LoginStatus1,
+#ctl01_LoginStatus1,
+a[id*="LoginStatus"],
+a.auth-link {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 6px 12px !important;
+    margin: 0 !important;
+    background-color: transparent !important;
+    color: #164F90 !important;
+    border: 1px solid #164F90 !important;
+    border-radius: 4px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    position: relative !important;
+    z-index: 9999 !important;
+}
+
+#navbar-collapse .auth-link-container a:hover,
+a#ctl01_LoginStatus1:hover,
+#ctl01_LoginStatus1:hover,
+a[id*="LoginStatus"]:hover,
+a.auth-link:hover {
+    background-color: #164F90 !important;
+    color: #FFFFFF !important;
+}
+
+/* header-bottom-container - make it blue to match nav */
+.header-bottom-container {
+    background-color: #164F90 !important;
+}
+
+/* Nav menu text - WHITE on blue background for readability */
+.RadMenu a.rmLink.rmRootLink,
+.RadMenu_Austin a.rmLink.rmRootLink,
+.header-bottom-container .RadMenu a.rmLink {
+    color: #FFFFFF !important;
+    background-color: transparent !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+}
+
+.RadMenu a.rmLink.rmRootLink:hover,
+.RadMenu_Austin a.rmLink.rmRootLink:hover {
+    background-color: rgba(255,255,255,0.2) !important;
+    color: #FFFFFF !important;
+}
+
+/* FIX: Subnav dropdown children - proper spacing and styling */
+.rmSlide .rmLink,
+.rmGroup .rmLink,
+.rmSlide a.rmLink,
+.rmGroup a.rmLink,
+ul.rmGroup li a.rmLink {
+    display: block !important;
+    padding: 10px 15px !important;
+    margin: 0 !important;
+    color: #164F90 !important;
+    background-color: #FFFFFF !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+    white-space: nowrap !important;
+}
+
+.rmSlide .rmLink:hover,
+.rmGroup .rmLink:hover,
+.rmSlide a.rmLink:hover,
+.rmGroup a.rmLink:hover {
+    background-color: #164F90 !important;
+    color: #FFFFFF !important;
+}
+
+/* Subnav dropdown container styling */
+.rmSlide,
+.rmGroup,
+ul.rmGroup {
+    background-color: #FFFFFF !important;
+    border: 1px solid #164F90 !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    min-width: 200px !important;
+    padding: 0 !important;
+    margin-top: 2px !important;
+}
+
+/* Third level submenu items */
+.rmSlide .rmSlide .rmLink,
+.rmGroup .rmGroup .rmLink {
+    padding-left: 25px !important;
+    font-size: 11px !important;
+}
+`;
+
+async function takeScreenshot(page, name, viewport = 'desktop') {
+    const filepath = path.join(SCREENSHOTS_DIR, `override-${viewport}-${name}-${Date.now()}.png`);
+    await page.screenshot({ path: filepath, fullPage: true });
+    console.log(`  Screenshot: ${filepath}`);
+    return filepath;
+}
+
+async function injectCSS(page) {
+    await page.evaluate((css) => {
+        const style = document.createElement('style');
+        style.id = 'css-override-test';
+        style.textContent = css;
+        document.head.appendChild(style);
+    }, CSS_OVERRIDES);
+    console.log('  CSS overrides injected');
+}
+
+async function testPages() {
+    console.log('Launching Chrome FULLSCREEN with CSS override testing...');
+    const browser = await puppeteer.launch({
+        headless: false,
+        defaultViewport: null,
+        args: ['--start-maximized']
+    });
+
+    const page = await browser.newPage();
+
+    page.on('dialog', async dialog => {
+        console.log(`  Dialog: ${dialog.type()}`);
+        await dialog.accept();
+    });
+
+    try {
+        // ============================================================
+        // WIDE DESKTOP (1920px)
+        // ============================================================
+        console.log('\n' + '='.repeat(60));
+        console.log('WIDE DESKTOP TESTING (1920px) WITH CSS OVERRIDES');
+        console.log('='.repeat(60));
+
+        // Login page
+        console.log('\n=== Login Page (Wide) ===');
+        await page.goto(PAGES.login, { waitUntil: 'networkidle2', timeout: 30000 });
+
+        // Debug: Log header structure
+        const headerInfo = await page.evaluate(() => {
+            const hd = document.querySelector('#hd');
+            const headerBg = document.querySelector('#masterHeaderBackground');
+            const headerImg = document.querySelector('#masterHeaderImage');
+            return {
+                hdExists: !!hd,
+                hdHTML: hd ? hd.outerHTML.substring(0, 500) : 'NOT FOUND',
+                headerBgExists: !!headerBg,
+                headerImgExists: !!headerImg
+            };
+        });
+        console.log('  Header Debug:', JSON.stringify(headerInfo, null, 2));
+
+        await injectCSS(page);
+        await wait(1000);
+        await takeScreenshot(page, '01-login', 'wide');
+
+        if (username && password) {
+            // Login
+            console.log('\n=== Logging in ===');
+            await page.evaluate((user, pass) => {
+                const usernameField = document.querySelector('input[id*="signInUserName"]');
+                const passwordField = document.querySelector('input[type="password"]');
+                if (usernameField) usernameField.value = user;
+                if (passwordField) passwordField.value = pass;
+            }, username, password);
+            await wait(500);
+            await page.evaluate(() => {
+                const btn = document.querySelector('input[type="submit"]');
+                if (btn) btn.click();
+            });
+            await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 30000 }).catch(() => {});
+            await wait(2000);
+
+            await injectCSS(page);
+            await wait(500);
+
+            console.log('\n=== Home (Wide) ===');
+
+            // Debug: Find Sign Out button and its parent container
+            const signOutInfo = await page.evaluate(() => {
+                const el = document.querySelector('#ctl01_LoginStatus1');
+                if (!el) return { error: 'Sign Out element not found' };
+
+                // Walk up the DOM to find what's hiding it
+                const ancestry = [];
+                let current = el;
+                for (let i = 0; i < 10 && current; i++) {
+                    const style = window.getComputedStyle(current);
+                    ancestry.push({
+                        tag: current.tagName,
+                        id: current.id,
+                        class: current.className,
+                        display: style.display,
+                        visibility: style.visibility,
+                        position: style.position
+                    });
+                    current = current.parentElement;
+                }
+
+                // Also capture the nav bar right side area
+                const navPanel = document.querySelector('[id*="NavPanel"]');
+                const navPanelStyle = navPanel ? window.getComputedStyle(navPanel) : null;
+
+                return {
+                    signOutAncestry: ancestry,
+                    navPanel: navPanel ? {
+                        id: navPanel.id,
+                        class: navPanel.className,
+                        bgColor: navPanelStyle.backgroundColor,
+                        width: navPanelStyle.width
+                    } : 'NOT FOUND'
+                };
+            });
+            console.log('  Sign Out Debug:', JSON.stringify(signOutInfo, null, 2));
+
+            await takeScreenshot(page, '02-home', 'wide');
+
+            console.log('\n=== Education (Wide) ===');
+            await page.goto(PAGES.education, { waitUntil: 'networkidle2', timeout: 30000 });
+            await injectCSS(page);
+            await wait(1000);
+            await takeScreenshot(page, '03-education', 'wide');
+
+            console.log('\n=== Community (Wide) ===');
+            await page.goto(PAGES.community, { waitUntil: 'networkidle2', timeout: 30000 });
+            await injectCSS(page);
+            await wait(1000);
+            await takeScreenshot(page, '04-community', 'wide');
+
+            // Test dropdown menu - hover over a nav item
+            console.log('\n=== Testing Nav Dropdown (Wide) ===');
+            await page.goto(PAGES.home, { waitUntil: 'networkidle2', timeout: 30000 });
+            await injectCSS(page);
+            await wait(500);
+            // Hover over nav item to trigger dropdown
+            const navItem = await page.$('.rmLink.rmRootLink');
+            if (navItem) {
+                await navItem.hover();
+                await wait(1000);
+                await takeScreenshot(page, '05-nav-dropdown', 'wide');
+            }
+
+            // ============================================================
+            // MOBILE (375px)
+            // ============================================================
+            console.log('\n' + '='.repeat(60));
+            console.log('MOBILE TESTING (375px) WITH CSS OVERRIDES');
+            console.log('='.repeat(60));
+
+            await page.setViewport(VIEWPORTS.mobile);
+            await wait(1000);
+
+            // Re-login at mobile
+            console.log('\n=== Login Page (Mobile) ===');
+            await page.goto(PAGES.login, { waitUntil: 'networkidle2', timeout: 30000 });
+            await injectCSS(page);
+            await wait(1000);
+            await takeScreenshot(page, '01-login', 'mobile');
+
+            await page.evaluate((user, pass) => {
+                const usernameField = document.querySelector('input[id*="signInUserName"]');
+                const passwordField = document.querySelector('input[type="password"]');
+                if (usernameField) usernameField.value = user;
+                if (passwordField) passwordField.value = pass;
+            }, username, password);
+            await wait(500);
+            await page.evaluate(() => {
+                const btn = document.querySelector('input[type="submit"]');
+                if (btn) btn.click();
+            });
+            await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 30000 }).catch(() => {});
+            await wait(2000);
+
+            await injectCSS(page);
+            await wait(500);
+
+            console.log('\n=== Home (Mobile) ===');
+            await takeScreenshot(page, '02-home', 'mobile');
+
+            console.log('\n=== Education (Mobile) ===');
+            await page.goto(PAGES.education, { waitUntil: 'networkidle2', timeout: 30000 });
+            await injectCSS(page);
+            await wait(1000);
+            await takeScreenshot(page, '03-education', 'mobile');
+        }
+
+        console.log('\n' + '='.repeat(60));
+        console.log('CSS OVERRIDE TESTING COMPLETE');
+        console.log('='.repeat(60));
+        console.log('\nReview the "override-*" screenshots to verify fixes.');
+
+    } catch (error) {
+        console.error('Error:', error.message);
+        await takeScreenshot(page, 'error', 'desktop');
+    }
+
+    console.log('\nBrowser open for 15 seconds...');
+    await wait(15000);
+    await browser.close();
+}
+
+testPages();
