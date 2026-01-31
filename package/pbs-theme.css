@@ -762,6 +762,7 @@ header,
 #hd > span > a,
 #masterLogoArea > a,
 #masterLogoArea > span > a,
+/* Top header buttons - SIGN OUT, MARK, CART - styled but NOT fixed position */
 #masterHeaderBackground > a,
 #masterHeaderBackground > span > a,
 a.TextButton[id*="LoginStatus"],
@@ -785,27 +786,9 @@ a[id*="signup"] {
     letter-spacing: 0.5px !important;
     font-family: var(--font-base) !important;
     margin: 3px !important;
-    position: fixed !important;
-    top: 15px !important;
-    z-index: 9999 !important;
 }
 
-/* Position links on right side - use right positioning */
-/* First link (Sign Up or Mark) */
-#hd > a:first-of-type,
-#hd > span:first-of-type > a,
-a[id*="lnkUserName"],
-a[id*="SignUp"],
-a[id*="signup"] {
-    right: 210px !important;
-}
-
-/* Second link (Cart) */
-#hd > a:nth-of-type(2),
-#hd > span:nth-of-type(2) > a,
-a[id*="lnkCart"] {
-    right: 110px !important;
-}
+/* Top buttons styled inline - no fixed positioning */
 
 /* Third link (Sign Out) */
 #hd > a:nth-of-type(3),
@@ -899,6 +882,23 @@ a.TextButton[id*="Login"]:hover {
    PRIMARY NAVIGATION (RadMenu)
    ======================================== */
 
+/* IMPORTANT: Reset RadMenus outside header to use Telerik defaults */
+/* This prevents our nav styling from breaking Resource Library, etc. */
+#bd .RadMenu,
+#bd .RadMenu .rmGroup,
+#bd .RadMenu .rmSlide,
+#bd .RadMenu a.rmLink,
+#masterContentArea .RadMenu,
+#masterContentArea .RadMenu .rmGroup,
+#masterContentArea .RadMenu .rmSlide,
+#masterContentArea .RadMenu a.rmLink,
+.ObjectBrowserWrapper .RadMenu,
+.ObjectBrowserWrapper .RadMenu .rmGroup,
+.RAD_SPLITTER .RadMenu,
+.RAD_SPLITTER .RadMenu .rmGroup {
+    all: revert !important;
+}
+
 /* Nav wrapper and all parent containers - ensure full width */
 /* Position below header banner with clear separation */
 .PrimaryNavPanel,
@@ -918,8 +918,11 @@ a.TextButton[id*="Login"]:hover {
     clear: both !important;
 }
 
-/* RadMenu - full width, matches content area */
-.RadMenu {
+/* PRIMARY NAV RadMenu ONLY - scoped to header area */
+/* Don't affect other RadMenus like Resource Library toolbar */
+#hd .RadMenu,
+.PrimaryNavPanel .RadMenu,
+.header-bottom-container .RadMenu {
     margin: 0;
     padding: 0 15px;
     box-sizing: border-box;
@@ -927,31 +930,37 @@ a.TextButton[id*="Login"]:hover {
     max-width: 100% !important;
 }
 
-/* RadMenu - full width within its container */
-.RadMenu.RadMenu_Austin,
-.RadMenu.RadMenu_Default {
+/* PRIMARY NAV RadMenu - blue background */
+#hd .RadMenu.RadMenu_Austin,
+#hd .RadMenu.RadMenu_Default,
+.PrimaryNavPanel .RadMenu.RadMenu_Austin,
+.header-bottom-container .RadMenu.RadMenu_Austin {
     background-color: var(--pbs-blue) !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
 }
 
-/* Ensure root menu group spans full width */
-.RadMenu .rmRootGroup {
+/* PRIMARY NAV root menu group spans full width */
+#hd .RadMenu .rmRootGroup,
+.PrimaryNavPanel .RadMenu .rmRootGroup,
+.header-bottom-container .RadMenu .rmRootGroup {
     width: 100% !important;
 }
 
-/* Keep dropdowns anchored to their parent items */
-.RadMenu .rmItem {
+/* PRIMARY NAV dropdowns anchored to parent items */
+#hd .RadMenu .rmItem,
+.PrimaryNavPanel .RadMenu .rmItem {
     position: relative;
 }
 
-.RadMenu a.rmLink,
-.RadMenu_Austin a.rmLink,
-.RadMenu_Default a.rmLink,
-.RadMenu_Austin.RadMenu a.rmLink,
-.RadMenu.RadMenu_Austin a.rmLink,
-.RadMenu.RadMenu_Default a.rmLink {
+/* ROOT LEVEL NAV ONLY - white text on blue (NOT dropdowns) */
+.RadMenu > .rmRootGroup > .rmItem > a.rmLink,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink,
+.RadMenu_Default > .rmRootGroup > .rmItem > a.rmLink,
+.RadMenu a.rmLink.rmRootLink,
+.RadMenu_Austin a.rmLink.rmRootLink,
+.RadMenu_Default a.rmLink.rmRootLink {
     color: var(--pbs-white) !important;
     padding: 12px 15px !important;
     font-weight: 600 !important;
@@ -985,23 +994,25 @@ a.TextButton[id*="Login"]:hover {
     color: var(--pbs-white) !important;
 }
 
-.RadMenu_Austin.RadMenu a.rmLink.rmFocused,
-.RadMenu_Austin.RadMenu a.rmLink.rmSelected,
-.RadMenu_Austin.RadMenu a.rmLink.rmExpanded,
-.RadMenu_Austin.RadMenu a.rmLink:focus,
-.RadMenu_Austin.RadMenu a.rmLink:active,
-.RadMenu.RadMenu_Default a.rmLink.rmFocused,
-.RadMenu.RadMenu_Default a.rmLink.rmSelected,
-.RadMenu.RadMenu_Default a.rmLink.rmExpanded,
-.RadMenu.RadMenu_Default a.rmLink:focus,
-.RadMenu.RadMenu_Default a.rmLink:active {
+/* ROOT NAV ONLY - focused/selected/expanded states */
+.RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmFocused,
+.RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmSelected,
+.RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmExpanded,
+.RadMenu_Austin.RadMenu a.rmLink.rmRootLink:focus,
+.RadMenu_Austin.RadMenu a.rmLink.rmRootLink:active,
+.RadMenu.RadMenu_Default a.rmLink.rmRootLink.rmFocused,
+.RadMenu.RadMenu_Default a.rmLink.rmRootLink.rmSelected,
+.RadMenu.RadMenu_Default a.rmLink.rmRootLink.rmExpanded,
+.RadMenu.RadMenu_Default a.rmLink.rmRootLink:focus,
+.RadMenu.RadMenu_Default a.rmLink.rmRootLink:active {
     color: var(--pbs-white);
     background-color: var(--pbs-blue);
     border-top: 3px solid var(--pbs-blue);
 }
 
-.RadMenu_Austin.RadMenu a.rmLink:hover,
-.RadMenu.RadMenu_Default a.rmLink:hover {
+/* ROOT NAV ONLY - hover state */
+.RadMenu_Austin.RadMenu a.rmLink.rmRootLink:hover,
+.RadMenu.RadMenu_Default a.rmLink.rmRootLink:hover {
     background-color: var(--pbs-blue-light);
     border-top: 3px solid var(--pbs-blue-accent);
 }
@@ -1041,30 +1052,20 @@ a.TextButton[id*="Login"]:hover {
    The actual site uses: <div class="rmSlide"><ul class="rmVertical rmGroup rmLevel1">
    ============================================== */
 
-/* rmSlide is the outer wrapper - controls positioning */
-/* CRITICAL: z-index must be VERY high to appear above ALL page content */
-/* Including resource library, panels, and other positioned elements */
-.RadMenu .rmSlide,
-.RadMenu_Austin .rmSlide,
-.RadMenu_Default .rmSlide,
-.RadMenu.RadMenu_Default .rmSlide,
-.rmSlide {
-    position: absolute !important;
-    z-index: 999999 !important;
-    top: 100% !important;
-    left: 0 !important;
-    margin-top: 0 !important;
+/* PRIMARY NAV rmSlide - z-index only, let Telerik handle positioning */
+#hd .RadMenu .rmSlide,
+#hd .RadMenu_Austin .rmSlide,
+.PrimaryNavPanel .RadMenu .rmSlide,
+.header-bottom-container .RadMenu .rmSlide {
+    z-index: 9999999 !important;
 }
 
-/* rmGroup is the inner list - controls styling */
-/* CRITICAL: z-index must be VERY high to appear above ALL page content */
-.RadMenu .rmGroup,
-.RadMenu_Austin .rmGroup,
-.RadMenu_Default .rmGroup,
-.RadMenu.RadMenu_Default .rmGroup,
-.rmVertical.rmGroup,
-ul.rmGroup,
-.rmGroup {
+/* PRIMARY NAV rmGroup - STYLING ONLY, no positioning */
+/* Scoped to header area - don't affect Resource Library */
+#hd .RadMenu .rmGroup,
+#hd .RadMenu_Austin .rmGroup,
+.PrimaryNavPanel .RadMenu .rmGroup,
+.header-bottom-container .RadMenu .rmGroup {
     background: var(--pbs-white) !important;
     background-color: var(--pbs-white) !important;
     background-image: none !important;
@@ -1072,11 +1073,9 @@ ul.rmGroup,
     border-radius: 8px !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
     padding: 8px 0 !important;
-    margin: 0 !important;
     min-width: 220px !important;
     list-style: none !important;
-    position: relative !important;
-    z-index: 999999 !important;
+    z-index: 9999999 !important;
 }
 
 /* Ensure nav panel and all dropdowns stay above page content */
@@ -1085,28 +1084,7 @@ ul.rmGroup,
 [id*="NavPanel"],
 .RadMenu,
 .RadMenu_Austin {
-    z-index: 100000 !important;
-}
-
-/* First level dropdown - rmSlide positioned below nav item */
-.RadMenu .rmRootGroup > .rmItem > .rmSlide,
-.rmRootGroup > .rmItem > .rmSlide {
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    margin-top: 0 !important;
-}
-
-/* Nested dropdowns (level 2+) - rmSlide positioned to the right */
-.rmGroup .rmItem > .rmSlide,
-.rmSlide .rmGroup .rmItem > .rmSlide,
-.rmLevel1 .rmItem > .rmSlide,
-.rmLevel2 .rmItem > .rmSlide {
-    position: absolute !important;
-    top: 0 !important;
-    left: 100% !important;
-    margin-left: 0 !important;
-    margin-top: 0 !important;
+    z-index: 9999998 !important;
 }
 
 /* Dropdown items - no backgrounds or gradients, RELATIVE position for nested menus */
@@ -1204,8 +1182,7 @@ ul.rmGroup span {
     color: #FFFFFF !important;
 }
 
-/* Nested dropdowns (second/third level) - position directly adjacent to parent */
-/* Close the gap by overlapping more with parent */
+/* Nested dropdowns (second/third level) - STYLING ONLY, let Telerik handle positioning */
 .RadMenu .rmGroup .rmGroup,
 .RadMenu_Austin .rmGroup .rmGroup,
 .RadMenu_Austin.RadMenu .rmGroup .rmGroup {
@@ -1216,13 +1193,8 @@ ul.rmGroup span {
     border-radius: 8px !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
     padding: 8px 0 !important;
-    margin: 0 !important;
-    left: 100% !important;
-    margin-left: -10px !important;
-    top: 0 !important;
     min-width: 180px !important;
-    position: absolute !important;
-    z-index: 10001 !important;
+    z-index: 9999999 !important;
 }
 
 /* Third level items - NO borders on items */
@@ -1264,7 +1236,7 @@ ul.rmGroup span {
     color: #FFFFFF !important;
 }
 
-/* Third level submenus (children's children) - ensure visible */
+/* Third level submenus (children's children) - STYLING ONLY, let Telerik handle positioning */
 .RadMenu .rmGroup .rmGroup .rmGroup,
 .RadMenu_Austin .rmGroup .rmGroup .rmGroup {
     background: var(--pbs-white) !important;
@@ -1272,12 +1244,8 @@ ul.rmGroup span {
     border-radius: 8px !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
     padding: 8px 0 !important;
-    left: 100% !important;
-    margin-left: -10px !important;
-    top: 0 !important;
     min-width: 160px !important;
-    position: absolute !important;
-    z-index: 10002 !important;
+    z-index: 9999999 !important;
 }
 
 /* Third level items - visible text */
@@ -3875,20 +3843,15 @@ a#masterDonorHeaderImage {
 }
 
 /* ========================================
-   SIGN OUT BUTTON - Position with MARK and CART
+   SIGN OUT BUTTON - Ensure visible (NOT fixed position)
    The auth-link is hidden by default, must override
    ======================================== */
 .auth-link-container,
 #hd .auth-link-container,
 #navbar-collapse .auth-link-container,
 header .auth-link-container {
-    position: fixed !important;
-    top: 15px !important;
-    right: 180px !important;
-    z-index: 99999 !important;
     display: block !important;
     visibility: visible !important;
-    transform: none !important;
 }
 
 /* Sign Out button - MUST MATCH MARK and CART exactly */
@@ -3967,24 +3930,20 @@ ul.rmRootGroup {
     background: transparent !important;
 }
 
-/* ROOT NAV - WHITE TEXT - Force all text white in root nav bar */
-.RadMenu > .rmRootGroup,
-.RadMenu > .rmRootGroup > .rmItem,
-.RadMenu > .rmRootGroup > .rmItem > a,
-.RadMenu > .rmRootGroup > .rmItem > a > span,
-.RadMenu_Austin > .rmRootGroup,
-.RadMenu_Austin > .rmRootGroup > .rmItem,
-.RadMenu_Austin > .rmRootGroup > .rmItem > a,
-.RadMenu_Austin > .rmRootGroup > .rmItem > a > span,
+/* ROOT NAV - WHITE TEXT - ONLY root level items, NOT dropdowns */
+.RadMenu > .rmRootGroup > .rmItem > a.rmLink,
+.RadMenu > .rmRootGroup > .rmItem > a.rmLink > .rmText,
+.RadMenu > .rmRootGroup > .rmItem > a.rmLink > span,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink > .rmText,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink > span,
 .RadMenu a.rmLink.rmRootLink,
 .RadMenu_Austin a.rmLink.rmRootLink,
 .RadMenu a.rmLink.rmRootLink .rmText,
 .RadMenu_Austin a.rmLink.rmRootLink .rmText,
 a.rmLink.rmRootLink,
 a.rmLink.rmRootLink span,
-a.rmLink.rmRootLink .rmText,
-.rmRootGroup .rmText,
-.rmRootGroup a .rmText {
+a.rmLink.rmRootLink .rmText {
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
     background-color: transparent !important;
@@ -4068,7 +4027,7 @@ div.rmSlide {
     background-color: #164F90 !important;
 }
 
-/* Nested dropdowns (all children) - ensure visible and styled */
+/* NESTED DROPDOWNS - ensure visible and above page content */
 .rmGroup .rmGroup,
 .rmSlide .rmSlide,
 .rmGroup .rmSlide,
@@ -4077,8 +4036,7 @@ div.rmSlide {
     visibility: visible !important;
     opacity: 1 !important;
     background-color: #FFFFFF !important;
-    z-index: 100000 !important;
-    position: absolute !important;
+    z-index: 9999999 !important;
 }
 
 .rmGroup .rmGroup a.rmLink,
