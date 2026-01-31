@@ -4054,16 +4054,32 @@ div.rmSlide {
     background-color: #164F90 !important;
 }
 
-/* Nested dropdowns (all children) - same styling */
+/* Nested dropdowns (all children) - ensure visible and styled */
 .rmGroup .rmGroup,
 .rmSlide .rmSlide,
+.rmGroup .rmSlide,
+.rmSlide .rmGroup {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    background-color: #FFFFFF !important;
+    z-index: 100000 !important;
+    position: absolute !important;
+}
+
 .rmGroup .rmGroup a.rmLink,
 .rmGroup .rmGroup a.rmLink .rmText,
 .rmSlide .rmSlide a.rmLink,
-.rmSlide .rmSlide a.rmLink .rmText {
+.rmSlide .rmSlide a.rmLink .rmText,
+.rmGroup .rmSlide a.rmLink,
+.rmGroup .rmSlide a.rmLink .rmText,
+.rmSlide .rmGroup a.rmLink,
+.rmSlide .rmGroup a.rmLink .rmText {
     color: #333333 !important;
     -webkit-text-fill-color: #333333 !important;
     background-color: #FFFFFF !important;
+    display: block !important;
+    visibility: visible !important;
 }
 
 .rmGroup .rmGroup a.rmLink:hover,
