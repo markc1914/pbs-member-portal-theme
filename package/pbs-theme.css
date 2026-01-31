@@ -3885,7 +3885,7 @@ a.auth-link:hover {
     background-color: var(--pbs-blue) !important;
 }
 
-/* Force ALL nav text elements to white */
+/* Force ALL nav text elements to white - includes webkit override */
 .RadMenu *,
 .RadMenu_Austin *,
 .rmRootGroup *,
@@ -3898,6 +3898,7 @@ a.auth-link:hover {
 a.rmLink.rmRootLink span,
 a.rmLink.rmRootLink .rmText {
     color: var(--pbs-white) !important;
+    -webkit-text-fill-color: var(--pbs-white) !important;
     background-color: transparent !important;
     font-weight: 600 !important;
 }
@@ -3908,4 +3909,12 @@ a.rmLink.rmRootLink .rmText {
 .RadMenu_Austin a.rmLink.rmRootLink:hover * {
     background-color: rgba(255,255,255,0.2) !important;
     color: var(--pbs-white) !important;
+    -webkit-text-fill-color: var(--pbs-white) !important;
+}
+
+/* header-bottom-container text elements - force white */
+.header-bottom-container,
+.header-bottom-container * {
+    color: var(--pbs-white) !important;
+    -webkit-text-fill-color: var(--pbs-white) !important;
 }
