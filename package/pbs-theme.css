@@ -3885,16 +3885,16 @@ a.auth-link:hover {
     background-color: var(--pbs-blue) !important;
 }
 
-/* Force ALL nav text elements to white - includes webkit override */
-.RadMenu *,
-.RadMenu_Austin *,
-.rmRootGroup *,
-.header-bottom-container .RadMenu *,
+/* ROOT LEVEL nav items only - white text on blue background */
+/* Excludes dropdown items which use .rmGroup/.rmSlide */
+.RadMenu > .rmRootGroup > .rmItem > a.rmLink,
+.RadMenu > .rmRootGroup > .rmItem > a.rmLink > .rmText,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink > .rmText,
 .RadMenu a.rmLink.rmRootLink,
 .RadMenu_Austin a.rmLink.rmRootLink,
-.header-bottom-container .RadMenu a.rmLink,
-.RadMenu .rmText,
-.RadMenu_Austin .rmText,
+.RadMenu a.rmLink.rmRootLink .rmText,
+.RadMenu_Austin a.rmLink.rmRootLink .rmText,
 a.rmLink.rmRootLink span,
 a.rmLink.rmRootLink .rmText {
     color: var(--pbs-white) !important;
@@ -3904,17 +3904,31 @@ a.rmLink.rmRootLink .rmText {
 }
 
 .RadMenu a.rmLink.rmRootLink:hover,
-.RadMenu_Austin a.rmLink.rmRootLink:hover,
-.RadMenu a.rmLink.rmRootLink:hover *,
-.RadMenu_Austin a.rmLink.rmRootLink:hover * {
+.RadMenu_Austin a.rmLink.rmRootLink:hover {
     background-color: rgba(255,255,255,0.2) !important;
     color: var(--pbs-white) !important;
     -webkit-text-fill-color: var(--pbs-white) !important;
 }
 
-/* header-bottom-container text elements - force white */
-.header-bottom-container,
-.header-bottom-container * {
-    color: var(--pbs-white) !important;
-    -webkit-text-fill-color: var(--pbs-white) !important;
+/* DROPDOWN items - dark text on white background */
+.RadMenu .rmGroup a.rmLink,
+.RadMenu .rmSlide a.rmLink,
+.RadMenu_Austin .rmGroup a.rmLink,
+.RadMenu_Austin .rmSlide a.rmLink,
+.rmGroup .rmLink,
+.rmSlide .rmLink,
+.rmGroup .rmLink .rmText,
+.rmSlide .rmLink .rmText {
+    color: #333333 !important;
+    -webkit-text-fill-color: #333333 !important;
+    background-color: #FFFFFF !important;
+}
+
+.RadMenu .rmGroup a.rmLink:hover,
+.RadMenu .rmSlide a.rmLink:hover,
+.RadMenu_Austin .rmGroup a.rmLink:hover,
+.RadMenu_Austin .rmSlide a.rmLink:hover {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background-color: var(--pbs-blue) !important;
 }
