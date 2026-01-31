@@ -3057,24 +3057,23 @@ a[title*="Edit"] .IconSprite {
        MOBILE BANNER IMAGE - RESPONSIVE SIZING
        ============================================ */
 
-    /* Banner image - scale FULL image to show FOUNDERS on right */
-    /* Image is 1040x89px, scaled to fit mobile width */
+    /* Banner image - CROP to show only FOUNDERS on mobile */
+    /* Full image is 1040x89px, show right portion with founders */
     #masterHeaderImage,
     #masterDonorHeaderImage {
         display: block !important;
         visibility: visible !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 35px !important;
-        margin: 5px auto !important;
-        background-size: 100% auto !important;
-        background-position: center center !important;
+        width: 200px !important;
+        height: 70px !important;
+        margin: 10px auto !important;
+        background-size: auto 100% !important;
+        background-position: right center !important;
         background-repeat: no-repeat !important;
     }
 
     #masterHeaderBackground {
         height: auto !important;
-        min-height: 50px !important;
+        min-height: 80px !important;
         padding: 5px !important;
         text-align: center !important;
     }
@@ -3084,7 +3083,8 @@ a[title*="Edit"] .IconSprite {
     #masterLogoArea {
         width: 100% !important;
         max-width: 100% !important;
-        padding: 0 5px !important;
+        padding: 0 !important;
+        text-align: center !important;
     }
 
     /* Logo/brand image in header - keep visible */
@@ -3858,7 +3858,7 @@ a.auth-link {
     margin: 0 !important;
     background-color: transparent !important;
     color: var(--pbs-blue) !important;
-    border: 1px solid var(--pbs-blue) !important;
+    border: 2px solid var(--pbs-blue) !important;
     border-radius: 4px !important;
     font-size: 11px !important;
     font-weight: 600 !important;
@@ -3866,6 +3866,8 @@ a.auth-link {
     text-decoration: none !important;
     position: relative !important;
     z-index: 9999 !important;
+    white-space: nowrap !important;
+    width: auto !important;
 }
 
 a#ctl01_LoginStatus1:hover,
@@ -3883,15 +3885,27 @@ a.auth-link:hover {
     background-color: var(--pbs-blue) !important;
 }
 
+/* Force ALL nav text elements to white */
+.RadMenu *,
+.RadMenu_Austin *,
+.rmRootGroup *,
+.header-bottom-container .RadMenu *,
 .RadMenu a.rmLink.rmRootLink,
 .RadMenu_Austin a.rmLink.rmRootLink,
-.header-bottom-container .RadMenu a.rmLink {
+.header-bottom-container .RadMenu a.rmLink,
+.RadMenu .rmText,
+.RadMenu_Austin .rmText,
+a.rmLink.rmRootLink span,
+a.rmLink.rmRootLink .rmText {
     color: var(--pbs-white) !important;
     background-color: transparent !important;
+    font-weight: 600 !important;
 }
 
 .RadMenu a.rmLink.rmRootLink:hover,
-.RadMenu_Austin a.rmLink.rmRootLink:hover {
+.RadMenu_Austin a.rmLink.rmRootLink:hover,
+.RadMenu a.rmLink.rmRootLink:hover *,
+.RadMenu_Austin a.rmLink.rmRootLink:hover * {
     background-color: rgba(255,255,255,0.2) !important;
     color: var(--pbs-white) !important;
 }
