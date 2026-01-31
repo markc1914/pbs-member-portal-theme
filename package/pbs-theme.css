@@ -2100,21 +2100,27 @@ footer a:hover {
     display: none !important;
 }
 
-/* COMMUNITY PAGE LAYOUT - Sidebar on RIGHT for desktop */
-/* Use float-based layout, only for elements containing community content */
+/* COMMUNITY PAGE LAYOUT - Sidebar on RIGHT, Content on LEFT, side by side at TOP */
 @media (min-width: 768px) {
-    /* When SubNavPanel contains community content, float it right */
-    #ctl01_SubNavPanel:has(.CommunityLinksBlock) {
-        float: right !important;
-        width: 250px !important;
-        margin-left: 20px !important;
+    /* Wrapper needs to contain the floats */
+    .wrapper.has-secondary-col:has(.CommunityLinksBlock) {
+        overflow: hidden !important;
     }
 
-    /* Fallback: target col-secondary directly when it has community content */
+    /* Main content - float left, leave room for sidebar */
+    .wrapper.has-secondary-col:has(.CommunityLinksBlock) .col-primary {
+        float: left !important;
+        width: calc(100% - 280px) !important;
+        margin-right: 20px !important;
+    }
+
+    /* Sidebar - float right */
+    .wrapper.has-secondary-col:has(.CommunityLinksBlock) .col-secondary,
+    #ctl01_SubNavPanel:has(.CommunityLinksBlock),
     .col-secondary:has(.CommunityLinksBlock) {
         float: right !important;
         width: 250px !important;
-        margin-left: 20px !important;
+        margin-left: 0 !important;
     }
 }
 
