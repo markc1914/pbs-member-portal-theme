@@ -768,9 +768,7 @@ a[id*="lnkCart"],
 a[id*="SignOut"],
 a[id*="signout"],
 a[id*="SignUp"],
-a[id*="signup"],
-a[id*="SignIn"],
-a[id*="signin"] {
+a[id*="signup"] {
     display: inline-block !important;
     padding: 8px 16px !important;
     color: var(--pbs-blue) !important;
@@ -799,12 +797,10 @@ a[id*="signup"] {
     right: 210px !important;
 }
 
-/* Second link (Sign In or Cart) */
+/* Second link (Cart) */
 #hd > a:nth-of-type(2),
 #hd > span:nth-of-type(2) > a,
-a[id*="lnkCart"],
-a[id*="SignIn"],
-a[id*="signin"] {
+a[id*="lnkCart"] {
     right: 110px !important;
 }
 
@@ -826,8 +822,7 @@ a.TextButton[id*="LoginStatus"]:hover,
 a[id*="lnkUserName"]:hover,
 a[id*="lnkCart"]:hover,
 a[id*="SignOut"]:hover,
-a[id*="SignUp"]:hover,
-a[id*="SignIn"]:hover {
+a[id*="SignUp"]:hover {
     background-color: var(--pbs-blue) !important;
     color: var(--pbs-white) !important;
 }
@@ -2998,19 +2993,20 @@ a[title*="Edit"] .IconSprite {
     }
 
     /* Style the header links - MODERN sleek buttons */
+    /* Accessible: 11px minimum for 50+ users */
     #hd li:not(.rmItem):not(.rtsLI) > a,
     header li:not(.rmItem):not(.rtsLI) > a,
     #masterTopBarAuxiliary li > a,
     #masterLogoArea li > a,
     .NavigationListItem > a {
         display: inline-block !important;
-        padding: 4px 10px !important;
+        padding: 6px 12px !important;
         background-color: transparent !important;
         color: var(--pbs-blue) !important;
         text-decoration: none !important;
         border: 1.5px solid var(--pbs-blue) !important;
-        border-radius: 10px !important;
-        font-size: 10px !important;
+        border-radius: 8px !important;
+        font-size: 11px !important;
         font-weight: 600 !important;
         text-transform: uppercase !important;
         letter-spacing: 0.3px !important;
@@ -3106,17 +3102,17 @@ a[title*="Edit"] .IconSprite {
     }
 
     /* Mobile nav links - WHITE background, BLUE text for readability */
-    /* MODERN: 10px radius, smaller/sleeker buttons */
+    /* Accessible: 11px minimum for 50+ users */
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
     .RadMenu a.rmLink.rmRootLink {
-        font-size: 8px !important;
-        padding: 5px 8px !important;
-        margin: 2px !important;
+        font-size: 11px !important;
+        padding: 8px 12px !important;
+        margin: 3px !important;
         display: inline-block !important;
         color: var(--pbs-blue) !important;
         background-color: var(--pbs-white) !important;
         border: 1.5px solid var(--pbs-blue) !important;
-        border-radius: 10px !important;
+        border-radius: 8px !important;
         text-transform: uppercase !important;
         font-weight: 600 !important;
         letter-spacing: 0.3px !important;
