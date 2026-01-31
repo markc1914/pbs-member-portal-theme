@@ -81,7 +81,7 @@ a#masterDonorHeaderImage {
     z-index: 1000 !important;
 }
 
-/* Nav menu bar - ONLY the nav row should be blue, not entire header */
+/* Nav menu bar - blue background */
 .RadMenu,
 .RadMenu_Austin,
 .rmRootGroup {
@@ -95,15 +95,43 @@ a#masterDonorHeaderImage {
     background-color: #164F90 !important;
 }
 
-/* Ensure nav items have proper contrast on blue background */
-.RadMenu a.rmLink.rmRootLink,
-.RadMenu_Austin a.rmLink.rmRootLink {
-    color: #FFFFFF !important;
-    background-color: transparent !important;
+/* header-bottom-container - make it blue */
+.header-bottom-container {
+    background-color: #164F90 !important;
 }
 
-.RadMenu a.rmLink.rmRootLink:hover,
-.RadMenu_Austin a.rmLink.rmRootLink:hover {
+/* DESKTOP NAV TEXT - FORCE WHITE on blue background */
+/* Use wildcard to catch all text elements in nav */
+.RadMenu *,
+.RadMenu_Austin *,
+.rmRootGroup *,
+.header-bottom-container .RadMenu *,
+.RadMenu a,
+.RadMenu span,
+.RadMenu .rmLink,
+.RadMenu .rmText,
+.RadMenu_Austin a,
+.RadMenu_Austin span,
+.RadMenu_Austin .rmLink,
+.RadMenu_Austin .rmText,
+.rmRootGroup a,
+.rmRootGroup span,
+a.rmLink.rmRootLink,
+a.rmLink.rmRootLink span,
+a.rmLink.rmRootLink .rmText,
+.header-bottom-container a,
+.header-bottom-container span {
+    color: #FFFFFF !important;
+    background-color: transparent !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+}
+
+.RadMenu a:hover,
+.RadMenu_Austin a:hover,
+a.rmLink.rmRootLink:hover,
+a.rmLink.rmRootLink:hover span,
+a.rmLink.rmRootLink:hover * {
     background-color: rgba(255,255,255,0.2) !important;
     color: #FFFFFF !important;
 }
@@ -122,31 +150,30 @@ a#masterDonorHeaderImage {
 
 /* FIX: Mobile nav - BLUE background, WHITE text for visibility */
 @media (max-width: 767px) {
-    /* Mobile banner - scale full image to show founders */
-    /* 1040px image scaled to fit 100% width, maintain aspect ratio */
+    /* Mobile banner - CROP to show only FOUNDERS (right side of image) */
     .header-logo-container,
     #masterLogoArea {
         width: 100% !important;
         max-width: 100% !important;
-        padding: 0 5px !important;
+        padding: 0 !important;
+        text-align: center !important;
     }
 
     #masterHeaderImage,
     #masterDonorHeaderImage {
         display: block !important;
         visibility: visible !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        height: 35px !important;
-        margin: 5px auto !important;
-        background-size: 100% auto !important;
-        background-position: center center !important;
+        width: 200px !important;
+        height: 70px !important;
+        margin: 10px auto !important;
+        background-size: auto 100% !important;
+        background-position: right center !important;
         background-repeat: no-repeat !important;
     }
 
     #masterHeaderBackground {
         height: auto !important;
-        min-height: 50px !important;
+        min-height: 80px !important;
         padding: 5px !important;
     }
 
@@ -225,7 +252,7 @@ a.auth-link {
     margin: 0 !important;
     background-color: transparent !important;
     color: #164F90 !important;
-    border: 1px solid #164F90 !important;
+    border: 2px solid #164F90 !important;
     border-radius: 4px !important;
     font-size: 11px !important;
     font-weight: 600 !important;
@@ -233,6 +260,8 @@ a.auth-link {
     text-decoration: none !important;
     position: relative !important;
     z-index: 9999 !important;
+    white-space: nowrap !important;
+    width: auto !important;
 }
 
 #navbar-collapse .auth-link-container a:hover,
@@ -296,7 +325,7 @@ ul.rmGroup li a.rmLink {
 .rmGroup,
 ul.rmGroup {
     background-color: #FFFFFF !important;
-    border: 1px solid #164F90 !important;
+    border: 2px solid #164F90 !important;
     border-radius: 4px !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
     min-width: 200px !important;
@@ -439,6 +468,29 @@ async function testPages() {
             await page.goto(PAGES.education, { waitUntil: 'networkidle2', timeout: 30000 });
             await injectCSS(page);
             await wait(1000);
+
+            // Debug nav styles
+            const navDebug = await page.evaluate(() => {
+                const navLink = document.querySelector('.rmLink.rmRootLink');
+                const navText = document.querySelector('.rmLink.rmRootLink .rmText');
+                const navContainer = document.querySelector('.RadMenu');
+                return {
+                    navLink: navLink ? {
+                        color: window.getComputedStyle(navLink).color,
+                        bgColor: window.getComputedStyle(navLink).backgroundColor,
+                        classes: navLink.className
+                    } : 'NOT FOUND',
+                    navText: navText ? {
+                        color: window.getComputedStyle(navText).color,
+                        innerHTML: navText.innerHTML
+                    } : 'NOT FOUND',
+                    navContainer: navContainer ? {
+                        bgColor: window.getComputedStyle(navContainer).backgroundColor
+                    } : 'NOT FOUND'
+                };
+            });
+            console.log('  Nav Debug:', JSON.stringify(navDebug, null, 2));
+
             await takeScreenshot(page, '03-education', 'wide');
 
             console.log('\n=== Community (Wide) ===');
