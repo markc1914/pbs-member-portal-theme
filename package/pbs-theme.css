@@ -307,13 +307,14 @@ h4, .SectionLabel, h5 {
 }
 
 #masterHeaderBackground {
-    height: 135px;
-    min-height: 90px;
+    height: 120px;
+    min-height: 100px;
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 10px !important; /* Add spacing between banner and nav bar */
+    margin-bottom: 5px !important;
+    padding-bottom: 5px !important;
 }
 
 /* Hide color scheme / dark mode toggles - they shouldn't appear */
@@ -406,13 +407,26 @@ a.NavigationLink:hover .nav-text {
     color: var(--pbs-white) !important;
 }
 
-/* Sign Out / Logout link - style as button like other nav links */
+/* Hide Sign In link - redundant on login page and when logged in */
+/* Target by ID pattern since it uses JavaScript postback */
+a[id*="LoginStatus1"][id*="ctl00"],
+a[id*="LoginStatus"][id*="ctl00"],
+a[id*="lnkSignIn"],
+a[id*="SignIn"],
+#hd a[id*="LoginStatus1"],
+.NavigationListItem a[id*="LoginStatus"],
+a[href*="Sign_In"],
+a[href*="Login.aspx"],
+.NavigationListItem a[href*="Sign_In"],
+#hd a[href*="Sign_In"] {
+    display: none !important;
+}
+
+/* Sign Out / Logout link - position in header with Mark and Cart buttons */
 /* Actual site uses: ctl01_LoginStatus1_ctl00 or similar */
 /* Using multiple selectors to catch all variations */
 a[id*="SignOut"],
 a[id*="Logout"],
-a[id*="LoginStatus"],
-a[id*="loginStatus"],
 a[id*="signout"],
 a[id*="logout"],
 a[href*="Sign_Out"],
@@ -421,16 +435,16 @@ a[href*="logout"],
 a[href*="Logout"],
 #masterTopBarAuxiliary a[id*="SignOut"],
 #masterTopBarAuxiliary a[id*="Logout"],
-#masterTopBarAuxiliary a[id*="LoginStatus"],
 .NavigationListItem a[id*="SignOut"],
 .NavigationListItem a[id*="Logout"],
-.NavigationListItem a[id*="LoginStatus"],
-#hd a[id*="LoginStatus"],
-#hd a[id*="loginStatus"],
-/* Target by class - TextButton class is used for Sign Out */
 #hd a.TextButton[id*="Login"],
 #masterTopBarAuxiliary a.TextButton,
 .NavigationListItem a.TextButton {
+    /* Position in header area with Mark/Cart buttons */
+    position: fixed !important;
+    top: 10px !important;
+    right: 120px !important;
+    z-index: 1000 !important;
     display: inline-block !important;
     padding: 8px 16px !important;
     color: var(--pbs-blue) !important;
@@ -443,7 +457,29 @@ a[href*="Logout"],
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
     font-family: var(--font-base) !important;
-    margin-left: 8px !important;
+}
+
+/* LoginStatus links that show Sign Out text - also position in header */
+a[id*="LoginStatus"][id*="ctl01"],
+a[id*="loginStatus"][id*="ctl01"],
+#hd a[id*="LoginStatus"],
+#hd a[id*="loginStatus"] {
+    position: fixed !important;
+    top: 10px !important;
+    right: 120px !important;
+    z-index: 1000 !important;
+    display: inline-block !important;
+    padding: 8px 16px !important;
+    color: var(--pbs-blue) !important;
+    background-color: var(--pbs-white) !important;
+    border: 2px solid var(--pbs-blue) !important;
+    border-radius: 10px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-family: var(--font-base) !important;
 }
 
 a[id*="SignOut"]:hover,
@@ -457,6 +493,7 @@ a[href*="SignOut"]:hover,
 .NavigationListItem a.TextButton:hover {
     background-color: var(--pbs-blue) !important;
     color: var(--pbs-white) !important;
+    border-color: var(--pbs-blue) !important;
 }
 
 /* Logo area */
@@ -473,14 +510,14 @@ a[href*="SignOut"]:hover,
     background-repeat: no-repeat;
     background-position: left center;
     background-size: contain;
-    width: 1000px;
-    height: 89px;
+    width: 800px;
+    height: 75px;
     /* Hide the "iMIS" text but keep accessible for screen readers */
     text-indent: -9999px;
     overflow: hidden;
     display: block;
     position: absolute;
-    top: 29px;
+    top: 20px;
     left: 15px;
 }
 
@@ -966,10 +1003,10 @@ a.TextButton[id*="Login"]:hover {
 .RadMenu.RadMenu_Austin a.rmLink.rmRootLink,
 .RadMenu.RadMenu_Default a.rmLink.rmRootLink {
     text-transform: uppercase !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.5px !important;
-    font-size: 13px !important;
-    padding: 14px 16px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0 !important;
+    font-size: 8px !important;
+    padding: 6px 4px !important;
     color: var(--pbs-white) !important;
 }
 
@@ -992,6 +1029,31 @@ a.TextButton[id*="Login"]:hover {
 .RadMenu.RadMenu_Default a.rmLink:hover {
     background-color: var(--pbs-blue-light);
     border-top: 3px solid var(--pbs-blue-accent);
+}
+
+/* DROPDOWN items - override expanded/selected states to stay white */
+/* Only apply blue background on actual hover, not just expanded state */
+.RadMenu .rmGroup a.rmLink.rmExpanded,
+.RadMenu .rmGroup a.rmLink.rmSelected,
+.RadMenu .rmGroup a.rmLink.rmFocused,
+.RadMenu_Austin .rmGroup a.rmLink.rmExpanded,
+.RadMenu_Austin .rmGroup a.rmLink.rmSelected,
+.RadMenu_Austin .rmGroup a.rmLink.rmFocused,
+.RadMenu .rmGroup .rmItem.rmExpanded > a.rmLink,
+.RadMenu .rmGroup .rmItem.rmSelected > a.rmLink,
+.RadMenu_Austin .rmGroup .rmItem.rmExpanded > a.rmLink,
+.RadMenu_Austin .rmGroup .rmItem.rmSelected > a.rmLink {
+    background: transparent !important;
+    background-color: transparent !important;
+    color: #333333 !important;
+    border: none !important;
+}
+
+.RadMenu .rmGroup a.rmLink.rmExpanded .rmText,
+.RadMenu .rmGroup a.rmLink.rmSelected .rmText,
+.RadMenu_Austin .rmGroup a.rmLink.rmExpanded .rmText,
+.RadMenu_Austin .rmGroup a.rmLink.rmSelected .rmText {
+    color: #333333 !important;
 }
 
 /* ========================================
@@ -2346,12 +2408,15 @@ footer a:hover {
    Community pages use a two-column layout with sidebar on left/right
    ================================================================= */
 
-/* Wrapper container - use flexbox for reliable two-column layout */
+/* Community wrapper - ensure proper layout */
+.wrapper,
 .wrapper.has-secondary-col,
 .has-secondary-col {
     display: flex !important;
     flex-wrap: nowrap !important;
     gap: 20px !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 /* Sidebar on right (col-on-right) */
@@ -2360,23 +2425,44 @@ footer a:hover {
     flex-direction: row !important;
 }
 
+/* Sidebar on left */
+.wrapper.col-on-left,
+.col-on-left {
+    flex-direction: row-reverse !important;
+}
+
 /* Main content - takes remaining space */
 .col-primary,
-[class*="col-primary"] {
+[class*="col-primary"],
+.primary-col {
     flex: 1 1 auto !important;
     min-width: 0 !important;
     order: 1 !important;
+    background: var(--pbs-white) !important;
+    padding: 20px !important;
 }
 
-/* Sidebar - fixed width on right */
+/* Sidebar - fixed width */
 .col-secondary,
 [class*="col-secondary"],
+.secondary-col,
 #ctl01_SideBarPlaceHolder_ctl00,
 [id*="SideBarPlaceHolder"] {
-    flex: 0 0 220px !important;
-    width: 220px !important;
-    min-width: 220px !important;
+    flex: 0 0 250px !important;
+    width: 250px !important;
+    max-width: 250px !important;
+    min-width: 200px !important;
     order: 2 !important;
+    background: var(--pbs-white) !important;
+    padding: 15px !important;
+}
+
+/* Community Description page specific - fix layout */
+[id*="CommunityDescription"] .wrapper,
+[id*="CommunityLayout"] .wrapper,
+.CommunityDescription .wrapper {
+    display: flex !important;
+    flex-direction: row !important;
 }
 
 /* On community pages, ensure the CommunityLinksBlock displays as vertical sidebar */
