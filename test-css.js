@@ -34,6 +34,12 @@ async function testPages() {
 
     const page = await browser.newPage();
 
+    // Handle JavaScript dialogs (alerts, confirms, prompts)
+    page.on('dialog', async dialog => {
+        console.log(`Dialog: ${dialog.type()} - ${dialog.message()}`);
+        await dialog.accept();
+    });
+
     try {
         // Test 1: Login page
         console.log('\n=== Testing Login Page ===');
@@ -44,33 +50,37 @@ async function testPages() {
         if (username && password) {
             console.log('\n=== Logging in ===');
 
-            // Fill username - target the visible text input in the login form
+            // Fill username using the exact field name from iMIS
+            // Username: ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName
             await page.evaluate((user, pass) => {
-                // Find all text inputs and password inputs
-                const allInputs = document.querySelectorAll('input');
-                let usernameField = null;
-                let passwordField = null;
+                // Find username field by partial ID match
+                const usernameField = document.querySelector('input[id*="signInUserName"]') ||
+                                      document.querySelector('input[name*="signInUserName"]') ||
+                                      document.querySelector('input[id*="Username"]');
 
-                allInputs.forEach(input => {
-                    if (input.type === 'password') {
-                        passwordField = input;
-                    } else if (input.type === 'text' && input.offsetParent !== null) {
-                        // Visible text input
-                        if (!usernameField || input.id.includes('Username') || input.name.includes('Username')) {
-                            usernameField = input;
-                        }
-                    }
-                });
+                // Find password field
+                const passwordField = document.querySelector('input[id*="signInPassword"]') ||
+                                      document.querySelector('input[name*="signInPassword"]') ||
+                                      document.querySelector('input[type="password"]');
 
-                if (usernameField) usernameField.value = user;
-                if (passwordField) passwordField.value = pass;
+                if (usernameField) {
+                    usernameField.value = user;
+                    console.log('Username field found and filled');
+                }
+                if (passwordField) {
+                    passwordField.value = pass;
+                    console.log('Password field found and filled');
+                }
             }, username, password);
 
             await wait(500);
+            await takeScreenshot(page, '01b-login-filled');
 
             // Click submit
             await page.evaluate(() => {
-                const btn = document.querySelector('input[type="submit"], input[value*="SIGN"], button[type="submit"]');
+                const btn = document.querySelector('input[type="submit"]') ||
+                            document.querySelector('input[value*="SIGN"]') ||
+                            document.querySelector('button[type="submit"]');
                 if (btn) btn.click();
             });
 
