@@ -13,124 +13,182 @@ const PAGES = {
     community: `${BASE_URL}/iCore/Communities/CommunityLayouts/CommunityDescription.aspx?iUniformKey=d2a740ce-8b73-4a54-97a5-990ac2cce029&WebsiteKey=f17366dc-26c7-4e94-9bc6-8535489d9140`
 };
 
+// Viewport sizes for testing
+const VIEWPORTS = {
+    desktop: { width: 1400, height: 900, name: 'desktop' },
+    tablet: { width: 768, height: 1024, name: 'tablet' },
+    mobile: { width: 375, height: 812, name: 'mobile' }
+};
+
 const username = process.argv[2];
 const password = process.argv[3];
+const testMobile = process.argv.includes('--mobile');
 
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-async function takeScreenshot(page, name) {
-    const filepath = path.join(SCREENSHOTS_DIR, `test-${name}-${Date.now()}.png`);
+async function takeScreenshot(page, name, viewport = 'desktop') {
+    const filepath = path.join(SCREENSHOTS_DIR, `test-${viewport}-${name}-${Date.now()}.png`);
     await page.screenshot({ path: filepath, fullPage: true });
-    console.log(`Screenshot: ${filepath}`);
+    console.log(`  Screenshot: ${filepath}`);
     return filepath;
+}
+
+async function testAtViewport(page, viewportName, viewportConfig, isLoggedIn) {
+    console.log(`\n========== Testing at ${viewportName.toUpperCase()} (${viewportConfig.width}x${viewportConfig.height}) ==========`);
+
+    await page.setViewport(viewportConfig);
+    await wait(1000);
+
+    if (!isLoggedIn) {
+        // Test login page
+        console.log(`\n[${viewportName}] Login Page`);
+        await page.goto(PAGES.login, { waitUntil: 'networkidle2', timeout: 30000 });
+        await wait(2000);
+        await takeScreenshot(page, '01-login', viewportName);
+    } else {
+        // Test logged-in pages
+        console.log(`\n[${viewportName}] Member Home`);
+        await page.goto(`${BASE_URL}/PBSMember/Home.aspx`, { waitUntil: 'networkidle2', timeout: 30000 });
+        await wait(2000);
+        await takeScreenshot(page, '02-home', viewportName);
+
+        console.log(`\n[${viewportName}] Education Material`);
+        await page.goto(PAGES.education, { waitUntil: 'networkidle2', timeout: 30000 });
+        await wait(2000);
+        await takeScreenshot(page, '03-education', viewportName);
+
+        console.log(`\n[${viewportName}] Community`);
+        await page.goto(PAGES.community, { waitUntil: 'networkidle2', timeout: 30000 });
+        await wait(2000);
+        await takeScreenshot(page, '04-community', viewportName);
+    }
 }
 
 async function testPages() {
     console.log('Launching Chrome...');
     const browser = await puppeteer.launch({
         headless: false,
-        defaultViewport: { width: 1400, height: 900 }
+        defaultViewport: VIEWPORTS.desktop
     });
 
     const page = await browser.newPage();
 
-    // Handle JavaScript dialogs (alerts, confirms, prompts)
+    // Handle JavaScript dialogs
     page.on('dialog', async dialog => {
-        console.log(`Dialog: ${dialog.type()} - ${dialog.message()}`);
+        console.log(`  Dialog: ${dialog.type()} - "${dialog.message().substring(0, 50)}..."`);
         await dialog.accept();
     });
 
     try {
-        // Test 1: Login page
-        console.log('\n=== Testing Login Page ===');
+        // DESKTOP TESTING
+        console.log('\n' + '='.repeat(60));
+        console.log('DESKTOP TESTING');
+        console.log('='.repeat(60));
+
+        // Test login page at desktop
+        console.log('\n=== Testing Login Page (Desktop) ===');
         await page.goto(PAGES.login, { waitUntil: 'networkidle2', timeout: 30000 });
         await wait(2000);
-        await takeScreenshot(page, '01-login');
+        await takeScreenshot(page, '01-login', 'desktop');
 
         if (username && password) {
             console.log('\n=== Logging in ===');
-
-            // Fill username using the exact field name from iMIS
-            // Username: ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName
             await page.evaluate((user, pass) => {
-                // Find username field by partial ID match
                 const usernameField = document.querySelector('input[id*="signInUserName"]') ||
-                                      document.querySelector('input[name*="signInUserName"]') ||
-                                      document.querySelector('input[id*="Username"]');
-
-                // Find password field
+                                      document.querySelector('input[name*="signInUserName"]');
                 const passwordField = document.querySelector('input[id*="signInPassword"]') ||
-                                      document.querySelector('input[name*="signInPassword"]') ||
                                       document.querySelector('input[type="password"]');
-
-                if (usernameField) {
-                    usernameField.value = user;
-                    console.log('Username field found and filled');
-                }
-                if (passwordField) {
-                    passwordField.value = pass;
-                    console.log('Password field found and filled');
-                }
+                if (usernameField) usernameField.value = user;
+                if (passwordField) passwordField.value = pass;
             }, username, password);
 
             await wait(500);
-            await takeScreenshot(page, '01b-login-filled');
-
-            // Click submit
             await page.evaluate(() => {
                 const btn = document.querySelector('input[type="submit"]') ||
-                            document.querySelector('input[value*="SIGN"]') ||
-                            document.querySelector('button[type="submit"]');
+                            document.querySelector('input[value*="SIGN"]');
                 if (btn) btn.click();
             });
 
             await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 30000 }).catch(() => {});
             await wait(3000);
 
-            // Test 2: After login (Member Home)
-            console.log('\n=== Testing Member Home ===');
-            await takeScreenshot(page, '02-home');
+            // Desktop pages after login
+            console.log('\n=== Testing Member Home (Desktop) ===');
+            await takeScreenshot(page, '02-home', 'desktop');
 
-            // Test 3: Profile page
-            console.log('\n=== Testing Profile Page ===');
+            console.log('\n=== Testing Profile (Desktop) ===');
             await page.goto(PAGES.profile, { waitUntil: 'networkidle2', timeout: 30000 });
             await wait(2000);
-            await takeScreenshot(page, '03-profile');
+            await takeScreenshot(page, '03-profile', 'desktop');
 
-            // Test 4: Education Material
-            console.log('\n=== Testing Education Material ===');
+            console.log('\n=== Testing Education Material (Desktop) ===');
             await page.goto(PAGES.education, { waitUntil: 'networkidle2', timeout: 30000 });
             await wait(2000);
-            await takeScreenshot(page, '04-education');
+            await takeScreenshot(page, '04-education', 'desktop');
 
-            // Test 5: Directory
-            console.log('\n=== Testing Directory ===');
+            console.log('\n=== Testing Directory (Desktop) ===');
             await page.goto(PAGES.directory, { waitUntil: 'networkidle2', timeout: 30000 });
             await wait(2000);
-            await takeScreenshot(page, '05-directory');
+            await takeScreenshot(page, '05-directory', 'desktop');
 
-            // Test 6: Community
-            console.log('\n=== Testing Community ===');
+            console.log('\n=== Testing Community (Desktop) ===');
             await page.goto(PAGES.community, { waitUntil: 'networkidle2', timeout: 30000 });
             await wait(2000);
-            await takeScreenshot(page, '06-community');
+            await takeScreenshot(page, '06-community', 'desktop');
 
-            // Test 7: Dropdown menu
-            console.log('\n=== Testing Dropdown ===');
-            const menuItems = await page.$$('.rmRootLink');
-            if (menuItems.length > 3) {
-                await menuItems[3].hover();
-                await wait(1500);
-                await takeScreenshot(page, '07-dropdown');
+            // MOBILE TESTING
+            if (testMobile) {
+                console.log('\n' + '='.repeat(60));
+                console.log('MOBILE TESTING (375px)');
+                console.log('='.repeat(60));
+
+                await page.setViewport(VIEWPORTS.mobile);
+                await wait(1000);
+
+                console.log('\n=== Testing Member Home (Mobile) ===');
+                await page.goto(`${BASE_URL}/PBSMember/Home.aspx`, { waitUntil: 'networkidle2', timeout: 30000 });
+                await wait(2000);
+                await takeScreenshot(page, '02-home', 'mobile');
+
+                console.log('\n=== Testing Education Material (Mobile) ===');
+                await page.goto(PAGES.education, { waitUntil: 'networkidle2', timeout: 30000 });
+                await wait(2000);
+                await takeScreenshot(page, '04-education', 'mobile');
+
+                console.log('\n=== Testing Community (Mobile) ===');
+                await page.goto(PAGES.community, { waitUntil: 'networkidle2', timeout: 30000 });
+                await wait(2000);
+                await takeScreenshot(page, '06-community', 'mobile');
+
+                // TABLET TESTING
+                console.log('\n' + '='.repeat(60));
+                console.log('TABLET TESTING (768px)');
+                console.log('='.repeat(60));
+
+                await page.setViewport(VIEWPORTS.tablet);
+                await wait(1000);
+
+                console.log('\n=== Testing Member Home (Tablet) ===');
+                await page.goto(`${BASE_URL}/PBSMember/Home.aspx`, { waitUntil: 'networkidle2', timeout: 30000 });
+                await wait(2000);
+                await takeScreenshot(page, '02-home', 'tablet');
+
+                console.log('\n=== Testing Education Material (Tablet) ===');
+                await page.goto(PAGES.education, { waitUntil: 'networkidle2', timeout: 30000 });
+                await wait(2000);
+                await takeScreenshot(page, '04-education', 'tablet');
             }
         } else {
-            console.log('Usage: node test-css.js <username> <password>');
+            console.log('Usage: node test-css.js <username> <password> [--mobile]');
         }
 
-        console.log('\n=== Done ===');
+        console.log('\n' + '='.repeat(60));
+        console.log('TESTING COMPLETE');
+        console.log('='.repeat(60));
+
     } catch (error) {
         console.error('Error:', error.message);
-        await takeScreenshot(page, 'error');
+        await takeScreenshot(page, 'error', 'desktop');
     }
 
     console.log('\nBrowser open for 15 seconds...');
