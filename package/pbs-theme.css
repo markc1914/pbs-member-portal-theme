@@ -1758,31 +1758,46 @@ tr:hover {
 .rgMasterTable th,
 .rgMasterTable .rgHeader,
 th.rgHeader,
-thead th {
-    background-color: var(--pbs-blue) !important;
+thead th,
+table thead th,
+.rgMasterTable thead th {
+    background-color: #164F90 !important;
+    background: #164F90 !important;
     color: #FFFFFF !important;
-    padding: 8px 10px !important;
+    padding: 8px 6px !important;
     font-weight: 600 !important;
-    font-size: 11px !important;
-    white-space: nowrap !important;
+    font-size: 10px !important;
+    white-space: normal !important;
     overflow: visible !important;
     text-overflow: clip !important;
+    word-wrap: break-word !important;
 }
 
 .RadGrid .rgHeader a,
 .RadGrid th a,
 .rgMasterTable th a,
 th.rgHeader a,
-thead th a {
+thead th a,
+table thead th a {
     color: #FFFFFF !important;
 }
 
-/* Ensure header text is visible - not hidden */
+/* Ensure ALL header text is visible - force white color */
+.rgHeader,
 .rgHeader *,
+.rgHeader span,
+.rgHeader a,
+thead th,
 thead th *,
-th.rgHeader * {
+thead th span,
+thead th a,
+th.rgHeader,
+th.rgHeader *,
+table thead th,
+table thead th * {
     color: #FFFFFF !important;
     visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* ========================================
@@ -2063,24 +2078,8 @@ footer a:hover {
     display: none !important;
 }
 
-/* COMMUNITY PAGE LAYOUT - Sidebar on LEFT */
-/* Target wrapper that contains CommunityLinksBlock */
-.wrapper.has-secondary-col.col-on-right {
-    display: flex !important;
-    flex-direction: row-reverse !important;
-}
-
-.wrapper.has-secondary-col.col-on-right .col-primary {
-    flex: 1 !important;
-    min-width: 0 !important;
-}
-
-.wrapper.has-secondary-col.col-on-right .col-secondary {
-    width: 250px !important;
-    flex-shrink: 0 !important;
-    margin-right: 20px !important;
-    margin-left: 0 !important;
-}
+/* COMMUNITY PAGE LAYOUT - Leave default iMIS layout alone */
+/* DO NOT add flexbox to .wrapper - it breaks ALL pages */
 
 /* Community logo - constrain size */
 [id*="CommunitySummary"] img,
@@ -2700,12 +2699,7 @@ a[title*="Edit"] .IconSprite {
         margin-bottom: 5px !important;
     }
 
-    /* Hide duplicate toggle buttons - only show first one */
-    .navbar-toggle ~ .navbar-toggle,
-    .navbar-toggler ~ .navbar-toggler,
-    [data-toggle="collapse"] ~ [data-toggle="collapse"] {
-        display: none !important;
-    }
+    /* DO NOT hide toggle buttons - it breaks the menu */
 
     /* ============================================
        MOBILE NAVIGATION BAR
