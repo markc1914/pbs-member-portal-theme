@@ -1755,17 +1755,33 @@ tr:hover {
 .RadGrid .rgHeader,
 .RadGrid th,
 .rgMasterTable th,
-.rgMasterTable .rgHeader {
+.rgMasterTable .rgHeader,
+th.rgHeader,
+thead th {
     background-color: var(--pbs-blue) !important;
-    color: var(--pbs-white) !important;
+    color: #FFFFFF !important;
     padding: 8px 10px !important;
     font-weight: 600 !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
 }
 
 .RadGrid .rgHeader a,
 .RadGrid th a,
-.rgMasterTable th a {
-    color: var(--pbs-white) !important;
+.rgMasterTable th a,
+th.rgHeader a,
+thead th a {
+    color: #FFFFFF !important;
+}
+
+/* Ensure header text is visible - not hidden */
+.rgHeader *,
+thead th *,
+th.rgHeader * {
+    color: #FFFFFF !important;
+    visibility: visible !important;
 }
 
 /* ========================================
@@ -2046,26 +2062,8 @@ footer a:hover {
     display: none !important;
 }
 
-/* COMMUNITY PAGE LAYOUT - Logo/sidebar on LEFT in desktop */
-/* Use :has() to detect community pages and override col-on-right */
-.wrapper.col-on-right:has(.CommunityLinksBlock),
-.wrapper.col-on-right:has([id*="CommunitySummary"]) {
-    display: flex !important;
-    flex-direction: row !important;
-}
-
-.wrapper.col-on-right:has(.CommunityLinksBlock) .col-secondary,
-.wrapper.col-on-right:has([id*="CommunitySummary"]) .col-secondary {
-    order: -1 !important;
-    width: 220px !important;
-    flex-shrink: 0 !important;
-    margin-right: 20px !important;
-}
-
-.wrapper.col-on-right:has(.CommunityLinksBlock) .col-primary,
-.wrapper.col-on-right:has([id*="CommunitySummary"]) .col-primary {
-    flex: 1 !important;
-}
+/* COMMUNITY PAGE LAYOUT - Do NOT override default iMIS layout */
+/* The :has() selector was causing layout issues - removed */
 
 /* Community logo - constrain size (only on community pages) */
 [id*="CommunitySummary"] img,
@@ -2665,13 +2663,10 @@ a[title*="Edit"] .IconSprite {
        MOBILE MENU TOGGLE BUTTON
        ============================================ */
 
-    /* The hamburger/collapse toggle - make it obvious and add text */
+    /* The hamburger/collapse toggle - style it */
     .navbar-toggle,
     .navbar-toggler,
-    [data-toggle="collapse"],
-    [class*="collapse-toggle"],
-    [class*="menu-toggle"],
-    button[aria-expanded] {
+    [data-toggle="collapse"] {
         display: block !important;
         width: 100% !important;
         background-color: var(--pbs-blue) !important;
@@ -2685,15 +2680,11 @@ a[title*="Edit"] .IconSprite {
         margin-bottom: 5px !important;
     }
 
-    /* Add "TAP TO SHOW MENU" text to toggle buttons */
-    .navbar-toggle::after,
-    .navbar-toggler::after,
-    [data-toggle="collapse"]::after {
-        content: "☰ TAP TO SHOW MENU" !important;
-        display: inline !important;
-        color: var(--pbs-white) !important;
-        font-size: 12px !important;
-        font-weight: 600 !important;
+    /* Hide duplicate toggle buttons - only show first one */
+    .navbar-toggle ~ .navbar-toggle,
+    .navbar-toggler ~ .navbar-toggler,
+    [data-toggle="collapse"] ~ [data-toggle="collapse"] {
+        display: none !important;
     }
 
     /* ============================================
@@ -2760,15 +2751,31 @@ a[title*="Edit"] .IconSprite {
     }
 
     /* CRITICAL: Active/selected menu item text MUST be WHITE */
-    .rmItem:hover > a.rmLink .rmText,
-    .rmItem.rmSelected > a.rmLink .rmText,
-    .rmItem.rmFocused > a.rmLink .rmText,
-    .rmItem.rmExpanded > a.rmLink .rmText,
-    .rmItem.rmSelected .rmText,
-    li.rmItem.rmSelected .rmText,
-    a.rmLink.rmRootLink.rmSelected .rmText,
-    .rmSelected .rmText {
+    /* Using very high specificity to override other rules */
+    .RadMenu .rmItem:hover > a.rmLink .rmText,
+    .RadMenu .rmItem.rmSelected > a.rmLink .rmText,
+    .RadMenu .rmItem.rmFocused > a.rmLink .rmText,
+    .RadMenu .rmItem.rmExpanded > a.rmLink .rmText,
+    .RadMenu .rmItem.rmSelected .rmText,
+    .RadMenu li.rmItem.rmSelected .rmText,
+    .RadMenu a.rmLink.rmRootLink.rmSelected .rmText,
+    .RadMenu .rmSelected .rmText,
+    .RadMenu_Austin .rmItem.rmSelected .rmText,
+    .RadMenu_Austin .rmItem.rmSelected > a .rmText,
+    .rmRootGroup .rmItem.rmSelected .rmText,
+    .rmRootGroup .rmItem.rmSelected a .rmText,
+    li.rmItem.rmSelected span.rmText,
+    .rmItem.rmSelected span.rmText {
+        color: #FFFFFF !important;
         color: var(--pbs-white) !important;
+    }
+
+    /* Force selected link AND its text to be white */
+    .rmItem.rmSelected a.rmLink,
+    .rmItem.rmSelected a.rmLink *,
+    li.rmItem.rmSelected a,
+    li.rmItem.rmSelected a * {
+        color: #FFFFFF !important;
     }
 
     /* Menu items flow horizontally, wrap as needed */
