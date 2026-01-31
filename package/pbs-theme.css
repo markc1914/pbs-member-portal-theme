@@ -1557,7 +1557,6 @@ img[id*="ContactPicture"],
 .RadTabStrip_Austin {
     overflow-x: auto !important;
     overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch;
     white-space: nowrap !important;
 }
 
@@ -2004,7 +2003,6 @@ td ul li:hover {
 [id*="Education"] .PanelBody,
 [id*="EducationBackground"] {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
 }
 
 table {
@@ -2036,7 +2034,6 @@ tr:hover {
 /* RadGrid responsive wrapper */
 .RadGrid {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
 }
 
 .RadGrid .rgMasterTable {
@@ -3766,7 +3763,6 @@ a[title*="Edit"] .IconSprite {
     .RadMenu,
     .RadMenu_Austin {
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
     }
 
     .RadMenu .rmRootGroup {
