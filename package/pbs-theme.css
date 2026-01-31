@@ -307,14 +307,14 @@ h4, .SectionLabel, h5 {
 }
 
 #masterHeaderBackground {
-    height: 120px;
-    min-height: 100px;
+    height: 130px;
+    min-height: 110px;
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 5px !important;
-    padding-bottom: 5px !important;
+    margin-bottom: 15px !important;
+    padding-bottom: 10px !important;
 }
 
 /* Hide color scheme / dark mode toggles - they shouldn't appear */
@@ -407,67 +407,42 @@ a.NavigationLink:hover .nav-text {
     color: var(--pbs-white) !important;
 }
 
-/* Hide Sign In link - redundant on login page and when logged in */
+/* Hide Sign In link AND its parent container - redundant on login page */
 /* Target by ID pattern since it uses JavaScript postback */
 a[id*="LoginStatus1"][id*="ctl00"],
 a[id*="LoginStatus"][id*="ctl00"],
 a[id*="lnkSignIn"],
-a[id*="SignIn"],
+a[id*="SignIn"]:not([id*="SignOut"]),
 #hd a[id*="LoginStatus1"],
-.NavigationListItem a[id*="LoginStatus"],
 a[href*="Sign_In"],
 a[href*="Login.aspx"],
 .NavigationListItem a[href*="Sign_In"],
-#hd a[href*="Sign_In"] {
+#hd a[href*="Sign_In"],
+/* Also hide parent li/span if it contains Sign In */
+.NavigationListItem:has(a[href*="Sign_In"]),
+.NavigationListItem:has(a[id*="SignIn"]:not([id*="SignOut"])),
+li:has(> a[href*="Sign_In"]),
+span:has(> a[id*="LoginStatus1"][id*="ctl00"]) {
     display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
 }
 
-/* Sign Out / Logout link - position in header with Mark and Cart buttons */
-/* Actual site uses: ctl01_LoginStatus1_ctl00 or similar */
-/* Using multiple selectors to catch all variations */
+/* Sign Out / Logout link - style as button (NO fixed positioning) */
 a[id*="SignOut"],
 a[id*="Logout"],
 a[id*="signout"],
 a[id*="logout"],
 a[href*="Sign_Out"],
 a[href*="SignOut"],
-a[href*="logout"],
-a[href*="Logout"],
 #masterTopBarAuxiliary a[id*="SignOut"],
 #masterTopBarAuxiliary a[id*="Logout"],
 .NavigationListItem a[id*="SignOut"],
-.NavigationListItem a[id*="Logout"],
-#hd a.TextButton[id*="Login"],
-#masterTopBarAuxiliary a.TextButton,
-.NavigationListItem a.TextButton {
-    /* Position in header area with Mark/Cart buttons */
-    position: fixed !important;
-    top: 10px !important;
-    right: 120px !important;
-    z-index: 1000 !important;
-    display: inline-block !important;
-    padding: 8px 16px !important;
-    color: var(--pbs-blue) !important;
-    background-color: var(--pbs-white) !important;
-    border: 2px solid var(--pbs-blue) !important;
-    border-radius: 10px !important;
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    text-decoration: none !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
-    font-family: var(--font-base) !important;
-}
-
-/* LoginStatus links that show Sign Out text - also position in header */
-a[id*="LoginStatus"][id*="ctl01"],
-a[id*="loginStatus"][id*="ctl01"],
-#hd a[id*="LoginStatus"],
-#hd a[id*="loginStatus"] {
-    position: fixed !important;
-    top: 10px !important;
-    right: 120px !important;
-    z-index: 1000 !important;
+.NavigationListItem a[id*="Logout"] {
     display: inline-block !important;
     padding: 8px 16px !important;
     color: var(--pbs-blue) !important;
@@ -1004,9 +979,9 @@ a.TextButton[id*="Login"]:hover {
 .RadMenu.RadMenu_Default a.rmLink.rmRootLink {
     text-transform: uppercase !important;
     font-weight: 600 !important;
-    letter-spacing: 0 !important;
-    font-size: 8px !important;
-    padding: 6px 4px !important;
+    letter-spacing: 0.3px !important;
+    font-size: 11px !important;
+    padding: 10px 8px !important;
     color: var(--pbs-white) !important;
 }
 
