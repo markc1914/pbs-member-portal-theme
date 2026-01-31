@@ -479,23 +479,23 @@ a[href*="SignOut"]:hover,
 }
 
 /* Header logo/branding image */
+/* IMPORTANT: position: relative ensures banner takes up space and nav appears below */
 #masterHeaderImage, #masterDonorHeaderImage {
     /* Path relative to theme folder */
     background-image: url("images/pbs-header2.png") !important;
     background-repeat: no-repeat !important;
     background-position: left center !important;
     background-size: contain !important;
-    width: 800px !important;
-    max-width: 60% !important;
-    height: 75px !important;
+    width: 100% !important;
+    max-width: 900px !important;
+    height: 90px !important;
     /* Hide the "iMIS" text but keep accessible for screen readers */
     text-indent: -9999px !important;
     overflow: hidden !important;
     display: block !important;
     visibility: visible !important;
-    position: absolute !important;
-    top: 20px !important;
-    left: 15px !important;
+    position: relative !important;
+    margin: 10px 15px !important;
     z-index: 10 !important;
 }
 
@@ -3054,20 +3054,37 @@ a[title*="Edit"] .IconSprite {
     }
 
     /* ============================================
-       MOBILE BANNER IMAGE - HIDDEN (not rendering properly)
+       MOBILE BANNER IMAGE - RESPONSIVE SIZING
        ============================================ */
 
-    /* Hide banner image on mobile - it doesn't render properly */
+    /* Banner image - scale FULL image to show FOUNDERS on right */
+    /* Image is 1040x89px, scaled to fit mobile width */
     #masterHeaderImage,
     #masterDonorHeaderImage {
-        display: none !important;
+        display: block !important;
+        visibility: visible !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 35px !important;
+        margin: 5px auto !important;
+        background-size: 100% auto !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
     }
 
     #masterHeaderBackground {
         height: auto !important;
-        min-height: auto !important;
-        padding: 10px 15px !important;
-        background-image: none !important;
+        min-height: 50px !important;
+        padding: 5px !important;
+        text-align: center !important;
+    }
+
+    /* Mobile header parent containers */
+    .header-logo-container,
+    #masterLogoArea {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 5px !important;
     }
 
     /* Logo/brand image in header - keep visible */
@@ -3123,30 +3140,30 @@ a[title*="Edit"] .IconSprite {
         background-color: var(--pbs-white) !important;
     }
 
-    /* Mobile nav links - WHITE background, BLUE text for readability */
-    /* Accessible: 11px minimum for 50+ users */
+    /* Mobile nav links - BLUE background, WHITE text for visibility */
+    /* Accessible: 12px minimum for 50+ users */
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
     .RadMenu a.rmLink.rmRootLink {
-        font-size: 11px !important;
-        padding: 8px 12px !important;
-        margin: 3px !important;
+        font-size: 12px !important;
+        padding: 10px 14px !important;
+        margin: 4px !important;
         display: inline-block !important;
-        color: var(--pbs-blue) !important;
-        background-color: var(--pbs-white) !important;
-        border: 1.5px solid var(--pbs-blue) !important;
-        border-radius: 8px !important;
+        color: var(--pbs-white) !important;
+        background-color: var(--pbs-blue) !important;
+        border: none !important;
+        border-radius: 6px !important;
         text-transform: uppercase !important;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
         letter-spacing: 0.3px !important;
         line-height: 1.2 !important;
         text-decoration: none !important;
     }
 
-    /* Hover, focus, active, selected states - BLUE bg, WHITE text */
+    /* Hover, focus, active, selected states - DARK BLUE bg, WHITE border for visibility */
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:hover,
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:focus,
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:active,
-    /* ROOT menu items - blue background on selected/hover */
+    /* ROOT menu items - darker blue on selected/hover */
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmSelected,
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmFocused,
     .RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmExpanded,
@@ -3162,9 +3179,10 @@ a[title*="Edit"] .IconSprite {
     .rmRootGroup > .rmItem.rmExpanded > a.rmLink,
     .rmRootGroup > .rmItem.rmSelected > a.rmLink.rmRootLink,
     .rmRootGroup > li.rmItem.rmSelected a.rmLink {
-        background-color: var(--pbs-blue) !important;
+        background-color: var(--pbs-blue-dark) !important;
         color: var(--pbs-white) !important;
-        background: var(--pbs-blue) !important;
+        background: var(--pbs-blue-dark) !important;
+        border: 2px solid var(--pbs-white) !important;
     }
 
     /* DROPDOWN items - keep white background on selected/hover */
@@ -3791,6 +3809,7 @@ a[title*="Edit"] .IconSprite {
 /* ========================================
    HEADER IMAGE PROTECTION - MUST BE LAST
    Prevents other rules from removing the banner
+   IMPORTANT: Image is 1040x89px - must show FOUNDERS on right side
    ======================================== */
 #hd #masterHeaderImage,
 #hd #masterDonorHeaderImage,
@@ -3803,4 +3822,76 @@ a#masterDonorHeaderImage {
     background: url("images/pbs-header2.png") no-repeat left center !important;
     background-image: url("images/pbs-header2.png") !important;
     background-color: transparent !important;
+    background-size: contain !important;
+    width: 1040px !important;
+    max-width: 95% !important;
+    height: 89px !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* ========================================
+   SIGN OUT BUTTON - Position with MARK and CART
+   The auth-link is hidden by default, must override
+   ======================================== */
+.auth-link-container {
+    position: fixed !important;
+    top: 10px !important;
+    right: 180px !important;
+    z-index: 9999 !important;
+    display: block !important;
+    visibility: visible !important;
+}
+
+#navbar-collapse .auth-link-container .auth-link,
+#navbar-collapse .auth-link-container a.auth-link,
+.auth-link-container > a.auth-link,
+#hd .auth-link-container a,
+a#ctl01_LoginStatus1,
+#ctl01_LoginStatus1,
+a[id*="LoginStatus"],
+a.auth-link {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 6px 12px !important;
+    margin: 0 !important;
+    background-color: transparent !important;
+    color: var(--pbs-blue) !important;
+    border: 1px solid var(--pbs-blue) !important;
+    border-radius: 4px !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    position: relative !important;
+    z-index: 9999 !important;
+}
+
+a#ctl01_LoginStatus1:hover,
+#ctl01_LoginStatus1:hover,
+a[id*="LoginStatus"]:hover,
+a.auth-link:hover {
+    background-color: var(--pbs-blue) !important;
+    color: var(--pbs-white) !important;
+}
+
+/* ========================================
+   NAV BAR - Blue background with white text
+   ======================================== */
+.header-bottom-container {
+    background-color: var(--pbs-blue) !important;
+}
+
+.RadMenu a.rmLink.rmRootLink,
+.RadMenu_Austin a.rmLink.rmRootLink,
+.header-bottom-container .RadMenu a.rmLink {
+    color: var(--pbs-white) !important;
+    background-color: transparent !important;
+}
+
+.RadMenu a.rmLink.rmRootLink:hover,
+.RadMenu_Austin a.rmLink.rmRootLink:hover {
+    background-color: rgba(255,255,255,0.2) !important;
+    color: var(--pbs-white) !important;
 }
