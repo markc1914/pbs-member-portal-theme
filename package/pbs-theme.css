@@ -955,7 +955,7 @@ div.RadMenu_Austin .rmGroup {
     color: #FFFFFF !important;
 }
 
-/* Nested dropdowns (third level) - clean styling, no boxes */
+/* Nested dropdowns (second/third level) - position directly adjacent to parent */
 .RadMenu .rmGroup .rmGroup,
 .RadMenu_Austin .rmGroup .rmGroup,
 .RadMenu_Austin.RadMenu .rmGroup .rmGroup {
@@ -966,10 +966,9 @@ div.RadMenu_Austin .rmGroup {
     border-radius: 8px !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
     padding: 8px 0 !important;
-    margin-top: 0 !important;
-    margin-left: 2px !important;
+    margin: 0 !important;
     left: 100% !important;
-    top: 0 !important;
+    top: -8px !important;
     min-width: 180px !important;
     position: absolute !important;
 }
@@ -1752,6 +1751,23 @@ tr:hover {
     background-color: var(--pbs-gray-100);
 }
 
+/* RadGrid header row - ensure readable text (white on blue) */
+.RadGrid .rgHeader,
+.RadGrid th,
+.rgMasterTable th,
+.rgMasterTable .rgHeader {
+    background-color: var(--pbs-blue) !important;
+    color: var(--pbs-white) !important;
+    padding: 8px 10px !important;
+    font-weight: 600 !important;
+}
+
+.RadGrid .rgHeader a,
+.RadGrid th a,
+.rgMasterTable th a {
+    color: var(--pbs-white) !important;
+}
+
 /* ========================================
    RESOURCE/DOCUMENT LIBRARY
    Minimal styling - let Telerik controls render naturally
@@ -2018,7 +2034,6 @@ footer a:hover {
 /* ========================================
    COMMUNITY PAGES STYLING
    Only style community-specific elements
-   Do NOT override wrapper/col-secondary layout (affects all pages)
    ======================================== */
 
 /* Hide sub-navigation tree menu on non-community pages */
@@ -2031,11 +2046,34 @@ footer a:hover {
     display: none !important;
 }
 
+/* COMMUNITY PAGE LAYOUT - Logo/sidebar on LEFT in desktop */
+/* Use :has() to detect community pages and override col-on-right */
+.wrapper.col-on-right:has(.CommunityLinksBlock),
+.wrapper.col-on-right:has([id*="CommunitySummary"]) {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+.wrapper.col-on-right:has(.CommunityLinksBlock) .col-secondary,
+.wrapper.col-on-right:has([id*="CommunitySummary"]) .col-secondary {
+    order: -1 !important;
+    width: 220px !important;
+    flex-shrink: 0 !important;
+    margin-right: 20px !important;
+}
+
+.wrapper.col-on-right:has(.CommunityLinksBlock) .col-primary,
+.wrapper.col-on-right:has([id*="CommunitySummary"]) .col-primary {
+    flex: 1 !important;
+}
+
 /* Community logo - constrain size (only on community pages) */
-[id*="CommunitySummary"] img {
+[id*="CommunitySummary"] img,
+.CommunitySummaryImage img {
     max-width: 100% !important;
     height: auto !important;
     display: block !important;
+    margin-bottom: 15px !important;
 }
 
 /* Community sidebar navigation menu - ONLY on community pages */
@@ -2597,40 +2635,26 @@ a[title*="Edit"] .IconSprite {
     }
 
     /* ============================================
-       MOBILE BANNER IMAGE - Responsive
+       MOBILE BANNER IMAGE - HIDDEN (not rendering properly)
        ============================================ */
 
-    /* Header image scales responsively on mobile */
+    /* Hide banner image on mobile - it doesn't render properly */
     #masterHeaderImage,
     #masterDonorHeaderImage {
-        width: 100% !important;
-        max-width: 100% !important;
-        height: auto !important;
-        min-height: 50px !important;
-        background-size: contain !important;
-        background-position: left center !important;
-        background-repeat: no-repeat !important;
-        position: relative !important;
-        left: 0 !important;
-        top: 0 !important;
-        margin: 10px 0 !important;
-        display: block !important;
+        display: none !important;
     }
 
     #masterHeaderBackground {
         height: auto !important;
         min-height: auto !important;
         padding: 10px 15px !important;
+        background-image: none !important;
     }
 
-    /* Logo/brand image in header */
-    #hd img,
-    header img,
+    /* Logo/brand image in header - keep visible */
     #masterLogoArea img,
-    [id*="Logo"] img,
-    [class*="logo"] img,
-    [class*="Logo"] img {
-        max-width: 100% !important;
+    [id*="Logo"] img:not([src*="header"]) {
+        max-width: 200px !important;
         height: auto !important;
         display: block !important;
     }
@@ -2641,7 +2665,7 @@ a[title*="Edit"] .IconSprite {
        MOBILE MENU TOGGLE BUTTON
        ============================================ */
 
-    /* The hamburger/collapse toggle - make it obvious */
+    /* The hamburger/collapse toggle - make it obvious and add text */
     .navbar-toggle,
     .navbar-toggler,
     [data-toggle="collapse"],
@@ -2661,24 +2685,15 @@ a[title*="Edit"] .IconSprite {
         margin-bottom: 5px !important;
     }
 
-    /* Add clear label to menu toggle - ONLY ONE main nav toggle */
-    /* Very specific selector to avoid duplicates */
-    .PrimaryNavPanel > [data-toggle="collapse"]:first-of-type::before {
-        content: "☰ TAP TO SHOW/HIDE MENU" !important;
-    }
-
-    /* Hide ALL other collapse toggle ::before content */
-    [data-toggle="collapse"]::before,
-    .navbar-toggle::before,
-    .navbar-toggler::before {
-        content: "" !important;
-        display: none !important;
-    }
-
-    /* Show only the primary nav toggle content */
-    .PrimaryNavPanel > [data-toggle="collapse"]:first-of-type::before {
-        content: "☰ TAP TO SHOW/HIDE MENU" !important;
-        display: block !important;
+    /* Add "TAP TO SHOW MENU" text to toggle buttons */
+    .navbar-toggle::after,
+    .navbar-toggler::after,
+    [data-toggle="collapse"]::after {
+        content: "☰ TAP TO SHOW MENU" !important;
+        display: inline !important;
+        color: var(--pbs-white) !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
     }
 
     /* ============================================
@@ -2736,17 +2751,23 @@ a[title*="Edit"] .IconSprite {
     .rmItem:hover > a.rmLink,
     .rmItem.rmSelected > a.rmLink,
     .rmItem.rmFocused > a.rmLink,
-    .rmItem.rmExpanded > a.rmLink {
+    .rmItem.rmExpanded > a.rmLink,
+    .rmItem.rmSelected > a.rmLink.rmRootLink,
+    li.rmItem.rmSelected a.rmLink {
         background-color: var(--pbs-blue) !important;
         color: var(--pbs-white) !important;
         background: var(--pbs-blue) !important;
     }
 
-    /* Hover text must be white */
+    /* CRITICAL: Active/selected menu item text MUST be WHITE */
     .rmItem:hover > a.rmLink .rmText,
     .rmItem.rmSelected > a.rmLink .rmText,
     .rmItem.rmFocused > a.rmLink .rmText,
-    .rmItem.rmExpanded > a.rmLink .rmText {
+    .rmItem.rmExpanded > a.rmLink .rmText,
+    .rmItem.rmSelected .rmText,
+    li.rmItem.rmSelected .rmText,
+    a.rmLink.rmRootLink.rmSelected .rmText,
+    .rmSelected .rmText {
         color: var(--pbs-white) !important;
     }
 
@@ -2786,9 +2807,10 @@ a[title*="Edit"] .IconSprite {
     /* ============================================
        MOBILE SUBMENUS / DROPDOWNS
        Styled like main nav - WHITE bg, BLUE text, BLUE border
+       Aligned to the RIGHT
        ============================================ */
 
-    /* Submenu container - MODERN rounded */
+    /* Submenu container - MODERN rounded, RIGHT-ALIGNED */
     .RadMenu .rmGroup,
     .RadMenu_Austin .rmGroup,
     .rmGroup {
@@ -2799,6 +2821,9 @@ a[title*="Edit"] .IconSprite {
         min-width: 160px !important;
         z-index: 9999 !important;
         padding: 6px !important;
+        right: 0 !important;
+        left: auto !important;
+        text-align: right !important;
     }
 
     /* Submenu links - MODERN sleek buttons */
