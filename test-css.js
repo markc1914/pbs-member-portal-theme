@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
 
-const SCREENSHOTS_DIR = '/Users/markcornelius/Screenshots';
+const SCREENSHOTS_DIR = './automatedTestScreenshots';
 const BASE_URL = 'https://members.phibetasigma1914.org/iMISDEV';
 
 // Correct page URLs
