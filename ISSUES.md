@@ -12,6 +12,18 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 
 ## Resolved Issues
 
+### Issue #12: Nav bar grey area on right side
+- **Status:** Resolved (2026-01-31)
+- **Fix:** Added header-bottom-container blue background to match nav bar
+
+### Issue #11: Sign Out button invisible
+- **Status:** Resolved (2026-01-31)
+- **Fix:** Sign Out button (ctl01_LoginStatus1) was hidden by CSS. Used specific selectors to override hidden state and positioned fixed in top right with MARK and CART buttons
+
+### Issue #10: Banner image not showing founders (3 men silhouette)
+- **Status:** Resolved (2026-01-31)
+- **Fix:** Banner image is 1040x89px. Increased width to 1040px (max-width 95%) to show full image including founders on right side. Mobile scales full image to fit viewport width.
+
 ### Issue #9: Community page sidebar/logo styling
 - **Status:** Resolved (2026-01-31)
 - **Fix:** Constrained community logo max-width to 200px, added border-radius, ensured sidebar container doesn't overflow
@@ -55,11 +67,14 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 Run automated tests to verify fixes:
 
 ```bash
-# Desktop only
+# Standard testing (desktop)
 node test-css.js "username" "password"
 
 # All viewports (desktop, tablet, mobile)
 node test-css.js "username" "password" --all
+
+# CSS override testing (tests CSS changes without deployment)
+node test-css-override.js "username" "password"
 ```
 
 Screenshots are saved to `automatedTestScreenshots/` folder.
