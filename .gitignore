@@ -20,6 +20,9 @@ testingScreenshots/*.png
 testingScreenshots/*.jpg
 testingScreenshots/*.jpeg
 
+# Automated test screenshots
+automatedTestScreenshots/
+
 # Node.js
 node_modules/
 package-lock.json
