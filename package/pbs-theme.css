@@ -875,6 +875,8 @@ div.RadMenu_Austin .rmGroup {
     padding: 8px 0 !important;
     margin-top: 0 !important;
     min-width: 220px !important;
+    z-index: 10000 !important;
+    position: relative !important;
 }
 
 /* Dropdown items - no backgrounds or gradients */
@@ -2114,13 +2116,15 @@ footer a:hover {
         margin-right: 20px !important;
     }
 
-    /* Sidebar - float right */
+    /* Sidebar - float right, lower z-index so nav dropdowns appear above */
     .wrapper.has-secondary-col:has(.CommunityLinksBlock) .col-secondary,
     #ctl01_SubNavPanel:has(.CommunityLinksBlock),
     .col-secondary:has(.CommunityLinksBlock) {
         float: right !important;
         width: 250px !important;
         margin-left: 0 !important;
+        z-index: 1 !important;
+        position: relative !important;
     }
 }
 
