@@ -1800,6 +1800,20 @@ table thead th * {
     opacity: 1 !important;
 }
 
+/* Mobile table headers - ensure white text */
+@media (max-width: 767px) {
+    .rgHeader,
+    .rgHeader *,
+    th.rgHeader,
+    th.rgHeader *,
+    thead th,
+    thead th *,
+    table th,
+    table th * {
+        color: #FFFFFF !important;
+    }
+}
+
 /* ========================================
    RESOURCE/DOCUMENT LIBRARY
    Minimal styling - let Telerik controls render naturally
@@ -2078,8 +2092,23 @@ footer a:hover {
     display: none !important;
 }
 
-/* COMMUNITY PAGE LAYOUT - Leave default iMIS layout alone */
-/* DO NOT add flexbox to .wrapper - it breaks ALL pages */
+/* COMMUNITY PAGE LAYOUT - Sidebar on RIGHT for desktop */
+/* Use float-based layout, only for elements containing community content */
+@media (min-width: 768px) {
+    /* When SubNavPanel contains community content, float it right */
+    #ctl01_SubNavPanel:has(.CommunityLinksBlock) {
+        float: right !important;
+        width: 250px !important;
+        margin-left: 20px !important;
+    }
+
+    /* Fallback: target col-secondary directly when it has community content */
+    .col-secondary:has(.CommunityLinksBlock) {
+        float: right !important;
+        width: 250px !important;
+        margin-left: 20px !important;
+    }
+}
 
 /* Community logo - constrain size */
 [id*="CommunitySummary"] img,
