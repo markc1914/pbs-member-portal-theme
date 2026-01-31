@@ -3880,55 +3880,157 @@ a.auth-link:hover {
 
 /* ========================================
    NAV BAR - Blue background with white text
+   CRITICAL: Must use broad selectors to override Telerik
    ======================================== */
-.header-bottom-container {
-    background-color: var(--pbs-blue) !important;
+
+/* Nav bar container - FORCE BLUE */
+.header-bottom-container,
+.PrimaryNavPanel,
+#ctl01_NavPanel,
+[id*="NavPanel"],
+[class*="NavPanel"] {
+    background-color: #164F90 !important;
+    background: #164F90 !important;
 }
 
-/* ROOT LEVEL nav items only - white text on blue background */
-/* Excludes dropdown items which use .rmGroup/.rmSlide */
-.RadMenu > .rmRootGroup > .rmItem > a.rmLink,
-.RadMenu > .rmRootGroup > .rmItem > a.rmLink > .rmText,
-.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink,
-.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink > .rmText,
+/* Nav menu bar - FORCE BLUE background */
+.RadMenu,
+.RadMenu_Austin,
+.rmRootGroup,
+.rmHorizontal,
+.rmRootGroup.rmHorizontal,
+ul.rmRootGroup {
+    background-color: #164F90 !important;
+    background: #164F90 !important;
+}
+
+/* Override any grey backgrounds in root nav area */
+.rmRootGroup > .rmItem,
+.rmRootGroup > li.rmItem,
+.rmRootGroup > .rmFirst,
+.rmRootGroup > .rmLast {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+/* ROOT NAV - WHITE TEXT - Force all text white in root nav bar */
+.RadMenu > .rmRootGroup,
+.RadMenu > .rmRootGroup > .rmItem,
+.RadMenu > .rmRootGroup > .rmItem > a,
+.RadMenu > .rmRootGroup > .rmItem > a > span,
+.RadMenu_Austin > .rmRootGroup,
+.RadMenu_Austin > .rmRootGroup > .rmItem,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a > span,
 .RadMenu a.rmLink.rmRootLink,
 .RadMenu_Austin a.rmLink.rmRootLink,
 .RadMenu a.rmLink.rmRootLink .rmText,
 .RadMenu_Austin a.rmLink.rmRootLink .rmText,
+a.rmLink.rmRootLink,
 a.rmLink.rmRootLink span,
-a.rmLink.rmRootLink .rmText {
-    color: var(--pbs-white) !important;
-    -webkit-text-fill-color: var(--pbs-white) !important;
+a.rmLink.rmRootLink .rmText,
+.rmRootGroup .rmText,
+.rmRootGroup a .rmText {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
     background-color: transparent !important;
     font-weight: 600 !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
 }
 
+/* Root nav hover state */
 .RadMenu a.rmLink.rmRootLink:hover,
-.RadMenu_Austin a.rmLink.rmRootLink:hover {
+.RadMenu_Austin a.rmLink.rmRootLink:hover,
+.RadMenu > .rmRootGroup > .rmItem > a:hover,
+.RadMenu_Austin > .rmRootGroup > .rmItem > a:hover {
     background-color: rgba(255,255,255,0.2) !important;
-    color: var(--pbs-white) !important;
-    -webkit-text-fill-color: var(--pbs-white) !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
 }
 
-/* DROPDOWN items - dark text on white background */
-.RadMenu .rmGroup a.rmLink,
+/* ========================================
+   DROPDOWN MENUS - Dark text on light background
+   Higher specificity to override root nav styles
+   ======================================== */
+
+/* Dropdown containers - white/grey background */
+.RadMenu .rmSlide,
+.RadMenu .rmGroup,
+.RadMenu_Austin .rmSlide,
+.RadMenu_Austin .rmGroup,
+ul.rmGroup,
+div.rmSlide {
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+}
+
+/* Dropdown items - DARK TEXT (override white from root) */
+.RadMenu .rmSlide .rmItem,
+.RadMenu .rmGroup .rmItem,
+.RadMenu_Austin .rmSlide .rmItem,
+.RadMenu_Austin .rmGroup .rmItem,
+.rmSlide .rmItem,
+.rmGroup .rmItem,
+.rmSlide li.rmItem,
+.rmGroup li.rmItem {
+    background-color: #FFFFFF !important;
+}
+
 .RadMenu .rmSlide a.rmLink,
-.RadMenu_Austin .rmGroup a.rmLink,
+.RadMenu .rmSlide a.rmLink .rmText,
+.RadMenu .rmGroup a.rmLink,
+.RadMenu .rmGroup a.rmLink .rmText,
 .RadMenu_Austin .rmSlide a.rmLink,
-.rmGroup .rmLink,
-.rmSlide .rmLink,
-.rmGroup .rmLink .rmText,
-.rmSlide .rmLink .rmText {
+.RadMenu_Austin .rmSlide a.rmLink .rmText,
+.RadMenu_Austin .rmGroup a.rmLink,
+.RadMenu_Austin .rmGroup a.rmLink .rmText,
+.rmSlide a.rmLink,
+.rmSlide a.rmLink .rmText,
+.rmGroup a.rmLink,
+.rmGroup a.rmLink .rmText,
+.rmSlide .rmText,
+.rmGroup .rmText {
     color: #333333 !important;
     -webkit-text-fill-color: #333333 !important;
     background-color: #FFFFFF !important;
 }
 
-.RadMenu .rmGroup a.rmLink:hover,
+/* Dropdown hover - blue background, white text */
 .RadMenu .rmSlide a.rmLink:hover,
+.RadMenu .rmSlide a.rmLink:hover .rmText,
+.RadMenu .rmGroup a.rmLink:hover,
+.RadMenu .rmGroup a.rmLink:hover .rmText,
+.RadMenu_Austin .rmSlide a.rmLink:hover,
+.RadMenu_Austin .rmSlide a.rmLink:hover .rmText,
 .RadMenu_Austin .rmGroup a.rmLink:hover,
-.RadMenu_Austin .rmSlide a.rmLink:hover {
+.RadMenu_Austin .rmGroup a.rmLink:hover .rmText,
+.rmSlide a.rmLink:hover,
+.rmSlide a.rmLink:hover .rmText,
+.rmGroup a.rmLink:hover,
+.rmGroup a.rmLink:hover .rmText {
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
-    background-color: var(--pbs-blue) !important;
+    background-color: #164F90 !important;
+}
+
+/* Nested dropdowns (all children) - same styling */
+.rmGroup .rmGroup,
+.rmSlide .rmSlide,
+.rmGroup .rmGroup a.rmLink,
+.rmGroup .rmGroup a.rmLink .rmText,
+.rmSlide .rmSlide a.rmLink,
+.rmSlide .rmSlide a.rmLink .rmText {
+    color: #333333 !important;
+    -webkit-text-fill-color: #333333 !important;
+    background-color: #FFFFFF !important;
+}
+
+.rmGroup .rmGroup a.rmLink:hover,
+.rmGroup .rmGroup a.rmLink:hover .rmText,
+.rmSlide .rmSlide a.rmLink:hover,
+.rmSlide .rmSlide a.rmLink:hover .rmText {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background-color: #164F90 !important;
 }
