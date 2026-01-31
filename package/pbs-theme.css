@@ -1753,14 +1753,19 @@ tr:hover {
 }
 
 /* RadGrid header row - ensure readable text (white on blue) */
-.RadGrid .rgHeader,
-.RadGrid th,
-.rgMasterTable th,
-.rgMasterTable .rgHeader,
-th.rgHeader,
-thead th,
-table thead th,
-.rgMasterTable thead th {
+/* Use very high specificity to override Telerik WebResource styles */
+html body .RadGrid .rgHeader,
+html body .RadGrid th,
+html body .rgMasterTable th,
+html body .rgMasterTable .rgHeader,
+html body th.rgHeader,
+html body thead th,
+html body table thead th,
+html body .rgMasterTable thead th,
+.RadGrid_Sitefinity .rgHeader,
+.RadGrid_Metro .rgHeader,
+div.RadGrid .rgHeader,
+div.RadGrid th.rgHeader {
     background-color: #164F90 !important;
     background: #164F90 !important;
     color: #FFFFFF !important;
@@ -1773,28 +1778,31 @@ table thead th,
     word-wrap: break-word !important;
 }
 
-.RadGrid .rgHeader a,
-.RadGrid th a,
-.rgMasterTable th a,
-th.rgHeader a,
-thead th a,
-table thead th a {
+html body .RadGrid .rgHeader a,
+html body .RadGrid th a,
+html body .rgMasterTable th a,
+html body th.rgHeader a,
+html body thead th a,
+html body table thead th a,
+.RadGrid_Sitefinity .rgHeader a,
+.RadGrid_Metro .rgHeader a {
     color: #FFFFFF !important;
 }
 
 /* Ensure ALL header text is visible - force white color */
-.rgHeader,
-.rgHeader *,
-.rgHeader span,
-.rgHeader a,
-thead th,
-thead th *,
-thead th span,
-thead th a,
-th.rgHeader,
-th.rgHeader *,
-table thead th,
-table thead th * {
+/* Triple specificity with html body prefix */
+html body .rgHeader,
+html body .rgHeader *,
+html body .rgHeader span,
+html body .rgHeader a,
+html body thead th,
+html body thead th *,
+html body th.rgHeader,
+html body th.rgHeader *,
+html body table thead th,
+html body table thead th *,
+.RadGrid .rgHeader *,
+.RadGrid th.rgHeader * {
     color: #FFFFFF !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -1802,14 +1810,14 @@ table thead th * {
 
 /* Mobile table headers - ensure white text */
 @media (max-width: 767px) {
-    .rgHeader,
-    .rgHeader *,
-    th.rgHeader,
-    th.rgHeader *,
-    thead th,
-    thead th *,
-    table th,
-    table th * {
+    html body .rgHeader,
+    html body .rgHeader *,
+    html body th.rgHeader,
+    html body th.rgHeader *,
+    html body thead th,
+    html body thead th *,
+    html body table th,
+    html body table th * {
         color: #FFFFFF !important;
     }
 }
