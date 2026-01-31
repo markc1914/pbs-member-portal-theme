@@ -956,6 +956,7 @@ div.RadMenu_Austin .rmGroup {
 }
 
 /* Nested dropdowns (second/third level) - position directly adjacent to parent */
+/* Close the gap by overlapping slightly with parent */
 .RadMenu .rmGroup .rmGroup,
 .RadMenu_Austin .rmGroup .rmGroup,
 .RadMenu_Austin.RadMenu .rmGroup .rmGroup {
@@ -967,8 +968,8 @@ div.RadMenu_Austin .rmGroup {
     box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
     padding: 8px 0 !important;
     margin: 0 !important;
-    left: 100% !important;
-    top: -8px !important;
+    left: calc(100% - 5px) !important;
+    top: 0 !important;
     min-width: 180px !important;
     position: absolute !important;
 }
@@ -2062,10 +2063,26 @@ footer a:hover {
     display: none !important;
 }
 
-/* COMMUNITY PAGE LAYOUT - Do NOT override default iMIS layout */
-/* The :has() selector was causing layout issues - removed */
+/* COMMUNITY PAGE LAYOUT - Sidebar on LEFT */
+/* Target wrapper that contains CommunityLinksBlock */
+.wrapper.has-secondary-col.col-on-right {
+    display: flex !important;
+    flex-direction: row-reverse !important;
+}
 
-/* Community logo - constrain size (only on community pages) */
+.wrapper.has-secondary-col.col-on-right .col-primary {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+.wrapper.has-secondary-col.col-on-right .col-secondary {
+    width: 250px !important;
+    flex-shrink: 0 !important;
+    margin-right: 20px !important;
+    margin-left: 0 !important;
+}
+
+/* Community logo - constrain size */
 [id*="CommunitySummary"] img,
 .CommunitySummaryImage img {
     max-width: 100% !important;
@@ -2074,20 +2091,23 @@ footer a:hover {
     margin-bottom: 15px !important;
 }
 
-/* Community sidebar navigation menu - ONLY on community pages */
+/* Community sidebar navigation menu */
 .CommunityLinksBlock {
     list-style: none !important;
     margin: 0 !important;
     padding: 0 !important;
 }
 
-/* Community menu links - WHITE background, BLUE text (match mobile) */
-/* ONLY target CommunityLinksBlock to avoid affecting other pages */
+/* Community menu links - WHITE background, BLUE text */
+/* High specificity to override any other styles */
 .CommunityLinksBlock a,
+.col-secondary .CommunityLinksBlock a,
+#ctl01_SideBarPlaceHolder_ctl00_CommunityLinksBlock a,
 [id*="CommunityLinksBlock"] a {
     display: block !important;
-    background-color: var(--pbs-white) !important;
-    color: var(--pbs-blue) !important;
+    background-color: #FFFFFF !important;
+    background: #FFFFFF !important;
+    color: #164F90 !important;
     padding: 10px 15px !important;
     text-decoration: none !important;
     font-weight: 600 !important;
