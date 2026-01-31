@@ -3032,28 +3032,19 @@ a[title*="Edit"] .IconSprite {
     }
 
     /* ============================================
-       MOBILE BANNER IMAGE - RESPONSIVE SIZING
+       MOBILE BANNER IMAGE - HIDDEN ON MOBILE
+       Will be replaced with mobile-specific banner later
        ============================================ */
 
-    /* Banner image - CROP to show only FOUNDERS on mobile */
-    /* Full image is 1040x89px, show right portion with founders */
+    /* Hide banner image on mobile - desktop only */
     #masterHeaderImage,
-    #masterDonorHeaderImage {
-        display: block !important;
-        visibility: visible !important;
-        width: 200px !important;
-        height: 70px !important;
-        margin: 10px auto !important;
-        background-size: auto 100% !important;
-        background-position: right center !important;
-        background-repeat: no-repeat !important;
-    }
-
+    #masterDonorHeaderImage,
     #masterHeaderBackground {
-        height: auto !important;
-        min-height: 80px !important;
-        padding: 5px !important;
-        text-align: center !important;
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
     }
 
     /* Mobile header parent containers */
