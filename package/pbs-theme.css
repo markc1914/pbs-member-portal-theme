@@ -4027,38 +4027,61 @@ div.rmSlide {
     background-color: #164F90 !important;
 }
 
-/* NESTED DROPDOWNS - ensure visible and above page content */
-.rmGroup .rmGroup,
-.rmSlide .rmSlide,
-.rmGroup .rmSlide,
-.rmSlide .rmGroup {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+/* NESTED DROPDOWNS - scoped to header nav only */
+/* Don't force visibility - let Telerik handle show/hide on hover */
+#hd .rmGroup .rmGroup,
+#hd .rmSlide .rmSlide,
+#hd .rmGroup .rmSlide,
+#hd .rmSlide .rmGroup,
+.PrimaryNavPanel .rmGroup .rmGroup,
+.PrimaryNavPanel .rmSlide .rmSlide,
+.header-bottom-container .rmGroup .rmGroup,
+.header-bottom-container .rmSlide .rmSlide {
     background-color: #FFFFFF !important;
     z-index: 9999999 !important;
 }
 
-.rmGroup .rmGroup a.rmLink,
-.rmGroup .rmGroup a.rmLink .rmText,
-.rmSlide .rmSlide a.rmLink,
-.rmSlide .rmSlide a.rmLink .rmText,
-.rmGroup .rmSlide a.rmLink,
-.rmGroup .rmSlide a.rmLink .rmText,
-.rmSlide .rmGroup a.rmLink,
-.rmSlide .rmGroup a.rmLink .rmText {
+#hd .rmGroup .rmGroup a.rmLink,
+#hd .rmGroup .rmGroup a.rmLink .rmText,
+#hd .rmSlide .rmSlide a.rmLink,
+#hd .rmSlide .rmSlide a.rmLink .rmText,
+.PrimaryNavPanel .rmGroup .rmGroup a.rmLink,
+.PrimaryNavPanel .rmGroup .rmGroup a.rmLink .rmText,
+.header-bottom-container .rmGroup .rmGroup a.rmLink,
+.header-bottom-container .rmGroup .rmGroup a.rmLink .rmText {
     color: #333333 !important;
     -webkit-text-fill-color: #333333 !important;
     background-color: #FFFFFF !important;
-    display: block !important;
-    visibility: visible !important;
 }
 
-.rmGroup .rmGroup a.rmLink:hover,
-.rmGroup .rmGroup a.rmLink:hover .rmText,
-.rmSlide .rmSlide a.rmLink:hover,
-.rmSlide .rmSlide a.rmLink:hover .rmText {
+#hd .rmGroup .rmGroup a.rmLink:hover,
+#hd .rmGroup .rmGroup a.rmLink:hover .rmText,
+#hd .rmSlide .rmSlide a.rmLink:hover,
+#hd .rmSlide .rmSlide a.rmLink:hover .rmText,
+.PrimaryNavPanel .rmGroup .rmGroup a.rmLink:hover,
+.PrimaryNavPanel .rmGroup .rmGroup a.rmLink:hover .rmText {
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
     background-color: #164F90 !important;
+}
+
+/* ========================================
+   FINAL RESET - Content Area RadMenus
+   Must be at end to override all above rules
+   ======================================== */
+#bd .RadMenu,
+#bd .RadMenu *,
+#bd .rmGroup,
+#bd .rmGroup *,
+#bd .rmSlide,
+#bd .rmSlide *,
+#masterContentArea .RadMenu,
+#masterContentArea .RadMenu *,
+#masterContentArea .rmGroup,
+#masterContentArea .rmGroup *,
+.ObjectBrowserWrapper .RadMenu,
+.ObjectBrowserWrapper .RadMenu *,
+.RAD_SPLITTER .RadMenu,
+.RAD_SPLITTER .RadMenu * {
+    all: revert !important;
 }
