@@ -3098,6 +3098,40 @@ a[title*="Edit"] .IconSprite {
     /* Keyword search is already hidden globally - no mobile-specific rules needed */
 
     /* ============================================
+       MOBILE SIGN OUT BUTTON - Must be visible
+       ============================================ */
+    .auth-link-container {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        display: block !important;
+        text-align: center !important;
+        margin: 10px 0 !important;
+        z-index: 9999 !important;
+    }
+
+    a#ctl01_LoginStatus1,
+    #ctl01_LoginStatus1,
+    a[id*="LoginStatus"],
+    a.auth-link,
+    .auth-link-container a {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        padding: 8px 16px !important;
+        margin: 5px !important;
+        background-color: var(--pbs-white) !important;
+        color: var(--pbs-blue) !important;
+        border: 2px solid var(--pbs-blue) !important;
+        border-radius: 10px !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        text-decoration: none !important;
+        position: relative !important;
+    }
+
+    /* ============================================
        MOBILE MENU TOGGLE BUTTON
        ============================================ */
 
@@ -3843,6 +3877,7 @@ a#masterDonorHeaderImage {
     visibility: visible !important;
 }
 
+/* Sign Out button - MUST MATCH MARK and CART exactly */
 #navbar-collapse .auth-link-container .auth-link,
 #navbar-collapse .auth-link-container a.auth-link,
 .auth-link-container > a.auth-link,
@@ -3854,16 +3889,18 @@ a.auth-link {
     display: inline-block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    padding: 6px 12px !important;
-    margin: 0 !important;
-    background-color: transparent !important;
+    padding: 8px 16px !important;
+    margin: 3px !important;
+    background-color: var(--pbs-white) !important;
     color: var(--pbs-blue) !important;
     border: 2px solid var(--pbs-blue) !important;
-    border-radius: 4px !important;
+    border-radius: 10px !important;
     font-size: 11px !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     text-transform: uppercase !important;
     text-decoration: none !important;
+    letter-spacing: 0.5px !important;
+    font-family: var(--font-base) !important;
     position: relative !important;
     z-index: 9999 !important;
     white-space: nowrap !important;
