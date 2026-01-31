@@ -4067,21 +4067,62 @@ div.rmSlide {
 
 /* ========================================
    FINAL RESET - Content Area RadMenus
-   Must be at end to override all above rules
+   Reset only our overrides, not Telerik structure
    ======================================== */
-#bd .RadMenu,
-#bd .RadMenu *,
-#bd .rmGroup,
-#bd .rmGroup *,
+
+/* Reset dropdown visibility - let Telerik control show/hide */
 #bd .rmSlide,
-#bd .rmSlide *,
-#masterContentArea .RadMenu,
-#masterContentArea .RadMenu *,
-#masterContentArea .rmGroup,
-#masterContentArea .rmGroup *,
-.ObjectBrowserWrapper .RadMenu,
-.ObjectBrowserWrapper .RadMenu *,
-.RAD_SPLITTER .RadMenu,
-.RAD_SPLITTER .RadMenu * {
-    all: revert !important;
+#bd .rmGroup:not(.rmRootGroup),
+#masterContentArea .rmSlide,
+#masterContentArea .rmGroup:not(.rmRootGroup),
+.ObjectBrowserWrapper .rmSlide,
+.ObjectBrowserWrapper .rmGroup:not(.rmRootGroup),
+.RAD_SPLITTER .rmSlide,
+.RAD_SPLITTER .rmGroup:not(.rmRootGroup) {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* When Telerik adds rmExpanded class, show the menu */
+#bd .rmExpanded > .rmSlide,
+#bd .rmExpanded > .rmGroup,
+#bd .rmItem.rmExpanded > .rmSlide,
+#bd .rmItem.rmExpanded .rmGroup,
+#masterContentArea .rmExpanded > .rmSlide,
+#masterContentArea .rmExpanded > .rmGroup,
+.ObjectBrowserWrapper .rmExpanded > .rmSlide,
+.ObjectBrowserWrapper .rmExpanded > .rmGroup,
+.RAD_SPLITTER .rmExpanded > .rmSlide,
+.RAD_SPLITTER .rmExpanded > .rmGroup {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Reset colors for content area menus - use Telerik defaults */
+#bd .RadMenu a.rmLink,
+#bd .RadMenu .rmText,
+#masterContentArea .RadMenu a.rmLink,
+#masterContentArea .RadMenu .rmText,
+.ObjectBrowserWrapper .RadMenu a.rmLink,
+.ObjectBrowserWrapper .RadMenu .rmText,
+.RAD_SPLITTER .RadMenu a.rmLink,
+.RAD_SPLITTER .RadMenu .rmText {
+    color: inherit !important;
+    -webkit-text-fill-color: inherit !important;
+    background-color: transparent !important;
+}
+
+/* Reset background for content area menu containers */
+#bd .RadMenu .rmGroup,
+#bd .RadMenu .rmSlide,
+#masterContentArea .RadMenu .rmGroup,
+#masterContentArea .RadMenu .rmSlide,
+.ObjectBrowserWrapper .RadMenu .rmGroup,
+.ObjectBrowserWrapper .RadMenu .rmSlide,
+.RAD_SPLITTER .RadMenu .rmGroup,
+.RAD_SPLITTER .RadMenu .rmSlide {
+    background-color: inherit !important;
+    background: inherit !important;
 }
