@@ -7,6 +7,7 @@ const BASE_URL = 'https://members.phibetasigma1914.org/iMISDEV';
 const PAGES = {
     login: 'https://members.phibetasigma1914.org/imisdev/pbsmember',
     home: `${BASE_URL}/PBSMember/Home.aspx`,
+    account: `${BASE_URL}/PBSMember/My_Account_2/PBSMember/AccountPage.aspx?hkey=53f0d6d1-e7a3-4f97-87b5-d6d0a6a282f0`,
     education: `${BASE_URL}/PBSMember/Documents/Member_Education_Material/PBSMember/Member_Education_Material.aspx?hkey=d0ba999b-db57-47c4-84c0-c9c1505cfacc`,
     community: `${BASE_URL}/iCore/Communities/CommunityLayouts/CommunityDescription.aspx?iUniformKey=d2a740ce-8b73-4a54-97a5-990ac2cce029&WebsiteKey=f17366dc-26c7-4e94-9bc6-8535489d9140`
 };
@@ -81,59 +82,121 @@ a#masterDonorHeaderImage {
     z-index: 1000 !important;
 }
 
-/* Nav menu bar - blue background */
+/* Nav menu bar - FORCE BLUE background (not grey) */
 .RadMenu,
 .RadMenu_Austin,
-.rmRootGroup {
+.rmRootGroup,
+.rmHorizontal,
+.rmRootGroup.rmHorizontal,
+ul.rmRootGroup {
     background-color: #164F90 !important;
+    background: #164F90 !important;
 }
 
-/* Grey area behind nav on right - make it blue to match */
+/* Nav bar container - FORCE BLUE */
 .PrimaryNavPanel,
 #ctl01_NavPanel,
-[id*="NavPanel"] {
+[id*="NavPanel"],
+[class*="NavPanel"] {
+    background-color: #164F90 !important;
+    background: #164F90 !important;
+}
+
+/* header-bottom-container - FORCE BLUE */
+.header-bottom-container,
+.header-bottom-container * {
     background-color: #164F90 !important;
 }
 
-/* header-bottom-container - make it blue */
-.header-bottom-container {
-    background-color: #164F90 !important;
-}
-
-/* DESKTOP NAV TEXT - FORCE WHITE on blue background */
-/* Use wildcard to catch all text elements in nav */
+/* Override any grey backgrounds in nav area */
 .RadMenu *,
 .RadMenu_Austin *,
 .rmRootGroup *,
-.header-bottom-container .RadMenu *,
-.RadMenu a,
-.RadMenu span,
-.RadMenu .rmLink,
-.RadMenu .rmText,
-.RadMenu_Austin a,
-.RadMenu_Austin span,
-.RadMenu_Austin .rmLink,
-.RadMenu_Austin .rmText,
-.rmRootGroup a,
-.rmRootGroup span,
-a.rmLink.rmRootLink,
-a.rmLink.rmRootLink span,
-a.rmLink.rmRootLink .rmText,
-.header-bottom-container a,
-.header-bottom-container span {
+.rmItem,
+li.rmItem,
+.rmFirst,
+.rmLast {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+/* DESKTOP NAV - WHITE TEXT on BLUE background for READABILITY */
+/* Override ALL possible text color properties */
+.RadMenu,
+.RadMenu_Austin,
+.rmRootGroup,
+.RadMenu *,
+.RadMenu_Austin *,
+.rmRootGroup *,
+.header-bottom-container,
+.header-bottom-container * {
     color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* Nav links specifically */
+.RadMenu a,
+.RadMenu_Austin a,
+a.rmLink,
+a.rmRootLink,
+a.rmLink.rmRootLink,
+.rmLink .rmText,
+.rmRootLink .rmText {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
     background-color: transparent !important;
     font-weight: 600 !important;
     text-shadow: none !important;
+    opacity: 1 !important;
 }
 
+/* Hover state */
 .RadMenu a:hover,
 .RadMenu_Austin a:hover,
-a.rmLink.rmRootLink:hover,
-a.rmLink.rmRootLink:hover span,
-a.rmLink.rmRootLink:hover * {
+a.rmLink:hover,
+a.rmRootLink:hover {
     background-color: rgba(255,255,255,0.2) !important;
     color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* Login page nav - FORCE ALL TEXT WHITE in nav bar area */
+/* Target anything that looks like it's in the nav bar */
+.header-bottom-container a,
+.header-bottom-container span,
+.header-bottom-container li,
+.header-bottom-container *,
+#hd .RadMenu a,
+#hd .RadMenu_Austin a,
+#hd a.rmLink,
+#hd .rmLink,
+#hd .rmText,
+#hd .rmRootLink,
+.PrimaryNavPanel a,
+.PrimaryNavPanel span,
+.PrimaryNavPanel *,
+[class*="Nav"] a,
+[class*="Nav"] span,
+[id*="Nav"] a,
+[id*="Nav"] span,
+.rmItem a,
+.rmItem span,
+li.rmItem *,
+ul.rmRootGroup a,
+ul.rmRootGroup span,
+ul.rmRootGroup * {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    background-color: transparent !important;
+    text-decoration: none !important;
+}
+
+/* Login page - nav container must be blue */
+.PrimaryNavPanel,
+[class*="NavPanel"],
+[id*="NavPanel"],
+.header-bottom-container {
+    background-color: #164F90 !important;
 }
 
 /* KEEP header/banner area WHITE - not blue */
@@ -218,6 +281,38 @@ a.rmLink.rmRootLink:hover * {
         background-color: #0d3a6a !important;
         color: #FFFFFF !important;
     }
+
+    /* MOBILE SIGN OUT BUTTON - Must be visible */
+    .auth-link-container {
+        position: relative !important;
+        top: auto !important;
+        right: auto !important;
+        display: block !important;
+        text-align: center !important;
+        margin: 10px 0 !important;
+        z-index: 9999 !important;
+    }
+
+    a#ctl01_LoginStatus1,
+    #ctl01_LoginStatus1,
+    a[id*="LoginStatus"],
+    a.auth-link,
+    .auth-link-container a {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        padding: 8px 16px !important;
+        margin: 5px !important;
+        background-color: #FFFFFF !important;
+        color: #164F90 !important;
+        border: 2px solid #164F90 !important;
+        border-radius: 10px !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        text-decoration: none !important;
+        position: relative !important;
+    }
 }
 
 /* Dropdown z-index fix */
@@ -225,7 +320,31 @@ a.rmLink.rmRootLink:hover * {
     z-index: 99999 !important;
 }
 
-/* FIX: Sign Out button - position in TOP RIGHT with MARK and CART */
+/* FIX: Sign In/Sign Up NavigationLink buttons - proper styling */
+.NavigationLink,
+a.NavigationLink {
+    display: inline-block !important;
+    visibility: visible !important;
+    padding: 8px 16px !important;
+    margin: 5px !important;
+    background-color: transparent !important;
+    color: #164F90 !important;
+    border: 2px solid #164F90 !important;
+    border-radius: 4px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+}
+
+.NavigationLink:hover,
+a.NavigationLink:hover {
+    background-color: #164F90 !important;
+    color: #FFFFFF !important;
+}
+
+/* FIX: Sign Out button container - position in TOP RIGHT */
 .auth-link-container {
     position: fixed !important;
     top: 10px !important;
@@ -235,6 +354,7 @@ a.rmLink.rmRootLink:hover * {
     visibility: visible !important;
 }
 
+/* FIX: SIGN OUT, MARK, CART buttons - BLUE text, consistent 2px border */
 #navbar-collapse .auth-link-container .auth-link,
 #navbar-collapse .auth-link-container a.auth-link,
 #navbar-collapse .auth-link-container a#ctl01_LoginStatus1,
@@ -244,31 +364,38 @@ a.rmLink.rmRootLink:hover * {
 a#ctl01_LoginStatus1,
 #ctl01_LoginStatus1,
 a[id*="LoginStatus"],
-a.auth-link {
+a.auth-link,
+a[id*="lnkUserName"],
+a[id*="lnkCart"],
+.TextButton,
+a.TextButton {
     display: inline-block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    padding: 6px 12px !important;
-    margin: 0 !important;
+    padding: 8px 16px !important;
+    margin: 5px !important;
     background-color: transparent !important;
     color: #164F90 !important;
     border: 2px solid #164F90 !important;
     border-radius: 4px !important;
-    font-size: 11px !important;
+    font-size: 12px !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
     text-decoration: none !important;
     position: relative !important;
     z-index: 9999 !important;
     white-space: nowrap !important;
-    width: auto !important;
 }
 
 #navbar-collapse .auth-link-container a:hover,
 a#ctl01_LoginStatus1:hover,
 #ctl01_LoginStatus1:hover,
 a[id*="LoginStatus"]:hover,
-a.auth-link:hover {
+a.auth-link:hover,
+a[id*="lnkUserName"]:hover,
+a[id*="lnkCart"]:hover,
+.TextButton:hover,
+a.TextButton:hover {
     background-color: #164F90 !important;
     color: #FFFFFF !important;
 }
@@ -401,6 +528,28 @@ async function testPages() {
 
         await injectCSS(page);
         await wait(1000);
+
+        // Debug login page nav structure
+        const loginNavDebug = await page.evaluate(() => {
+            const navItems = document.querySelectorAll('.rmLink, .rmRootLink, [class*="Nav"] a, .header-bottom-container a');
+            const items = [];
+            navItems.forEach((item, i) => {
+                if (i < 5) {
+                    const style = window.getComputedStyle(item);
+                    items.push({
+                        tag: item.tagName,
+                        class: item.className,
+                        text: item.textContent.trim().substring(0, 20),
+                        color: style.color,
+                        bgColor: style.backgroundColor,
+                        webkitFill: style.webkitTextFillColor
+                    });
+                }
+            });
+            return items;
+        });
+        console.log('  Login Nav Debug:', JSON.stringify(loginNavDebug, null, 2));
+
         await takeScreenshot(page, '01-login', 'wide');
 
         if (username && password) {
@@ -499,17 +648,37 @@ async function testPages() {
             await wait(1000);
             await takeScreenshot(page, '04-community', 'wide');
 
-            // Test dropdown menu - hover over a nav item
-            console.log('\n=== Testing Nav Dropdown (Wide) ===');
-            await page.goto(PAGES.home, { waitUntil: 'networkidle2', timeout: 30000 });
+            // Account page testing
+            console.log('\n=== Account Page (Wide) ===');
+            await page.goto(PAGES.account, { waitUntil: 'networkidle2', timeout: 30000 });
+            await injectCSS(page);
+            await wait(1000);
+            await takeScreenshot(page, '05-account', 'wide');
+
+            // Test dropdown menus - hover over nav items to show all levels
+            console.log('\n=== Testing Nav Dropdown Level 1 (Wide) ===');
             await injectCSS(page);
             await wait(500);
-            // Hover over nav item to trigger dropdown
-            const navItem = await page.$('.rmLink.rmRootLink');
-            if (navItem) {
-                await navItem.hover();
-                await wait(1000);
-                await takeScreenshot(page, '05-nav-dropdown', 'wide');
+
+            // Find and hover over My Account to show dropdown
+            const myAccountLink = await page.$('a.rmLink.rmRootLink');
+            if (myAccountLink) {
+                await myAccountLink.hover();
+                await wait(1500);
+                await takeScreenshot(page, '06-nav-dropdown-L1', 'wide');
+
+                // Try to hover over a submenu item to show level 2
+                console.log('\n=== Testing Nav Dropdown Level 2 (Wide) ===');
+                try {
+                    const submenuItem = await page.$('.rmSlide .rmLink, .rmGroup .rmLink');
+                    if (submenuItem) {
+                        await submenuItem.hover();
+                        await wait(1500);
+                        await takeScreenshot(page, '07-nav-dropdown-L2', 'wide');
+                    }
+                } catch (e) {
+                    console.log('  Dropdown L2 hover failed, continuing...');
+                }
             }
 
             // ============================================================
