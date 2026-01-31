@@ -6,37 +6,23 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 
 ## Open Issues
 
-### Issue #7: Banner image not showing on login page
-- **Status:** Open
-- **Priority:** High
-- **Page:** Login page
-- **Description:** The PBS header banner image is not visible on the login page. A gray bar appears where the banner should be, with the nav menu covering the area.
-- **Expected:** Banner image should display above the navigation menu
-- **Screenshot:** `~/Screenshots/Screenshot_2026-01-31_at_7_30_09 PM.png`
-
----
-
-### Issue #8: Nav dropdown z-index (menus appearing behind content)
-- **Status:** Open
-- **Priority:** High
-- **Page:** Education Material page (and potentially others)
-- **Description:** Navigation dropdown submenus appear behind page content instead of on top. The REGIONS dropdown menu items are visible but appear behind the document library content.
-- **Expected:** Dropdown menus should always appear on top of page content
-- **Screenshot:** `~/Screenshots/Screenshot_2026-01-31_at_7_31_55 PM.png`
-- **Fix:** Increase z-index on `.rmGroup`, `.rmSlide`, and related dropdown elements
-
----
-
-### Issue #9: Community page sidebar/logo styling
-- **Status:** Open
-- **Priority:** Medium
-- **Page:** Community page
-- **Description:** The PBS Fraternity logo/seal area in the community sidebar may have styling issues. Needs review for proper sizing and layout.
-- **Screenshot:** `~/Screenshots/Screenshot_2026-01-31_at_7_32_03 PM.png`
+*No open issues at this time.*
 
 ---
 
 ## Resolved Issues
+
+### Issue #9: Community page sidebar/logo styling
+- **Status:** Resolved (2026-01-31)
+- **Fix:** Constrained community logo max-width to 200px, added border-radius, ensured sidebar container doesn't overflow
+
+### Issue #8: Nav dropdown z-index (menus appearing behind content)
+- **Status:** Resolved (2026-01-31)
+- **Fix:** Increased rmSlide and rmGroup z-index from 10000 to 99999, ensures dropdowns appear above all page content
+
+### Issue #7: Banner image not showing on login page
+- **Status:** Resolved (2026-01-31)
+- **Fix:** Added !important to header image rules, ensured #masterHeaderBackground has proper height (130px), added z-index to header image element
 
 ### Issue #1: Nav menu covering banner image
 - **Status:** Resolved (2026-01-31)
