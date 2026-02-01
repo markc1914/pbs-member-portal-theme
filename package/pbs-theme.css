@@ -95,11 +95,11 @@ textarea:focus-visible,
     display: block;
 }
 
-/* Larger touch targets for main navigation only */
-.RadMenu a.rmLink.rmRootLink,
-.RadMenu_Austin a.rmLink.rmRootLink,
-.RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
-.RadMenu.RadMenu_Austin a.rmLink.rmRootLink {
+/* Larger touch targets for main navigation only (scoped to header) */
+#hd .RadMenu a.rmLink.rmRootLink,
+#hd .RadMenu_Austin a.rmLink.rmRootLink,
+#hd .RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
+#hd .RadMenu.RadMenu_Austin a.rmLink.rmRootLink {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
@@ -927,6 +927,45 @@ a.TextButton[id*="Login"]:hover {
     all: revert !important;
 }
 
+/* CONTENT AREA MENUS - Force readable dark text (Resource Library, etc.) */
+#bd .RadMenu a.rmLink,
+#bd .RadMenu a.rmLink .rmText,
+#bd .RadMenu .rmText,
+#bd .RadMenu span,
+#masterContentArea .RadMenu a.rmLink,
+#masterContentArea .RadMenu a.rmLink .rmText,
+#masterContentArea .RadMenu .rmText,
+.ObjectBrowserWrapper .RadMenu a.rmLink,
+.ObjectBrowserWrapper .RadMenu .rmText,
+.RAD_SPLITTER .RadMenu a.rmLink,
+.RAD_SPLITTER .RadMenu .rmText {
+    color: #333333 !important;
+    -webkit-text-fill-color: #333333 !important;
+    background-color: transparent !important;
+}
+
+/* Content area menu backgrounds - light/default */
+#bd .RadMenu,
+#bd .RadMenu .rmGroup,
+#bd .RadMenu .rmSlide,
+#masterContentArea .RadMenu,
+#masterContentArea .RadMenu .rmGroup,
+.ObjectBrowserWrapper .RadMenu,
+.RAD_SPLITTER .RadMenu {
+    background-color: #f5f5f5 !important;
+    background: #f5f5f5 !important;
+}
+
+/* Content area menu hover - standard blue highlight */
+#bd .RadMenu a.rmLink:hover,
+#bd .RadMenu a.rmLink:hover .rmText,
+#masterContentArea .RadMenu a.rmLink:hover,
+#masterContentArea .RadMenu a.rmLink:hover .rmText {
+    background-color: #164F90 !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
+
 /* Nav wrapper and all parent containers - ensure full width */
 /* Position below header banner with clear separation */
 .PrimaryNavPanel,
@@ -982,13 +1021,13 @@ a.TextButton[id*="Login"]:hover {
     position: relative;
 }
 
-/* ROOT LEVEL NAV ONLY - white text on blue (NOT dropdowns) */
-.RadMenu > .rmRootGroup > .rmItem > a.rmLink,
-.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink,
-.RadMenu_Default > .rmRootGroup > .rmItem > a.rmLink,
-.RadMenu a.rmLink.rmRootLink,
-.RadMenu_Austin a.rmLink.rmRootLink,
-.RadMenu_Default a.rmLink.rmRootLink {
+/* ROOT LEVEL NAV ONLY - white text on blue (scoped to header) */
+#hd .RadMenu > .rmRootGroup > .rmItem > a.rmLink,
+#hd .RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink,
+#hd .RadMenu_Default > .rmRootGroup > .rmItem > a.rmLink,
+#hd .RadMenu a.rmLink.rmRootLink,
+#hd .RadMenu_Austin a.rmLink.rmRootLink,
+#hd .RadMenu_Default a.rmLink.rmRootLink {
     color: var(--pbs-white) !important;
     padding: 12px 15px !important;
     font-weight: 600 !important;
@@ -998,22 +1037,22 @@ a.TextButton[id*="Login"]:hover {
     border-bottom: 3px solid var(--pbs-blue-accent) !important;
 }
 
-.RadMenu a.rmLink.rmRootLink .rmText,
-.RadMenu_Austin a.rmLink.rmRootLink .rmText,
-.RadMenu_Default a.rmLink.rmRootLink .rmText,
-.RadMenu_Austin.RadMenu a.rmLink.rmRootLink .rmText,
-.RadMenu.RadMenu_Default a.rmLink.rmRootLink .rmText {
+#hd .RadMenu a.rmLink.rmRootLink .rmText,
+#hd .RadMenu_Austin a.rmLink.rmRootLink .rmText,
+#hd .RadMenu_Default a.rmLink.rmRootLink .rmText,
+#hd .RadMenu_Austin.RadMenu a.rmLink.rmRootLink .rmText,
+#hd .RadMenu.RadMenu_Default a.rmLink.rmRootLink .rmText {
     padding: 0 !important;
     font-family: var(--font-base) !important;
     color: var(--pbs-white) !important;
 }
 
-.RadMenu a.rmLink.rmRootLink,
-.RadMenu_Austin a.rmLink.rmRootLink,
-.RadMenu_Default a.rmLink.rmRootLink,
-.RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
-.RadMenu.RadMenu_Austin a.rmLink.rmRootLink,
-.RadMenu.RadMenu_Default a.rmLink.rmRootLink {
+#hd .RadMenu a.rmLink.rmRootLink,
+#hd .RadMenu_Austin a.rmLink.rmRootLink,
+#hd .RadMenu_Default a.rmLink.rmRootLink,
+#hd .RadMenu_Austin.RadMenu a.rmLink.rmRootLink,
+#hd .RadMenu.RadMenu_Austin a.rmLink.rmRootLink,
+#hd .RadMenu.RadMenu_Default a.rmLink.rmRootLink {
     text-transform: uppercase !important;
     font-weight: 600 !important;
     letter-spacing: 0.3px !important;
@@ -1022,25 +1061,25 @@ a.TextButton[id*="Login"]:hover {
     color: var(--pbs-white) !important;
 }
 
-/* ROOT NAV ONLY - focused/selected/expanded states */
-.RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmFocused,
-.RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmSelected,
-.RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmExpanded,
-.RadMenu_Austin.RadMenu a.rmLink.rmRootLink:focus,
-.RadMenu_Austin.RadMenu a.rmLink.rmRootLink:active,
-.RadMenu.RadMenu_Default a.rmLink.rmRootLink.rmFocused,
-.RadMenu.RadMenu_Default a.rmLink.rmRootLink.rmSelected,
-.RadMenu.RadMenu_Default a.rmLink.rmRootLink.rmExpanded,
-.RadMenu.RadMenu_Default a.rmLink.rmRootLink:focus,
-.RadMenu.RadMenu_Default a.rmLink.rmRootLink:active {
+/* ROOT NAV ONLY - focused/selected/expanded states (scoped to header) */
+#hd .RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmFocused,
+#hd .RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmSelected,
+#hd .RadMenu_Austin.RadMenu a.rmLink.rmRootLink.rmExpanded,
+#hd .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:focus,
+#hd .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:active,
+#hd .RadMenu.RadMenu_Default a.rmLink.rmRootLink.rmFocused,
+#hd .RadMenu.RadMenu_Default a.rmLink.rmRootLink.rmSelected,
+#hd .RadMenu.RadMenu_Default a.rmLink.rmRootLink.rmExpanded,
+#hd .RadMenu.RadMenu_Default a.rmLink.rmRootLink:focus,
+#hd .RadMenu.RadMenu_Default a.rmLink.rmRootLink:active {
     color: var(--pbs-white);
     background-color: var(--pbs-blue);
     border-top: 3px solid var(--pbs-blue);
 }
 
-/* ROOT NAV ONLY - hover state */
-.RadMenu_Austin.RadMenu a.rmLink.rmRootLink:hover,
-.RadMenu.RadMenu_Default a.rmLink.rmRootLink:hover {
+/* ROOT NAV ONLY - hover state (scoped to header) */
+#hd .RadMenu_Austin.RadMenu a.rmLink.rmRootLink:hover,
+#hd .RadMenu.RadMenu_Default a.rmLink.rmRootLink:hover {
     background-color: var(--pbs-blue-light);
     border-top: 3px solid var(--pbs-blue-accent);
 }
@@ -3993,40 +4032,40 @@ a.auth-link:hover {
     background: #164F90 !important;
 }
 
-/* Nav menu bar - FORCE BLUE background */
-.RadMenu,
-.RadMenu_Austin,
-.rmRootGroup,
-.rmHorizontal,
-.rmRootGroup.rmHorizontal,
-ul.rmRootGroup {
+/* Nav menu bar - FORCE BLUE background (scoped to header only) */
+#hd .RadMenu,
+#hd .RadMenu_Austin,
+#hd .rmRootGroup,
+#hd .rmHorizontal,
+#hd .rmRootGroup.rmHorizontal,
+#hd ul.rmRootGroup {
     background-color: #164F90 !important;
     background: #164F90 !important;
 }
 
-/* Override any grey backgrounds in root nav area */
-.rmRootGroup > .rmItem,
-.rmRootGroup > li.rmItem,
-.rmRootGroup > .rmFirst,
-.rmRootGroup > .rmLast {
+/* Override any grey backgrounds in root nav area (scoped to header) */
+#hd .rmRootGroup > .rmItem,
+#hd .rmRootGroup > li.rmItem,
+#hd .rmRootGroup > .rmFirst,
+#hd .rmRootGroup > .rmLast {
     background-color: transparent !important;
     background: transparent !important;
 }
 
-/* ROOT NAV - WHITE TEXT - ONLY root level items, NOT dropdowns */
-.RadMenu > .rmRootGroup > .rmItem > a.rmLink,
-.RadMenu > .rmRootGroup > .rmItem > a.rmLink > .rmText,
-.RadMenu > .rmRootGroup > .rmItem > a.rmLink > span,
-.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink,
-.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink > .rmText,
-.RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink > span,
-.RadMenu a.rmLink.rmRootLink,
-.RadMenu_Austin a.rmLink.rmRootLink,
-.RadMenu a.rmLink.rmRootLink .rmText,
-.RadMenu_Austin a.rmLink.rmRootLink .rmText,
-a.rmLink.rmRootLink,
-a.rmLink.rmRootLink span,
-a.rmLink.rmRootLink .rmText {
+/* ROOT NAV - WHITE TEXT - ONLY header nav, NOT Resource Library or other content area menus */
+#hd .RadMenu > .rmRootGroup > .rmItem > a.rmLink,
+#hd .RadMenu > .rmRootGroup > .rmItem > a.rmLink > .rmText,
+#hd .RadMenu > .rmRootGroup > .rmItem > a.rmLink > span,
+#hd .RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink,
+#hd .RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink > .rmText,
+#hd .RadMenu_Austin > .rmRootGroup > .rmItem > a.rmLink > span,
+#hd .RadMenu a.rmLink.rmRootLink,
+#hd .RadMenu_Austin a.rmLink.rmRootLink,
+#hd .RadMenu a.rmLink.rmRootLink .rmText,
+#hd .RadMenu_Austin a.rmLink.rmRootLink .rmText,
+#hd a.rmLink.rmRootLink,
+#hd a.rmLink.rmRootLink span,
+#hd a.rmLink.rmRootLink .rmText {
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
     background-color: transparent !important;
@@ -4035,11 +4074,11 @@ a.rmLink.rmRootLink .rmText {
     opacity: 1 !important;
 }
 
-/* Root nav hover state */
-.RadMenu a.rmLink.rmRootLink:hover,
-.RadMenu_Austin a.rmLink.rmRootLink:hover,
-.RadMenu > .rmRootGroup > .rmItem > a:hover,
-.RadMenu_Austin > .rmRootGroup > .rmItem > a:hover {
+/* Root nav hover state - scoped to header only */
+#hd .RadMenu a.rmLink.rmRootLink:hover,
+#hd .RadMenu_Austin a.rmLink.rmRootLink:hover,
+#hd .RadMenu > .rmRootGroup > .rmItem > a:hover,
+#hd .RadMenu_Austin > .rmRootGroup > .rmItem > a:hover {
     background-color: rgba(255,255,255,0.2) !important;
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
