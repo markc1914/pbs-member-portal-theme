@@ -1120,11 +1120,12 @@ a.TextButton[id*="Login"]:hover {
    ============================================== */
 
 /* PRIMARY NAV rmSlide - z-index only, let Telerik handle positioning */
+/* Use moderate z-index so nav dropdowns appear over content but under modals */
 #hd .RadMenu .rmSlide,
 #hd .RadMenu_Austin .rmSlide,
 .PrimaryNavPanel .RadMenu .rmSlide,
 .header-bottom-container .RadMenu .rmSlide {
-    z-index: 9999999 !important;
+    z-index: 1000 !important;
 }
 
 /* PRIMARY NAV rmGroup - STYLING ONLY, no positioning */
@@ -1142,16 +1143,16 @@ a.TextButton[id*="Login"]:hover {
     padding: 8px 0 !important;
     min-width: 220px !important;
     list-style: none !important;
-    z-index: 9999999 !important;
+    z-index: 1000 !important;
 }
 
-/* Ensure nav panel and all dropdowns stay above page content */
+/* Ensure nav panel and all dropdowns stay above page content but under modals */
 .PrimaryNavPanel,
 #ctl01_NavPanel,
 [id*="NavPanel"],
-.RadMenu,
-.RadMenu_Austin {
-    z-index: 9999998 !important;
+#hd .RadMenu,
+#hd .RadMenu_Austin {
+    z-index: 999 !important;
 }
 
 /* Dropdown items - no backgrounds or gradients, RELATIVE position for nested menus */
@@ -1250,9 +1251,10 @@ ul.rmGroup span {
 }
 
 /* Nested dropdowns (second/third level) - STYLING ONLY, let Telerik handle positioning */
-.RadMenu .rmGroup .rmGroup,
-.RadMenu_Austin .rmGroup .rmGroup,
-.RadMenu_Austin.RadMenu .rmGroup .rmGroup {
+/* Scoped to header to not affect content area menus */
+#hd .RadMenu .rmGroup .rmGroup,
+#hd .RadMenu_Austin .rmGroup .rmGroup,
+#hd .RadMenu_Austin.RadMenu .rmGroup .rmGroup {
     background: var(--pbs-white) !important;
     background-color: var(--pbs-white) !important;
     background-image: none !important;
@@ -1261,7 +1263,7 @@ ul.rmGroup span {
     box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
     padding: 8px 0 !important;
     min-width: 180px !important;
-    z-index: 9999999 !important;
+    z-index: 1001 !important;
 }
 
 /* Third level items - NO borders on items */
@@ -1304,15 +1306,16 @@ ul.rmGroup span {
 }
 
 /* Third level submenus (children's children) - STYLING ONLY, let Telerik handle positioning */
-.RadMenu .rmGroup .rmGroup .rmGroup,
-.RadMenu_Austin .rmGroup .rmGroup .rmGroup {
+/* Scoped to header */
+#hd .RadMenu .rmGroup .rmGroup .rmGroup,
+#hd .RadMenu_Austin .rmGroup .rmGroup .rmGroup {
     background: var(--pbs-white) !important;
     border: 1px solid var(--pbs-gray-300) !important;
     border-radius: 8px !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
     padding: 8px 0 !important;
     min-width: 160px !important;
-    z-index: 9999999 !important;
+    z-index: 1002 !important;
 }
 
 /* Third level items - visible text */
@@ -3178,7 +3181,7 @@ a[title*="Edit"] .IconSprite {
         display: block !important;
         text-align: center !important;
         margin: 10px 0 !important;
-        z-index: 9999 !important;
+        z-index: 999 !important;
     }
 
     a#ctl01_LoginStatus1,
@@ -3376,7 +3379,7 @@ a[title*="Edit"] .IconSprite {
         border-radius: 12px !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
         min-width: 160px !important;
-        z-index: 9999 !important;
+        z-index: 999 !important;
         padding: 6px !important;
         right: 0 !important;
         left: auto !important;
@@ -3583,7 +3586,7 @@ a[title*="Edit"] .IconSprite {
         border-radius: 12px !important;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
         min-width: 160px !important;
-        z-index: 10000 !important;
+        z-index: 1000 !important;
         padding: 6px !important;
         position: relative !important;
     }
@@ -4001,7 +4004,7 @@ a.auth-link {
     letter-spacing: 0.5px !important;
     font-family: var(--font-base) !important;
     position: relative !important;
-    z-index: 9999 !important;
+    z-index: 999 !important;
     white-space: nowrap !important;
     width: auto !important;
     line-height: 20px !important;
@@ -4151,6 +4154,7 @@ div.rmSlide {
 
 /* NESTED DROPDOWNS - scoped to header nav only */
 /* Don't force visibility - let Telerik handle show/hide on hover */
+/* Use moderate z-index so dropdowns appear over content but under modals */
 #hd .rmGroup .rmGroup,
 #hd .rmSlide .rmSlide,
 #hd .rmGroup .rmSlide,
@@ -4160,7 +4164,7 @@ div.rmSlide {
 .header-bottom-container .rmGroup .rmGroup,
 .header-bottom-container .rmSlide .rmSlide {
     background-color: #FFFFFF !important;
-    z-index: 9999999 !important;
+    z-index: 1001 !important;
 }
 
 #hd .rmGroup .rmGroup a.rmLink,
@@ -4192,36 +4196,47 @@ div.rmSlide {
    DESKTOP ONLY - On mobile, let Telerik handle everything natively
    ======================================== */
 
-@media (min-width: 768px) {
-    /* Reset dropdown visibility - let Telerik control show/hide */
-    #bd .rmSlide,
-    #bd .rmGroup:not(.rmRootGroup),
-    #masterContentArea .rmSlide,
-    #masterContentArea .rmGroup:not(.rmRootGroup),
-    .ObjectBrowserWrapper .rmSlide,
-    .ObjectBrowserWrapper .rmGroup:not(.rmRootGroup),
-    .RAD_SPLITTER .rmSlide,
-    .RAD_SPLITTER .rmGroup:not(.rmRootGroup) {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-    }
+/* Content area RadMenu dropdowns - hide by default, show on hover/click */
+/* Hide dropdowns by default in content area - ALL VIEWPORTS */
+#bd .RadMenu .rmSlide,
+#bd .RadMenu ul.rmGroup:not(.rmRootGroup),
+#bd .RadMenu .rmVertical,
+#masterContentArea .RadMenu .rmSlide,
+#masterContentArea .RadMenu ul.rmGroup:not(.rmRootGroup),
+#masterContentArea .RadMenu .rmVertical {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
 
-    /* When Telerik adds rmExpanded class, show the menu */
-    #bd .rmExpanded > .rmSlide,
-    #bd .rmExpanded > .rmGroup,
-    #bd .rmItem.rmExpanded > .rmSlide,
-    #bd .rmItem.rmExpanded .rmGroup,
-    #masterContentArea .rmExpanded > .rmSlide,
-    #masterContentArea .rmExpanded > .rmGroup,
-    .ObjectBrowserWrapper .rmExpanded > .rmSlide,
-    .ObjectBrowserWrapper .rmExpanded > .rmGroup,
-    .RAD_SPLITTER .rmExpanded > .rmSlide,
-    .RAD_SPLITTER .rmExpanded > .rmGroup {
+/* Show dropdown when item is expanded (clicked) - ALL VIEWPORTS */
+#bd .RadMenu .rmItem.rmExpanded .rmSlide,
+#bd .RadMenu .rmItem.rmExpanded ul.rmGroup,
+#bd .RadMenu .rmItem.rmExpanded .rmVertical,
+#masterContentArea .RadMenu .rmItem.rmExpanded .rmSlide,
+#masterContentArea .RadMenu .rmItem.rmExpanded ul.rmGroup,
+#masterContentArea .RadMenu .rmItem.rmExpanded .rmVertical {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+/* Show dropdown on hover - DESKTOP ONLY */
+@media (min-width: 768px) {
+    #bd .RadMenu .rmItem:hover > .rmSlide,
+    #bd .RadMenu .rmItem:hover ul.rmGroup,
+    #bd .RadMenu .rmItem:hover .rmVertical,
+    #masterContentArea .RadMenu .rmItem:hover > .rmSlide,
+    #masterContentArea .RadMenu .rmItem:hover ul.rmGroup,
+    #masterContentArea .RadMenu .rmItem:hover .rmVertical {
         display: block !important;
         visibility: visible !important;
-        opacity: 1 !important;
+        height: auto !important;
+        overflow: visible !important;
     }
+}
 
     /* Reset colors for content area menus - use Telerik defaults */
     #bd .RadMenu a.rmLink,
