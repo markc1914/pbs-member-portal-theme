@@ -4211,3 +4211,95 @@ div.rmSlide {
         background: inherit !important;
     }
 }
+
+/* ========================================
+   LOGIN PAGE SPECIFIC STYLES
+   Only applies when the sign-in form is present
+   ======================================== */
+
+/* Detect login page by presence of sign-in form and hide redundant SIGN IN button */
+/* Use very high specificity to override existing rules */
+html body:has([id*="ciNewContactSignInCommon"]) #hd a#ctl01_LoginStatus1,
+html body:has([id*="ciNewContactSignInCommon"]) #hd .auth-link-container a.auth-link,
+html body:has([id*="ciNewContactSignInCommon"]) a#ctl01_LoginStatus1,
+html body:has([id*="ciNewContactSignInCommon"]) a.auth-link,
+html body:has([id*="signInDiv"]) #hd a#ctl01_LoginStatus1,
+html body:has([id*="signInDiv"]) #hd .auth-link-container a.auth-link,
+html body:has([id*="signInDiv"]) a#ctl01_LoginStatus1,
+html body:has([id*="signInDiv"]) a.auth-link {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+/* On login page, show SIGN UP button in same style/position as SIGN IN was */
+body:has([id*="ciNewContactSignInCommon"]) li#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationListItem,
+body:has([id*="signInDiv"]) li#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationListItem {
+    display: inline-block !important;
+    visibility: visible !important;
+}
+
+body:has([id*="ciNewContactSignInCommon"]) a#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationLink,
+body:has([id*="signInDiv"]) a#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationLink {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    padding: 8px 16px !important;
+    margin: 3px !important;
+    background-color: var(--pbs-white) !important;
+    color: var(--pbs-blue) !important;
+    border: 2px solid var(--pbs-blue) !important;
+    border-radius: 10px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    letter-spacing: 0.5px !important;
+    font-family: var(--font-base) !important;
+    white-space: nowrap !important;
+    line-height: 20px !important;
+    min-height: 40px !important;
+    box-sizing: border-box !important;
+}
+
+body:has([id*="ciNewContactSignInCommon"]) a#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationLink:hover,
+body:has([id*="signInDiv"]) a#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationLink:hover {
+    background-color: var(--pbs-blue) !important;
+    color: var(--pbs-white) !important;
+}
+
+/* LOGIN FORM - Clean panel styling */
+body:has([id*="ciNewContactSignInCommon"]) [id*="signInDiv"],
+body:has([id*="ciNewContactSignInCommon"]) .SignInPanel,
+body:has([id*="signInDiv"]) [id*="signInDiv"] {
+    border: 1px solid var(--pbs-gray-300) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+    background-color: var(--pbs-white) !important;
+    padding: 20px !important;
+}
+
+/* Clean form panel header */
+body:has([id*="ciNewContactSignInCommon"]) .PanelHead,
+body:has([id*="signInDiv"]) .PanelHead {
+    background-color: var(--pbs-gray-100) !important;
+    border-bottom: 1px solid var(--pbs-gray-300) !important;
+    border-radius: 8px 8px 0 0 !important;
+    padding: 12px 20px !important;
+    margin: -20px -20px 20px -20px !important;
+}
+
+/* Sign In form title */
+body:has([id*="ciNewContactSignInCommon"]) .PanelHead span,
+body:has([id*="signInDiv"]) .PanelHead span {
+    color: var(--pbs-blue) !important;
+    font-weight: 600 !important;
+    font-size: 16px !important;
+}
