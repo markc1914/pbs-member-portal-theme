@@ -1,0 +1,25 @@
+{
+  "testUsers": [
+    {
+      "username": "kingboot",
+      "password": "pbs1914",
+      "name": "Craig Collins",
+      "role": "Financial Member",
+      "notes": "Can see Resource Library"
+    },
+    {
+      "username": "mcornelius",
+      "password": "gomab95",
+      "name": "Mark Cornelius",
+      "role": "Staff",
+      "notes": "Can see Resource Library, admin access"
+    },
+    {
+      "username": "dmasamake",
+      "password": "pbs1914",
+      "name": "",
+      "role": "Non-Financial Member",
+      "notes": "Cannot see Resource Library - for testing restricted access"
+    }
+  ]
+}
