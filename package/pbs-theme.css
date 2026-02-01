@@ -4239,46 +4239,43 @@ html body:has([id*="signInDiv"]) a.auth-link {
     left: -9999px !important;
 }
 
-/* On login page, show SIGN UP button in same style/position as SIGN IN was */
+/* On login page, HIDE Sign Up from auxiliary container (already in navbar) */
 body:has([id*="ciNewContactSignInCommon"]) li#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationListItem,
-body:has([id*="signInDiv"]) li#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationListItem {
-    display: inline-block !important;
-    visibility: visible !important;
-}
-
+body:has([id*="signInDiv"]) li#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationListItem,
 body:has([id*="ciNewContactSignInCommon"]) a#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationLink,
 body:has([id*="signInDiv"]) a#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationLink {
-    display: inline-block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    padding: 8px 16px !important;
-    margin: 3px !important;
-    background-color: var(--pbs-white) !important;
-    color: var(--pbs-blue) !important;
-    border: 2px solid var(--pbs-blue) !important;
-    border-radius: 10px !important;
-    font-size: 11px !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    text-decoration: none !important;
-    letter-spacing: 0.5px !important;
-    font-family: var(--font-base) !important;
-    white-space: nowrap !important;
-    line-height: 20px !important;
-    min-height: 40px !important;
-    box-sizing: border-box !important;
+    display: none !important;
+    visibility: hidden !important;
 }
 
-body:has([id*="ciNewContactSignInCommon"]) a#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationLink:hover,
-body:has([id*="signInDiv"]) a#ctl01_Auxiliary_Auxiliary_rptWrapper_Auxiliary_rptWrapper_rpt_ctl01_NavigationLink:hover {
-    background-color: var(--pbs-blue) !important;
-    color: var(--pbs-white) !important;
+/* LOGIN FORM - Remove ALL borders from all containers */
+body:has([id*="ciNewContactSignInCommon"]) [id*="ste_container"] > div,
+body:has([id*="ciNewContactSignInCommon"]) [id*="ciNewContactSignInCommon"][id*="_Body"],
+body:has([id*="ciNewContactSignInCommon"]) [id*="ciNewContactSignInCommon"][id*="__Body"],
+body:has([id*="ciNewContactSignInCommon"]) [id*="ciNewContactSignInCommon"][id*="BodyContainer"],
+body:has([id*="ciNewContactSignInCommon"]) [id*="ciNewContactSignInCommon"][id*="_BodyContainer"],
+body:has([id*="ciNewContactSignInCommon"]) [id*="contentPanel"],
+body:has([id*="ciNewContactSignInCommon"]) [id*="commandButtons"],
+body:has([id*="ciNewContactSignInCommon"]) [id*="LinkPanel"] {
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 12px !important;
+    background: transparent !important;
 }
 
-/* LOGIN FORM - Clean panel styling */
-body:has([id*="ciNewContactSignInCommon"]) [id*="signInDiv"],
-body:has([id*="ciNewContactSignInCommon"]) .SignInPanel,
-body:has([id*="signInDiv"]) [id*="signInDiv"] {
+/* LOGIN FORM - Remove horizontal margins, full width */
+body:has([id*="ciNewContactSignInCommon"]) [id*="SignInPanel"],
+body:has([id*="signInDiv"]) [id*="SignInPanel"] {
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+/* LOGIN FORM - Single border around SignInRefreshPanel (contains all form elements) */
+body:has([id*="ciNewContactSignInCommon"]) [id*="SignInRefreshPanel"] {
     border: 1px solid var(--pbs-gray-300) !important;
     border-radius: 8px !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
@@ -4286,20 +4283,74 @@ body:has([id*="signInDiv"]) [id*="signInDiv"] {
     padding: 20px !important;
 }
 
-/* Clean form panel header */
-body:has([id*="ciNewContactSignInCommon"]) .PanelHead,
-body:has([id*="signInDiv"]) .PanelHead {
-    background-color: var(--pbs-gray-100) !important;
-    border-bottom: 1px solid var(--pbs-gray-300) !important;
-    border-radius: 8px 8px 0 0 !important;
-    padding: 12px 20px !important;
-    margin: -20px -20px 20px -20px !important;
+/* Remove extra spacing from content containers on login page */
+body:has([id*="ciNewContactSignInCommon"]) #bd,
+body:has([id*="ciNewContactSignInCommon"]) #yui-main,
+body:has([id*="ciNewContactSignInCommon"]) .yui-b {
+    padding: 10px !important;
+    margin: 0 !important;
 }
 
-/* Sign In form title */
-body:has([id*="ciNewContactSignInCommon"]) .PanelHead span,
-body:has([id*="signInDiv"]) .PanelHead span {
-    color: var(--pbs-blue) !important;
-    font-weight: 600 !important;
-    font-size: 16px !important;
+/* LOGIN PAGE - Remove all whitespace/margins around banner */
+body:has([id*="ciNewContactSignInCommon"]) #hd,
+body:has([id*="ciNewContactSignInCommon"]) #masterHeaderBackground,
+body:has([id*="ciNewContactSignInCommon"]) #masterLogoArea,
+body:has([id*="ciNewContactSignInCommon"]) [id*="ste_container_HeaderLogo"],
+body:has([id*="ciNewContactSignInCommon"]) .header-top-container {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+body:has([id*="ciNewContactSignInCommon"]) #masterHeaderImage,
+body:has([id*="ciNewContactSignInCommon"]) #masterDonorHeaderImage {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* HIDE the "SIGN IN" panel header rectangle on login page */
+/* Target specifically the form's panel heading, not header elements */
+body:has([id*="ciNewContactSignInCommon"]) [id*="ciNewContactSignInCommon"][id*="_Head"],
+body:has([id*="ciNewContactSignInCommon"]) [id*="ciNewContactSignInCommon"] .panel-heading,
+body:has([id*="ciNewContactSignInCommon"]) [id*="ciNewContactSignInCommon"] .PanelHead,
+body:has([id*="ciNewContactSignInCommon"]) [id*="ciNewContactSignInCommon"] .Distinguish,
+body:has([id*="ciNewContactSignInCommon"]) #bd .panel-heading,
+body:has([id*="ciNewContactSignInCommon"]) #bd .Distinguish {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+}
+
+/* Remove border from signInDiv (extra rectangle above username) */
+body:has([id*="ciNewContactSignInCommon"]) [id*="signInDiv"] {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* MOBILE LOGIN PAGE: Expand nav menu by default so users can see SIGN UP */
+@media (max-width: 767px) {
+    body:has([id*="ciNewContactSignInCommon"]) #navbar-collapse,
+    body:has([id*="ciNewContactSignInCommon"]) .navbar-collapse.nav-primary {
+        display: block !important;
+        visibility: visible !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    /* Style the expanded menu nicely */
+    body:has([id*="ciNewContactSignInCommon"]) #navbar-collapse .RadMenu,
+    body:has([id*="ciNewContactSignInCommon"]) .navbar-collapse .RadMenu {
+        display: block !important;
+        visibility: visible !important;
+    }
+
+    body:has([id*="ciNewContactSignInCommon"]) .rmRootGroup {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 5px !important;
+    }
 }
