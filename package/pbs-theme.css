@@ -1783,13 +1783,19 @@ header .RadTabStrip {
 
 .RadWindow .rwTitleBar .rwTitle,
 .RadWindow_Default .rwTitle,
+.RadWindow_Default .rwTitleBar .rwTitle,
 [class*="RadWindow"] .rwTitle,
+[class*="RadWindow"] .rwTitleBar .rwTitle,
 .rwTitleBar .rwTitle,
-.rwTitle {
+.rwTitle,
+.rwTitleBar em,
+.RadWindow .rwTitleBar em,
+.RadWindow_Default .rwTitleBar em {
     color: #FFFFFF !important;
     font-weight: 700 !important;
-    font-size: 18px !important;
+    font-size: 13px !important;
     text-shadow: none !important;
+    font-style: normal !important;
 }
 
 /* Window controls (close, minimize buttons) */
