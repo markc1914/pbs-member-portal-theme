@@ -6,7 +6,15 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 
 ## Open Issues
 
-*No open issues at this time.*
+### Issue #13: Banner image "Membership Database" text cut off at 1440p
+- **Status:** Open
+- **Priority:** Medium
+- **Affected page(s):** All pages with banner (authenticated)
+- **Description:** On wide monitors (1440p/2560x1440), the banner image text "Membership Database" is cut off on the right side
+- **Expected behavior:** Full banner text should be visible at all reasonable desktop resolutions
+- **Viewport:** 2560x1440 (1440p)
+- **Screenshot:** `automatedTestScreenshots/1440p-header-closeup-1769990129291.png`
+- **Details:** Text "MEMBERSHIP DATABASE" shows as "MEMBERSHIP DATABA" - the "SE" is clipped
 
 ---
 
