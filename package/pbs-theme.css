@@ -1769,39 +1769,47 @@ header .RadTabStrip {
    Remove ugly rectangle headers from dialogs
    ======================================== */
 
-/* RadWindow title bar - clean styling */
+/* RadWindow title bar - clean blue styling */
 .RadWindow .rwTitleBar,
 .RadWindow_Default .rwTitleBar,
 .RadWindow_Metro .rwTitleBar,
-[class*="RadWindow"] .rwTitleBar {
-    background-color: var(--pbs-blue) !important;
+[class*="RadWindow"] .rwTitleBar,
+.rwTitleBar,
+table.rwTitleBar {
+    background-color: #164F90 !important;
     background-image: none !important;
-    color: var(--pbs-white) !important;
     border: none !important;
-    padding: 8px 12px !important;
 }
 
-/* Dialog title - force white 16px on ALL elements in title bar */
-.rwTitleBar,
-.rwTitleBar *,
-.rwTitleRow .rwTitleBar,
-.rwTitleRow .rwTitleBar *,
-.RadWindow .rwTitleBar,
-.RadWindow .rwTitleBar *,
-.RadWindow_Default .rwTitleBar,
-.RadWindow_Default .rwTitleBar *,
-div.RadWindow .rwTitleBar *,
-div.RadWindow_Default .rwTitleBar *,
-table.rwTitleBar *,
-.rwTitle,
-.rwTitle *,
-.rwTitleBar .rwTitle,
-.rwTitleBar .rwTitle *,
+/* Title bar table cells - all should be blue */
+.rwTitleBar td,
+.RadWindow .rwTitleBar td,
+.RadWindow_Default .rwTitleBar td,
+.rwTitleBar tr,
+.rwTitleBar tr td {
+    background-color: #164F90 !important;
+    background-image: none !important;
+    border: none !important;
+}
+
+/* Dialog title text - WHITE and readable */
+.rwTitleBar td,
+.rwTitleBar td *,
 .rwTitleBar em,
-.rwTitleBar span {
+.rwTitleBar span,
+.rwTitle,
+.rwTitle em,
+.RadWindow .rwTitleBar td,
+.RadWindow .rwTitleBar td *,
+.RadWindow .rwTitleBar em,
+.RadWindow_Default .rwTitleBar td,
+.RadWindow_Default .rwTitleBar td *,
+.RadWindow_Default .rwTitleBar em,
+[class*="RadWindow"] .rwTitleBar td,
+[class*="RadWindow"] .rwTitleBar em {
     color: #FFFFFF !important;
-    font-weight: 700 !important;
-    font-size: 16px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
     text-shadow: none !important;
     font-style: normal !important;
 }
@@ -1845,20 +1853,28 @@ table.rwTitleBar *,
     background-color: #164F90 !important;
 }
 
-/* Body and footer chrome - white background */
+/* Body and footer chrome - white background, minimal width */
 .RadWindow .rwBodyLeft,
 .RadWindow .rwBodyRight,
 .RadWindow .rwFooterLeft,
 .RadWindow .rwFooterRight,
-.RadWindow .rwFooterCenter,
-.RadWindow .rwCorner,
 .RadWindow_Default .rwBodyLeft,
 .RadWindow_Default .rwBodyRight,
 .RadWindow_Default .rwFooterLeft,
 .RadWindow_Default .rwFooterRight,
+[class*="RadWindow"] .rwBodyLeft,
+[class*="RadWindow"] .rwBodyRight {
+    background-image: none !important;
+    background-color: #FFFFFF !important;
+    width: 1px !important;
+}
+
+.RadWindow .rwFooterCenter,
+.RadWindow .rwCorner,
 .RadWindow_Default .rwFooterCenter,
 .RadWindow_Default .rwCorner,
-[class*="RadWindow"] .rwCorner {
+[class*="RadWindow"] .rwCorner,
+[class*="RadWindow"] .rwFooterCenter {
     background-image: none !important;
     background-color: #FFFFFF !important;
 }
