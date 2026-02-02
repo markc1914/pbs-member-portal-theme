@@ -4514,25 +4514,271 @@ a[title*="Edit"] .IconSprite {
 }
 
 /* ========================================
-   PRINT STYLES
+   PRINT STYLES - Issue #5
+   Comprehensive print stylesheet for member portal
    ======================================== */
 @media print {
+    /* ===========================================
+       HIDE NON-ESSENTIAL ELEMENTS
+       =========================================== */
     #masterTopBarAuxiliary,
     .RadMenu,
+    .RadMenu_Austin,
     .panel-heading-options,
-    #ft {
-        display: none !important;
-    }
-
+    .PanelHeadOptions,
+    #ft,
+    #hd .nav-auxiliary,
+    .navbar-header,
+    .navbar-collapse,
+    #navbar-collapse,
+    #search-collapse,
+    .auth-link-container,
+    .header-bottom-container,
     #masterSideBarPanel,
-    #yui-main {
-        float: none;
-        width: 100%;
+    .col-secondary,
+    #ctl01_SubNavPanel,
+    .CommunityLinksBlock,
+    .NotPrinted,
+    .btn-group,
+    .IconSprite,
+    [class*="btn-"],
+    button:not([type="submit"]),
+    .hamburger-menu,
+    .mobile-menu-toggle,
+    .dropdown-toggle,
+    .rmSlide,
+    .rmGroup,
+    #masterHeaderBackground,
+    #masterHeaderImage,
+    .breadcrumb,
+    .pagination,
+    .pager {
+        display: none !important;
+        visibility: hidden !important;
     }
 
-    body {
-        background: white;
-        font-size: 12pt;
+    /* ===========================================
+       PAGE SETUP
+       =========================================== */
+    @page {
+        margin: 0.75in;
+        size: letter;
+    }
+
+    html, body {
+        background: white !important;
+        color: black !important;
+        font-size: 11pt !important;
+        line-height: 1.4 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* ===========================================
+       LAYOUT - SINGLE COLUMN
+       =========================================== */
+    #bd,
+    #yui-main,
+    .body-container,
+    .wrapper,
+    .container,
+    .row {
+        display: block !important;
+        float: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .col-primary,
+    .col-sm-9,
+    .col-md-9,
+    .col-lg-9,
+    [class*="col-"] {
+        float: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: none !important;
+    }
+
+    /* ===========================================
+       TYPOGRAPHY - BLACK TEXT FOR READABILITY
+       =========================================== */
+    h1, h2, h3, h4, h5, h6,
+    .PanelHead,
+    .panel-heading {
+        color: black !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+    }
+
+    p, li, td, th, span, div {
+        color: black !important;
+    }
+
+    a, a:visited {
+        color: black !important;
+        text-decoration: underline !important;
+    }
+
+    /* Show URL after links for reference */
+    a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 9pt;
+        color: #666 !important;
+    }
+
+    /* Don't show URL for internal/navigation links */
+    a[href^="#"]:after,
+    a[href^="javascript"]:after,
+    .RadMenu a:after,
+    nav a:after {
+        content: none !important;
+    }
+
+    /* ===========================================
+       PANELS - CLEAN BORDERS
+       =========================================== */
+    .PanelBody,
+    .panel-body,
+    .Panel,
+    .panel {
+        border: 1px solid #ccc !important;
+        background: white !important;
+        padding: 10pt !important;
+        margin-bottom: 10pt !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    .PanelHead,
+    .panel-heading {
+        background: #f5f5f5 !important;
+        border-bottom: 1px solid #ccc !important;
+        padding: 8pt 10pt !important;
+        font-weight: bold !important;
+    }
+
+    /* ===========================================
+       TABLES - PAGE BREAKS & BORDERS
+       =========================================== */
+    table,
+    .RadGrid,
+    .rgMasterTable {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        page-break-inside: auto !important;
+    }
+
+    tr {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    thead {
+        display: table-header-group !important;
+    }
+
+    th, td {
+        border: 1px solid #ccc !important;
+        padding: 6pt !important;
+        background: white !important;
+        color: black !important;
+    }
+
+    th,
+    .rgHeader {
+        background: #f0f0f0 !important;
+        font-weight: bold !important;
+    }
+
+    .rgRow,
+    .rgAltRow {
+        background: white !important;
+    }
+
+    /* ===========================================
+       PROFILE/MEMBER PAGES
+       =========================================== */
+    .PanelField,
+    .PanelFieldValue {
+        display: inline-block !important;
+        vertical-align: top !important;
+    }
+
+    .PanelField {
+        font-weight: bold !important;
+        width: 30% !important;
+    }
+
+    .PanelFieldValue {
+        width: 65% !important;
+    }
+
+    /* Profile images - reasonable size for print */
+    .profile-image,
+    .member-photo,
+    img[src*="Photo"],
+    img[src*="profile"] {
+        max-width: 150px !important;
+        max-height: 150px !important;
+        page-break-inside: avoid !important;
+    }
+
+    /* ===========================================
+       FORMS - CLEAN DISPLAY
+       =========================================== */
+    input, select, textarea {
+        border: 1px solid #999 !important;
+        background: white !important;
+        color: black !important;
+    }
+
+    /* ===========================================
+       PAGE BREAK CONTROL
+       =========================================== */
+    .page-break-before {
+        page-break-before: always !important;
+        break-before: page !important;
+    }
+
+    .page-break-after {
+        page-break-after: always !important;
+        break-after: page !important;
+    }
+
+    .no-page-break {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* Avoid orphans and widows */
+    p, h1, h2, h3, h4, h5, h6 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    /* ===========================================
+       PRINT HEADER/FOOTER
+       =========================================== */
+    .print-header {
+        display: block !important;
+        text-align: center;
+        font-size: 14pt;
+        font-weight: bold;
+        margin-bottom: 15pt;
+        border-bottom: 2pt solid black;
+        padding-bottom: 10pt;
+    }
+
+    .print-footer {
+        display: block !important;
+        text-align: center;
+        font-size: 9pt;
+        margin-top: 15pt;
+        border-top: 1pt solid #ccc;
+        padding-top: 5pt;
     }
 }
 
