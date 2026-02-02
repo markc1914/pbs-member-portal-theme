@@ -2185,13 +2185,14 @@ html body table thead th *,
 }
 
 /* Tree node lists - ensure they display and expand to fill parent */
+/* NOTE: Do NOT use !important on display - JavaScript sets display:none inline for collapse */
 .RadTreeView ul,
 .RadTreeView .rtUL,
 .rtUL {
-    display: block !important;
+    display: block;  /* No !important - allows JS inline display:none to work */
     visibility: visible !important;
     list-style: none !important;
-    height: auto !important;
+    height: auto;    /* No !important - allows JS to control height */
     max-height: none !important;
     overflow: visible !important;
 }
@@ -2232,10 +2233,36 @@ html body table thead th *,
 }
 
 /* Collapsed child nodes - MUST hide */
+/* JavaScript sets inline style "display: none" - we must respect it */
+/* Use attribute selector to target elements with display:none in style */
+.RadTreeView ul[style*="display: none"],
+.RadTreeView .rtUL[style*="display: none"],
+.ObjectBrowserWrapper ul[style*="display: none"],
+.ObjectBrowserWrapper .rtUL[style*="display: none"],
+.TreePane ul[style*="display: none"],
+.TreePane .rtUL[style*="display: none"],
+ul.rtUL[style*="display: none"],
+.rtUL[style*="display: none"] {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Also hide by class for completeness */
 .RadTreeView .rtUL.rtCollapsed,
 .RadTreeView ul.rtCollapsed,
-.rtCollapsed:not(.RadTreeView) {
+.rtCollapsed:not(.RadTreeView),
+.ObjectBrowserWrapper .RadTreeView ul.rtCollapsed,
+.ObjectBrowserWrapper .RadTreeView .rtUL.rtCollapsed,
+.TreePane .RadTreeView ul.rtCollapsed,
+.TreePane .RadTreeView .rtUL.rtCollapsed,
+.RadTreeView_Default ul.rtCollapsed,
+.RadTreeView_Metro ul.rtCollapsed {
     display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
 }
 
 /* Tree expand/collapse toggle icons - ensure visible */
@@ -2290,11 +2317,12 @@ html body table thead th *,
 }
 
 /* Tree nodes in ObjectBrowser - ensure all levels show */
+/* NOTE: No !important on display - allows JS inline display:none for collapse */
 .ObjectBrowserWrapper .RadTreeView ul,
 .ObjectBrowserWrapper .RadTreeView li,
 .TreePane .RadTreeView ul,
 .TreePane .RadTreeView li {
-    display: block !important;
+    display: block;  /* No !important - allows collapse to work */
     visibility: visible !important;
     list-style: none !important;
 }
