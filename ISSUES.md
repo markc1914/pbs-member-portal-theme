@@ -6,7 +6,17 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 
 ## Open Issues
 
-*No open issues - see GitHub Issues for current tracking*
+### TODO: Fix web.config cookie path to prevent Chrome login redirect loop
+- **Status:** Open
+- **Priority:** Medium
+- **Affected:** DEV and Production
+- **Description:** Chrome users may experience login redirect loops due to duplicate `LoginDEV`/`Login` cookies with different paths. The `<forms>` element has `path="/iMISDEV/"` (DEV) or implicit path (Prod), but cookies may be set at `path=/`, causing duplicates.
+- **Root Cause:** When cookies exist at both `/` and `/iMISDEV/` paths, the browser sends both. The server reads the empty one first and rejects authentication.
+- **Workaround:** Users can clear cookies for the site to resolve temporarily.
+- **Permanent Fix:** Update web.config `<forms>` element to use consistent path:
+  - **DEV (line 156):** Change `path="/iMISDEV/"` to `path="/"`
+  - **Production (line 156):** Add `path="/"`
+- **Also needed:** Add `sameSite="None"` to `<httpCookies>`, `cookieSameSite="None"` to `<forms>` and `<sessionState>` (already done on DEV)
 
 ---
 
@@ -116,4 +126,4 @@ Screenshots are saved to `automatedTestScreenshots/` folder.
 
 ---
 
-*Last updated: 2026-02-02 (Issue #16 resolved)*
+*Last updated: 2026-02-02 (Added web.config cookie path TODO)*
