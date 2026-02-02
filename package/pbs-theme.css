@@ -2510,6 +2510,66 @@ td ul li:hover {
 }
 
 /* ========================================
+   RadEditor Toolbar - EXPLICIT OVERRIDES
+   Must come AFTER the ul/li list rules above
+   to ensure toolbar displays correctly
+   ======================================== */
+ul.reToolbar,
+.reToolbar,
+.reToolbarWrapper,
+.reToolCell ul,
+.RadEditor ul.reToolbar,
+td .reToolbar,
+.PanelBody .reToolbar,
+.PanelField .reToolbar {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+.reToolbarWrapper,
+.Default.reToolbarWrapper,
+.reToolCell .reToolbarWrapper {
+    height: auto !important;
+    min-height: 28px !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
+}
+
+/* Ensure toolbar cell expands to fit all toolbar rows */
+.reToolCell,
+td.reToolCell {
+    height: auto !important;
+    min-height: 70px !important;
+    overflow: visible !important;
+}
+
+.reToolbar li,
+ul.reToolbar li,
+.reToolCell li,
+td .reToolbar li {
+    list-style: none !important;
+    display: inline-block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    border-bottom: none !important;
+    background: transparent !important;
+    cursor: default !important;
+}
+
+.reToolbar li:hover,
+ul.reToolbar li:hover {
+    background: transparent !important;
+}
+
+/* ========================================
    TABLES & GRIDS
    ======================================== */
 
