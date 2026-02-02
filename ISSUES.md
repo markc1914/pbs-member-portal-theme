@@ -6,19 +6,22 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 
 ## Open Issues
 
-### Issue #13: Banner image "Membership Database" text cut off at 1440p
+### Issue #14: Resource library folders don't collapse when minus clicked
 - **Status:** Open
 - **Priority:** Medium
-- **Affected page(s):** All pages with banner (authenticated)
-- **Description:** On wide monitors (1440p/2560x1440), the banner image text "Membership Database" is cut off on the right side
-- **Expected behavior:** Full banner text should be visible at all reasonable desktop resolutions
-- **Viewport:** 2560x1440 (1440p)
-- **Screenshot:** `automatedTestScreenshots/1440p-header-closeup-1769990129291.png`
-- **Details:** Text "MEMBERSHIP DATABASE" shows as "MEMBERSHIP DATABA" - the "SE" is clipped
+- **Affected page(s):** Resource Library / Document pages
+- **Description:** Folders in the resource library expand when the plus (+) is clicked, but do not contract/collapse when minus (-) is clicked
+- **Expected behavior:** Clicking minus should collapse the expanded folder
+- **Viewport:** Desktop and Mobile
+- **Screenshot:** TBD
 
 ---
 
 ## Resolved Issues
+
+### Issue #13: Banner image "Membership Database" text cut off at 1440p
+- **Status:** Resolved (2026-02-02)
+- **Fix:** Changed `background-size` from `cover` to `contain` in HEADER IMAGE PROTECTION section. Blue background fills gaps on ultra-wide monitors while showing full banner text.
 
 ### Issue #12: Nav bar grey area on right side
 - **Status:** Resolved (2026-01-31)
