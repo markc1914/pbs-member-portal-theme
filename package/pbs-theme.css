@@ -496,10 +496,14 @@ a[href*="SignOut"]:hover,
     background-image: url("images/pbs-banner-responsive.png") !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
-    background-size: cover !important;
+    /* Use contain to show full banner without cropping on wide screens (1440p+) */
+    /* This ensures "Membership Database" text is never cut off */
+    background-size: contain !important;
     width: 100% !important;
     max-width: 100% !important;
     height: 120px !important;
+    /* Add blue background to fill any gaps on wide screens */
+    background-color: var(--pbs-blue) !important;
     /* Hide the "iMIS" text but keep accessible for screen readers */
     text-indent: -9999px !important;
     overflow: hidden !important;
