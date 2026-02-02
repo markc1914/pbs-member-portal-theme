@@ -303,7 +303,7 @@ h4, .SectionLabel, h5 {
    HEADER
    ======================================== */
 #hd, header {
-    background: var(--pbs-white);
+    background: var(--pbs-blue) !important;
 }
 
 #masterHeaderBackground {
@@ -311,9 +311,9 @@ h4, .SectionLabel, h5 {
     min-height: 130px !important;
     position: relative !important;
     display: block !important;
-    margin-bottom: 15px !important;
-    padding-bottom: 10px !important;
-    background-color: var(--pbs-white) !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    background-color: var(--pbs-blue) !important;
     overflow: visible !important;
 }
 
@@ -4243,6 +4243,42 @@ a.auth-link:hover {
     background: transparent !important;
 }
 
+/* Remove nav bar container border/outline - Issue #17 */
+/* The rmRootGroup.rmHorizontal has a grey border that looks incomplete */
+#hd .rmRootGroup,
+#hd .rmRootGroup.rmHorizontal,
+#hd ul.rmRootGroup,
+#hd ul.rmRootGroup.rmHorizontal,
+#hd .RadMenu .rmRootGroup,
+#hd .RadMenu_Austin .rmRootGroup,
+#hd .RadMenu > .rmRootGroup,
+#hd .RadMenu_Austin > .rmRootGroup {
+    border: none !important;
+    border-top: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    outline: none !important;
+}
+
+/* Remove trailing border on last nav item - Issue #17 */
+#hd .rmRootGroup > .rmItem:last-child,
+#hd .rmRootGroup > li.rmItem:last-child,
+#hd .rmRootGroup > .rmLast,
+#hd .RadMenu .rmRootGroup > .rmItem:last-child,
+#hd .RadMenu_Austin .rmRootGroup > .rmItem:last-child {
+    border-right: none !important;
+}
+
+/* Remove any left border on first nav item */
+#hd .rmRootGroup > .rmItem:first-child,
+#hd .rmRootGroup > li.rmItem:first-child,
+#hd .rmRootGroup > .rmFirst,
+#hd .RadMenu .rmRootGroup > .rmItem:first-child,
+#hd .RadMenu_Austin .rmRootGroup > .rmItem:first-child {
+    border-left: none !important;
+}
+
 /* ROOT NAV - WHITE TEXT - ONLY header nav, NOT Resource Library or other content area menus */
 #hd .RadMenu > .rmRootGroup > .rmItem > a.rmLink,
 #hd .RadMenu > .rmRootGroup > .rmItem > a.rmLink > .rmText,
@@ -4263,6 +4299,14 @@ a.auth-link:hover {
     font-weight: 600 !important;
     text-shadow: none !important;
     opacity: 1 !important;
+    /* Clean up nav button styling - Issue #17 */
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    background-image: none !important;
+    padding: 12px 10px !important;
 }
 
 /* Root nav hover state - scoped to header only */
