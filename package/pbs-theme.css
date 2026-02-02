@@ -2612,22 +2612,55 @@ footer a:hover {
 
 /* Follow Community button - WHITE text on blue background */
 /* The button has class PrimaryButton but text color was overridden to blue */
-a[id*="SubscribeLink"][id*="lnkSubscribe"],
-a.TextButton.PrimaryButton[id*="SubscribeLink"],
-.CommunityActionButtons a.PrimaryButton,
-.Section.CommunityActionButtons a,
-#ctl01_SideBarPlaceHolder_ctl00_SubscribeLink1_lnkSubscribe {
+/* Using high specificity to override iMIS base styles */
+.col-secondary a[id*="SubscribeLink"][id*="lnkSubscribe"],
+.col-secondary a.TextButton.PrimaryButton.MediumButton,
+.col-secondary .CommunityActionButtons a.PrimaryButton,
+.col-secondary .Section.CommunityActionButtons a.TextButton,
+#ctl01_SubNavPanel a[id*="SubscribeLink"],
+#ctl01_SideBarPlaceHolder_ctl00_SubscribeLink1_lnkSubscribe,
+a#ctl01_SideBarPlaceHolder_ctl00_SubscribeLink1_lnkSubscribe.TextButton.PrimaryButton {
     color: #FFFFFF !important;
     background-color: var(--pbs-blue) !important;
     border-color: var(--pbs-blue) !important;
+    display: block !important;
+    text-align: center !important;
+    padding: 10px 15px !important;
+    text-decoration: none !important;
+    border-radius: 4px !important;
+    font-weight: 500 !important;
 }
 
-a[id*="SubscribeLink"][id*="lnkSubscribe"]:hover,
-.CommunityActionButtons a.PrimaryButton:hover,
-#ctl01_SideBarPlaceHolder_ctl00_SubscribeLink1_lnkSubscribe:hover {
+.col-secondary a[id*="SubscribeLink"][id*="lnkSubscribe"]:hover,
+.col-secondary .CommunityActionButtons a.PrimaryButton:hover,
+#ctl01_SideBarPlaceHolder_ctl00_SubscribeLink1_lnkSubscribe:hover,
+a#ctl01_SideBarPlaceHolder_ctl00_SubscribeLink1_lnkSubscribe.TextButton.PrimaryButton:hover {
     color: #FFFFFF !important;
     background-color: #000000 !important;
     border-color: #000000 !important;
+}
+
+/* Edit link in community sidebar - needs visible styling */
+.col-secondary .Section.CommunityActionButtons a[id*="EditLink"],
+.col-secondary a#ctl01_SideBarPlaceHolder_ctl00_EditLink1_lnkEdit,
+#ctl01_SubNavPanel a[id*="EditLink"][id*="lnkEdit"],
+a#ctl01_SideBarPlaceHolder_ctl00_EditLink1_lnkEdit {
+    color: var(--pbs-blue) !important;
+    background-color: transparent !important;
+    border: 2px solid var(--pbs-blue) !important;
+    display: inline-block !important;
+    text-align: center !important;
+    padding: 8px 15px !important;
+    text-decoration: none !important;
+    border-radius: 4px !important;
+    font-weight: 500 !important;
+    margin-top: 8px !important;
+}
+
+.col-secondary a[id*="EditLink"]:hover,
+a#ctl01_SideBarPlaceHolder_ctl00_EditLink1_lnkEdit:hover {
+    color: #FFFFFF !important;
+    background-color: var(--pbs-blue) !important;
 }
 
 /* =====================================================
