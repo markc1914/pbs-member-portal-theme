@@ -1783,10 +1783,13 @@ header .RadTabStrip {
 
 .RadWindow .rwTitleBar .rwTitle,
 .RadWindow_Default .rwTitle,
-[class*="RadWindow"] .rwTitle {
-    color: var(--pbs-white) !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
+[class*="RadWindow"] .rwTitle,
+.rwTitleBar .rwTitle,
+.rwTitle {
+    color: #FFFFFF !important;
+    font-weight: 700 !important;
+    font-size: 18px !important;
+    text-shadow: none !important;
 }
 
 /* Window controls (close, minimize buttons) */
@@ -1812,6 +1815,94 @@ header .RadTabStrip {
 [class*="RadWindow"] .rwContent {
     background-color: var(--pbs-white) !important;
     padding: 15px !important;
+}
+
+/* Remove ALL sprite backgrounds from RadWindow chrome */
+.RadWindow td,
+.RadWindow_Default td,
+[class*="RadWindow"] td,
+.RadWindow .rwTopLeft,
+.RadWindow .rwTopRight,
+.RadWindow .rwTopResize,
+.RadWindow .rwStatusBar,
+.RadWindow .rwStatusBarRow,
+.RadWindow .rwBodyLeft,
+.RadWindow .rwBodyRight,
+.RadWindow .rwFooterLeft,
+.RadWindow .rwFooterRight,
+.RadWindow .rwFooterCenter,
+.RadWindow .rwCorner,
+.RadWindow_Default .rwTopLeft,
+.RadWindow_Default .rwTopRight,
+.RadWindow_Default .rwTopResize,
+.RadWindow_Default .rwStatusBar,
+.RadWindow_Default .rwBodyLeft,
+.RadWindow_Default .rwBodyRight,
+.RadWindow_Default .rwFooterLeft,
+.RadWindow_Default .rwFooterRight,
+.RadWindow_Default .rwFooterCenter,
+.RadWindow_Default .rwCorner,
+[class*="RadWindow"] .rwTopResize,
+[class*="RadWindow"] .rwStatusBar,
+[class*="RadWindow"] .rwCorner {
+    background-image: none !important;
+    background: transparent !important;
+}
+
+/* Clean title row - remove dotted pattern */
+.RadWindow .rwTitleRow,
+.RadWindow .rwTitleRow td,
+.RadWindow_Default .rwTitleRow,
+.RadWindow_Default .rwTitleRow td,
+[class*="RadWindow"] .rwTitleRow,
+[class*="RadWindow"] .rwTitleRow td {
+    background-image: none !important;
+    background-color: var(--pbs-blue) !important;
+    border: none !important;
+}
+
+/* Hide resize handles/grips */
+.RadWindow .rwStatusBar,
+.RadWindow_Default .rwStatusBar,
+[class*="RadWindow"] .rwStatusBar {
+    display: none !important;
+}
+
+/* Clean window border */
+.RadWindow,
+.RadWindow_Default,
+[class*="RadWindow"] {
+    border: 1px solid var(--pbs-gray-300) !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
+}
+
+/* Hide empty panel containers in dialogs */
+.RadWindow .PanelBody:empty,
+.RadWindow_Default .PanelBody:empty,
+[class*="RadWindow"] .PanelBody:empty,
+.RadWindow .panel:empty,
+.RadWindow_Default .panel:empty {
+    display: none !important;
+}
+
+/* Hide empty-looking fieldsets and panels in dialogs */
+.RadWindow fieldset:not(:has(input)):not(:has(select)):not(:has(textarea)),
+.RadWindow_Default fieldset:not(:has(input)):not(:has(select)):not(:has(textarea)),
+.rwContent fieldset:not(:has(input)):not(:has(select)):not(:has(textarea)) {
+    display: none !important;
+}
+
+/* Make empty grey boxes in dialog content transparent or hidden */
+.rwContent > fieldset,
+.rwContent fieldset {
+    border: none !important;
+    background: transparent !important;
+}
+
+/* If fieldset only has whitespace/no visible content, collapse it */
+.rwContent fieldset:has(> :only-child:empty) {
+    display: none !important;
 }
 
 /* ========================================
