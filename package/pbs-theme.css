@@ -1781,19 +1781,27 @@ header .RadTabStrip {
     padding: 8px 12px !important;
 }
 
-.RadWindow .rwTitleBar .rwTitle,
-.RadWindow_Default .rwTitle,
-.RadWindow_Default .rwTitleBar .rwTitle,
-[class*="RadWindow"] .rwTitle,
-[class*="RadWindow"] .rwTitleBar .rwTitle,
-.rwTitleBar .rwTitle,
+/* Dialog title - force white 16px on ALL elements in title bar */
+.rwTitleBar,
+.rwTitleBar *,
+.rwTitleRow .rwTitleBar,
+.rwTitleRow .rwTitleBar *,
+.RadWindow .rwTitleBar,
+.RadWindow .rwTitleBar *,
+.RadWindow_Default .rwTitleBar,
+.RadWindow_Default .rwTitleBar *,
+div.RadWindow .rwTitleBar *,
+div.RadWindow_Default .rwTitleBar *,
+table.rwTitleBar *,
 .rwTitle,
+.rwTitle *,
+.rwTitleBar .rwTitle,
+.rwTitleBar .rwTitle *,
 .rwTitleBar em,
-.RadWindow .rwTitleBar em,
-.RadWindow_Default .rwTitleBar em {
+.rwTitleBar span {
     color: #FFFFFF !important;
     font-weight: 700 !important;
-    font-size: 13px !important;
+    font-size: 16px !important;
     text-shadow: none !important;
     font-style: normal !important;
 }
