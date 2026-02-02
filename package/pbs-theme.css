@@ -2536,10 +2536,18 @@ td .reToolbar,
 .Default.reToolbarWrapper,
 .reToolCell .reToolbarWrapper {
     height: auto !important;
-    min-height: 28px !important;
+    min-height: 65px !important;  /* Fits 2 rows of toolbar buttons */
     max-height: none !important;
     overflow: visible !important;
     display: block !important;
+    position: relative !important;
+}
+
+/* Ensure wrapper contains all toolbar rows */
+.reToolbarWrapper::after {
+    content: "" !important;
+    display: table !important;
+    clear: both !important;
 }
 
 /* Ensure toolbar cell expands to fit all toolbar rows */
@@ -2567,6 +2575,20 @@ td .reToolbar li {
 .reToolbar li:hover,
 ul.reToolbar li:hover {
     background: transparent !important;
+}
+
+/* RadEditor content area - expand text area to fill available space */
+/* Target the content iframe directly */
+.reContentCell iframe,
+td.reContentCell iframe {
+    min-height: 150px !important;
+}
+
+/* Ensure content cell takes available space */
+.reContentCell,
+td.reContentCell {
+    height: auto !important;
+    min-height: 150px !important;
 }
 
 /* ========================================
@@ -3557,27 +3579,16 @@ a[onclick*="Edit"],
     box-shadow: none !important;
 }
 
-/* AGGRESSIVE: Remove ALL backgrounds from Edit/Address controls and their wrappers */
-a[id*="Edit"],
-a[id*="edit"],
+/* Remove backgrounds from Edit/Address controls */
+/* NOTE: Removed [id*="Edit"] span selectors - they were breaking RadEditor toolbar sprites */
+a[id*="Edit"]:not(.reTool):not(.reTool_text),
+a[id*="edit"]:not(.reTool):not(.reTool_text),
 a[id*="Address"],
 a[id*="address"],
-[id*="Edit"] a,
-[id*="edit"] a,
 [id*="Address"] a,
 [id*="address"] a,
-[id*="Edit"] span,
-[id*="edit"] span,
 [id*="Address"] span,
 [id*="address"] span,
-[id*="Edit"] > *,
-[id*="edit"] > *,
-[id*="Address"] > *,
-[id*="address"] > *,
-a[id*="Edit"] *,
-a[id*="edit"] *,
-a[id*="Address"] *,
-a[id*="address"] *,
 .PanelHeadOptions a,
 .PanelHeadOptions a *,
 .PanelHeadOptions span,
