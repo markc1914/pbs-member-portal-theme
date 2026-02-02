@@ -1831,26 +1831,30 @@ table.rwTitleBar *,
     padding: 15px !important;
 }
 
-/* Remove sprite backgrounds from RadWindow chrome - use solid white */
+/* Hide the top resize row completely - causes white rectangle */
+.RadWindow .rwTopResize,
 .RadWindow .rwTopLeft,
 .RadWindow .rwTopRight,
-.RadWindow .rwTopResize,
+.RadWindow_Default .rwTopResize,
+.RadWindow_Default .rwTopLeft,
+.RadWindow_Default .rwTopRight,
+[class*="RadWindow"] .rwTopResize {
+    display: none !important;
+}
+
+/* Body and footer chrome - white background */
 .RadWindow .rwBodyLeft,
 .RadWindow .rwBodyRight,
 .RadWindow .rwFooterLeft,
 .RadWindow .rwFooterRight,
 .RadWindow .rwFooterCenter,
 .RadWindow .rwCorner,
-.RadWindow_Default .rwTopLeft,
-.RadWindow_Default .rwTopRight,
-.RadWindow_Default .rwTopResize,
 .RadWindow_Default .rwBodyLeft,
 .RadWindow_Default .rwBodyRight,
 .RadWindow_Default .rwFooterLeft,
 .RadWindow_Default .rwFooterRight,
 .RadWindow_Default .rwFooterCenter,
 .RadWindow_Default .rwCorner,
-[class*="RadWindow"] .rwTopResize,
 [class*="RadWindow"] .rwCorner {
     background-image: none !important;
     background-color: #FFFFFF !important;
