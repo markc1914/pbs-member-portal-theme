@@ -1831,15 +1831,18 @@ table.rwTitleBar *,
     padding: 15px !important;
 }
 
-/* Hide the top resize row completely - causes white rectangle */
+/* Top row chrome - just remove sprites, keep structure */
 .RadWindow .rwTopResize,
 .RadWindow .rwTopLeft,
 .RadWindow .rwTopRight,
 .RadWindow_Default .rwTopResize,
 .RadWindow_Default .rwTopLeft,
 .RadWindow_Default .rwTopRight,
-[class*="RadWindow"] .rwTopResize {
-    display: none !important;
+[class*="RadWindow"] .rwTopResize,
+[class*="RadWindow"] .rwTopLeft,
+[class*="RadWindow"] .rwTopRight {
+    background-image: none !important;
+    background-color: #164F90 !important;
 }
 
 /* Body and footer chrome - white background */
