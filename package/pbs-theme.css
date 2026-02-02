@@ -2610,6 +2610,26 @@ footer a:hover {
     color: var(--pbs-white) !important;
 }
 
+/* Follow Community button - WHITE text on blue background */
+/* The button has class PrimaryButton but text color was overridden to blue */
+a[id*="SubscribeLink"][id*="lnkSubscribe"],
+a.TextButton.PrimaryButton[id*="SubscribeLink"],
+.CommunityActionButtons a.PrimaryButton,
+.Section.CommunityActionButtons a,
+#ctl01_SideBarPlaceHolder_ctl00_SubscribeLink1_lnkSubscribe {
+    color: #FFFFFF !important;
+    background-color: var(--pbs-blue) !important;
+    border-color: var(--pbs-blue) !important;
+}
+
+a[id*="SubscribeLink"][id*="lnkSubscribe"]:hover,
+.CommunityActionButtons a.PrimaryButton:hover,
+#ctl01_SideBarPlaceHolder_ctl00_SubscribeLink1_lnkSubscribe:hover {
+    color: #FFFFFF !important;
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+}
+
 /* =====================================================
    COMMUNITY PAGE SIDEBAR FIX - Issue #16
    Make sidebar appear on the right instead of bottom
