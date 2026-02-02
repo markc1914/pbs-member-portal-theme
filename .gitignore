@@ -34,3 +34,5 @@ test-safari.scpt
 test-users.json
 .env
 *.env.local
+workfiles/*.config
+workfiles/web.config*

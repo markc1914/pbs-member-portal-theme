@@ -1992,7 +1992,39 @@ table.rwTitleBar {
     box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
 }
 
+/* FIX Issue #36: Ensure RadWindow dialog tables maintain proper width */
+/* The RadWindow uses a table-based layout - ensure it doesn't collapse */
+
+/* Main dialog wrapper - don't constrain */
+.RadWindow,
+.RadWindow_Default,
+[class*="RadWindow"] {
+    max-width: none !important;
+}
+
+/* Dialog layout table - must fill the window */
+.RadWindow > table,
+.RadWindow_Default > table,
+[class*="RadWindow"] > table,
+.rwTable {
+    width: 100% !important;
+}
+
+/* Content area should fill available space */
+.rwContent {
+    width: 100% !important;
+}
+
+/* Iframe inside dialog (used by some editors) */
+.RadWindow iframe,
+.RadWindow_Default iframe,
+.rwContent iframe {
+    width: 100% !important;
+    min-width: 300px !important;
+}
+
 /* Hide empty panel containers in dialogs */
+/* DISABLED - may hide content that loads dynamically or via iframe
 .RadWindow .PanelBody:empty,
 .RadWindow_Default .PanelBody:empty,
 [class*="RadWindow"] .PanelBody:empty,
@@ -2000,6 +2032,7 @@ table.rwTitleBar {
 .RadWindow_Default .panel:empty {
     display: none !important;
 }
+*/
 
 /* Hide empty-looking fieldsets and panels in dialogs */
 /* DISABLED - was potentially hiding date picker fieldsets
@@ -2462,6 +2495,8 @@ table {
 /* Exclude date pickers and small control tables from min-width */
 .RadPicker table,
 .RadDatePicker table,
+/* Date picker and form field tables - allow auto width */
+/* NOTE: Do NOT include .rwContent table or .RadWindow table here - it breaks dialog layout (Issue #36) */
 [class*="RadPicker"] table,
 [class*="RadDatePicker"] table,
 .RadInput table,
@@ -2470,10 +2505,15 @@ table {
 .PanelFieldValue table,
 [id*="rad_Dp"] table,
 [id*="Dp"] table,
-span[id*="rad"] table,
-.rwContent table,
-.RadWindow table,
-.panelEditor table {
+span[id*="rad"] table {
+    min-width: 0 !important;
+    width: auto !important;
+}
+
+/* Panel editor content tables - not the main layout table */
+.rwContent .PanelBody table,
+.rwContent .panel-body table,
+.rwContent form > table table {
     min-width: 0 !important;
     width: auto !important;
 }

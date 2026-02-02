@@ -6,7 +6,13 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 
 ## Open Issues
 
-*No open issues in ISSUES.md - see GitHub Issues for current open items*
+### Issue #36: Panel editor dialog not opening to correct size
+- **Status:** Open
+- **Priority:** High
+- **Affected page(s):** Panel editor dialog (Staff site functionality)
+- **Description:** The panel editor dialog box opens extremely narrow/squished on DEV, with content cut off. On Production, it opens full-width with proper two-column layout.
+- **Expected behavior:** Dialog should open to full width with all fields visible in two-column layout
+- **Screenshot:** testingScreenshots/Screenshot 2026-02-02 at 11.28.44 AM.png (Production - correct), Screenshot 2026-02-02 at 11.29.06 AM.png (DEV - broken)
 
 ---
 
