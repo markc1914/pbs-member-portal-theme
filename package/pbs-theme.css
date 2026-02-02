@@ -495,7 +495,7 @@ a[href*="SignOut"]:hover,
     /* Path relative to theme folder - Desktop banner */
     background-image: url("images/pbs-banner-responsive.png") !important;
     background-repeat: no-repeat !important;
-    background-position: center center !important;
+    background-position: center top !important;
     /* Use contain to show full banner without cropping on wide screens (1440p+) */
     /* This ensures "Membership Database" text is never cut off */
     background-size: contain !important;
@@ -3935,7 +3935,8 @@ a#masterDonorHeaderImage {
     background: url("images/pbs-banner-responsive.png") no-repeat center center !important;
     background-image: url("images/pbs-banner-responsive.png") !important;
     background-color: var(--pbs-blue) !important;
-    background-size: cover !important;
+    /* Use contain to prevent cropping on wide screens (1440p+) - Issue #13 */
+    background-size: contain !important;
     width: 100% !important;
     max-width: 100% !important;
     height: 120px !important;
