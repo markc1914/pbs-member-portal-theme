@@ -4441,3 +4441,40 @@ body:has([id*="ciNewContactSignInCommon"]) [id*="signInDiv"] {
         gap: 5px !important;
     }
 }
+
+/* ========================================
+   Issue #15: HIDE SIGN IN BUTTON ON LOGIN PAGE ONLY
+   The auth-link shows "Sign In" on login page, "Sign Out" when authenticated.
+   We must hide it on login page (redundant) but keep it visible elsewhere.
+   Uses maximum specificity to override the visibility rules above.
+   ======================================== */
+
+/* Target the Sign In button specifically on login page */
+/* Use body:has() to detect login page by presence of sign-in form elements */
+html body:has([id*="ciNewContactSignInCommon"]) .auth-link-container,
+html body:has([id*="ciNewContactSignInCommon"]) .auth-link-container a,
+html body:has([id*="ciNewContactSignInCommon"]) .auth-link-container a.auth-link,
+html body:has([id*="ciNewContactSignInCommon"]) a#ctl01_LoginStatus1,
+html body:has([id*="ciNewContactSignInCommon"]) #ctl01_LoginStatus1,
+html body:has([id*="ciNewContactSignInCommon"]) a.auth-link,
+html body:has([id*="ciNewContactSignInCommon"]) a[id*="LoginStatus"],
+html body:has([id*="signInDiv"]) .auth-link-container,
+html body:has([id*="signInDiv"]) .auth-link-container a,
+html body:has([id*="signInDiv"]) .auth-link-container a.auth-link,
+html body:has([id*="signInDiv"]) a#ctl01_LoginStatus1,
+html body:has([id*="signInDiv"]) #ctl01_LoginStatus1,
+html body:has([id*="signInDiv"]) a.auth-link,
+html body:has([id*="signInDiv"]) a[id*="LoginStatus"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
