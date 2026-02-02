@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
+const { getCredentials } = require('./test-config');
 
 const RESOURCE_LIB_URL = 'https://members.phibetasigma1914.org/iMISDEV/PBSMember/Documents/Member_Education_Material/PBSMember/Member_Education_Material.aspx?hkey=d0ba999b-db57-47c4-84c0-c9c1505cfacc';
 const LOGIN_URL = 'https://members.phibetasigma1914.org/iMISdev/';
@@ -26,8 +27,9 @@ async function login(page, username, password) {
 
     const page = await browser.newPage();
 
-    console.log('=== LOGGING IN AS STAFF (REDACTED_USER) ===');
-    const afterLoginUrl = await login(page, 'REDACTED_USER', 'REDACTED_PASSWORD');
+    const { username, password } = getCredentials();
+    console.log('=== LOGGING IN AS STAFF ===');
+    const afterLoginUrl = await login(page, username, password);
     console.log('After login URL:', afterLoginUrl);
 
     await page.screenshot({ path: path.join(SCREENSHOT_DIR, 'staff-after-login.png'), fullPage: true });

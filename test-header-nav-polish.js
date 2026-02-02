@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
+const { getCredentials } = require('./test-config');
 
 const LOGIN_URL = 'https://members.phibetasigma1914.org/iMISdev/';
 const THEME_BASE_URL = 'https://members.phibetasigma1914.org/iMISdev/App_Themes/PBS_Responsive_Theme';
@@ -32,9 +33,10 @@ async function testHeaderNavPolish() {
 
         // Login
         console.log('Logging in...');
+        const { username, password } = getCredentials();
         await page.goto(LOGIN_URL, { waitUntil: 'networkidle2', timeout: 30000 });
-        await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', 'REDACTED_USER');
-        await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', 'REDACTED_PASSWORD');
+        await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', username);
+        await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', password);
 
         // Use JavaScript click for more reliable login
         await page.evaluate(() => {

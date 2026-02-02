@@ -1,0 +1,18 @@
+{
+  "testUsers": [
+    {
+      "username": "YOUR_USERNAME",
+      "password": "YOUR_PASSWORD",
+      "name": "Test User",
+      "role": "Financial Member",
+      "notes": "Can see Resource Library"
+    },
+    {
+      "username": "YOUR_STAFF_USERNAME",
+      "password": "YOUR_STAFF_PASSWORD",
+      "name": "Staff User",
+      "role": "Staff",
+      "notes": "Admin access"
+    }
+  ]
+}

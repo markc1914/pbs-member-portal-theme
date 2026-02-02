@@ -168,6 +168,33 @@ Target specific containers:
 - Test on actual iOS/Android devices
 - Screenshots should be added to `testingScreenshots/` folder
 
+### Setting Up Test Credentials (New Machine Setup)
+
+Test scripts require iMIS login credentials. Credentials are **NOT stored in git** for security.
+
+**Option 1: Environment Variables (Recommended)**
+```bash
+export PBS_TEST_USER="your_username"
+export PBS_TEST_PASSWORD="your_password"
+node test-login.js
+```
+
+**Option 2: Command Line Arguments**
+```bash
+node test-login.js your_username your_password
+```
+
+**Option 3: Local Config File**
+```bash
+# Copy the template
+cp test-users.json.example test-users.json
+
+# Edit test-users.json with your credentials
+# This file is gitignored and stays local
+```
+
+The `test-config.js` module handles credential loading automatically. Scripts will show an error with instructions if no credentials are found.
+
 ---
 
 ## Deployment to iMIS

@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
+const { getCredentials } = require('./test-config');
 
 const LOGIN_URL = 'https://members.phibetasigma1914.org/iMISdev/';
 const SCREENSHOT_DIR = path.join(__dirname, 'testingScreenshots');
@@ -36,9 +37,10 @@ const SCREENSHOT_DIR = path.join(__dirname, 'testingScreenshots');
 
     // Step 1: Login
     console.log('\n=== LOGGING IN ===');
+    const { username, password } = getCredentials();
     await page.goto(LOGIN_URL, { waitUntil: 'networkidle2', timeout: 30000 });
-    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', 'REDACTED_USER');
-    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', 'REDACTED_PASSWORD');
+    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', username);
+    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', password);
     await page.click('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_SubmitButton');
 
     console.log('Waiting for login to complete...');

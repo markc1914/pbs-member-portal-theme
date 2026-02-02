@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const { getCredentials } = require('./test-config');
 
 const LOGIN_URL = 'https://members.phibetasigma1914.org/iMISdev/';
 const DIRECTORY_URL = 'https://members.phibetasigma1914.org/iMISDEV/PBSMember/Membership/Directory/PBSMember/Directory.aspx?hkey=dedd1298-4a4a-4e0a-a0a8-e4bcc640c2cc';
@@ -13,8 +14,9 @@ async function debugRectangle() {
 
     // Login
     await page.goto(LOGIN_URL, { waitUntil: 'networkidle2' });
-    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', 'REDACTED_USER');
-    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', 'REDACTED_PASSWORD');
+    const { username, password } = getCredentials();
+    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', username);
+    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', password);
     await page.evaluate(() => document.querySelector('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_SubmitButton').click());
     await sleep(6000);
 

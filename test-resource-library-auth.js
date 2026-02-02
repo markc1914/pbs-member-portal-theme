@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
+const { getCredentials } = require('./test-config');
 
 const RESOURCE_LIB_URL = 'https://members.phibetasigma1914.org/iMISDEV/PBSMember/Documents/Member_Education_Material/PBSMember/Member_Education_Material.aspx?hkey=d0ba999b-db57-47c4-84c0-c9c1505cfacc';
 const LOGIN_URL = 'https://members.phibetasigma1914.org/iMISdev/';
@@ -21,13 +22,14 @@ const SCREENSHOT_DIR = path.join(__dirname, 'testingScreenshots');
 
         // Step 2: Enter credentials
         console.log('=== STEP 2: Entering credentials ===');
+        const { username, password } = getCredentials();
         const usernameSelector = '#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName';
         const passwordSelector = '#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword';
         const submitSelector = '#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_SubmitButton';
 
         await page.waitForSelector(usernameSelector, { timeout: 10000 });
-        await page.type(usernameSelector, 'REDACTED_USER');
-        await page.type(passwordSelector, 'REDACTED_PASSWORD');
+        await page.type(usernameSelector, username);
+        await page.type(passwordSelector, password);
         await page.screenshot({ path: path.join(SCREENSHOT_DIR, '2-credentials-entered.png') });
 
         // Step 3: Submit and wait for response

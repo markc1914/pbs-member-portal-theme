@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
+const { getCredentials } = require('./test-config');
 
 const LOGIN_URL = 'https://members.phibetasigma1914.org/iMISdev/';
 const COMMUNITY_URL = 'https://members.phibetasigma1914.org/iMISDEV/iCore/Communities/CommunityLayouts/CommunityDescription.aspx?iUniformKey=33451093-a35b-433d-9b88-4337ac3ed9b3&WebsiteKey=f17366dc-26c7-4e94-9bc6-8535489d9140';
@@ -20,9 +21,10 @@ const SCREENSHOT_DIR = path.join(__dirname, 'testingScreenshots');
 
     // Login
     console.log('=== LOGGING IN ===');
+    const { username, password } = getCredentials();
     await page.goto(LOGIN_URL, { waitUntil: 'networkidle2', timeout: 30000 });
-    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', 'REDACTED_USER');
-    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', 'REDACTED_PASSWORD');
+    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', username);
+    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', password);
     await page.click('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_SubmitButton');
     await new Promise(r => setTimeout(r, 6000));
 

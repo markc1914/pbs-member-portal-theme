@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+const { getCredentials } = require('./test-config');
 
 const BASE_URL = 'https://members.phibetasigma1914.org/iMISDEV';
 const SCREENSHOTS_DIR = '/Users/markcornelius/projects/claude/pbs-member-portal-theme/automatedTestScreenshots';
@@ -27,8 +28,9 @@ const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
     // Login
     console.log('2. Logging in...');
-    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', 'REDACTED_USER');
-    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', 'REDACTED_PASSWORD');
+    const { username, password } = getCredentials();
+    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', username);
+    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', password);
     await page.click('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_SubmitButton');
     await wait(5000);
 

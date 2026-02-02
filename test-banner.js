@@ -1,11 +1,10 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
+const { getCredentials } = require('./test-config');
 
 const TEST_URL = 'https://members.phibetasigma1914.org/iMISdev/';
 const THEME_BASE_URL = 'https://members.phibetasigma1914.org/iMISdev/App_Themes/PBS_Responsive_Theme';
-const USERNAME = 'REDACTED_USER';
-const PASSWORD = 'REDACTED_PASSWORD';
 const SCREENSHOT_DIR = path.join(__dirname, 'testingScreenshots');
 const LOCAL_CSS_PATH = path.join(__dirname, 'package', 'pbs-theme.css');
 
@@ -28,11 +27,12 @@ async function test() {
         
         await dp.goto(TEST_URL, { waitUntil: 'networkidle2', timeout: 30000 });
         
+        const { username, password } = getCredentials();
         const u = await dp.$('input[id*="signInUserName"]');
         const p = await dp.$('input[id*="signInPassword"], input[type="password"]');
         if (u && p) {
-            await u.type(USERNAME, { delay: 30 });
-            await p.type(PASSWORD, { delay: 30 });
+            await u.type(username, { delay: 30 });
+            await p.type(password, { delay: 30 });
             const s = await dp.$('input[type="submit"]');
             if (s) { await s.click(); await dp.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => {}); }
         }
@@ -82,8 +82,8 @@ async function test() {
         const mu = await mp.$('input[id*="signInUserName"]');
         const mpa = await mp.$('input[id*="signInPassword"], input[type="password"]');
         if (mu && mpa) {
-            await mu.type(USERNAME, { delay: 30 });
-            await mpa.type(PASSWORD, { delay: 30 });
+            await mu.type(username, { delay: 30 });
+            await mpa.type(password, { delay: 30 });
             const ms = await mp.$('input[type="submit"]');
             if (ms) { await ms.click(); await mp.waitForNavigation({ waitUntil: 'networkidle2' }).catch(() => {}); }
         }

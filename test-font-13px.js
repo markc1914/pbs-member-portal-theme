@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
+const { getCredentials } = require('./test-config');
 
 const LOGIN_URL = 'https://members.phibetasigma1914.org/iMISdev/';
 const THEME_BASE_URL = 'https://members.phibetasigma1914.org/iMISdev/App_Themes/PBS_Responsive_Theme';
@@ -25,11 +26,12 @@ const SCREENSHOT_DIR = path.join(__dirname, 'testingScreenshots');
     console.log('=== DESKTOP VIEW (1280x800) ===');
     await page.setViewport({ width: 1280, height: 800 });
 
-    // Login as REDACTED_USER
-    console.log('Logging in as REDACTED_USER...');
+    // Login
+    const { username, password } = getCredentials();
+    console.log('Logging in...');
     await page.goto(LOGIN_URL, { waitUntil: 'networkidle2', timeout: 30000 });
-    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', 'REDACTED_USER');
-    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', 'REDACTED_PASSWORD');
+    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInUserName', username);
+    await page.type('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_signInPassword', password);
     await page.click('#ctl01_TemplateBody_WebPartManager1_gwpciNewContactSignInCommon_ciNewContactSignInCommon_SubmitButton');
     await new Promise(r => setTimeout(r, 5000));
     console.log('Logged in! Current URL:', page.url());
