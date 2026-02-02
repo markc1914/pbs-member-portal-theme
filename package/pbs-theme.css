@@ -5189,6 +5189,81 @@ html body a.rcCalPopup::after,
 }
 
 /* ========================================
+   FIX: BusinessCalendar Date Picker Controls (Reports)
+   These use input[type="image"] with empty src - need to provide visible icon
+   ======================================== */
+
+/* BusinessCalendar image button - the src is broken so we need to style it as a visible button */
+input[type="image"][id*="BusinessCalendar"],
+input[type="image"][id*="Calendar_ImageButton"],
+input[type="image"][alt="Use calendar"],
+.GridFilterCalendar input[type="image"] {
+    display: inline-block !important;
+    visibility: visible !important;
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+    padding: 0 !important;
+    margin-left: 4px !important;
+    vertical-align: middle !important;
+    cursor: pointer !important;
+    /* Hide the broken image alt text */
+    font-size: 0 !important;
+    color: transparent !important;
+    text-indent: -9999px !important;
+    overflow: hidden !important;
+    /* Style as calendar button */
+    background-color: var(--pbs-blue) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z'/%3E%3C/svg%3E") !important;
+    background-size: 18px 18px !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    border: 1px solid var(--pbs-blue) !important;
+    border-radius: 4px !important;
+    /* Ensure the broken image icon is hidden */
+    object-fit: none !important;
+    object-position: -9999px -9999px !important;
+}
+
+input[type="image"][id*="BusinessCalendar"]:hover,
+input[type="image"][id*="Calendar_ImageButton"]:hover,
+input[type="image"][alt="Use calendar"]:hover,
+.GridFilterCalendar input[type="image"]:hover {
+    background-color: var(--pbs-blue-dark) !important;
+    border-color: var(--pbs-blue-dark) !important;
+}
+
+/* GridFilterCalendar table layout */
+.GridFilterCalendar {
+    border-collapse: separate !important;
+    border-spacing: 4px !important;
+}
+
+.GridFilterCalendar td {
+    vertical-align: middle !important;
+    padding: 2px 4px !important;
+}
+
+/* StylesDateText input - the date text field */
+.StylesDateText,
+input.StylesDateText {
+    padding: 6px 10px !important;
+    border: 1px solid var(--pbs-gray-300) !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    min-width: 100px !important;
+    background-color: var(--pbs-white) !important;
+}
+
+.StylesDateText:focus,
+input.StylesDateText:focus {
+    border-color: var(--pbs-blue) !important;
+    outline: none !important;
+    box-shadow: 0 0 4px rgba(22, 79, 144, 0.3) !important;
+}
+
+/* ========================================
    RadCalendar Popup Styling - Issue #20
    ======================================== */
 
