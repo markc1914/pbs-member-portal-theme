@@ -2023,6 +2023,42 @@ table.rwTitleBar {
     min-width: 300px !important;
 }
 
+/* Loading spinner for RadWindow dialogs */
+@keyframes rwSpinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.rwLoading {
+    position: relative !important;
+}
+
+.rwLoading::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    margin: -20px 0 0 -20px !important;
+    border: 4px solid var(--pbs-gray-200, #e5e7eb) !important;
+    border-top-color: var(--pbs-blue, #164F90) !important;
+    border-radius: 50% !important;
+    animation: rwSpinner 0.8s linear infinite !important;
+    z-index: 10 !important;
+}
+
+.rwLoading::after {
+    content: "Loading..." !important;
+    position: absolute !important;
+    top: calc(50% + 35px) !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    font-size: 14px !important;
+    color: var(--pbs-blue, #164F90) !important;
+    z-index: 10 !important;
+}
+
 /* Hide empty panel containers in dialogs */
 /* DISABLED - may hide content that loads dynamically or via iframe
 .RadWindow .PanelBody:empty,
