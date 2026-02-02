@@ -2610,6 +2610,108 @@ footer a:hover {
     color: var(--pbs-white) !important;
 }
 
+/* =====================================================
+   COMMUNITY PAGE SIDEBAR FIX - Issue #16
+   Make sidebar appear on the right instead of bottom
+   The body-container holds both main content and sidebar
+   ===================================================== */
+
+.body-container {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+}
+
+/* Main content area - takes remaining space */
+.body-container > .row:first-of-type,
+.body-container > div:not(.col-secondary):not(.NotPrinted):first-child {
+    flex: 1 !important;
+    min-width: 0 !important;
+    order: 1 !important;
+}
+
+/* Sidebar - fixed width on the right */
+#ctl01_SubNavPanel {
+    display: block !important;
+    width: 280px !important;
+    min-width: 280px !important;
+    max-width: 280px !important;
+    flex-shrink: 0 !important;
+    order: 2 !important;
+    float: none !important;
+    padding: 15px !important;
+    background-color: #f8f9fa !important;
+    border-radius: 8px !important;
+    border: 1px solid #e0e0e0 !important;
+}
+
+/* Ensure sidebar content is readable */
+#ctl01_SubNavPanel * {
+    max-width: 100% !important;
+    word-wrap: break-word !important;
+}
+
+#ctl01_SubNavPanel a {
+    color: var(--pbs-blue, #164F90) !important;
+    text-decoration: none !important;
+}
+
+#ctl01_SubNavPanel a:hover {
+    text-decoration: underline !important;
+}
+
+#ctl01_SubNavPanel h3,
+#ctl01_SubNavPanel h4 {
+    color: #333 !important;
+    font-weight: 600 !important;
+    margin-bottom: 10px !important;
+    font-size: 14px !important;
+}
+
+/* Community logo in sidebar */
+#ctl01_SubNavPanel img {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 4px !important;
+}
+
+/* Community sidebar title */
+.CommunitySideBarTitle {
+    font-weight: 600 !important;
+    margin-bottom: 10px !important;
+}
+
+/* Scope fix: don't break pages without sidebar */
+.wrapper:not(.has-secondary-col) .body-container:not(:has(.col-secondary)):not(:has(#ctl01_SubNavPanel)) {
+    display: block !important;
+}
+
+/* Make sure header and footer are NOT affected by flex */
+#hd, #ft, header, footer,
+#ctl01_headerWrapper,
+#ctl01_footerWrapper {
+    display: block !important;
+    width: 100% !important;
+    flex: none !important;
+}
+
+/* Mobile: Stack sidebar below content */
+@media (max-width: 991px) {
+    .body-container {
+        flex-direction: column !important;
+    }
+
+    #ctl01_SubNavPanel {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+        order: 2 !important;
+        margin-top: 20px !important;
+    }
+}
+
 /* ========================================
    ICON SPRITES & ACTION ICONS
    ======================================== */

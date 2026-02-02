@@ -19,6 +19,10 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 
 ## Resolved Issues
 
+### Issue #16: Community page sidebar appears at bottom instead of right side
+- **Status:** Resolved (2026-02-02)
+- **Fix:** Added flexbox layout to `.body-container` with `flex-direction: row`. Sidebar (`#ctl01_SubNavPanel`) now has fixed 280px width, positioned as order: 2 (right side). Main content takes remaining space. Mobile stacks sidebar below content. Header/footer explicitly excluded from flex layout.
+
 ### Issue #14: Resource library folders don't collapse when minus clicked
 - **Status:** Resolved (2026-02-02)
 - **Fix:** Removed `!important` from `.rtUL` display rules and added attribute selector `[style*="display: none"]` to respect JavaScript's inline styles when collapsing folders.
@@ -111,4 +115,4 @@ Screenshots are saved to `automatedTestScreenshots/` folder.
 
 ---
 
-*Last updated: 2026-02-02*
+*Last updated: 2026-02-02 (Issue #16 resolved)*
