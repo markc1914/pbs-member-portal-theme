@@ -43,53 +43,52 @@ async function testEditDialog() {
         // Go to Account page
         console.log('Navigating to Account page...');
         await page.goto(ACCOUNT_URL, { waitUntil: 'networkidle2', timeout: 30000 });
-        await sleep(3000); // Wait longer for dynamic content
+        await sleep(3000);
 
         // Inject CSS to main page
         console.log('Injecting local CSS...');
         await page.addStyleTag({ content: localCss });
         await sleep(500);
 
-        // Find ALL links and look for Edit - case insensitive, check innerText
-        const allLinks = await page.evaluate(() => {
-            const links = Array.from(document.querySelectorAll('a'));
-            return links.map((a, i) => ({
-                index: i,
-                text: a.innerText?.trim() || a.textContent?.trim() || '',
-                id: a.id,
-                className: a.className,
-                visible: a.offsetParent !== null,
-                rect: a.getBoundingClientRect()
-            })).filter(l => l.text.toLowerCase().includes('edit'));
-        });
-        console.log('Edit links found:', JSON.stringify(allLinks, null, 2));
+        // Find and click Edit link - try getting element handle
+        console.log('Looking for Edit link...');
 
-        // Click the first visible Edit link (above the name)
-        console.log('Clicking Edit link above name...');
-        const clicked = await page.evaluate(() => {
-            const links = Array.from(document.querySelectorAll('a'));
+        // Get all anchor elements and find the one with "Edit" text in the sidebar
+        const links = await page.$$('a');
+        let clickedEdit = false;
+
+        for (const link of links) {
+            const text = await page.evaluate(el => el.textContent?.trim(), link);
+            const box = await link.boundingBox();
+
+            if (text === 'Edit' && box && box.x < 200 && box.y > 100 && box.y < 200) {
+                console.log(`Found Edit link at (${box.x}, ${box.y}), clicking...`);
+                await link.click();
+                clickedEdit = true;
+                break;
+            }
+        }
+
+        if (!clickedEdit) {
+            // Try clicking any Edit link
             for (const link of links) {
-                const text = (link.innerText || link.textContent || '').trim().toLowerCase();
-                if (text === 'edit' && link.offsetParent !== null) {
-                    const rect = link.getBoundingClientRect();
-                    // The first Edit link should be in the upper left area (sidebar)
-                    if (rect.top > 100 && rect.top < 300 && rect.left < 200) {
-                        link.click();
-                        return { clicked: true, rect, text: link.innerText };
-                    }
+                const text = await page.evaluate(el => el.textContent?.trim(), link);
+                const box = await link.boundingBox();
+
+                if (text === 'Edit' && box) {
+                    console.log(`Found Edit link at (${box.x}, ${box.y}), clicking...`);
+                    await link.click();
+                    clickedEdit = true;
+                    break;
                 }
             }
-            // If not found by position, just click the first visible Edit
-            for (const link of links) {
-                const text = (link.innerText || link.textContent || '').trim().toLowerCase();
-                if (text === 'edit' && link.offsetParent !== null) {
-                    link.click();
-                    return { clicked: true, fallback: true, text: link.innerText };
-                }
-            }
-            return { clicked: false };
-        });
-        console.log('Click result:', clicked);
+        }
+
+        if (!clickedEdit) {
+            console.log('No Edit link found, trying coordinate click...');
+            await page.mouse.click(165, 135);
+        }
+
         await sleep(4000);
 
         // Inject CSS again after dialog opens
@@ -103,17 +102,20 @@ async function testEditDialog() {
         });
         console.log('Screenshot saved: edit-dialog-test.png');
 
-        // Check if RadWindow appeared
+        // Check dialog styling
         const dialogCheck = await page.evaluate(() => {
             const radWindow = document.querySelector('.RadWindow, [class*="RadWindow"]');
             if (radWindow) {
-                const titleRow = radWindow.querySelector('.rwTitleRow, .rwTitleBar');
-                const style = titleRow ? getComputedStyle(titleRow) : null;
+                const titleBar = radWindow.querySelector('.rwTitleBar');
+                const titleEl = radWindow.querySelector('.rwTitle, .rwTitleBar em, .rwTitleBar span');
+                const titleStyle = titleEl ? getComputedStyle(titleEl) : null;
+                const titleBarStyle = titleBar ? getComputedStyle(titleBar) : null;
+
                 return {
                     found: true,
-                    className: radWindow.className,
-                    titleRowBg: style ? style.backgroundImage : null,
-                    titleRowBgColor: style ? style.backgroundColor : null
+                    titleBarBg: titleBarStyle ? titleBarStyle.backgroundColor : null,
+                    titleColor: titleStyle ? titleStyle.color : null,
+                    titleFontSize: titleStyle ? titleStyle.fontSize : null
                 };
             }
             return { found: false };
@@ -121,14 +123,10 @@ async function testEditDialog() {
         console.log('Dialog check:', JSON.stringify(dialogCheck, null, 2));
 
         console.log('\n=== WAITING FOR MANUAL INSPECTION ===');
-        await sleep(10000);
+        await sleep(15000);
 
     } catch (error) {
         console.error('Error:', error);
-        await page.screenshot({
-            path: path.join(SCREENSHOT_DIR, 'edit-dialog-error.png'),
-            fullPage: true
-        });
     } finally {
         await browser.close();
     }
