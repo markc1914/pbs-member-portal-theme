@@ -2473,9 +2473,10 @@ select[multiple] option {
 
 /* Target multi-select lists in search/directory contexts */
 /* These are identified by being ul elements following a checkbox input or within specific field containers */
-.PanelField ul,
-.PanelBody ul:not(.NavigationUnorderedList):not(.rtsUL):not(.rmRootGroup):not(.rmGroup),
-td ul:not(.NavigationUnorderedList):not(.rtsUL):not(.rmRootGroup):not(.rmGroup) {
+/* NOTE: Exclude .reToolbar to preserve RadEditor formatting toolbar */
+.PanelField ul:not(.reToolbar),
+.PanelBody ul:not(.NavigationUnorderedList):not(.rtsUL):not(.rmRootGroup):not(.rmGroup):not(.reToolbar),
+td ul:not(.NavigationUnorderedList):not(.rtsUL):not(.rmRootGroup):not(.rmGroup):not(.reToolbar) {
     list-style: none !important;
     margin: 5px 0 !important;
     padding: 0 !important;
@@ -2485,9 +2486,9 @@ td ul:not(.NavigationUnorderedList):not(.rtsUL):not(.rmRootGroup):not(.rmGroup) 
     overflow-y: auto;
 }
 
-.PanelField ul li,
-.PanelBody ul:not(.NavigationUnorderedList):not(.rtsUL):not(.rmRootGroup):not(.rmGroup) li,
-td ul:not(.NavigationUnorderedList):not(.rtsUL):not(.rmRootGroup):not(.rmGroup) li {
+.PanelField ul:not(.reToolbar) li,
+.PanelBody ul:not(.NavigationUnorderedList):not(.rtsUL):not(.rmRootGroup):not(.rmGroup):not(.reToolbar) li,
+td ul:not(.NavigationUnorderedList):not(.rtsUL):not(.rmRootGroup):not(.rmGroup):not(.reToolbar) li {
     list-style: none !important;
     padding: 4px 10px !important;
     margin: 0 !important;
