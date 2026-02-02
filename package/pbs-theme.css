@@ -2774,15 +2774,16 @@ footer a:hover {
    Only style community-specific elements
    ======================================== */
 
-/* Hide sub-navigation tree menu on non-community pages */
-/* This hides the massive tree menu (Staff, Documents, etc.) */
-.sub-nav-head,
-[id*="SubNavHead"],
-.sub-nav-body,
-[id*="SubNavBody"],
-[id*="SubNavigationTree"] {
+/* Hide sub-navigation panel on pages where it's not needed */
+/* Also hide the container to avoid empty rectangle */
+#ctl01_SubNavPanel:has(.sub-nav-body:empty),
+#ctl01_SubNavPanel:has([id*="SubNavigationTree"]:only-child),
+.col-secondary:not(:has(a)):not(:has(img)):not(:has(.Section)) {
     display: none !important;
 }
+
+/* Keep sub-nav visible on pages that use it (like Directory) */
+/* The .sub-nav-head, .sub-nav-body, and tree should display normally */
 
 /* COMMUNITY PAGE LAYOUT
    Community pages use a two-column layout with sidebar on left/right
