@@ -6,18 +6,22 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 
 ## Open Issues
 
-### Issue #14: Resource library folders don't collapse when minus clicked
+### Issue #15: Redundant SIGN IN button on login page
 - **Status:** Open
 - **Priority:** Medium
-- **Affected page(s):** Resource Library / Document pages
-- **Description:** Folders in the resource library expand when the plus (+) is clicked, but do not contract/collapse when minus (-) is clicked
-- **Expected behavior:** Clicking minus should collapse the expanded folder
+- **Affected page(s):** Login page (Sign_In.aspx)
+- **Description:** A "SIGN IN" button appears in the top left header area on the login page, which is redundant since users are already on the sign-in page with a form submit button
+- **Expected behavior:** Hide SIGN IN button on login page only, while keeping SIGN OUT button visible on authenticated pages
 - **Viewport:** Desktop and Mobile
-- **Screenshot:** TBD
+- **Screenshot:** automatedTestScreenshots/1440p-login-*.png
 
 ---
 
 ## Resolved Issues
+
+### Issue #14: Resource library folders don't collapse when minus clicked
+- **Status:** Resolved (2026-02-02)
+- **Fix:** Removed `!important` from `.rtUL` display rules and added attribute selector `[style*="display: none"]` to respect JavaScript's inline styles when collapsing folders.
 
 ### Issue #13: Banner image "Membership Database" text cut off at 1440p
 - **Status:** Resolved (2026-02-02)
@@ -107,4 +111,4 @@ Screenshots are saved to `automatedTestScreenshots/` folder.
 
 ---
 
-*Last updated: 2026-01-31*
+*Last updated: 2026-02-02*
