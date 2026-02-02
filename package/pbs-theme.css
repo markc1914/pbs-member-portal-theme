@@ -1525,6 +1525,24 @@ img[id*="ContactPicture"],
     color: var(--pbs-gray-800);
 }
 
+/* Non-editable field values - ensure high contrast text */
+.PanelFieldValue span,
+.PanelFieldValue > span,
+.PanelField span.Label + span,
+.rwContent .PanelFieldValue span,
+.RadWindow .PanelFieldValue span {
+    color: #000000 !important;
+    font-weight: 500 !important;
+}
+
+/* Static display values in dialogs - ensure visible */
+.rwContent span[id],
+.RadWindow span[id],
+.RadWindow_Default span[id] {
+    color: #000000 !important;
+    font-size: 14px !important;
+}
+
 /* ========================================
    PANELS
    ======================================== */
@@ -1886,6 +1904,56 @@ table.rwTitleBar {
     background-image: none !important;
 }
 
+/* IMPORTANT: Restore date picker calendar button background image - must come AFTER the rule above */
+.RadWindow .rcCalPopup,
+.RadWindow_Default .rcCalPopup,
+[class*="RadWindow"] .rcCalPopup,
+.RadWindow .RadPicker a,
+.RadWindow .RadDatePicker a,
+.RadWindow [class*="RadPicker"] a,
+.RadWindow [class*="RadDatePicker"] a,
+.RadWindow_Default .RadPicker a,
+.RadWindow_Default .RadDatePicker a,
+.RadWindow_Default [class*="RadPicker"] a,
+[class*="RadWindow"] .RadPicker a,
+[class*="RadWindow"] .RadDatePicker a,
+[class*="RadWindow"] [class*="RadPicker"] a,
+[class*="RadWindow"] [class*="RadDatePicker"] a,
+.RadWindow .riSingle a,
+.RadWindow_Default .riSingle a,
+[class*="RadWindow"] .riSingle a,
+.RadWindow .RadInput a,
+.RadWindow_Default .RadInput a,
+[class*="RadWindow"] .RadInput a,
+.RadWindow [id*="rad_Dp"] a,
+.RadWindow_Default [id*="rad_Dp"] a,
+[class*="RadWindow"] [id*="rad_Dp"] a {
+    background-image: revert !important;
+}
+
+/* Also ensure date picker td cells preserve their background */
+.RadWindow .RadPicker td,
+.RadWindow .RadDatePicker td,
+.RadWindow [class*="RadPicker"] td,
+.RadWindow [class*="RadDatePicker"] td,
+.RadWindow_Default .RadPicker td,
+.RadWindow_Default .RadDatePicker td,
+[class*="RadWindow"] .RadPicker td,
+[class*="RadWindow"] .RadDatePicker td,
+[class*="RadWindow"] [class*="RadPicker"] td,
+[class*="RadWindow"] [class*="RadDatePicker"] td,
+.RadWindow .riSingle td,
+.RadWindow_Default .riSingle td,
+[class*="RadWindow"] .riSingle td,
+.RadWindow .RadInput td,
+.RadWindow_Default .RadInput td,
+[class*="RadWindow"] .RadInput td,
+.RadWindow [id*="rad_Dp"] td,
+.RadWindow_Default [id*="rad_Dp"] td,
+[class*="RadWindow"] [id*="rad_Dp"] td {
+    background-image: revert !important;
+}
+
 /* Status bar and resize row - hide */
 .RadWindow .rwStatusBar,
 .RadWindow .rwStatusBarRow,
@@ -1934,11 +2002,13 @@ table.rwTitleBar {
 }
 
 /* Hide empty-looking fieldsets and panels in dialogs */
+/* DISABLED - was potentially hiding date picker fieldsets
 .RadWindow fieldset:not(:has(input)):not(:has(select)):not(:has(textarea)),
 .RadWindow_Default fieldset:not(:has(input)):not(:has(select)):not(:has(textarea)),
 .rwContent fieldset:not(:has(input)):not(:has(select)):not(:has(textarea)) {
     display: none !important;
 }
+*/
 
 /* Make empty grey boxes in dialog content transparent or hidden */
 .rwContent > fieldset,
@@ -1947,10 +2017,11 @@ table.rwTitleBar {
     background: transparent !important;
 }
 
-/* If fieldset only has whitespace/no visible content, collapse it */
+/* DISABLED - was potentially hiding date picker fieldsets
 .rwContent fieldset:has(> :only-child:empty) {
     display: none !important;
 }
+*/
 
 /* ========================================
    FIX: Select/Upload Button Styling - Issue #19
@@ -2215,70 +2286,24 @@ input[type="date"]:focus {
 
 /* ========================================
    FIX: Telerik RadDatePicker Controls - Issue #20
-   Ensure date picker calendar buttons are visible
+   Only style the INPUT and BUTTON - let JS control calendar popup
    ======================================== */
 
-/* RadDatePicker wrapper - don't apply generic table rules */
-.RadPicker,
-.RadDatePicker,
-[class*="RadPicker"],
-[class*="RadDatePicker"],
-.riSingle,
-.RadInput {
-    display: inline-block !important;
-    width: auto !important;
-    min-width: 0 !important;
-}
-
-/* RadDatePicker internal table - override generic table min-width */
-.RadPicker table,
-.RadDatePicker table,
-[class*="RadPicker"] table,
-[class*="RadDatePicker"] table,
-.riSingle table,
-.RadInput table {
-    width: auto !important;
-    min-width: 0 !important;
-    display: inline-table !important;
-}
-
-/* Date picker calendar popup button - ensure visible */
-.RadPicker a,
-.RadDatePicker a,
-[class*="RadPicker"] a,
-[class*="RadDatePicker"] a,
-.rcCalPopup,
-a.rcCalPopup,
-.riSingle a,
-.RadInput a {
-    display: inline-block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    width: auto !important;
-    height: auto !important;
-}
-
-/* Date picker button cell - ensure visible */
-.RadPicker td,
-.RadDatePicker td,
-[class*="RadPicker"] td,
-[class*="RadDatePicker"] td,
-.riSingle td,
-.RadInput td {
-    display: table-cell !important;
-    visibility: visible !important;
-    padding: 0 !important;
-}
-
-/* Date picker input wrapper */
+/* Date picker INPUT - style only, don't force display */
 .riTextBox,
-.RadPicker input,
-.RadDatePicker input,
-[class*="RadPicker"] input,
-[class*="RadDatePicker"] input {
-    display: inline-block !important;
+.riTextBox.riEnabled,
+input.riTextBox {
     width: auto !important;
-    min-width: 80px !important;
+    min-width: 100px !important;
+    max-width: 150px !important;
+    padding: 4px 8px !important;
+    border: 1px solid var(--pbs-gray-300) !important;
+    background-color: var(--pbs-white) !important;
+}
+
+/* Date picker calendar BUTTON only */
+a.rcCalPopup {
+    cursor: pointer !important;
 }
 
 select {
@@ -2442,7 +2467,13 @@ table {
 .RadInput table,
 .riSingle table,
 .PanelField table,
-.PanelFieldValue table {
+.PanelFieldValue table,
+[id*="rad_Dp"] table,
+[id*="Dp"] table,
+span[id*="rad"] table,
+.rwContent table,
+.RadWindow table,
+.panelEditor table {
     min-width: 0 !important;
     width: auto !important;
 }
@@ -5094,3 +5125,383 @@ html body:has([id*="signInDiv"]) a[id*="LoginStatus"] {
     opacity: 0 !important;
     pointer-events: none !important;
 }
+
+/* ========================================
+   FIX: DATE PICKER VISIBILITY - Issue #20
+   FINAL OVERRIDE - Force date pickers to be visible
+   This section must be at the END of the CSS file
+   ======================================== */
+
+/* Force date input fields to be visible by ID pattern */
+html body input[id*="rad_Dp"],
+html body input[id*="dateInput"],
+html body input[id*="DateOfBirth"],
+html body input[id*="BIRTH"],
+html body input[id*="Birth"],
+html body input[id*="INITIATION"],
+html body input[id*="Initiation"],
+html body input.riTextBox,
+html body input.riEnabled,
+html body .riTextBox.riEnabled {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: auto !important;
+    min-width: 100px !important;
+    max-width: 200px !important;
+    height: auto !important;
+    min-height: 20px !important;
+    position: static !important;
+    left: auto !important;
+    padding: 4px 8px !important;
+    border: 1px solid #cccccc !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    pointer-events: auto !important;
+}
+
+/* Calendar popup BUTTON - ensure visible with icon */
+html body a.rcCalPopup,
+.RadWindow a.rcCalPopup,
+.rwContent a.rcCalPopup {
+    display: inline-block !important;
+    visibility: visible !important;
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    cursor: pointer !important;
+    /* Fallback: show a calendar emoji if background-image is stripped */
+    background-color: #f0f0f0 !important;
+    border: 1px solid #ccc !important;
+    border-radius: 3px !important;
+    text-align: center !important;
+    line-height: 20px !important;
+    font-size: 14px !important;
+}
+
+/* Add calendar icon as content if the background-image sprite is missing */
+html body a.rcCalPopup::after,
+.RadWindow a.rcCalPopup::after,
+.rwContent a.rcCalPopup::after {
+    content: "📅";
+    font-size: 12px;
+}
+
+/* ========================================
+   RadCalendar Popup Styling - Issue #20
+   ======================================== */
+
+/* Calendar popup container - solid background */
+.RadCalendar,
+.RadCalendar_Metro,
+.RadCalendar_Default,
+div.RadCalendar {
+    background-color: #ffffff !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    z-index: 10000 !important;
+}
+
+/* Calendar header table - proper layout */
+.RadCalendar table,
+.RadCalendar_Metro table {
+    background-color: #ffffff !important;
+}
+
+/* Calendar titlebar row */
+.RadCalendar .rcTitlebar,
+.rcTitlebar {
+    background-color: #164F90 !important;
+}
+
+/* Titlebar table cells - horizontal layout */
+.RadCalendar .rcTitlebar td,
+.rcTitlebar td {
+    background-color: #164F90 !important;
+    padding: 6px 4px !important;
+    vertical-align: middle !important;
+}
+
+/* Month/Year title text */
+.RadCalendar .rcTitle,
+.rcTitle {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    text-align: center !important;
+}
+
+/* Navigation links in titlebar */
+.RadCalendar .rcTitlebar a,
+.rcTitlebar a {
+    display: inline-block !important;
+    visibility: visible !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    padding: 2px 6px !important;
+    text-decoration: none !important;
+}
+
+/* Navigation arrow cells */
+.RadCalendar .rcTitlebar td.rcFastPrev a::after { content: "«"; }
+.RadCalendar .rcTitlebar td.rcPrev a::after { content: "‹"; }
+.RadCalendar .rcTitlebar td.rcNext a::after { content: "›"; }
+.RadCalendar .rcTitlebar td.rcFastNext a::after { content: "»"; }
+
+/* Also try without .RadCalendar prefix */
+.rcTitlebar .rcFastPrev a::after { content: "«"; }
+.rcTitlebar .rcPrev a::after { content: "‹"; }
+.rcTitlebar .rcNext a::after { content: "›"; }
+.rcTitlebar .rcFastNext a::after { content: "»"; }
+
+/* Hover effect for nav arrows */
+.RadCalendar .rcTitlebar a:hover,
+.rcTitlebar a:hover {
+    background-color: rgba(255,255,255,0.2) !important;
+    border-radius: 3px !important;
+}
+
+/* Calendar main table */
+.RadCalendar .rcMainTable,
+.rcMainTable {
+    background-color: #ffffff !important;
+}
+
+/* Calendar day cells - override generic td styling */
+.RadCalendar .rcMainTable td,
+.rcMainTable td,
+.RadCalendar .rcRow td {
+    background-color: #ffffff !important;
+    border-bottom: none !important;
+    padding: 2px !important;
+    text-align: center !important;
+}
+
+/* Calendar day links */
+.RadCalendar .rcMainTable td a,
+.rcMainTable td a {
+    display: block !important;
+    padding: 4px 6px !important;
+    color: #333333 !important;
+    text-decoration: none !important;
+    border-radius: 3px !important;
+}
+
+/* Hover state for days */
+.RadCalendar .rcMainTable td a:hover,
+.rcMainTable td a:hover {
+    background-color: #e8f0fe !important;
+    color: #164F90 !important;
+}
+
+/* Selected day */
+.RadCalendar td.rcSelected a,
+.rcSelected a {
+    background-color: #164F90 !important;
+    color: #ffffff !important;
+}
+
+/* Today */
+.RadCalendar td.rcToday a,
+.rcToday a {
+    border: 1px solid #164F90 !important;
+}
+
+/* Day header row (Sun, Mon, etc.) - override generic th styling */
+.RadCalendar .rcMainTable th,
+.rcMainTable th,
+.RadCalendar .rcWeek th {
+    background-color: #f5f5f5 !important;
+    color: #666666 !important;
+    font-weight: 600 !important;
+    font-size: 11px !important;
+    padding: 6px 4px !important;
+    text-transform: none !important;
+}
+
+/* Other month days (grayed out) */
+.RadCalendar .rcOtherMonth a,
+.rcOtherMonth a {
+    color: #aaaaaa !important;
+}
+
+/* Month/Year selector dropdown */
+.RadCalendar .rcFastNav,
+.rcFastNav,
+.RadCalendarMonthView,
+.RadCalendarMonthView_Metro {
+    background-color: #ffffff !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+}
+
+/* Month/Year selector table */
+.RadCalendar .rcFastNav table,
+.rcFastNav table {
+    background-color: #ffffff !important;
+}
+
+/* Month/Year selector cells */
+.RadCalendar .rcFastNav td,
+.rcFastNav td {
+    background-color: #ffffff !important;
+    padding: 4px !important;
+    border-bottom: none !important;
+}
+
+/* Month/Year selector button row - override the white background */
+.rcFastNav td.rcButtons,
+.rcFastNav .rcButtons,
+td.rcButtons {
+    background-color: #f0f0f0 !important;
+    padding: 10px 8px !important;
+    text-align: center !important;
+}
+
+/* Month/Year selector buttons (Today, OK, Cancel) within FastNav */
+.rcFastNav td.rcButtons input,
+.rcFastNav td.rcButtons input[type="button"],
+.rcFastNav .rcButtons input,
+.rcFastNav .rcButtons input[type="button"],
+input#rcMView_Today,
+input#rcMView_OK,
+input#rcMView_Cancel,
+input[id^="rcMView_"] {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    display: inline-block !important;
+    padding: 8px 16px !important;
+    margin: 0 4px !important;
+    background: #164F90 !important;
+    background-color: #164F90 !important;
+    color: #ffffff !important;
+    border: 1px solid #164F90 !important;
+    border-radius: 4px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    font-family: Inter, Arial, sans-serif !important;
+    cursor: pointer !important;
+    min-width: 60px !important;
+    width: auto !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+.rcFastNav td.rcButtons input:hover,
+.rcFastNav .rcButtons input:hover,
+input#rcMView_Today:hover,
+input#rcMView_OK:hover,
+input#rcMView_Cancel:hover {
+    background-color: #0d3a6a !important;
+    border-color: #0d3a6a !important;
+}
+
+/* Today button - outline style */
+input#rcMView_Today,
+input[id="rcMView_Today"] {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #164F90 !important;
+    border: 2px solid #164F90 !important;
+}
+
+input#rcMView_Today:hover,
+input[id="rcMView_Today"]:hover {
+    background: #e8f0fe !important;
+    background-color: #e8f0fe !important;
+    color: #164F90 !important;
+    border-color: #164F90 !important;
+}
+
+/* Month/Year selector links */
+.RadCalendar .rcFastNav a,
+.rcFastNav a {
+    display: block !important;
+    padding: 6px 10px !important;
+    color: #333333 !important;
+    text-decoration: none !important;
+    border-radius: 3px !important;
+}
+
+.RadCalendar .rcFastNav a:hover,
+.rcFastNav a:hover {
+    background-color: #e8f0fe !important;
+    color: #164F90 !important;
+}
+
+/* Selected month/year in selector */
+.RadCalendar .rcFastNav .rcSelected a,
+.rcFastNav .rcSelected a {
+    background-color: #164F90 !important;
+    color: #ffffff !important;
+}
+
+/* Calendar footer buttons (Today, OK, Cancel) */
+.RadCalendar .rcFooter,
+.rcFooter {
+    background-color: #f5f5f5 !important;
+    border-top: 1px solid #ddd !important;
+    padding: 8px !important;
+    text-align: right !important;
+}
+
+.RadCalendar .rcFooter td,
+.rcFooter td {
+    background-color: #f5f5f5 !important;
+    border-bottom: none !important;
+    padding: 4px !important;
+}
+
+/* Footer buttons */
+.RadCalendar .rcFooter a,
+.RadCalendar .rcFooter input,
+.RadCalendar .rcButton,
+.rcFooter a,
+.rcFooter input,
+.rcButton {
+    display: inline-block !important;
+    padding: 6px 14px !important;
+    margin: 2px 4px !important;
+    background-color: #164F90 !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+}
+
+.RadCalendar .rcFooter a:hover,
+.RadCalendar .rcFooter input:hover,
+.RadCalendar .rcButton:hover,
+.rcFooter a:hover,
+.rcFooter input:hover,
+.rcButton:hover {
+    background-color: #0d3a6a !important;
+}
+
+/* Today button - slightly different style */
+.RadCalendar .rcFooter .rcToday,
+.rcFooter .rcToday {
+    background-color: #ffffff !important;
+    color: #164F90 !important;
+    border: 1px solid #164F90 !important;
+}
+
+.RadCalendar .rcFooter .rcToday:hover,
+.rcFooter .rcToday:hover {
+    background-color: #e8f0fe !important;
+}
+
+/* IMPORTANT: Do NOT add any display/visibility rules for date picker wrappers, */
+/* tables, or cells - this breaks the calendar popup which Telerik controls via JS */
