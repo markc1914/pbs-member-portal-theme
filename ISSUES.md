@@ -6,18 +6,15 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 
 ## Open Issues
 
-### Issue #15: Redundant SIGN IN button on login page
-- **Status:** Open
-- **Priority:** Medium
-- **Affected page(s):** Login page (Sign_In.aspx)
-- **Description:** A "SIGN IN" button appears in the top left header area on the login page, which is redundant since users are already on the sign-in page with a form submit button
-- **Expected behavior:** Hide SIGN IN button on login page only, while keeping SIGN OUT button visible on authenticated pages
-- **Viewport:** Desktop and Mobile
-- **Screenshot:** automatedTestScreenshots/1440p-login-*.png
+*No open issues in ISSUES.md - see GitHub Issues for current open items*
 
 ---
 
 ## Resolved Issues
+
+### Issue #15: Redundant SIGN IN button on login page
+- **Status:** Resolved (2026-02-02)
+- **Fix:** Added CSS to hide the SIGN IN button specifically on the login page using body class selector while keeping SIGN OUT visible on authenticated pages.
 
 ### Issue #16: Community page sidebar appears at bottom instead of right side
 - **Status:** Resolved (2026-02-02)
