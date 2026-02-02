@@ -2213,6 +2213,74 @@ input[type="date"]:focus {
     box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(22, 79, 144, 0.4);
 }
 
+/* ========================================
+   FIX: Telerik RadDatePicker Controls - Issue #20
+   Ensure date picker calendar buttons are visible
+   ======================================== */
+
+/* RadDatePicker wrapper - don't apply generic table rules */
+.RadPicker,
+.RadDatePicker,
+[class*="RadPicker"],
+[class*="RadDatePicker"],
+.riSingle,
+.RadInput {
+    display: inline-block !important;
+    width: auto !important;
+    min-width: 0 !important;
+}
+
+/* RadDatePicker internal table - override generic table min-width */
+.RadPicker table,
+.RadDatePicker table,
+[class*="RadPicker"] table,
+[class*="RadDatePicker"] table,
+.riSingle table,
+.RadInput table {
+    width: auto !important;
+    min-width: 0 !important;
+    display: inline-table !important;
+}
+
+/* Date picker calendar popup button - ensure visible */
+.RadPicker a,
+.RadDatePicker a,
+[class*="RadPicker"] a,
+[class*="RadDatePicker"] a,
+.rcCalPopup,
+a.rcCalPopup,
+.riSingle a,
+.RadInput a {
+    display: inline-block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* Date picker button cell - ensure visible */
+.RadPicker td,
+.RadDatePicker td,
+[class*="RadPicker"] td,
+[class*="RadDatePicker"] td,
+.riSingle td,
+.RadInput td {
+    display: table-cell !important;
+    visibility: visible !important;
+    padding: 0 !important;
+}
+
+/* Date picker input wrapper */
+.riTextBox,
+.RadPicker input,
+.RadDatePicker input,
+[class*="RadPicker"] input,
+[class*="RadDatePicker"] input {
+    display: inline-block !important;
+    width: auto !important;
+    min-width: 80px !important;
+}
+
 select {
     border: 1px solid var(--pbs-gray-300);
     background-color: var(--pbs-white);
@@ -2364,6 +2432,19 @@ table {
     width: 100%;
     border-collapse: collapse;
     min-width: 500px; /* Ensures table doesn't compress too much */
+}
+
+/* Exclude date pickers and small control tables from min-width */
+.RadPicker table,
+.RadDatePicker table,
+[class*="RadPicker"] table,
+[class*="RadDatePicker"] table,
+.RadInput table,
+.riSingle table,
+.PanelField table,
+.PanelFieldValue table {
+    min-width: 0 !important;
+    width: auto !important;
 }
 
 th {
