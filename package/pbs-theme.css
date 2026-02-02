@@ -1666,6 +1666,190 @@ img[id*="ContactPicture"],
     background-color: var(--pbs-white) !important;
 }
 
+/* ========================================
+   FIX: Consistent Tab Styling - Issue #19
+   Remove Telerik sprite backgrounds that create inconsistent bracket shapes
+   ======================================== */
+
+/* Remove background images from tab inner spans */
+.RadTabStrip .rtsOut,
+.RadTabStrip .rtsIn,
+.RadTabStrip_Default .rtsOut,
+.RadTabStrip_Default .rtsIn,
+.RadTabStripTop_Default .rtsOut,
+.RadTabStripTop_Default .rtsIn,
+.rtsOut,
+.rtsIn {
+    background-image: none !important;
+    background: none !important;
+}
+
+/* Clean, consistent tab styling */
+.RadTabStrip_Default .rtsLI,
+.RadTabStripTop_Default .rtsLI,
+.RadTabStrip .rtsLI {
+    background: none !important;
+    background-image: none !important;
+    border: 1px solid var(--pbs-gray-300) !important;
+    border-bottom: none !important;
+    border-radius: 4px 4px 0 0 !important;
+    margin-right: 4px !important;
+}
+
+.RadTabStrip_Default .rtsLI.rtsFirst,
+.RadTabStripTop_Default .rtsLI.rtsFirst {
+    margin-left: 0 !important;
+}
+
+/* Selected tab styling */
+.RadTabStrip_Default .rtsLI.rtsSelected,
+.RadTabStripTop_Default .rtsLI.rtsSelected,
+.RadTabStrip .rtsLI.rtsSelected,
+.rtsLI.rtsSelected {
+    background-color: var(--pbs-white) !important;
+    border-bottom: 1px solid var(--pbs-white) !important;
+    margin-bottom: -1px !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Non-selected tabs */
+.RadTabStrip_Default .rtsLI:not(.rtsSelected),
+.RadTabStripTop_Default .rtsLI:not(.rtsSelected),
+.RadTabStrip .rtsLI:not(.rtsSelected) {
+    background-color: var(--pbs-gray-100) !important;
+}
+
+/* Tab link styling */
+.RadTabStrip_Default .rtsLink,
+.RadTabStripTop_Default .rtsLink {
+    font-family: var(--font-base) !important;
+    color: var(--pbs-blue) !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    padding: 10px 16px !important;
+    background: none !important;
+    background-image: none !important;
+    text-decoration: none !important;
+    display: block !important;
+}
+
+.RadTabStrip_Default .rtsSelected .rtsLink,
+.RadTabStripTop_Default .rtsSelected .rtsLink {
+    color: var(--pbs-blue-dark) !important;
+}
+
+.RadTabStrip_Default .rtsLink:hover,
+.RadTabStripTop_Default .rtsLink:hover {
+    background-color: var(--pbs-gray-100) !important;
+}
+
+/* Tab container bottom border - ONLY in content area, NOT in header nav */
+#masterContentArea .RadTabStrip_Default,
+#masterContentArea .RadTabStripTop_Default,
+#masterContentArea .RadTabStrip,
+#yui-main .RadTabStrip_Default,
+#yui-main .RadTabStripTop_Default,
+#yui-main .RadTabStrip,
+.body-container .RadTabStrip_Default,
+.body-container .RadTabStripTop_Default,
+.body-container .RadTabStrip {
+    border-bottom: 1px solid var(--pbs-gray-300) !important;
+}
+
+/* Ensure header nav has NO tab border */
+#hd .RadTabStrip,
+#hd .RadTabStrip_Default,
+header .RadTabStrip {
+    border-bottom: none !important;
+}
+
+/* ========================================
+   FIX: Dialog/Modal Header Styling - Issue #19
+   Remove ugly rectangle headers from dialogs
+   ======================================== */
+
+/* RadWindow title bar - clean styling */
+.RadWindow .rwTitleBar,
+.RadWindow_Default .rwTitleBar,
+.RadWindow_Metro .rwTitleBar,
+[class*="RadWindow"] .rwTitleBar {
+    background-color: var(--pbs-blue) !important;
+    background-image: none !important;
+    color: var(--pbs-white) !important;
+    border: none !important;
+    padding: 8px 12px !important;
+}
+
+.RadWindow .rwTitleBar .rwTitle,
+.RadWindow_Default .rwTitle,
+[class*="RadWindow"] .rwTitle {
+    color: var(--pbs-white) !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+/* Window controls (close, minimize buttons) */
+.RadWindow .rwControlButtons,
+.RadWindow_Default .rwControlButtons,
+[class*="RadWindow"] .rwControlButtons {
+    background: none !important;
+}
+
+.RadWindow .rwControlButtons a,
+.RadWindow_Default .rwControlButtons a {
+    opacity: 0.8 !important;
+}
+
+.RadWindow .rwControlButtons a:hover,
+.RadWindow_Default .rwControlButtons a:hover {
+    opacity: 1 !important;
+}
+
+/* Modal content area */
+.RadWindow .rwContent,
+.RadWindow_Default .rwContent,
+[class*="RadWindow"] .rwContent {
+    background-color: var(--pbs-white) !important;
+    padding: 15px !important;
+}
+
+/* ========================================
+   FIX: Select/Upload Button Styling - Issue #19
+   ======================================== */
+
+/* RadUpload select button */
+.RadUpload .ruButton,
+.RadUpload .ruBrowse,
+.ruButton,
+.ruBrowse,
+input.ruButton,
+span.ruButton {
+    background-color: var(--pbs-blue) !important;
+    background-image: none !important;
+    color: var(--pbs-white) !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 8px 16px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+}
+
+.RadUpload .ruButton:hover,
+.RadUpload .ruBrowse:hover,
+.ruButton:hover,
+.ruBrowse:hover {
+    background-color: var(--pbs-blue-dark) !important;
+}
+
+/* File input styling */
+.RadUpload .ruInputs,
+.RadUpload input[type="text"] {
+    border: 1px solid var(--pbs-gray-300) !important;
+    border-radius: 4px !important;
+    padding: 6px 10px !important;
+}
+
 /* Hide link (edit panel) - make it blue and visible */
 a[href*="Hide"],
 a.Hide,
@@ -4165,6 +4349,19 @@ a#masterDonorHeaderImage {
 header .auth-link-container {
     display: block !important;
     visibility: visible !important;
+}
+
+/* Remove any borders/lines between sign out area and nav menu - Issue #19 */
+#navbar-collapse,
+.navbar-collapse,
+.navbar-collapse.nav-primary,
+#search-collapse,
+.collapse.navbar-collapse,
+.nav-auxiliary,
+.navbar-header {
+    border-bottom: none !important;
+    border-top: none !important;
+    background-color: var(--pbs-blue) !important;
 }
 
 /* Sign Out button - MUST MATCH MARK and CART exactly */
