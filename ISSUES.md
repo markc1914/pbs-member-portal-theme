@@ -6,7 +6,13 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 
 ## Open Issues
 
-*No open issues at this time.*
+### Issue #17: Footer floats up when page content is short
+- **Status:** Open
+- **Priority:** Medium
+- **Affected:** All pages with minimal content
+- **Description:** When a page doesn't have enough content to fill the viewport, the footer appears in the middle of the screen instead of staying at the bottom.
+- **Expected:** Footer should always be at the bottom of the viewport (sticky footer), pushing down naturally when content exceeds viewport height.
+- **Branch:** `fix/sticky-footer`
 
 ---
 
