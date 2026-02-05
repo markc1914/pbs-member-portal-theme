@@ -16,6 +16,10 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 - **Status:** Resolved (2026-02-05)
 - **Fix:** Updated web.config on both DEV and Production: added `path="/"` and `cookieSameSite="None"` to `<forms>`, added `sameSite="None"` to `<httpCookies>`, and `cookieSameSite="None"` to `<sessionState>`. This prevents duplicate cookies at different paths that caused Chrome to send the wrong cookie first.
 
+### Stale CSS/static content after deployments
+- **Status:** Resolved (2026-02-05)
+- **Fix:** Added `Cache-Control: no-cache` header in web.config `<httpProtocol><customHeaders>` section. Browsers still cache static files but always revalidate with server. After deployments, users get fresh content immediately; unchanged files return 304 Not Modified for fast loads.
+
 ### Issue #36: Panel editor dialog not opening to correct size
 - **Status:** Resolved (2026-02-02)
 - **Fix:** Removed overly broad table width rules from RadWindow dialogs. Added targeted width rules for dialog layout tables and iframe min-width for community dialogs. Disabled "hide empty panel" rule that was hiding dynamic content. Verified working in Chrome and Safari via Playwright cross-browser testing.
@@ -120,4 +124,4 @@ Screenshots are saved to `automatedTestScreenshots/` folder.
 
 ---
 
-*Last updated: 2026-02-05 (Resolved web.config cookie path issue)*
+*Last updated: 2026-02-05 (Resolved stale content caching issue)*
