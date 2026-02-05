@@ -6,21 +6,25 @@ This document tracks known issues and their status for the PBS Member Portal CSS
 
 ## Open Issues
 
-### TODO: Fix web.config cookie path to prevent Chrome login redirect loop
+### Issue #17: Footer floats up when page content is short
 - **Status:** Open
 - **Priority:** Medium
-- **Affected:** DEV and Production
-- **Description:** Chrome users may experience login redirect loops due to duplicate `LoginDEV`/`Login` cookies with different paths. The `<forms>` element has `path="/iMISDEV/"` (DEV) or implicit path (Prod), but cookies may be set at `path=/`, causing duplicates.
-- **Root Cause:** When cookies exist at both `/` and `/iMISDEV/` paths, the browser sends both. The server reads the empty one first and rejects authentication.
-- **Workaround:** Users can clear cookies for the site to resolve temporarily.
-- **Permanent Fix:** Update web.config `<forms>` element to use consistent path:
-  - **DEV (line 156):** Change `path="/iMISDEV/"` to `path="/"`
-  - **Production (line 156):** Add `path="/"`
-- **Also needed:** Add `sameSite="None"` to `<httpCookies>`, `cookieSameSite="None"` to `<forms>` and `<sessionState>` (already done on DEV)
+- **Affected:** All pages with minimal content
+- **Description:** When a page doesn't have enough content to fill the viewport, the footer appears in the middle of the screen instead of staying at the bottom.
+- **Expected:** Footer should always be at the bottom of the viewport (sticky footer), pushing down naturally when content exceeds viewport height.
+- **Branch:** `fix/sticky-footer`
 
 ---
 
 ## Resolved Issues
+
+### Chrome login redirect loop due to cookie path mismatch
+- **Status:** Resolved (2026-02-05)
+- **Fix:** Updated web.config on both DEV and Production: added `path="/"` and `cookieSameSite="None"` to `<forms>`, added `sameSite="None"` to `<httpCookies>`, and `cookieSameSite="None"` to `<sessionState>`. This prevents duplicate cookies at different paths that caused Chrome to send the wrong cookie first.
+
+### Stale CSS/static content after deployments
+- **Status:** Resolved (2026-02-05)
+- **Fix:** Added `Cache-Control: no-cache` header in web.config `<httpProtocol><customHeaders>` section. Browsers still cache static files but always revalidate with server. After deployments, users get fresh content immediately; unchanged files return 304 Not Modified for fast loads.
 
 ### Issue #36: Panel editor dialog not opening to correct size
 - **Status:** Resolved (2026-02-02)
@@ -126,4 +130,4 @@ Screenshots are saved to `automatedTestScreenshots/` folder.
 
 ---
 
-*Last updated: 2026-02-02 (Added web.config cookie path TODO)*
+*Last updated: 2026-02-05 (Resolved stale content caching issue)*
