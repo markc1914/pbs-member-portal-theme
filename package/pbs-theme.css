@@ -164,6 +164,31 @@ h4, .SectionLabel, h5 {
     margin-right: 0 !important;
 }
 
+/* ========================================
+   STICKY FOOTER
+   Footer stays at bottom of viewport when content is short,
+   pushes down naturally when content exceeds viewport height.
+   ======================================== */
+html, body {
+    height: 100% !important;
+    margin: 0 !important;
+}
+
+#doc,
+#doc3 {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+}
+
+#bd {
+    flex: 1 0 auto !important;
+}
+
+#ft {
+    flex-shrink: 0 !important;
+}
+
 /* Header area - contains nav - force full width */
 #hd,
 #hd > div,
