@@ -171,14 +171,20 @@ h4, .SectionLabel, h5 {
    ======================================== */
 html, body {
     height: 100% !important;
+    min-height: 100vh !important;
     margin: 0 !important;
+    background-color: var(--pbs-blue, #164F90) !important;
 }
 
+/* Target all possible YUI doc containers */
 #doc,
-#doc3 {
+#doc2,
+#doc3,
+#doc4 {
     display: flex !important;
     flex-direction: column !important;
     min-height: 100vh !important;
+    background-color: #f5f5f5 !important;
 }
 
 #bd {
@@ -186,7 +192,13 @@ html, body {
 }
 
 #ft {
-    flex-shrink: 0 !important;
+    flex: 0 0 auto !important;
+    margin-top: auto !important;
+    /* Ensure footer fills remaining space at bottom */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    min-height: 0 !important;
 }
 
 /* Header area - contains nav - force full width */
